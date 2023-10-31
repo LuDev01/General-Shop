@@ -31,11 +31,11 @@ const usersSchema = new mongoose.Schema({ // Creates a Mongoose schema for the "
         type: String,
         required: true
     },
-    role: {
-        type: String,
-        required: true,
-        default: 'guest'
-    }
+    // role: {
+    //     type: String,
+    //     required: true,
+    //     default: 'guest'
+    // }
 });
 
 const Users = mongoose.model('Users', usersSchema); // Creates a Mongoose model named "Users" based on the defined schema. The model represents a collection in the MongoDB database and provides an interface for interacting with it.
