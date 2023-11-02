@@ -4,6 +4,8 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
+// import styles from './RegisterForm.module.css';
+import './RegisterForm.css';
 
 export const RegisterForm = () => {
     const [inputs, setInputs] = useState({
@@ -59,9 +61,9 @@ export const RegisterForm = () => {
 
   return (
     <>
-        <Container>
+        <Container >
+            <Form className='custom-border' onSubmit={(e) => handleSubmit(e)}>
             <h1>Sign Up</h1>
-            <Form onSubmit={(e) => handleSubmit(e)}>
                 <Form.Group className="mb-3" controlId="formBasicEmail">
                     <Form.Label>First Name*</Form.Label>
                     <Form.Control type="text" placeholder="John" name="firstName" onChange={(e) => handleInputs(e)} value={firstName}/>
@@ -116,10 +118,6 @@ export const RegisterForm = () => {
 
                 <style type='text/css'>
                     {`
-                        h1{
-                            color: #30c3cd;
-                        }
-
                         .btn-flat {
                             background-color: #30c3cd;
                             color: white;
@@ -131,8 +129,8 @@ export const RegisterForm = () => {
                         }
                     `}
                 </style>
-            </Form>
             <p>Have an Account? <a href="">Sign In</a></p>
+            </Form>
         </Container>
     </>
   )
