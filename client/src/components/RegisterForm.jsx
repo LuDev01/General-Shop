@@ -6,6 +6,7 @@ import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 // import styles from './RegisterForm.module.css';
 import './RegisterForm.css';
+import Logo from "./assets/GeneralShopLogo.png";
 
 export const RegisterForm = () => {
     const [inputs, setInputs] = useState({
@@ -63,7 +64,10 @@ export const RegisterForm = () => {
     <>
         <Container >
             <Form className='custom-border' onSubmit={(e) => handleSubmit(e)}>
-            <h1>Sign Up</h1>
+            <div className="d-flex justify-content-center">
+                <img className="logo-img-signup" src={Logo} alt="GeneralShop" />
+            </div>
+            <h1 className='signUp-title'>Sign Up</h1>
                 <Form.Group className="mb-3" controlId="formBasicEmail">
                     <Form.Label>First Name*</Form.Label>
                     <Form.Control type="text" placeholder="John" name="firstName" onChange={(e) => handleInputs(e)} value={firstName}/>

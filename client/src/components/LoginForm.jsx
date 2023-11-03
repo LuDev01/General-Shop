@@ -88,7 +88,7 @@ const validate=()=>{
           </div>
         </Form.Group>
         <div className="d-grid gap-2">
-        <button type="submit" class="submit-button btn btn-outline-info" onSubmit={handleSubmit}>Log In</button>
+        <button type="submit" class="submit-button btn btn-outline-info" onSubmit={e => handleSubmit(e)}>Log In</button>
         </div>
       </Form>
     </>
