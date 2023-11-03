@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes,Route } from "react-router-dom"; //Impo
 // import NavBar from './components/NavBar'; 
 import { HomePage } from './pages/HomePage';
 import { RegisterForm } from './components/RegisterForm';
+import { LoginForm } from './components/LoginForm';
 
 function App() { // Defines the App component, which serves as the main component for the React application.
   return (
@@ -12,6 +13,7 @@ function App() { // Defines the App component, which serves as the main componen
     <Routes> {/*Sets up a container for defining different routes in the application.*/}
       <Route path='/' element={<HomePage/>}/> {/*Defines a route for the root path / that renders the HomePage component when the root path is matched.*/}
       <Route path= '/register' element={<RegisterForm/>}/>
+      <Route path='/login' element={<LoginForm/>}/>
     </Routes>
     </div>
     </Router>
