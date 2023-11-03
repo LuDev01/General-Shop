@@ -1,19 +1,21 @@
 import { useState } from "react";
-import Button from "react-bootstrap/Button";
+import {useNavigate} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
 import Logo from "./assets/GeneralShopLogo.png";
+import bg1 from "./assets/Background1.jpg";
 import { BsFillEyeFill, BsFillEyeSlashFill } from "react-icons/bs";
-import { validate } from "uuid";
 
 export const LoginForm = () => {
   
   const [type,setType]=useState('password');
   const [icon,setIcon]=useState(BsFillEyeSlashFill);
   const [email,setEmail]=useState('');
-  const [password,setPassword]=useState('');
+  const [passw,setPassw]=useState('');
   const [emailError,setEmailError]=useState('');
   const [errors, setErrors]=useState('');
+  const navigate = useNavigate();
 
 
   const handleToggle=()=>{
@@ -38,59 +40,94 @@ export const LoginForm = () => {
 
   };
 
-  // const handlePasswordChange=(e)=>{
-  //   setPassword(e.target.value);
-  // };
+  const handlePasswordChange=(e)=>{
+    setPassw(e.target.value);
+  };
 
 const handleSubmit=(e)=>{
+    e.preventDefault();
     const errors=validate();
     setErrors(errors);
-    if(Object.keys(errors).length===0){
-      alert("Done!");
-    }
-     
-}
 
+    // if(Object.keys(errors).length===0){
+    //   alert("Done!");
+    // }
+    if (!errors.email && !errors.passw) {
+      alert("Done!");
+      setEmail('');
+      setPassw('');
+      navigate('/');
+    }
+};
+  
 const validate=()=>{
   const error={};
 
   if(!email){
     error.email="Email is required";
   }
-  if(!password){
-    error.password="Password is required"
+  else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(email)) {
+    error.email = "Please, enter a valid email";
+  }
+  else{
+    error.email="";
   }
 
-  return errors
+  if(!passw){
+    error.passw="Password is required"
+  }
+  else if(passw.length<5){
+    error.passw="Password must be at least 5 characters long";
+  }
+  else if (!/(?=.*[a-z])(?=.*[A-Z])(?=.*\d)/.test(passw)){
+    error.passw="Password must contain at least one uppercase letter, one lowercase letter, and one number";
+  }
+  else{
+    error.passw="";
+  }
+
+  return error;
 }
 
   return (
     <>
-      <Form className="login-form">
+    <div className="form-img">
+      <Form className="login-form"  onSubmit={handleSubmit}>
         <div className="d-flex justify-content-center">
           <img className="logo-img" src={Logo} alt="GeneralShop" />
         </div>
         <Form.Group className="mb-3" controlId="formBasicEmail">
           <h3 className="text-title">Log in to continue </h3>
           <Form.Label>Email</Form.Label>
-          <Form.Control className={`form-control ${emailError ? 'is-invalid': ''}`}  type="email" placeholder="example@email.com" id="email" value={email} onChange={handleEmailChange}/>
+          <Form.Control className={`form-control ${emailError ? 'is-invalid': ''}`} onChange={handleEmailChange} type="email" placeholder="example@email.com" id="email" value={email} />
           {errors.email && <div className="error">{errors.email}</div>}
         </Form.Group>
 
         <Form.Group className="  mb-3" controlId="formBasicPassword">
           <Form.Label>Password</Form.Label>
           <div className="password-field form-control">
-            <input className="input-field" type={type} placeholder="Password" id="password" value={password} />
-            {/* {errors.password && <div className="error">{errors.password}</div>} */}
+            <input className="input-field" onChange={handlePasswordChange} type={type} placeholder="Password" id ="passw" value={passw}  />
+            {errors.passw && <div className="error">{errors.passw}</div>}
             <span onClick={handleToggle}>
               {icon}
             </span>
           </div>
         </Form.Group>
         <div className="d-grid gap-2">
-        <button type="submit" class="submit-button btn btn-outline-info" onSubmit={e => handleSubmit(e)}>Log In</button>
+        <button type="submit" class="submit-button btn btn-outline-info">Log In</button>
+        
         </div>
+        <div className="register-link">
+        <p>Not a member?</p>
+          <Link className="create-account" to="/register">Create an account</Link>
+        </div>
+
       </Form>
+
+      <div className="login-bg"> 
+      <img  src={bg1} alt="background" />
+      </div>
+      </div>
     </>
   );
 };

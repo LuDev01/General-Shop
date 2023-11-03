@@ -133,7 +133,7 @@ export const RegisterForm = () => {
                         }
                     `}
                 </style>
-            <p>Have an Account? <a href="">Sign In</a></p>
+            <p>Have an Account? <a href="/login">Sign In</a></p>
             </Form>
         </Container>
     </>
