@@ -2,9 +2,9 @@ import { useState } from "react";
 import {useNavigate} from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import Modal from "react-bootstrap/Modal";
+import CarrouselLogIn from './CarrouselLogIn';
 import Form from "react-bootstrap/Form";
 import Logo from "./assets/GeneralShopLogo.png";
-import bg1 from "./assets/Background1.jpg";
 import { BsFillEyeFill, BsFillEyeSlashFill } from "react-icons/bs";
 
 export const LoginForm = () => {
@@ -89,7 +89,7 @@ const validate=()=>{
   return error;
 }
 
-  return (
+  return (  
     <>
     <div className="form-img">
       <Form className="login-form"  onSubmit={handleSubmit}>
@@ -121,11 +121,11 @@ const validate=()=>{
         <p>Not a member?</p>
           <Link className="create-account" to="/register">Create an account</Link>
         </div>
-
       </Form>
-
       <div className="login-bg"> 
-      <img  src={bg1} alt="background" />
+      <CarrouselLogIn/>
+      {/* <img  src={bg1} alt="background" />
+       */}
       </div>
       </div>
     </>
