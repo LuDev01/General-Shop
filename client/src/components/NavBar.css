@@ -1,0 +1,25 @@
+.NavBar-color{
+    background-color: var(--blue-second);
+
+  }
+.NavBar-color.active{
+    /* background-color: transparent; */
+    background-color: var(--orange-main);
+}
+
+.general-logo{
+    max-width: 15vh;
+}
+
+.logo-container{
+    margin-right:65vh ;
+}
+.search-icon{
+    margin-right:  30px;
+    cursor: pointer;
+}
+
+/* .search-field{
+    
+} */
+

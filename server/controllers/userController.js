@@ -22,7 +22,22 @@ const controllers={  //Defines an object named controllers that holds various co
         } catch (error) { // Catches any errors that may occur during the user finding process and sends a JSON response with an error message.
             res.json({error:'Error al mostrar los  usuarios'}) 
         }
-    }
+    },
+
+    // testSession:async(req,res)=>{
+    //     const counter=0;
+    //     console.log(req.session);
+    //     try {
+            
+    //         if (req.session.visitorCounter == undefined) {
+    //           req.session.visitorCounter = counter;
+    //         }
+    //         req.session.visitorCounter++;
+    //         res.send('Session has the number: ' + req.session.visitorCounter);
+    //       } catch (error) {
+    //         res.send({error:'Internal Server Error'});
+    //       }
+    // }
 
 }
 

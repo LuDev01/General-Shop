@@ -10,3 +10,4 @@ root.render(
     <App /> {/*Shows the App component, which represents the main structure of the React application.*/}
   </React.StrictMode>
 );
+  
