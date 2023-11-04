@@ -4,9 +4,9 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
-// import styles from './RegisterForm.module.css';
 import './RegisterForm.css';
 import Logo from "./assets/GeneralShopLogo.png";
+import { Link } from 'react-router-dom';
 
 export const RegisterForm = () => {
     const [inputs, setInputs] = useState({
@@ -62,7 +62,7 @@ export const RegisterForm = () => {
 
   return (
     <>
-        <Container >
+        <Container>
             <Form className='custom-border' onSubmit={(e) => handleSubmit(e)}>
             <div className="d-flex justify-content-center">
                 <img className="logo-img-signup" src={Logo} alt="GeneralShop" />
@@ -116,24 +116,13 @@ export const RegisterForm = () => {
                     <Form.Check type="checkbox" label="I agree to the Terms of Services and Privacy Policy." />
                 </Form.Group>
 
-                <Button type="submit" variant="flat">
-                    Continue
+                <Button type="submit" variant="flat" className="submit-button btn btn-outline-info">
+                    Register
                 </Button>
-
-                <style type='text/css'>
-                    {`
-                        .btn-flat {
-                            background-color: #30c3cd;
-                            color: white;
-                        }
-
-                        .btn-flat:hover{
-                            background-color: #1697b7;
-                            color: white;
-                        }
-                    `}
-                </style>
-            <p>Have an Account? <a href="/login">Sign In</a></p>
+                <div className="login-link">
+                    <p className="sign-in-p">Do you have an Account?</p>
+                    <Link className="sign-in-text" to="/login">Sign In</Link>
+                </div>
             </Form>
         </Container>
     </>

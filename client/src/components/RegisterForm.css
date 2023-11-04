@@ -1,13 +1,12 @@
 .custom-border{
+    padding: 2rem;
     border-radius: 10px;
     box-shadow: 0px 0px 25px -10px var(--orange-second);
-    padding: 20px;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    height: 100vh;
-    width: 50vw;
-    margin: auto;
+    width: 70vw;
+    margin: 1rem auto;
 }
 
 .signUp-title{
@@ -18,6 +17,46 @@
 }
 
 .logo-img-signup{
-    /* width: 30%; */
     height: 100px;
+}
+
+.submit-button{
+    cursor: pointer;
+}
+
+.sign-in-text{
+    color: var(--orange-second);
+    text-decoration: none;
+}
+
+.login-link{
+    margin-top:1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+@media( width >= 760px){
+    .custom-border{
+        width: 40vw;
+    }
+
+    .login-link{
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+    }
+
+    .sign-in-p{
+        margin: 0;
+    }
+
+    .sign-in-text{
+        margin-left: 1rem;
+    }
+
 }
