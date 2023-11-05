@@ -1,10 +1,12 @@
 .NavBar-color{
     background-color: var(--blue-second);
+    transition: all 500ms;
 
   }
 .NavBar-color.active{
     /* background-color: transparent; */
     background-color: var(--orange-main);
+  
 }
 
 .general-logo{
@@ -23,3 +25,12 @@
     
 } */
 
+.user-icon{
+    margin-right: 30px;
+    cursor: pointer;
+}
+
+.cart-icon{
+    margin-right: 30px;
+    cursor: pointer;
+}

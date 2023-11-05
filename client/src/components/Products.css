@@ -1,0 +1,11 @@
+.products-section{
+    display: grid;
+    grid-row:2rem;
+    padding:3rem;
+
+
+}
+
+.add-cart{
+    text-align:center;
+}
