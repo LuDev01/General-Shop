@@ -6,7 +6,8 @@
   }
 .NavBar-color.active{
     /* background-color: transparent; */
-    background-color: white;
+    /* background-color: white; */
+    background-color: var(--orange-main);
     opacity: 0.8;
   
 }

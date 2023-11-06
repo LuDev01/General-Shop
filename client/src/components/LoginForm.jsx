@@ -6,8 +6,6 @@ import Form from "react-bootstrap/Form";
 import Logo from "./assets/GeneralShopLogo.png";
 import { BsFillEyeFill, BsFillEyeSlashFill } from "react-icons/bs";
 
-
-
 export const LoginForm = () => {
   
   const [type,setType]=useState('password');
@@ -37,6 +35,7 @@ export const LoginForm = () => {
     }
     else{
       setEmailError('');
+
     }
 
   };
@@ -58,6 +57,18 @@ const handleSubmit=(e)=>{
       setEmail('');
       setPassw('');
       navigate('/');
+      
+      fetch('http://localhost:5000/login',{
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+        },
+        body: JSON.stringify({email:email,password:passw})
+    })
+    .then(response => response.json())
+    .then(data => console.log(data))
+    .catch(error => console.log(error))
     }
 };
   
