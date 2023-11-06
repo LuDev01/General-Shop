@@ -49,6 +49,7 @@ justify-content: space-between;
   cursor: pointer;
   padding-left: 7px;
 }
+
 .input-field{
   border: none;
   width: 85%;
@@ -111,7 +112,7 @@ justify-content: space-between;
     align-items: flex-start;
     flex-direction: row;
   }
-    .login-form{
+    /* .login-form{
       padding: 3rem;
       margin-left: 860px;
       margin-top: 3rem;
@@ -120,7 +121,7 @@ justify-content: space-between;
       border-radius: 10px;
       box-shadow: 0px 0px 25px -10px var(--orange-second);
       background-color: rgba(255, 255, 255, 0.7);
-    }
+    } */
 
   }
 
