@@ -1,11 +1,13 @@
 .NavBar-color{
     background-color: var(--blue-second);
+    opacity: 1;
     transition: all 500ms;
 
   }
 .NavBar-color.active{
     /* background-color: transparent; */
-    background-color: var(--orange-main);
+    background-color: white;
+    opacity: 0.8;
   
 }
 
@@ -21,10 +23,6 @@
     cursor: pointer;
 }
 
-/* .search-field{
-    
-} */
-
 .user-icon{
     margin-right: 30px;
     cursor: pointer;
@@ -33,4 +31,8 @@
 .cart-icon{
     margin-right: 30px;
     cursor: pointer;
+}
+
+.link-user{
+    color: #000;
 }

@@ -1,36 +1,75 @@
-import Card from 'react-bootstrap/Card';
-import Button from 'react-bootstrap/Button';
-import img1 from './assets/img1.png';
-import img2 from './assets/img2.png';
-import './Products.css';
+import Card from "react-bootstrap/Card";
+import Col from "react-bootstrap/Col";
+import Row from "react-bootstrap/Row";
+import Button from "react-bootstrap/esm/Button";
+import img1 from "./assets/products/img1.png";
+import img2 from "./assets/products/img2.png";
+import img3 from "./assets/products/img3.png";
+import "./Products.css";
 
-export const Products=()=>{
+export const Products = () => {
+  const imgArray = [img1, img2, img3];
+  const products = [
+    {
+      name: "Red t-shirt",
+      description:
+        "This is a longer card with supporting text below as a natural to additional content. This content is a little bitlonger.",
+      price: "$25",
+      image: img1,
+    },
+    {
+      name: "White t-shirt",
+      description:
+        "This is a longer card with supporting text below as a natural to additional content. This content is a little bitlonger.",
+      price: "$25",
+      image: img2,
+    },
+    {
+      name: "Black t-shirt",
+      description:
+        "This is a longer card with supporting text below as a natural to additional content. This content is a little bitlonger.",
+      price: "$25",
+      image: img3,
+    },
+    {
+      name: "Red t-shirt",
+      description:
+        "This is a longer card with supporting text below as a natural to additional content. This content is a little bitlonger.",
+      price: "$25",
+      image: img1,
+    },
+    {
+      name: "White t-shirt",
+      description:
+        "This is a longer card with supporting text below as a natural to additional content. This content is a little bitlonger.",
+      price: "$25",
+      image: img2,
+    },
+    {
+      name: "Black t-shirt",
+      description:
+        "This is a longer card with supporting text below as a natural to additional content. This content is a little bitlonger.",
+      price: "$25",
+      image: img3,
+    },
+  ];
   return (
-    <div className='products-section'>
-    <Card style={{ width: '18rem' }}>
-      <Card.Img variant="top" src={img1} />
-      <Card.Body>
-        <Card.Title>Card Title</Card.Title>
-        <Card.Text>
-          Some quick example text to build on the card title and make up the
-          bulk of the card's content.
-        </Card.Text>
-        <Button variant="primary">Go somewhere</Button>
-      </Card.Body>
-    </Card>
-
-    <Card style={{ width: '18rem' }}>
-      <Card.Img variant="top" src={img2} />
-      <Card.Body>
-        <Card.Title>Card Title</Card.Title>
-        <Card.Text>
-          Some quick example text to build on the card title and make up the
-          bulk of the card's content.
-        </Card.Text>
-        <Button variant="primary">Go somewhere</Button>
-      </Card.Body>
-    </Card>
-    </div>
+    <Row xs={1} md={3} className="g-4 m-4">
+      {products.map((el, idx) => (
+        <Col key={idx}>
+          <Card>
+            <Card.Img className="products-img" variant="top" src={el.image} />
+            <Card.Body>
+              <Card.Title>{el.name}</Card.Title>
+              <Card.Text>{el.description}</Card.Text>
+              <Card.Text>{el.price}</Card.Text>
+              <div className=" d-grid">
+                <button type="submit" size="lg" class="submit-button btn btn-outline-info">Add to cart</button>
+              </div>
+            </Card.Body>
+          </Card>
+        </Col>
+      ))}
+    </Row>
   );
-}
-
+};

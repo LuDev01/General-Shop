@@ -1,11 +1,9 @@
-.products-section{
-    display: grid;
-    grid-row:2rem;
-    padding:3rem;
-
-
+.products-img{
+    width: 100%;
+    height: 25rem;
+    object-fit: cover;
 }
-
 .add-cart{
-    text-align:center;
+    cursor: pointer;
+
 }

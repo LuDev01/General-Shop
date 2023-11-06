@@ -9,11 +9,10 @@ import {ImSearch} from 'react-icons/im'
 import { useState,useEffect} from "react";
 import CartModal from './CartModal';
 import { FaUserAlt } from "react-icons/fa";
-
+import { Link } from "react-router-dom";
 
 export const NavBar = () => {
 const [navbar,setNavbar]=useState(false);
-
 const [isSearchVisible, setIsSearchVisible] = useState(false);
 const [search,setSearchBtn]=useState({
   transition:"all .3s ease",
@@ -39,7 +38,7 @@ const changeBackground=()=>{
   setNavbar(false)
  };
 
-}
+};
 
 window.addEventListener('scroll',changeBackground)
   return (
@@ -75,7 +74,7 @@ window.addEventListener('scroll',changeBackground)
           </Form>
           {search.showSearchButton ? (<ImSearch className="search-icon" onClick={showIcon}/>
           ): null }
-      <FaUserAlt className="user-icon"/>
+        <Link className="link-user" to="/login"> <FaUserAlt className="user-icon"/> </Link>
 
            <CartModal/>
           
