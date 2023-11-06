@@ -7,6 +7,7 @@
     justify-content: center;
     width: 70vw;
     margin: 1rem auto;
+    background-color: rgba(255, 255, 255, 0.7);
 }
 
 .signUp-title{
@@ -36,6 +37,10 @@
     align-items: center;
     justify-content: center;
     text-align: center;
+}
+
+.error-message{
+    color: red;
 }
 
 @media( width >= 760px){
