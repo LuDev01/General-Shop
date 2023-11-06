@@ -21,7 +21,7 @@ function Notification() {
           </Toast.Header>
           <Toast.Body>Product added to you shopping cart! =)</Toast.Body>
         </Toast>
-       
+      
       </Col>
         <div className=" d-grid">
       <button type="submit" size="lg" class="submit-button btn btn-outline-info" onClick={() => setShow(true)}>Add to cart</button>

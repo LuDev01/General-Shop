@@ -8,7 +8,7 @@ router.post('/register', userController.createUser); //Defines a POST route at /
 // @GET//user/:id
 router.get('/user/:id',userController.getUserByPk); //Defines a GET route at /user/:id that, when accessed, calls the getUserByPk function from the userController.
 
-// router.get ('/testSession',userController.testSession);
-
+//@POST //login
+router.post('/login',userController.processLogin);
 
 module.exports=router; //Exports the configured router for use in other parts of the application.
