@@ -31,6 +31,10 @@ const usersSchema = new mongoose.Schema({ // Creates a Mongoose schema for the "
         type: String,
         required: true
     },
+    confirmPassword: {
+        type: String,
+        required: true
+    },
     // role: {
     //     type: String,
     //     required: true,

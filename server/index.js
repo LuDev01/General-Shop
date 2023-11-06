@@ -77,6 +77,7 @@ app.route('/register')
     user.save((err,docs)=>{
         if(err){
             res.redirect('/register')
+            console.log("No es posible crear el usuario")
         }
         else{
             console.log(docs)

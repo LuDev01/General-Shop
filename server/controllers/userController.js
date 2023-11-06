@@ -8,6 +8,11 @@ const controllers={  //Defines an object named controllers that holds various co
             const password=bcrypt.hashSync(req.body.password,12); //Hashes the user's password using bcrypt.hashSync with a salt factor of 12.
             delete req.body.password;
             req.body.password=password;
+
+            const confirmPassword=bcrypt.hashSync(req.body.confirmPassword,12);
+            delete req.body.confirmPassword;
+            req.body.confirmPassword=confirmPassword;
+
             const newUser=await User.create({ ...req.body}); //Creates a new user using the User.create method, which is likely a Mongoose method for adding a new document to the "Users" collection.
             res.json({status:'200', user:newUser}) //Sends a JSON response indicating success (status 200) and includes the newly created user in the response.
         } catch (error) { //Catches any errors that may occur during user creation and sends a JSON response with an error message.
