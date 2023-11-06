@@ -1,4 +1,5 @@
-import {useState} from 'react'
+import {useState} from 'react';
+import {useNavigate} from 'react-router-dom';
 import Form from 'react-bootstrap/Form';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
@@ -9,7 +10,9 @@ import Logo from "./assets/GeneralShopLogo.png";
 import { Link } from 'react-router-dom';
 import CarrouselLogIn from './CarrouselLogIn';
 
+
 export const RegisterForm = () => {
+    const navigate = useNavigate();
     const [inputs, setInputs] = useState({
         firstName: '',
         lastName: '',

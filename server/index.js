@@ -8,8 +8,7 @@ const userRouter=require('./routes/userRoutes'); // Imports the userRoutes modul
 
 const bodyParser=require('body-parser');
 const cookieParser=require ('cookie-parser');
-const session=require('express-session');
-const morgan=require('morgan');
+let session=require('express-session');
 
 const connectDB=require('./database/config/db'); //Imports a function (connectDB) responsible for connecting to the database. It's in a separate file (db.js) located in the ./database/config/ directory.
 const app=express(); //Creates an instance of the Express application, providing a foundation for building a web server in Node.js.
@@ -23,70 +22,13 @@ app.use(express.json()); //Adds middleware to parse incoming JSON requests, enab
 app.use(cors()); //Adds CORS middleware to the Express app, enabling cross-origin resource sharing.
 app.use(userRouter); //Tells the Express app to use the routes defined in userRouter.
 
-app.use(bodyParser.urlencoded({extended:true}))
-app.use(cookieParser());
-
 app.use(session({
-    key:'user_sid',
-    secret:'Secret information!!',
+    secret:'Is a secret!',
     resave:false,
     saveUninitialized:false,
-    cookie:{
-        expires:600000// information stored for six days
-    }
-
+    
 }));
-
-app.use((req,res,next)=>{
-    if(req.session.user && req.cookies.user_sid){
-        res.redirect('/')
-    }
-    next()
-})
-
-var sessionChecker=(req,res,next)=>{
-    if(req.session.user && req.cookies.user_sid){
-        res.redirect('/')
-    }
-    else{
-        next()
-    }
-};
-
-app.get('/',sessionChecker,(req,res)=>{
-    res.redirect('/login')
-});
-
-app.route('/login')
-.get(sessionChecker,(req,res)=>{
-    res.sendFile(__dirname+'src/pages/LogIn.jsx')
-});
-
-app.route('/register')
-.get(sessionChecker,(req,res)=>{
-    res.sendFile(__dirname+'src/pages/Register.jsx')
-})
-.post((req,res)=>{
-    var user=new User({
-        firstName:req.body.firstName,
-        lastName:req.body.lastName,     
-        email:req.body.email,
-        password:req.body.password
-    })
-
-    user.save((err,docs)=>{
-        if(err){
-            res.redirect('/register')
-            console.log("No es posible crear el usuario")
-        }
-        else{
-            console.log(docs)
-            req.session.user=docs
-            res.redirect('/')
-        }
-    })
-})
-
+app.use(cookieParser());
 
 app.listen(port,console.log(`Server working! Port: ${port}`)) //Starts the server, listening on the specified port. The callback function logs a message to the console indicating that the server is running, along with the port number.
 

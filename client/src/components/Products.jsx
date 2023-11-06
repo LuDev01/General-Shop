@@ -1,7 +1,7 @@
 import Card from "react-bootstrap/Card";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
-import Button from "react-bootstrap/esm/Button";
+import Notification from "./Notification";
 import img1 from "./assets/products/img1.png";
 import img2 from "./assets/products/img2.png";
 import img3 from "./assets/products/img3.png";
@@ -63,10 +63,9 @@ export const Products = () => {
               <Card.Title>{el.name}</Card.Title>
               <Card.Text>{el.description}</Card.Text>
               <Card.Text>{el.price}</Card.Text>
-              <div className=" d-grid">
-                <button type="submit" size="lg" class="submit-button btn btn-outline-info">Add to cart</button>
-              </div>
+               <Notification/>
             </Card.Body>
+           
           </Card>
         </Col>
       ))}

@@ -29,20 +29,29 @@ const controllers={  //Defines an object named controllers that holds various co
         }
     },
 
-    // testSession:async(req,res)=>{
-    //     const counter=0;
-    //     console.log(req.session);
-    //     try {
-            
-    //         if (req.session.visitorCounter == undefined) {
-    //           req.session.visitorCounter = counter;
-    //         }
-    //         req.session.visitorCounter++;
-    //         res.send('Session has the number: ' + req.session.visitorCounter);
-    //       } catch (error) {
-    //         res.send({error:'Internal Server Error'});
-    //       }
-    // }
+    processLogin:async(req,res)=>{
+     try {
+        const user=await User.findOne({email:req.body.email})
+   
+        const {password:hashedPassword}=user;
+        const isCorrect=bcrypt.compareSync(req.body.password,hashedPassword)
+        if(isCorrect){
+            res.cookie('email',user.email,{maxAge:1000*60*60*24*360});
+            delete user.password;
+            if (!req.session) {
+                req.session = {};
+              }
+            req.session.user=user;
+            console.log(req.session.user);  
+        
+            res.json({message:'Éxito!'})
+        }
+     } catch (error) {
+        console.log(error);
+        res.json(false)
+
+     }
+    }
 
 }
 
