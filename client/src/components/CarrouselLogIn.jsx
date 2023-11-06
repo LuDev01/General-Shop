@@ -10,17 +10,13 @@ function DarkVariantExample() {
       };
 
   return (
-    <Carousel data-bs-theme="dark" className='custom-carrousel'>
+    <Carousel data-bs-theme="dark" className='custom-carrousel' controls={false} indicators={false}>
       <Carousel.Item style={carouselItemStyle}>
         <img
           className="d-block w-100"
           src={bg1}
           alt="First slide"
         />
-        <Carousel.Caption>
-          <h5>First slide label</h5>
-          <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
-        </Carousel.Caption>
       </Carousel.Item>
       <Carousel.Item  style={carouselItemStyle}>
         <img

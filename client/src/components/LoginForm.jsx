@@ -1,11 +1,12 @@
 import { useState } from "react";
 import {useNavigate} from 'react-router-dom';
 import { Link } from 'react-router-dom';
-import Modal from "react-bootstrap/Modal";
 import CarrouselLogIn from './CarrouselLogIn';
 import Form from "react-bootstrap/Form";
 import Logo from "./assets/GeneralShopLogo.png";
 import { BsFillEyeFill, BsFillEyeSlashFill } from "react-icons/bs";
+
+
 
 export const LoginForm = () => {
   
@@ -124,8 +125,7 @@ const validate=()=>{
       </Form>
       <div className="login-bg"> 
       <CarrouselLogIn/>
-      {/* <img  src={bg1} alt="background" />
-       */}
+
       </div>
       </div>
     </>

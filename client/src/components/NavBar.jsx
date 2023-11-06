@@ -5,15 +5,15 @@ import NavDropdown from "react-bootstrap/NavDropdown";
 import Form from 'react-bootstrap/Form';
 import './NavBar.css';
 import logo from './assets/GeneralShopLogoNoSlogan.png';
-import {FaUserAlt} from 'react-icons/fa'
 import {ImSearch} from 'react-icons/im'
-import {FaShoppingCart} from 'react-icons/fa'
 import { useState,useEffect} from "react";
-
+import CartModal from './CartModal';
+import { FaUserAlt } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 export const NavBar = () => {
 const [navbar,setNavbar]=useState(false);
- const [isSearchVisible, setIsSearchVisible] = useState(false);
+const [isSearchVisible, setIsSearchVisible] = useState(false);
 const [search,setSearchBtn]=useState({
   transition:"all .3s ease",
   opacity:0,
@@ -29,7 +29,6 @@ const showIcon = () => {
 
 };
 
-
 const changeBackground=()=>{
  if(window.scrollY>=80){
   setNavbar(true)
@@ -37,10 +36,10 @@ const changeBackground=()=>{
  }
  else{
   setNavbar(false)
- }
-  
-  
-}
+ };
+
+};
+
 window.addEventListener('scroll',changeBackground)
   return (
 
@@ -75,9 +74,9 @@ window.addEventListener('scroll',changeBackground)
           </Form>
           {search.showSearchButton ? (<ImSearch className="search-icon" onClick={showIcon}/>
           ): null }
-          <FaUserAlt style={{ marginRight: '30px' }}/>
-          <FaShoppingCart  style={{  marginRight: '30px' }}/>
-          
+        <Link className="link-user" to="/login"> <FaUserAlt className="user-icon"/> </Link>
+
+           <CartModal/>
           
         </Navbar.Collapse>
       </Container>

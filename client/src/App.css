@@ -16,14 +16,18 @@
   color: red;
 }
 .login-form{
-  padding: 3rem;
+  padding: 3.5em;
   margin:auto;
-  margin-top: 3rem;
-  margin-bottom: 5rem;
-  max-width: 400px;
   border-radius: 10px;
   box-shadow: 0px 0px 25px -10px var(--orange-second);
   background-color: rgba(255, 255, 255, 0.7);
+}
+
+.form-img{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
 }
 
 .logo-img{
@@ -52,7 +56,7 @@ justify-content: space-between;
 
 .input-field{
   border: none;
-  width: 85%;
+  width: 80%;
   outline: none;
 }
 
@@ -69,30 +73,13 @@ justify-content: space-between;
   color: var(--orange-second);
 }
 
-/* .form-img{
-  display: flex;
-  align-items: center;
-  justify-content:flex-end; 
-  position: relative;
-  max-height: 700px;
-  margin: 1rem;
-  border-radius: 10px;
-  border: 1px solid black;
-} */
-
 .login-bg img{
-  /* width: 190vh; */
-  /* height: 120vh; */
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
   z-index: -1;
-
-  /* width: 800px;
-  height: 600px;
-  padding:0 0 1rem 1rem; */
 }
 
 @media( width >=480px){
@@ -125,35 +112,7 @@ justify-content: space-between;
 
   }
 
-  @media( width >=780px){
-    .logo-img{
-      width: 60%;
-      height: 110px;
-     }
-  
-     .password-field span{
-      cursor: pointer;
-      padding-left: 20px;
-    }
-  
-    .register-link{
-      display: flex;
-      justify-content: space-evenly;
-      align-items: flex-start;
-      flex-direction: row;
-    }
-      .login-form{
-        padding: 3rem;
-        margin-left: 860px;
-        margin-top: 3rem;
-        margin-bottom: 5rem;
-        max-width: 400px;
-        border-radius: 10px;
-        box-shadow: 0px 0px 25px -10px var(--orange-second);
-        background-color: rgba(255, 255, 255, 0.7);
-      }
-  
-    }
+
 
 
 
