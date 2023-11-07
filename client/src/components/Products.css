@@ -2,8 +2,17 @@
     width: 100%;
     height: 25rem;
     object-fit: cover;
+    
 }
+
 .add-cart{
     cursor: pointer;
+}
 
+.product-cards{
+    transition: 0.3s;
+}
+.product-cards:hover{
+    transform: translateY(-0.5rem);
+    box-shadow: 0.5rem 0.75rem 1.5rem #bbbb;
 }
