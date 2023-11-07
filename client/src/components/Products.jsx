@@ -54,10 +54,10 @@ export const Products = () => {
     },
   ];
   return (
-    <Row xs={1} md={3} className="g-4 m-4">
+    <Row xs={1} md={3} className="g-4 m-4 ">
       {products.map((el, idx) => (
         <Col key={idx}>
-          <Card>
+          <Card className="product-cards">
             <Card.Img className="products-img" variant="top" src={el.image} />
             <Card.Body>
               <Card.Title>{el.name}</Card.Title>

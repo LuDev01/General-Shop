@@ -23,8 +23,9 @@ function Notification() {
         </Toast>
       
       </Col>
-        <div className=" d-grid">
-      <button type="submit" size="lg" class="submit-button btn btn-outline-info" onClick={() => setShow(true)}>Add to cart</button>
+        <div className=" d-grid ">
+      <button type="submit" size="lg" class="submit-button btn btn-outline-info mb-3" onClick={() => setShow(true)}>Add to cart</button>
+      <button type="submit" size="lg" class="submit-button btn btn-outline-warning" onClick={() => setShow(true)}>Product details</button>
       </div>
     </Row>
     </div>
