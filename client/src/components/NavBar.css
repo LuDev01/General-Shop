@@ -1,6 +1,6 @@
 .NavBar-color{
-    background-color: var(--blue-second);
-    opacity: 1;
+    background-color: white;
+    opacity: 0.8;
     transition: all 500ms;
 
   }

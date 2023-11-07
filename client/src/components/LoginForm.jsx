@@ -44,33 +44,38 @@ export const LoginForm = () => {
     setPassw(e.target.value);
   };
 
-const handleSubmit=(e)=>{
+  const handleSubmit = (e) => {
     e.preventDefault();
-    const errors=validate();
+    const errors = validate();
     setErrors(errors);
-
-    // if(Object.keys(errors).length===0){
-    //   alert("Done!");
-    // }
+  
     if (!errors.email && !errors.passw) {
-      alert("Done!");
-      setEmail('');
-      setPassw('');
-      navigate('/');
-      
-      fetch('http://localhost:5000/login',{
+      // Here we only continue if there are no validation errors
+      fetch('http://localhost:5000/login', {
         method: 'POST',
         headers: {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json'
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
         },
-        body: JSON.stringify({email:email,password:passw})
-    })
-    .then(response => response.json())
-    .then(data => console.log(data))
-    .catch(error => console.log(error))
+        body: JSON.stringify({ email: email, password: passw }),
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          if (data.message === 'Welcome!') {
+            alert('Logged in successfully! Welcome to General Shop');
+            setEmail('');
+            setPassw('');
+            navigate('/');
+          } else {
+            // Authentication fails
+            alert('Authentication failed! Please check your information or create your account.');
+            console.log("Error de else")
+          }
+        })
+        .catch((error) => console.log(error));
     }
-};
+  };
+  
   
 const validate=()=>{
   const error={};
@@ -92,9 +97,9 @@ const validate=()=>{
     error.passw="Password must be at least 5 characters long";
   }
   else if (!/(?=.*[a-z])(?=.*[A-Z])(?=.*\d)/.test(passw)){
-    error.passw="Password must contain at least one uppercase letter, one lowercase letter, and one number";
+    error.passw="Wrong password";
   }
-  else{
+  else {
     error.passw="";
   }
 
@@ -119,11 +124,11 @@ const validate=()=>{
           <Form.Label>Password</Form.Label>
           <div className="password-field form-control">
             <input className="input-field" onChange={handlePasswordChange} type={type} placeholder="Password" id ="passw" value={passw}  />
-            {errors.passw && <div className="error">{errors.passw}</div>}
             <span onClick={handleToggle}>
               {icon}
             </span>
           </div>
+          {errors.passw && <div className="error">{errors.passw}</div>}
         </Form.Group>
         <div className="d-grid gap-2">
         <button type="submit" class="submit-button btn btn-outline-info">Log In</button>

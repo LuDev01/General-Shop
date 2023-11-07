@@ -84,7 +84,7 @@ justify-content: space-between;
 
 @media( width >=480px){
   .logo-img{
-    width: 60%;
+    width: 50%;
     height: 110px;
    }
 

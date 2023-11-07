@@ -1,5 +1,5 @@
 import {useState} from 'react';
-import {useNavigate} from 'react-router-dom';
+import {useFetcher, useNavigate} from 'react-router-dom';
 import Form from 'react-bootstrap/Form';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
@@ -9,7 +9,6 @@ import './RegisterForm.css';
 import Logo from "./assets/GeneralShopLogo.png";
 import { Link } from 'react-router-dom';
 import CarrouselLogIn from './CarrouselLogIn';
-
 
 export const RegisterForm = () => {
     const navigate = useNavigate();
@@ -33,6 +32,8 @@ export const RegisterForm = () => {
         password: '',
         confirmPassword: '',
     });
+
+    const [emailExists, setEmailExists] = useState(false);
 
     const {firstName,lastName,documentType,document,email,password,confirmPassword} = inputs
 
@@ -65,7 +66,7 @@ export const RegisterForm = () => {
 
         if (!email) {
         newErrors.email = 'Email is required';
-        }
+        } 
 
         if (!password) {
             newErrors.password = 'Password is required';
@@ -85,51 +86,55 @@ export const RegisterForm = () => {
         }
 
         if (Object.keys(newErrors).length > 0) {
-            setErrors(newErrors);
-            alert("Please check your inputs");
-        } else {
-            setErrors({}); 
-            user = {
-              firstName,
-              lastName,
-              documentType,
-              document,
-              email,
-              password,
-              confirmPassword
-            };
-            alert("Created user")
-        }
+          setErrors(newErrors);
+          alert("Please check your inputs");
+      } else {
+          setErrors({});
+          if (emailExists) {
+              alert("Email is already in use");
+              setInputs({
+                firstName: '',
+                lastName: '',
+                documentType:'',
+                document:'',
+                email: '',
+                password: '',
+                confirmPassword: '',
+            })
+          } else {
+              const user = {
+                  firstName,
+                  lastName,
+                  documentType,
+                  document,
+                  email,
+                  password,
+                  confirmPassword
+              };
+              alert("Created user");
 
-        fetch('http://localhost:5000/register',{
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json'
-            },
-            body: JSON.stringify({...user}
-            )
-        })
-        .then(response => response.json())
-        .then(data => console.log(data))
-        .catch(error => console.log(error))
-
-        setInputs({
-            firstName: '',
-            lastName: '',
-            documentType:'',
-            document:'',
-            email: '',
-            password: '',
-            confirmPassword: '',
-        })
-    }
-
-    // const [checked,setChecked] = useState(false)
-
-    // const handleCheckBox = () => {
-    //     setChecked(!checked);
-    // };
+              // Send the POST request to the server only if the email does not exist
+              fetch('http://localhost:5000/register', {
+                  method: 'POST',
+                  headers: {
+                      'Content-Type': 'application/json',
+                      'Accept': 'application/json'
+                  },
+                  body: JSON.stringify({ ...user })
+              })
+                  .then(response => response.json())
+                  .then(data => {
+                      if (data.error && data.error === 'Email is already in use') {
+                          setEmailExists(true); // Marks that the email already exists
+                          alert("Email is already in use");
+                      } else {
+                          navigate('/login'); // Redirect the user to the login page
+                      }
+                  })
+                  .catch(error => console.log(error));
+          }
+      }
+  }
 
     return (
         <>
