@@ -20,7 +20,8 @@ const usersSchema = new mongoose.Schema({ // Creates a Mongoose schema for the "
     },
     document:{
         type: String,
-        required: true
+        required: true,
+        unique: true
     },
     email: {
         type: String,

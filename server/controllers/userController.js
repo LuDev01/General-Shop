@@ -5,6 +5,14 @@ const controllers={  //Defines an object named controllers that holds various co
     createUser: async(req,res)=>{ // Defines an asynchronous function createUser to handle the creation of a new user. It takes req (request) and res (response) as parameters.
         console.log(req.body)
         try {
+            const { email } = req.body; 
+            const existingUser = await User.findOne({ email }); // Check if the email already exists in the database
+
+            if (existingUser) {
+                res.status(400).json({ error: 'Email is already in use' }); // If the email is already in use, send a response to the client
+                return; // Stop the creation process
+            }
+
             const password=bcrypt.hashSync(req.body.password,12); //Hashes the user's password using bcrypt.hashSync with a salt factor of 12.
             delete req.body.password;
             req.body.password=password;
@@ -16,9 +24,11 @@ const controllers={  //Defines an object named controllers that holds various co
             const newUser=await User.create({ ...req.body}); //Creates a new user using the User.create method, which is likely a Mongoose method for adding a new document to the "Users" collection.
             res.json({status:'200', user:newUser}) //Sends a JSON response indicating success (status 200) and includes the newly created user in the response.
         } catch (error) { //Catches any errors that may occur during user creation and sends a JSON response with an error message.
+            
             res.json({error:'Error al crear el usuario'}) 
         }
     },
+
     getUserByPk:async(req,res)=>{ //  Defines an asynchronous function getUserByPk to handle fetching a user by their primary key (ID). It takes req (request) and res (response) as parameters.
         const id=req.params.id; //  Find the user ID from the request parameters.
         try {
@@ -40,16 +50,15 @@ const controllers={  //Defines an object named controllers that holds various co
             delete user.password;
             if (!req.session) {
                 req.session = {};
-              }
+            }
             req.session.user=user;
             console.log(req.session.user);  
         
-            res.json({message:'Éxito!'})
+            res.json({message:'Welcome!'})
         }
      } catch (error) {
         console.log(error);
         res.json(false)
-
      }
     }
 
