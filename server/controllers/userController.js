@@ -45,6 +45,7 @@ const controllers={  //Defines an object named controllers that holds various co
    
         const {password:hashedPassword}=user;
         const isCorrect=bcrypt.compareSync(req.body.password,hashedPassword)
+  
         if(isCorrect){
             res.cookie('email',user.email,{maxAge:1000*60*60*24*360});
             delete user.password;

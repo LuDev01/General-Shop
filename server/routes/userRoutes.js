@@ -11,4 +11,5 @@ router.get('/user/:id',userController.getUserByPk); //Defines a GET route at /us
 //@POST //login
 router.post('/login',userController.processLogin);
 
+
 module.exports=router; //Exports the configured router for use in other parts of the application.
