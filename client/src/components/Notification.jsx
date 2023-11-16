@@ -4,8 +4,6 @@ import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import Toast from 'react-bootstrap/Toast';
 
-
-
 function Notification({productId}) {
   const [show, setShow] = useState(false);
   const navigate = useNavigate();

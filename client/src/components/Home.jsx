@@ -1,13 +1,15 @@
 import CarrouselHome from "./CarrouselHome";
-import {Products} from "./Products";
-// import './Products.css'
+import {AllProducts} from "./AllProducts";
+import { CarrouselSuggestions } from "./CarrouselSuggestions";
 
 export const Home = () => {
   return (
     <>
         <CarrouselHome />
-        
-        <Products/>
+        <CarrouselSuggestions/>
+        <AllProducts/>
+  
+
         
     </>
   );

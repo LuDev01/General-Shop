@@ -3,7 +3,10 @@ import { BrowserRouter as Router, Routes,Route } from "react-router-dom"; //Impo
 import { HomePage } from './pages/HomePage';
 import { RegisterForm } from './components/RegisterForm';
 import {LogIn} from './pages/LogIn';
-import {ProductDetails} from './components/ProductDetails'
+import {ProductDetails} from './components/ProductDetails';
+import { AboutUs } from './components/AboutUs';
+import { WomenProducts } from './components/WomenProducts';
+import { MenProducts } from './components/MenProducts';
 
 function App() { // Defines the App component, which serves as the main component for the React application.
   return (
@@ -14,7 +17,11 @@ function App() { // Defines the App component, which serves as the main componen
       <Route path='/' element={<HomePage/>}/> {/*Defines a route for the root path / that renders the HomePage component when the root path is matched.*/}
       <Route path= '/register' element={<RegisterForm/>}/>
       <Route path='/login' element={<LogIn/>}/>
+      <Route path='/aboutUs' element={<AboutUs/>}/>
       <Route path='/productDetails/:productId' element={<ProductDetails/>}/>
+      <Route path='/womenProducts' element={<WomenProducts/>}/>
+      <Route path='/menProducts' element={<MenProducts/>}/>
+
     </Routes>
     </div>
     </Router>

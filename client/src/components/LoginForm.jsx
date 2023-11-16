@@ -22,8 +22,6 @@ export const LoginForm = () => {
 
   const navigate = useNavigate();
 
-
-
   const handleToggle=()=>{
     if(type==='password'){
       setIcon(BsFillEyeFill);
@@ -63,6 +61,7 @@ export const LoginForm = () => {
 
 
   // // Send the request to the server
+  
   fetch('http://localhost:5000/login', {
     method: 'POST',
     headers: {
@@ -73,9 +72,19 @@ export const LoginForm = () => {
   })
     .then((response) => response.json())
     .then((data) => {
-      // Handle the response
+      if (data.message === 'Welcome!') {
+        alert('Logged in successfully! Welcome to General Shop');
+        setEmail('');
+        setPassw('');
+        navigate('/');
+      } else {
+        // Authentication fails
+        alert('Authentication failed! Please check your information or create your account.');
+        console.log("Error de else")
+      }
     })
     .catch((error) => console.log(error));
+  
 
 
     if (!errors.email && !errors.passw) {
@@ -86,8 +95,7 @@ export const LoginForm = () => {
           'Content-Type': 'application/json',
           'Accept': 'application/json',
         },
-        body: JSON.stringify({ email: email, password: passw }),
-
+        body: JSON.stringify({ email: email, password: passw }), 
 
       })
         .then((response) => response.json())
@@ -104,6 +112,8 @@ export const LoginForm = () => {
           }
         })
         .catch((error) => console.log(error));
+
+
     }
   };
   
