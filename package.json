@@ -32,6 +32,7 @@
     "swagger": "^0.7.5",
     "swagger-jsdoc": "^6.2.8",
     "swagger-ui-express": "^5.0.0",
+    "react-scripts": "^5.0.1",
     "uuid": "^9.0.1"
   }
 }
