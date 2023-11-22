@@ -5,7 +5,7 @@ import CarrouselLogIn from './CarrouselLogIn';
 import Form from "react-bootstrap/Form";
 import Logo from "./assets/GeneralShopLogo.png";
 import { BsFillEyeFill, BsFillEyeSlashFill } from "react-icons/bs";
-import bcrypt from 'bcryptjs';
+import CryptoJS from "crypto-js";
 
 export const LoginForm = () => {
   
@@ -15,8 +15,6 @@ export const LoginForm = () => {
   const [passw,setPassw]=useState('');
   const [emailError,setEmailError]=useState('');
   const [errors, setErrors]=useState('');
-  // const emailRef=useRef();
-  // const passwRef=useRef();
 
   const navigate = useNavigate();
 
@@ -52,27 +50,32 @@ export const LoginForm = () => {
     const errors = validate();
     setErrors(errors);
   
-//     const Eemail=email.current.value;
-//     const Ppassw=passw.current.value;
- const hashedPassword=bcrypt.hashSync(passw,12);
+
+    // const hashedPassword = CryptoJS.AES.encrypt(passw, 'secret key').toString();
 //  window.localStorage.setItem('login',JSON.stringify(Eemail,hashedPassword))
-
-
-  // // Send the request to the server
 
     if (!errors.email && !errors.passw) {
       // Here we only continue if there are no validation errors
+     
+
+      console.log("Sending request with email and password:", email, passw);
+
       fetch('http://localhost:5000/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
           'Accept': 'application/json',
         },
-        body: JSON.stringify({ email: email, password: hashedPassword }), 
+    
+        body: JSON.stringify({ email: email, password: passw }), 
+        // body: JSON.stringify({ email: email, password: hashedPassword }), 
 
       })
         .then((response) => response.json())
         .then((data) => {
+
+          console.log("Received response from server:", data.message);
+
           if (data.message === 'Welcome!') {
             alert('Logged in successfully! Welcome to General Shop');
             setEmail('');
@@ -82,6 +85,7 @@ export const LoginForm = () => {
             // Authentication fails
             alert('Authentication failed! Please check your information or create your account.');
             console.log("Error de else")
+            console.log(passw);
           }
         })
         .catch((error) => console.log(error));

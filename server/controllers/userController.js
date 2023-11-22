@@ -1,7 +1,8 @@
 const User = require("../database/models/Users"); // Imports the User model from the specified path.
 const bcrypt = require("bcrypt"); //Imports the bcrypt library, commonly used for hashing passwords.
 const Jwt = require("jsonwebtoken");
-const decrypt=require("crypto");
+const CryptoJS=require("crypto-js")
+const { log } = require("console");
 
 const controllers = {
   //Defines an object named controllers that holds various controller functions for handling different aspects of user-related operations.
@@ -26,7 +27,9 @@ const controllers = {
       // req.body.confirmPassword = confirmPassword;
 
       console.log(req.body);
+
       const newUser = await User.create({ ...req.body }); //Creates a new user using the User.create method, which is likely a Mongoose method for adding a new document to the "Users" collection.
+
       res.json({ status: "201", user: newUser }); //Sends a JSON response indicating success (status 200) and includes the newly created user in the response.
     } catch (error) {
       //Catches any errors that may occur during user creation and sends a JSON response with an error message.
@@ -54,8 +57,7 @@ const controllers = {
 
       // var bytes = CryptoJS.AES.decrypt(ciphertext, 'my-secret-key@123');
       // var decryptedData = JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
-      var bytes = CryptoJS.AES.decrypt(password, 'my-secret-key@123');
-      var decryptpassword=JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
+
 
       const user = await User.findOne({ email });
 
@@ -63,27 +65,52 @@ const controllers = {
       if (!user) {
         return res.status(401).json({ message: "Credenciales inválidas" });
       }
-      console.log(user.password);
-      console.log(decryptpassword);
-      
-      const isPasswordValid = await bcrypt.compare(password, user.password);
-      console.log(isPasswordValid);
-      console.log(password);
-      if (!isPasswordValid) {
+
+      // const bytes = CryptoJS.AES.decrypt(password, 'my-secret-key@123');
+      // const decryptedPassword=bytes.toString(CryptoJS.enc.Utf8);
+
+      // console.log("Decrypted password:", decryptedPassword);
+
+
+      console.log("Original Password :", password);
+      console.log("Hashed Password: ", user.password);
+
+      const isMatch = await bcrypt.compare(password, user.password);
+      // const isMatch = await bcrypt.compare(decryptedPassword, user.password);
+
+      console.log("Do they match?:", isMatch);
+
+      // const isPasswordValid = await bcrypt.compare(hashedPassword, user.password);
+
+      console.log(
+        "----------------------------------------------------------------------"
+      );
+
+      if (!isMatch) {
         return res.status(401).json({ message: "Credenciales inválidas" });
       }
 
-      const token = jwt.sign({ userId: user._id }, "secreto", {
+      const token = Jwt.sign({ userId: user._id }, process.env.JWT_SECRET_KEY, {
         expiresIn: "1h",
       });
+      res.status(200).json({ token, message: "Welcome!" });
 
-      res.status(200).json({ token });
+      // if (!isPasswordValid) {
+      //   return res.status(401).json({ message: "Credenciales inválidas" });
+      // }
+
+      // const token = Jwt.sign({ userId: user._id }, process.env.JWT_SECRET_KEY, {
+      //   expiresIn: "1h",
+      // });
+      // res.status(200).json({ token, message: "Inicio de sesión exitoso" });
+
       // const { password: hashedPassword } = user;
       // const isCorrect = bcrypt.compareSync(req.body.password, hashedPassword);
 
       // if (isCorrect) {
-      //   res.cookie("email", user.email, { maxAge: 1000 * 60 * 60 * 24 * 360 });
-      //   delete user.password;
+
+      // res.cookie("email", user.email, { maxAge: 1000 * 60 * 60 * 24 * 360 });
+      // delete user.password;
 
       //   if (!req.session) {
       //     req.session = {};
@@ -95,7 +122,7 @@ const controllers = {
 
       // }
     } catch (error) {
-      // console.log(error);
+      console.log(error);
       // res.json(false);
       res.status(500).json({ message: "Error en el servidor" });
     }

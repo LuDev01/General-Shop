@@ -105,6 +105,7 @@ export const RegisterForm = () => {
             })
           } else {
             const hashedPassword=bcrypt.hashSync(password,12);
+      
              password=hashedPassword;
              confirmPassword=password;
               const user = {
