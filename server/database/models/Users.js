@@ -3,8 +3,11 @@ const { v4: uuidv4 } = require('uuid'); //Destructures the v4 property from the 
 
 const usersSchema = new mongoose.Schema({ // Creates a Mongoose schema for the "Users" collection, defining the structure and validation rules for documents in the collection.
     _id: {
-        type: String,
-        default: uuidv4
+        // type: String,
+        // default: uuidv4
+
+        type: mongoose.Schema.Types.ObjectId,
+        default: () => new mongoose.Types.ObjectId()
     },
     firstName: {
         type: String,

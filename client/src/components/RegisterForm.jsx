@@ -9,6 +9,7 @@ import './RegisterForm.css';
 import Logo from "./assets/GeneralShopLogo.png";
 import { Link } from 'react-router-dom';
 import CarrouselLogIn from './CarrouselLogIn';
+import bcrypt from 'bcryptjs';
 
 export const RegisterForm = () => {
     const navigate = useNavigate();
@@ -35,7 +36,8 @@ export const RegisterForm = () => {
 
     const [emailExists, setEmailExists] = useState(false);
 
-    const {firstName,lastName,documentType,document,email,password,confirmPassword} = inputs
+    const {firstName,lastName,documentType,document,email} = inputs
+    var {password,confirmPassword}=inputs;
 
     const handleInputs = (e) => {
         setInputs({...inputs, [e.target.name]: e.target.value})
@@ -45,7 +47,7 @@ export const RegisterForm = () => {
         e.preventDefault();
 
         const newErrors = {};
-
+        
         if (!firstName) {
         newErrors.firstName = 'First Name is required';
         }
@@ -102,6 +104,9 @@ export const RegisterForm = () => {
                 confirmPassword: '',
             })
           } else {
+            const hashedPassword=bcrypt.hashSync(password,12);
+             password=hashedPassword;
+             confirmPassword=password;
               const user = {
                   firstName,
                   lastName,
@@ -112,7 +117,7 @@ export const RegisterForm = () => {
                   confirmPassword
               };
               alert("Created user");
-
+               
               // Send the POST request to the server only if the email does not exist
               fetch('http://localhost:5000/register', {
                   method: 'POST',
@@ -121,6 +126,7 @@ export const RegisterForm = () => {
                       'Accept': 'application/json'
                   },
                   body: JSON.stringify({ ...user })
+                  
               })
                   .then(response => response.json())
                   .then(data => {

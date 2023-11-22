@@ -13,7 +13,7 @@ export const AllProducts = () => {
         {products.map((el, idx) => (
           <Col key={idx}>
             <Card className="product-cards">
-              <Card.Img className="products-img" variant="top" src={el.image} />
+              <Card.Img className="products-img" variant="top" src={el.image} />  
               <Card.Body>
                 <Card.Title>{el.name}</Card.Title>
                 <Card.Text>{el.description}</Card.Text>

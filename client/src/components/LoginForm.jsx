@@ -7,8 +7,6 @@ import Logo from "./assets/GeneralShopLogo.png";
 import { BsFillEyeFill, BsFillEyeSlashFill } from "react-icons/bs";
 import bcrypt from 'bcryptjs';
 
-
-
 export const LoginForm = () => {
   
   const [type,setType]=useState('password');
@@ -61,31 +59,6 @@ export const LoginForm = () => {
 
 
   // // Send the request to the server
-  
-  fetch('http://localhost:5000/login', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'Accept': 'application/json',
-    },
-    body: JSON.stringify({ email, password: hashedPassword }),
-  })
-    .then((response) => response.json())
-    .then((data) => {
-      if (data.message === 'Welcome!') {
-        alert('Logged in successfully! Welcome to General Shop');
-        setEmail('');
-        setPassw('');
-        navigate('/');
-      } else {
-        // Authentication fails
-        alert('Authentication failed! Please check your information or create your account.');
-        console.log("Error de else")
-      }
-    })
-    .catch((error) => console.log(error));
-  
-
 
     if (!errors.email && !errors.passw) {
       // Here we only continue if there are no validation errors
@@ -95,7 +68,7 @@ export const LoginForm = () => {
           'Content-Type': 'application/json',
           'Accept': 'application/json',
         },
-        body: JSON.stringify({ email: email, password: passw }), 
+        body: JSON.stringify({ email: email, password: hashedPassword }), 
 
       })
         .then((response) => response.json())
@@ -104,7 +77,7 @@ export const LoginForm = () => {
             alert('Logged in successfully! Welcome to General Shop');
             setEmail('');
             setPassw('');
-            navigate('/');
+            navigate('/');  
           } else {
             // Authentication fails
             alert('Authentication failed! Please check your information or create your account.');
@@ -112,7 +85,6 @@ export const LoginForm = () => {
           }
         })
         .catch((error) => console.log(error));
-
 
     }
   };

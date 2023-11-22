@@ -1,8 +1,7 @@
 const User = require("../database/models/Users"); // Imports the User model from the specified path.
 const bcrypt = require("bcrypt"); //Imports the bcrypt library, commonly used for hashing passwords.
 const Jwt = require("jsonwebtoken");
-
-
+const decrypt=require("crypto");
 
 const controllers = {
   //Defines an object named controllers that holds various controller functions for handling different aspects of user-related operations.
@@ -18,35 +17,20 @@ const controllers = {
         return; // Stop the creation process
       }
 
-      const password = bcrypt.hashSync(req.body.password, 12); //Hashes the user's password using bcrypt.hashSync with a salt factor of 12.
-      delete req.body.password;
-      req.body.password = password;
+      // const password = bcrypt.hashSync(req.body.password, 12); //Hashes the user's password using bcrypt.hashSync with a salt factor of 12.
+      // delete req.body.password;
+      // req.body.password = password;
 
-      const confirmPassword = bcrypt.hashSync(req.body.confirmPassword, 12);
-      delete req.body.confirmPassword;
-      req.body.confirmPassword = confirmPassword;
+      // const confirmPassword = bcrypt.hashSync(req.body.confirmPassword, 12);
+      // delete req.body.confirmPassword;
+      // req.body.confirmPassword = confirmPassword;
 
-      const authToken=(User)=>{
-        const secretKey=process.env.JWT_SECRET_KEY;
-        const token=Jwt.sign({
-          _id:User._id,
-          email:User.email
-        },
-        secretKey
-        );
-        return token;
-      }
-
+      console.log(req.body);
       const newUser = await User.create({ ...req.body }); //Creates a new user using the User.create method, which is likely a Mongoose method for adding a new document to the "Users" collection.
-      res.json({ status: "200", user: newUser }); //Sends a JSON response indicating success (status 200) and includes the newly created user in the response.
-     
-      User=await User.save ();
-      const token=authToken(User);
-      res.json(token);
-   
+      res.json({ status: "201", user: newUser }); //Sends a JSON response indicating success (status 200) and includes the newly created user in the response.
     } catch (error) {
       //Catches any errors that may occur during user creation and sends a JSON response with an error message.
-
+      console.log(error);
       res.json({ error: "Error creating the user" });
     }
   },
@@ -63,30 +47,57 @@ const controllers = {
     }
   },
 
-  processLogin: async (req, res) => { 
+  processLogin: async (req, res) => {
+    const { email, password } = req.body;
     try {
-      const user = await User.findOne({ email: req.body.email });
+      // const user = await User.findOne({ email: req.body.email });
 
-      const { password: hashedPassword } = user;
-      const isCorrect = bcrypt.compareSync(req.body.password, hashedPassword);
+      // var bytes = CryptoJS.AES.decrypt(ciphertext, 'my-secret-key@123');
+      // var decryptedData = JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
+      var bytes = CryptoJS.AES.decrypt(password, 'my-secret-key@123');
+      var decryptpassword=JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
 
-      if (isCorrect) {
-        res.cookie("email", user.email, { maxAge: 1000 * 60 * 60 * 24 * 360 });
-        delete user.password;
+      const user = await User.findOne({ email });
 
-        if (!req.session) {
-          req.session = {};
-        }
-        req.session.user = user;
-        console.log(req.session.user);
-
-        res.json({ message: "Welcome!" });
-      
+      console.log("Aqui estoy");
+      if (!user) {
+        return res.status(401).json({ message: "Credenciales inválidas" });
       }
+      console.log(user.password);
+      console.log(decryptpassword);
       
+      const isPasswordValid = await bcrypt.compare(password, user.password);
+      console.log(isPasswordValid);
+      console.log(password);
+      if (!isPasswordValid) {
+        return res.status(401).json({ message: "Credenciales inválidas" });
+      }
+
+      const token = jwt.sign({ userId: user._id }, "secreto", {
+        expiresIn: "1h",
+      });
+
+      res.status(200).json({ token });
+      // const { password: hashedPassword } = user;
+      // const isCorrect = bcrypt.compareSync(req.body.password, hashedPassword);
+
+      // if (isCorrect) {
+      //   res.cookie("email", user.email, { maxAge: 1000 * 60 * 60 * 24 * 360 });
+      //   delete user.password;
+
+      //   if (!req.session) {
+      //     req.session = {};
+      //   }
+      //   req.session.user = user;
+      //   console.log(req.session.user);
+
+      //   res.json({ message: "Welcome!" });
+
+      // }
     } catch (error) {
-      console.log(error);
-      res.json(false);
+      // console.log(error);
+      // res.json(false);
+      res.status(500).json({ message: "Error en el servidor" });
     }
   },
 };
