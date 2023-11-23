@@ -104,7 +104,7 @@ const handleOnSearch=(searchItem)=>{
               const searchItem=value.toLowerCase();
               const itemName=el.name.toLowerCase();
               // return searchItem && itemName.startsWith(searchItem) && itemName!==searchItem
-              return searchItem && itemName.includes(searchItem.toLowerCase()) && itemName!==searchItem
+              return searchItem && itemName.includes(searchItem.toLowerCase()) 
             }).slice(0,3)
             
             .map((el)=>(

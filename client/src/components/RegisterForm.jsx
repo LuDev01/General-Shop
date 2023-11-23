@@ -10,12 +10,13 @@ import Logo from "./assets/GeneralShopLogo.png";
 import { Link } from 'react-router-dom';
 import CarrouselLogIn from './CarrouselLogIn';
 import bcrypt from 'bcryptjs';
+import CryptoJS from 'crypto-js';
 
 export const RegisterForm = () => {
     const navigate = useNavigate();
     const [inputs, setInputs] = useState({
         firstName: '',
-        lastName: '',
+        lastName: '', 
         documentType:'',
         document:'',
         email: '',

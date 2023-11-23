@@ -71,7 +71,6 @@ const controllers = {
 
       // console.log("Decrypted password:", decryptedPassword);
 
-
       console.log("Original Password :", password);
       console.log("Hashed Password: ", user.password);
 
