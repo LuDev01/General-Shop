@@ -10,6 +10,7 @@ import Logo from "./assets/GeneralShopLogo.png";
 import { Link } from 'react-router-dom';
 import CarrouselLogIn from './CarrouselLogIn';
 import bcrypt from 'bcryptjs';
+import CryptoJS from "crypto-js";
 
 export const RegisterForm = () => {
     const navigate = useNavigate();
@@ -104,8 +105,11 @@ export const RegisterForm = () => {
                 confirmPassword: '',
             })
           } else {
-            const hashedPassword=bcrypt.hashSync(password,12);
-      
+            // const hashedPassword=bcrypt.hashSync(password,12);
+            const hashedPassword = CryptoJS.AES.encrypt(password, 'secret key 123').toString();
+            // const hashedPassword=CryptoJS.MD5.encrypt(password,);
+            console.log(hashedPassword)
+
              password=hashedPassword;
              confirmPassword=password;
               const user = {

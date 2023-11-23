@@ -13,7 +13,7 @@ const options = {
       description: 'Documentation for your API endpoints',
     },
   },
-  apis: ['./routes/*.js'], // Ruta a tus archivos de definición de rutas
+  apis: ['../routes/userRoutes.js'], // Ruta a tus archivos de definición de rutas
 };
 
 const specs = swaggerJsdoc(options);
