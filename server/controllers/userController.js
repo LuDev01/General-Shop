@@ -48,6 +48,9 @@ const controllers = {
   },
 
   processLogin: async (req, res) => {
+    console.log("Entrando en processLogin");
+    console.log("Checking req.body content", req.body);
+
     const { email, password } = req.body;
     try {
       // const user = await User.findOne({ email: req.body.email });
