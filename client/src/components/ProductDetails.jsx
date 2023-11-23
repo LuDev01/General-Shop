@@ -15,6 +15,22 @@ import { NavBar } from "./NavBar";
 export const ProductDetails = () => {
   const { productId } = useParams();
   const [selectedSize, setSelectedSize] = useState(null);
+  const [quantity,setQuantity]=useState(1);
+
+  const handleDecrement=()=>{
+    if(quantity>1){
+      setQuantity(prevCount=>prevCount-1);
+    }
+  
+  };
+  const handleIncrement=()=>{
+    if(quantity<10){
+      setQuantity(prevCount=>prevCount+1);
+    }
+   
+  }
+
+
   const product = products.find(
     (products) => products.id === parseInt(productId)
   );
@@ -60,6 +76,17 @@ export const ProductDetails = () => {
                   </Dropdown.Menu>
                 </Dropdown>
               </CardSubtitle>
+              <br />
+              <div className="row">
+              <div className="col-md-3 mt-3">
+              <div className="input-group">
+                <button type="button" onClick={handleDecrement} className="input-group-text">-</button>
+                <input type="numbet" className="form-control text-center"value={quantity}/>
+                {/* <div className="form-control text-center">{quantity}</div> */}
+                <button type="button" onClick={handleIncrement} className="input-group-text">+</button>
+              </div>
+              </div>
+              </div>
               <div className="product-info">
                 <h3>Product information</h3>
                 <p>Product information details</p>

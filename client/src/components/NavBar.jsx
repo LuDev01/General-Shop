@@ -6,14 +6,11 @@ import Form from "react-bootstrap/Form";
 import "./NavBar.css";
 import logo from "./assets/GeneralShopLogoNoSlogan.png";
 import { ImSearch } from "react-icons/im";
-import { useState, useEffect } from "react";
+import { useState} from "react";
 import CartModal from "./CartModal";
 import { FaUserAlt } from "react-icons/fa";
 import { Link } from "react-router-dom";
-import Dropdown from "react-bootstrap/Dropdown";
-import DropdownButton from "react-bootstrap/DropdownButton";
 import { products } from "./Products";
-
 
 export const NavBar = () => {
   const [navbar, setNavbar] = useState(false);
@@ -56,11 +53,9 @@ const handleOnSearch=(searchItem)=>{
   console.log('searching', searchItem);
 };
 
-
-
-
-
   return (
+    <>
+   
     <Navbar
       expand="lg"
       className={
@@ -89,9 +84,9 @@ const handleOnSearch=(searchItem)=>{
               </NavDropdown.Item>
             </NavDropdown>
           </Nav>
-      <div className="search-container">
+      {/* <div className="search-container"> */}
           <Form
-            className="d-flex search-field"
+            className="d-flex search-field search-container"
             style={{ opacity: search.opacity, transition: search.transition }}
           >
             <Form.Control
@@ -108,27 +103,18 @@ const handleOnSearch=(searchItem)=>{
             {products.filter(el=>{
               const searchItem=value.toLowerCase();
               const itemName=el.name.toLowerCase();
-              return searchItem && itemName.startsWith(searchItem) && itemName!==searchItem
+              // return searchItem && itemName.startsWith(searchItem) && itemName!==searchItem
+              return searchItem && itemName.includes(searchItem.toLowerCase()) && itemName!==searchItem
             }).slice(0,3)
             
             .map((el)=>(
-              <div className="dropdown-search-row" onClick={()=>handleOnSearch(el.name)} key={el.id}>
+              <Link className="dropdown-search-row"  to={`/productDetails/${el.id}`} onClick={()=>handleOnSearch(el.name)} key={el.id}   style={{ textDecoration: "none", color:"black" }}>
                 {el.name}
-            
-              </div>
+                 <img  className="dropdown-search-img" src={el.image} alt="products" />
+                 </Link>       
             ))}
-
             </div>
-
-        {/* {isDropdownVisible && (
-          
-            <DropdownButton>
-            {products.map((el)=>(
-            <Dropdown.Item>{el.name}</Dropdown.Item>))}
-            </DropdownButton>
-        )} */}
           </Form>
-          </div>
 
           {search.showSearchButton ? (
             <ImSearch className="search-icon" onClick={showIcon}  />
@@ -142,5 +128,6 @@ const handleOnSearch=(searchItem)=>{
         </Navbar.Collapse>
       </Container>
     </Navbar>
+    </>
   );
 };
