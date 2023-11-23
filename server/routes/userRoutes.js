@@ -163,7 +163,7 @@ function verifyToken(req, res, next) {
       return res.status(403).json({ message: 'Token no proporcionado' });
     }
   
-    jwt.verify(token, 'secreto', (err, decoded) => {
+    jwt.verify(token, 'secret key 123', (err, decoded) => {
       if (err) {
         return res.status(401).json({ message: 'Token inválido' });
       }

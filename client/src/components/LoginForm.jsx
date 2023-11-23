@@ -52,22 +52,22 @@ export const LoginForm = () => {
   
 
     // const hashedPassword = CryptoJS.AES.encrypt(passw, 'secret key').toString();
-//  window.localStorage.setItem('login',JSON.stringify(Eemail,hashedPassword))
+    //  window.localStorage.setItem('login',JSON.stringify(Eemail,hashedPassword))
 
     if (!errors.email && !errors.passw) {
       // Here we only continue if there are no validation errors
      
 
       console.log("Sending request with email and password:", email, passw);
-
+      const passwordProcess = CryptoJS.AES.encrypt(passw, 'secret key 123').toString();
       fetch('http://localhost:5000/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
           'Accept': 'application/json',
         },
-    
-        body: JSON.stringify({ email: email, password: passw }), 
+        
+        body: JSON.stringify({ email: email, password: passwordProcess }), 
         // body: JSON.stringify({ email: email, password: hashedPassword }), 
 
       })

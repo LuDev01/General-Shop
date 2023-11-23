@@ -51,6 +51,9 @@ const controllers = {
   },
 
   processLogin: async (req, res) => {
+    console.log("Entrando en processLogin");
+    console.log("Checking req.body content", req.body);
+
     const { email, password } = req.body;
     try {
       // const user = await User.findOne({ email: req.body.email });
@@ -66,16 +69,23 @@ const controllers = {
         return res.status(401).json({ message: "Credenciales inválidas" });
       }
 
-      // const bytes = CryptoJS.AES.decrypt(password, 'my-secret-key@123');
-      // const decryptedPassword=bytes.toString(CryptoJS.enc.Utf8);
+      const bytes = CryptoJS.AES.decrypt(password, 'secret key 123');
+      const decryptedPassword=bytes.toString(CryptoJS.enc.Utf8);
+      console.log(decryptedPassword);
+      console.log("Desencriptando la petición del cliente", decryptedPassword);
+
+      const bytesDB = CryptoJS.AES.decrypt(user.password, 'secret key 123');
+      const decryptedPasswordDB=bytes.toString(CryptoJS.enc.Utf8);
+      console.log("Desencriptando password de la base de datos:", decryptedPasswordDB);
 
       // console.log("Decrypted password:", decryptedPassword);
 
       console.log("Original Password :", password);
       console.log("Hashed Password: ", user.password);
 
-      const isMatch = await bcrypt.compare(password, user.password);
+      // const isMatch = await bcrypt.compare(password, user.password);
       // const isMatch = await bcrypt.compare(decryptedPassword, user.password);
+      const isMatch = decryptedPasswordDB === decryptedPassword? true : false;
 
       console.log("Do they match?:", isMatch);
 
@@ -89,6 +99,7 @@ const controllers = {
         return res.status(401).json({ message: "Credenciales inválidas" });
       }
 
+      
       const token = Jwt.sign({ userId: user._id }, process.env.JWT_SECRET_KEY, {
         expiresIn: "1h",
       });
