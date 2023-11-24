@@ -1,5 +1,5 @@
 import {useState} from 'react';
-import {useFetcher, useNavigate} from 'react-router-dom';
+import { useNavigate} from 'react-router-dom';
 import Form from 'react-bootstrap/Form';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
@@ -9,9 +9,9 @@ import './RegisterForm.css';
 import Logo from "./assets/GeneralShopLogo.png";
 import { Link } from 'react-router-dom';
 import CarrouselLogIn from './CarrouselLogIn';
-import bcrypt from 'bcryptjs';
+
 import CryptoJS from 'crypto-js';
-import CryptoJS from "crypto-js";
+
 
 export const RegisterForm = () => {
     const navigate = useNavigate();

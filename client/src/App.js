@@ -7,20 +7,37 @@ import {ProductDetails} from './components/ProductDetails';
 import { AboutUs } from './components/AboutUs';
 import { WomenProducts } from './components/WomenProducts';
 import { MenProducts } from './components/MenProducts';
+import { useState,useEffect } from 'react';
 
 function App() { // Defines the App component, which serves as the main component for the React application.
+  const [login, setLogin] = useState(window.localStorage.getItem("isLoggedIn"));
+
+  useEffect(() => {
+    const handleStorageChange = () => {
+      setLogin(window.localStorage.getItem("isLoggedIn"));
+    };
+
+    window.addEventListener('storage', handleStorageChange);
+
+    return () => {
+      window.removeEventListener('storage', handleStorageChange);
+    };
+  }, []);
+
+
   return (
     <Router> {/*Starts the router context provided by BrowserRouter. This allows you to use features like navigation and route matching.*/}
-      {/* <NavBar/> */}
+
+      
     <div className="App"> {/*Provide a container for the main content of the application.*/}
     <Routes> {/*Sets up a container for defining different routes in the application.*/}
-      <Route path='/' element={<HomePage/>}/> {/*Defines a route for the root path / that renders the HomePage component when the root path is matched.*/}
+      <Route path='/' element={ <HomePage/>}/> {/*Defines a route for the root path / that renders the HomePage component when the root path is matched.*/}
       <Route path= '/register' element={<RegisterForm/>}/>
-      <Route path='/login' element={<LogIn/>}/>
+      <Route path='/login' element={login==="true" ? <HomePage/> : <LogIn/>}/>
       <Route path='/aboutUs' element={<AboutUs/>}/>
-      <Route path='/productDetails/:productId' element={<ProductDetails/>}/>
-      <Route path='/womenProducts' element={<WomenProducts/>}/>
-      <Route path='/menProducts' element={<MenProducts/>}/>
+      <Route path='/productDetails/:productId' element={login==="true" ? <ProductDetails/>: <LogIn/>}/>
+      <Route path='/womenProducts' element={ login==="true" ?  <WomenProducts/> : <LogIn/>}/>
+      <Route path='/menProducts' element={login==="true" ? <MenProducts/>: <LogIn/>}/>
 
     </Routes>
     </div>

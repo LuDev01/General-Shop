@@ -3,6 +3,7 @@ const bcrypt = require("bcrypt"); //Imports the bcrypt library, commonly used fo
 const Jwt = require("jsonwebtoken");
 const CryptoJS=require("crypto-js")
 const { log } = require("console");
+const { Result } = require("express-validator");
 
 const controllers = {
   //Defines an object named controllers that holds various controller functions for handling different aspects of user-related operations.
@@ -56,12 +57,6 @@ const controllers = {
 
     const { email, password } = req.body;
     try {
-      // const user = await User.findOne({ email: req.body.email });
-
-      // var bytes = CryptoJS.AES.decrypt(ciphertext, 'my-secret-key@123');
-      // var decryptedData = JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
-
-
       const user = await User.findOne({ email });
 
       console.log("Aqui estoy");
@@ -78,18 +73,13 @@ const controllers = {
       const decryptedPasswordDB=bytes.toString(CryptoJS.enc.Utf8);
       console.log("Desencriptando password de la base de datos:", decryptedPasswordDB);
 
-      // console.log("Decrypted password:", decryptedPassword);
-
       console.log("Original Password :", password);
       console.log("Hashed Password: ", user.password);
 
-      // const isMatch = await bcrypt.compare(password, user.password);
-      // const isMatch = await bcrypt.compare(decryptedPassword, user.password);
       const isMatch = decryptedPasswordDB === decryptedPassword? true : false;
 
       console.log("Do they match?:", isMatch);
 
-      // const isPasswordValid = await bcrypt.compare(hashedPassword, user.password);
 
       console.log(
         "----------------------------------------------------------------------"
@@ -131,6 +121,8 @@ const controllers = {
       //   res.json({ message: "Welcome!" });
 
       // }
+      
+
     } catch (error) {
       console.log(error);
       // res.json(false);

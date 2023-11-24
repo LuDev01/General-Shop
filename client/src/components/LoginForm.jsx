@@ -50,13 +50,7 @@ export const LoginForm = () => {
     const errors = validate();
     setErrors(errors);
   
-
-    // const hashedPassword = CryptoJS.AES.encrypt(passw, 'secret key').toString();
-    //  window.localStorage.setItem('login',JSON.stringify(Eemail,hashedPassword))
-
     if (!errors.email && !errors.passw) {
-      // Here we only continue if there are no validation errors
-     
 
       console.log("Sending request with email and password:", email, passw);
       const passwordProcess = CryptoJS.AES.encrypt(passw, 'secret key 123').toString();
@@ -75,6 +69,8 @@ export const LoginForm = () => {
         .then((data) => {
 
           console.log("Received response from server:", data.message);
+          console.log(data);
+          window.localStorage.setItem("isLoggedIn",true)
 
           if (data.message === 'Welcome!') {
             alert('Logged in successfully! Welcome to General Shop');

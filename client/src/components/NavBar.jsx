@@ -9,7 +9,8 @@ import { ImSearch } from "react-icons/im";
 import { useState} from "react";
 import CartModal from "./CartModal";
 import { FaUserAlt } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { IoLogOut } from "react-icons/io5";
+import { Link,useNavigate } from "react-router-dom";
 import { products } from "./Products";
 
 export const NavBar = () => {
@@ -17,6 +18,7 @@ export const NavBar = () => {
   const [isSearchVisible, setIsSearchVisible] = useState(false);
   const [isDropdownVisible, setIsDropdownVisible] = useState(false);
   const [value, setValue]=useState('');
+  const navigate=useNavigate();
 
   const [search, setSearchBtn] = useState({
     transition: "all .3s ease",
@@ -52,6 +54,12 @@ const handleOnSearch=(searchItem)=>{
   setValue(searchItem);
   console.log('searching', searchItem);
 };
+
+const handleOnLogOut=()=>{
+  window.localStorage.removeItem("isLoggedIn")
+  navigate('/');
+    
+}
 
   return (
     <>
@@ -124,7 +132,9 @@ const handleOnSearch=(searchItem)=>{
             <FaUserAlt className="user-icon" />{" "}
           </Link>
 
-          <CartModal />
+
+          <CartModal className="cart-icon"/>
+          <IoLogOut className="log-out-icon"onClick={handleOnLogOut}/>
         </Navbar.Collapse>
       </Container>
     </Navbar>
