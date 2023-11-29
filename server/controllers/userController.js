@@ -4,6 +4,8 @@ const Jwt = require("jsonwebtoken");
 const CryptoJS=require("crypto-js")
 const { log } = require("console");
 const { Result } = require("express-validator");
+const cloudinary = require("cloudinary").v2;
+
 
 const controllers = {
   //Defines an object named controllers that holds various controller functions for handling different aspects of user-related operations.
@@ -91,7 +93,7 @@ const controllers = {
 
       
       const token = Jwt.sign({ userId: user._id }, process.env.JWT_SECRET_KEY, {
-        expiresIn: "1h",
+        expiresIn: 3600,
       });
       res.status(200).json({ token, message: "Welcome!" });
 

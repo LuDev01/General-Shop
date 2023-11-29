@@ -15,6 +15,7 @@
     "bcrypt": "^5.1.1",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.20.2",
+    "cloudinary": "^1.41.0",
     "colors": "^1.4.0",
     "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
@@ -29,10 +30,10 @@
     "morgan": "^1.10.0",
     "nodemon": "^3.0.1",
     "react-multi-carousel": "^2.8.4",
+    "react-scripts": "^5.0.1",
     "swagger": "^0.7.5",
     "swagger-jsdoc": "^6.2.8",
     "swagger-ui-express": "^5.0.0",
-    "react-scripts": "^5.0.1",
     "uuid": "^9.0.1"
   }
 }

@@ -1,5 +1,6 @@
 const express=require('express'); // Imports the Express.js framework, which is commonly used for building web applications and APIs in Node.js.
 const swagger = require('./swagger');
+const cloudinary = require("cloudinary").v2;
 
 const cors=require('cors'); // Imports the CORS (Cross-Origin Resource Sharing) middleware, which enables the server to handle cross-origin HTTP requests.
 require('dotenv').config(); // Imports and configures the dotenv module, allowing the application to read environment variables from a .env file.
@@ -41,6 +42,12 @@ app.use(session({
     }
     
 }));
+
+cloudinary.config({ 
+  cloud_name: 'dzcqlvf5e', 
+  api_key: '481745541696896', 
+  api_secret: 'zRthE4v_GvaDYYklrZuMaZ9Bygg' 
+});
 
 
 app.listen(port,console.log(`Server working! Port: ${port}`)) //Starts the server, listening on the specified port. The callback function logs a message to the console indicating that the server is running, along with the port number.
