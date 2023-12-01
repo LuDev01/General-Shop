@@ -71,6 +71,14 @@ export const LoginForm = () => {
           console.log("Received response from server:", data.message);
           console.log(data);
           window.localStorage.setItem("isLoggedIn",true)
+          // window.sessionStorage.setItem("isLoggedInv2",true)
+
+
+          function setCookie(name, value, days) {   let expires = '';   if (days) {     const date = new Date();     date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));     expires = `; expires=${date.toUTCString()}`;   }   document.cookie = `${name}=${value || ''}${expires}; path=/`; }
+          
+          setCookie('isLoggedInv3',true,1);
+
+
 
           if (data.message === 'Welcome!') {
             alert('Logged in successfully! Welcome to General Shop');

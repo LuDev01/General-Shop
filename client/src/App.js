@@ -9,20 +9,33 @@ import { WomenProducts } from './components/WomenProducts';
 import { MenProducts } from './components/MenProducts';
 import { useState,useEffect } from 'react';
 
-function App() { // Defines the App component, which serves as the main component for the React application.
-  const [login, setLogin] = useState(window.localStorage.getItem("isLoggedIn"));
+function getCookie(name) {   const cookies = document.cookie.split(';');      for (let i = 0; i < cookies.length; i++) {     const cookie = cookies[i].trim();     const [cookieName, cookieValue] = cookie.split('=');          if (cookieName === name) {       return decodeURIComponent(cookieValue);     }   }      return null;} // Si no se encuentra la cookie}
 
+
+
+
+
+function App() { // Defines the App component, which serves as the main component for the React application.
+
+  // const [login, setLogin] = useState(window.localStorage.getItem("isLoggedIn"));
+  
+  const [login, setLogin] = useState(getCookie("isLoggedInv3"));
+ 
   useEffect(() => {
     const handleStorageChange = () => {
-      setLogin(window.localStorage.getItem("isLoggedIn"));
+      debugger
+      // setLogin(window.localStorage.getItem("isLoggedIn"));
+      // setLogin(window.sessionStorage.getItem("isLoggedInv2"));
+      setLogin(getCookie("isLoggedInv3"));
     };
-
+  
     window.addEventListener('storage', handleStorageChange);
 
     return () => {
+
       window.removeEventListener('storage', handleStorageChange);
     };
-  }, []);
+  }, [login]);
 
 
   return (

@@ -57,6 +57,7 @@ const handleOnSearch=(searchItem)=>{
 
 const handleOnLogOut=()=>{
   window.localStorage.removeItem("isLoggedIn")
+  window.sessionStorage.removeItem("isLoggedInv2")
   navigate('/');
     
 }
