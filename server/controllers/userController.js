@@ -88,14 +88,15 @@ const controllers = {
       );
 
       if (!isMatch) {
-        return res.status(401).json({ message: "Credenciales inválidas" });
+        return res.status(401).json({ message: "Credenciales inválidas"});
       }
 
       
       const token = Jwt.sign({ userId: user._id }, process.env.JWT_SECRET_KEY, {
         expiresIn: 3600,
       });
-      res.status(200).json({ token, message: "Welcome!" });
+      res.status(200).json({token, message: "Welcome!" });
+      
 
       // if (!isPasswordValid) {
       //   return res.status(401).json({ message: "Credenciales inválidas" });

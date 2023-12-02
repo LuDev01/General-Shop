@@ -24,10 +24,10 @@ function Notification({productId}) {
       
       </Col>
         <div className=" d-grid ">
-      <button type="submit" size="lg" class="submit-button btn btn-outline-info mb-3" onClick={() => setShow(true)}>Add to cart</button>
-      <button type="submit" size="lg" class="submit-button btn btn-outline-warning" onClick={() =>navigate(`/productDetails/${productId}`) }>Product details</button>
+      <button type="submit" size="lg" className="submit-button btn btn-outline-info mb-3" onClick={() => setShow(true)}>Add to cart</button>
+      <button type="submit" size="lg" className="submit-button btn btn-outline-warning" onClick={() =>navigate(`/productDetails/${productId}`) }>Product details</button>
       {/* <Link to={`/productDetails/${productId}`} onClick={()=>setRedirect(!redirect)}>
-      <button type="submit" size="lg" class="submit-button btn btn-outline-warning">Product details</button>  
+      <button type="submit" size="lg" className="submit-button btn btn-outline-warning">Product details</button>  
       </Link> */}
       </div>
     </Row>

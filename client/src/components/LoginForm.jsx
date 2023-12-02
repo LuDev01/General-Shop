@@ -6,6 +6,7 @@ import Form from "react-bootstrap/Form";
 import Logo from "./assets/GeneralShopLogo.png";
 import { BsFillEyeFill, BsFillEyeSlashFill } from "react-icons/bs";
 import CryptoJS from "crypto-js";
+import Cookies from 'js-cookie';
 
 export const LoginForm = () => {
   
@@ -71,6 +72,7 @@ export const LoginForm = () => {
           console.log("Received response from server:", data.message);
           console.log(data);
           window.localStorage.setItem("isLoggedIn",true)
+          Cookies.set('token',data.token);
           // window.sessionStorage.setItem("isLoggedInv2",true)
 
 
@@ -152,7 +154,7 @@ return (
           {errors.passw && <div className="error">{errors.passw}</div>}
         </Form.Group>
         <div className="d-grid gap-2">
-        <button type="submit" class="submit-button btn btn-outline-info">Log In</button>
+        <button type="submit" className="submit-button btn btn-outline-info">Log In</button>
         
         </div>
         <div className="register-link">
