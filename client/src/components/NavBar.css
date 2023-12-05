@@ -70,3 +70,7 @@
     margin-left: 2rem;
     max-width: 4.5rem;
 }
+
+.user-dropdown .dropdown-toggle::after{
+    display: none;
+}

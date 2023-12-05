@@ -42,7 +42,7 @@ export const ProductDetails = () => {
   return (
     <>
       <NavBar />
-      <Card style={{ margin: "8rem" }}>
+      <Card style={{margin:"8rem 6rem "}}>
         <Row>
           <Col>
             <img src={product.image} alt="{product.name}" />
@@ -81,7 +81,7 @@ export const ProductDetails = () => {
               <div className="col-md-3 mt-3">
               <div className="input-group">
                 <button type="button" onClick={handleDecrement} className="input-group-text">-</button>
-                <input type="numbet" className="form-control text-center"value={quantity}/>
+                <input type="text" className="form-control text-center"value={quantity}/>
                 {/* <div className="form-control text-center">{quantity}</div> */}
                 <button type="button" onClick={handleIncrement} className="input-group-text">+</button>
               </div>

@@ -158,7 +158,7 @@ export const LoginForm = () => {
             {errors.passw && <div className="error">{errors.passw}</div>}
           </Form.Group>
           <div className="d-grid gap-2">
-            <button type="submit" class="submit-button btn btn-outline-info">Log In</button>
+            <button type="submit" className="submit-button btn btn-outline-info">Log In</button>
 
           </div>
           <div className="register-link">

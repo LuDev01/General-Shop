@@ -5,22 +5,25 @@ import NavDropdown from "react-bootstrap/NavDropdown";
 import Form from "react-bootstrap/Form";
 import "./NavBar.css";
 import logo from "./assets/GeneralShopLogoNoSlogan.png";
-import { ImSearch } from "react-icons/im";
+import { ImDisplay, ImSearch } from "react-icons/im";
 import { useState } from "react";
 import CartModal from "./CartModal";
 import { FaUserAlt } from "react-icons/fa";
-import { IoLogOut } from "react-icons/io5";
 import { Link, useNavigate } from "react-router-dom";
 import { products } from "./Products";
+import defaultUserImg from "./assets/DefaultUserPicture.jpg";
+
 
 export const NavBar = () => {
   const [navbar, setNavbar] = useState(false);
   const [isSearchVisible, setIsSearchVisible] = useState(false);
   const [isDropdownVisible, setIsDropdownVisible] = useState(false);
-  const [value, setValue] = useState('');
+  const [value, setValue] = useState("");
+  const [userDropdown, setUserDropdown] = useState(false);
   const navigate = useNavigate();
 
   const token = localStorage.getItem("token");
+  const isLoggedIn = Boolean(token);
 
   const [search, setSearchBtn] = useState({
     transition: "all .3s ease",
@@ -53,7 +56,7 @@ export const NavBar = () => {
 
   const handleOnSearch = (searchItem) => {
     setValue(searchItem);
-    console.log('searching', searchItem);
+    console.log("searching", searchItem);
   };
 
   const handleOnLogOut = () => {
@@ -69,13 +72,12 @@ export const NavBar = () => {
       var name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
       document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
     }
-    navigate('/');
+    navigate("/");
     window.location.reload();
-  }
+  };
 
   return (
     <>
-
       <Navbar
         expand="lg"
         className={
@@ -116,21 +118,34 @@ export const NavBar = () => {
                 aria-label="Search"
                 value={value}
                 onChange={handleOnChangeValue}
-
               />
 
               <div className="dropdown-search">
-                {products.filter(el => {
-                  const searchItem = value.toLowerCase();
-                  const itemName = el.name.toLowerCase();
-                  // return searchItem && itemName.startsWith(searchItem) && itemName!==searchItem
-                  return searchItem && itemName.includes(searchItem.toLowerCase())
-                }).slice(0, 3)
+                {products
+                  .filter((el) => {
+                    const searchItem = value.toLowerCase();
+                    const itemName = el.name.toLowerCase();
+                    // return searchItem && itemName.startsWith(searchItem) && itemName!==searchItem
+                    return (
+                      searchItem && itemName.includes(searchItem.toLowerCase())
+                    );
+                  })
+                  .slice(0, 3)
 
                   .map((el) => (
-                    <Link className="dropdown-search-row" to={`/productDetails/${el.id}`} onClick={() => handleOnSearch(el.name)} key={el.id} style={{ textDecoration: "none", color: "black" }}>
+                    <Link
+                      className="dropdown-search-row"
+                      to={`/productDetails/${el.id}`}
+                      onClick={() => handleOnSearch(el.name)}
+                      key={el.id}
+                      style={{ textDecoration: "none", color: "black" }}
+                    >
                       {el.name}
-                      <img className="dropdown-search-img" src={el.image} alt="products" />
+                      <img
+                        className="dropdown-search-img"
+                        src={el.image}
+                        alt="products"
+                      />
                     </Link>
                   ))}
               </div>
@@ -139,14 +154,33 @@ export const NavBar = () => {
             {search.showSearchButton ? (
               <ImSearch className="search-icon" onClick={showIcon} />
             ) : null}
-            <Link className="link-user" to="/login">
-              {" "}
-              <FaUserAlt className="user-icon" />{" "}
-            </Link>
-
+            {isLoggedIn ? (
+              <Nav style={{ position: "relative", right: 17 }}>
+                <img
+                  src={defaultUserImg}
+                  style={{ borderRadius: "50%", width: "32px", height: "32px" }}
+                  alt="profle-picture"
+                  onClick={() => setUserDropdown(!userDropdown)}
+                />
+                <NavDropdown show={userDropdown} className="user-dropdown">
+                  <NavDropdown.Item href="/userProfile">
+                    Profile
+                  </NavDropdown.Item>
+                  <NavDropdown.Item onClick={handleOnLogOut}>
+                    Logout{" "}
+                  </NavDropdown.Item>
+                </NavDropdown>
+              </Nav>
+            ) : (
+              <div>
+                <Link className="link-user" to="/login">
+                  {" "}
+                  <FaUserAlt className="user-icon" />{" "}
+                </Link>
+              </div>
+            )}
 
             <CartModal className="cart-icon" />
-            <IoLogOut className="log-out-icon" onClick={handleOnLogOut} />
           </Navbar.Collapse>
         </Container>
       </Navbar>

@@ -11,6 +11,8 @@ import { MenProducts } from './components/MenProducts';
 import CartContent from './components/CartContent';
 import { useState, useEffect } from 'react';
 import  DataProvider  from './components/context/DataContext';
+import {Profile} from "./components/Profile";
+import { Home } from './components/Home';
 
 function getCookie(name) {
   const cookies = document.cookie.split(';');
@@ -52,13 +54,15 @@ function App() { // Defines the App component, which serves as the main componen
         <div className="App"> {/*Provide a container for the main content of the application.*/}
           <Routes> {/*Sets up a container for defining different routes in the application.*/}
             <Route path='/' element={<HomePage />} /> {/*Defines a route for the root path / that renders the HomePage component when the root path is matched.*/}
-            <Route path='/register' element={<RegisterForm />} />
+            <Route path='/register' element={login==="true" ?<HomePage/>:<RegisterForm />} />
             <Route path='/login' element={login === "true" ? <HomePage /> : <LogIn />} />
             <Route path='/aboutUs' element={<AboutUs />} />
             <Route path='/productDetails/:productId' element={<ProductDetails />} />
-            <Route path='/womenProducts' element={login === "true" ? <WomenProducts /> : <LogIn />} />
-            <Route path='/menProducts' element={login === "true" ? <MenProducts /> : <LogIn />} />
+            <Route path='/womenProducts' element={ <WomenProducts /> } />
+            <Route path='/menProducts' element={ <MenProducts /> } />
             <Route path='/cart' element={<CartContent />} />
+            <Route path='/userProfile' element={<Profile/>}/>
+            
           </Routes>
         </div>
       </BrowserRouter>

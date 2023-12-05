@@ -69,8 +69,7 @@ const controllers = {
       const decryptedPasswordDB = bytesDB.toString(CryptoJS.enc.Utf8);
       if (decryptedPassword !== decryptedPasswordDB) return res.status(401).json({ message: "Credenciales inválidas" });
       const isMatch = decryptedPasswordDB === decryptedPassword ? true : false;
-
-
+      
       if (!isMatch) {
         return res.status(401).json({ message: "Credenciales inválidas" });
       }
