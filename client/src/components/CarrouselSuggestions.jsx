@@ -117,7 +117,7 @@ export const CarrouselSuggestions = () => {
   return (
     <>
       <div>
-        <h1 style={{ textAlign: "center" ,marginTop:"2rem", color:"orange", fontWeight:"bold"}}>Latest promotions</h1>
+        <h1 style={{ textAlign: "center" ,margin:"2rem", color:"orange", fontWeight:"bold"}}>Latest promotions</h1>
         <Carousel  responsive={responsive}>
           {carrouselSuggestionsData.map((product,idx) => (
             <div className="carrousel-card"  key={idx}>
