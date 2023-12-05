@@ -167,7 +167,7 @@ export const NavBar = () => {
                     Profile
                   </NavDropdown.Item>
                   <NavDropdown.Item onClick={handleOnLogOut}>
-                    Logout{" "}
+                    Log Out{" "}
                   </NavDropdown.Item>
                 </NavDropdown>
               </Nav>

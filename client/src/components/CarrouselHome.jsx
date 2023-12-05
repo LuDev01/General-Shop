@@ -2,6 +2,9 @@ import Carousel from 'react-bootstrap/Carousel';
 import bg1 from "./assets/Background1.jpg";
 import bg2 from "./assets/Background2.jpg";
 import bg3 from "./assets/Background3.jpg";
+import bg4 from "./assets/Background4.jpg";
+import bg5 from "./assets/Background5.jpg";
+import bg6 from "./assets/Background6.jpg";
 
 function DarkVariantExample() {
 
@@ -14,7 +17,7 @@ function DarkVariantExample() {
       <Carousel.Item style={carouselItemStyle}>
         <img
           className="d-block w-100"
-          src={bg1}
+          src={bg4}
           alt="First slide"
         />
         <Carousel.Caption>
@@ -25,7 +28,7 @@ function DarkVariantExample() {
       <Carousel.Item  style={carouselItemStyle}>
         <img
           className="d-block w-100"
-          src={bg2}
+          src={bg5}
           alt="Second slide"
         />
         <Carousel.Caption>
@@ -36,7 +39,7 @@ function DarkVariantExample() {
       <Carousel.Item style={carouselItemStyle}>
         <img
           className="d-block w-100"
-          src={bg3}
+          src={bg6}
           alt="Third slide"
         />
         <Carousel.Caption>
@@ -45,6 +48,7 @@ function DarkVariantExample() {
             Praesent commodo cursus magna, vel scelerisque nisl consectetur.
           </p>
         </Carousel.Caption>
+
       </Carousel.Item>
     </Carousel>
   );

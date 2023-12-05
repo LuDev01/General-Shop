@@ -1,13 +1,13 @@
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
-import imgc1 from "../components/assets/products/img4.png";
-import imgc2 from "../components/assets/products/img5.png";
-import imgc3 from "../components/assets/products/img6.png";
-import imgc4 from "../components/assets/products/img7.png";
-import imgc5 from "../components/assets/products/img8.png";
-import imgc6 from "../components/assets/products/img9.png";
-import imgc7 from "../components/assets/products/img10.png";
-import imgc8 from "../components/assets/products/img11.png";
+import imgc1 from "../components/assets/products/img8.png";
+import imgc2 from "../components/assets/products/img9.png";
+import imgc3 from "../components/assets/products/img10.png";
+import imgc4 from "../components/assets/products/img11.png";
+import imgc5 from "../components/assets/products/img12.png";
+import imgc6 from "../components/assets/products/img13.png"
+import imgc7 from "../components/assets/products/img14.png"
+import imgc8 from "../components/assets/products/img15.png"
 import "./CarrouselSuggestions.css";
 
 import { useContext } from "react";
@@ -49,47 +49,47 @@ export const CarrouselSuggestions = () => {
     {
       id: 1,
       image: imgc1,
-      name: " Sport Tshirt",
-      price: "$250",
+      name: "Comfort Tee",
+      price: "$120",
       descripcion: "Save 20% buying now!",
       
     },
     {
       id: 2,
       image: imgc2,
-      name: " Sport Tshirt",
-      price: "$250",
+      name: "Everyday Lifestyle ",
+      price: "$130",
       descripcion: "Save 20% buying now!",
       
     },
     {
       id: 3,
       image: imgc3,
-      name: " Sport Tshirt",
-      price: "$250",
+      name: "Casual Relax ",
+      price: "$90",
       descripcion: "Save 20% buying now!",
       
     },
     {
       id: 4,
       image: imgc4,
-      name: " Sport Tshirt",
-      price: "$250",
+      name: "Good Vibes Only",
+      price: "$135",
       descripcion: "Save 20% buying now!",
       
     },
     {
       id: 5,
       image: imgc5,
-      name: " Sport Tshirt",
-      price: "$250",
+      name: "Mosh-Pit Vibe",
+      price: "$125",
       descripcion: "Save 20% buying now!",
       
     },
     {
       id: 6,
       image: imgc6,
-      name: " Sport Tshirt",
+      name: "Hardcore Lifestyle",
       price: "$250",
       descripcion: "Save 20% buying now!",
       
@@ -97,15 +97,16 @@ export const CarrouselSuggestions = () => {
     {
       id: 7,
       image: imgc7,
-      name: " Sport Tshirt",
-      price: "$250",
+      name: "Free Spirit",
+      price: "$115",
       descripcion: "Save 20% buying now!",
       
     },
+
     {
-      id: 8,
+      id: 9,
       image: imgc8,
-      name: " Sport Tshirt",
+      name: "Rick & Morty Vibe",
       price: "$250",
       descripcion: "Save 20% buying now!",
       
@@ -116,7 +117,7 @@ export const CarrouselSuggestions = () => {
   return (
     <>
       <div>
-        <h1 style={{ textAlign: "center" }}>Latest promotions</h1>
+        <h1 style={{ textAlign: "center" ,marginTop:"2rem", color:"orange", fontWeight:"bold"}}>Latest promotions</h1>
         <Carousel  responsive={responsive}>
           {carrouselSuggestionsData.map((product,idx) => (
             <div className="carrousel-card"  key={idx}>

@@ -12,7 +12,7 @@ import CartContent from './components/CartContent';
 import { useState, useEffect } from 'react';
 import  DataProvider  from './components/context/DataContext';
 import {Profile} from "./components/Profile";
-import { Home } from './components/Home';
+
 
 function getCookie(name) {
   const cookies = document.cookie.split(';');
