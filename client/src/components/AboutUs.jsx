@@ -3,7 +3,7 @@ import Card from "react-bootstrap/Card";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import member1 from "./assets/team/member1.png";
-import member2 from "./assets/team/member1.png";
+import member2 from "./assets/team/member2.png";
 import { Link } from "react-router-dom";
 import { BsGithub } from "react-icons/bs";
 import { FaLinkedin } from "react-icons/fa";

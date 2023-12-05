@@ -10,7 +10,17 @@ import imgc7 from "../components/assets/products/img10.png";
 import imgc8 from "../components/assets/products/img11.png";
 import "./CarrouselSuggestions.css";
 
+import { useContext } from "react";
+import { dataContext } from "./context/DataContext";
+
 export const CarrouselSuggestions = () => {
+  const { data, cart, setCart } = useContext(dataContext);
+
+  const buyProducts = (product) => {
+      console.log(product)
+      setCart([...cart, product])
+  };
+
   const responsive = {
     superLargeDesktop: {
       // the naming can be any, depends on you.
@@ -108,13 +118,13 @@ export const CarrouselSuggestions = () => {
       <div>
         <h1 style={{ textAlign: "center" }}>Latest promotions</h1>
         <Carousel  responsive={responsive}>
-          {carrouselSuggestionsData.map((el,idx) => (
+          {carrouselSuggestionsData.map((product,idx) => (
             <div className="carrousel-card"  key={idx}>
-              <img className="product--image" src={el.image} alt={el.name} />
-                <h2>{el.name}</h2>
-                <p className="price">{el.price}</p>
-                <p>{el.descripcion}</p>
-                <p><button>Add to Cart</button></p>
+              <img className="product--image" src={product.image} alt={product.name} />
+                <h2>{product.name}</h2>
+                <p className="price">{product.price}</p>
+                <p>{product.descripcion}</p>
+                <p><button onClick={() => buyProducts(product)}>Add to Cart</button></p>
               </div>
           ))}
         </Carousel>

@@ -42,7 +42,7 @@ export const ProductDetails = () => {
   return (
     <>
       <NavBar />
-      <Card style={{ margin: "6rem" }}>
+      <Card style={{ margin: "8rem" }}>
         <Row>
           <Col>
             <img src={product.image} alt="{product.name}" />

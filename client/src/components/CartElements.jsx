@@ -1,6 +1,8 @@
 import { useContext } from "react";
 import { dataContext } from "./context/DataContext";
 
+import "./CartContent.css";
+
 export const CartElements = () => {
     const {cart} = useContext(dataContext);
     return cart.map((product => {

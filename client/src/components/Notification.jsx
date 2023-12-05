@@ -4,9 +4,27 @@ import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import Toast from 'react-bootstrap/Toast';
 
-function Notification({productId}) {
+import { useContext } from "react";
+import { dataContext } from "./context/DataContext";
+import ProductsCart from './ProductsCart';
+
+function Notification({productId, buyProducts, product}) {
   const [show, setShow] = useState(false);
   const navigate = useNavigate();
+  const { data, cart, setCart } = useContext(dataContext);
+  
+
+  //  const buyProducts = (product) => {
+  //      console.log(product)
+  //      setCart([...cart, product])
+  //  };
+
+  const addToCart = (product) => {
+    setShow(true);
+    console.log(product)
+    setCart([...cart, product])
+    buyProducts(product)
+  }
   
   return (
     <div className=''>
@@ -25,12 +43,9 @@ function Notification({productId}) {
       
       </Col>
         <div className=" d-grid ">
-      <button type="submit" size="lg" class="submit-button btn btn-outline-info mb-3" onClick={() => setShow(true)}>Add to cart</button>
-      <button type="submit" size="lg" class="submit-button btn btn-outline-warning" onClick={() =>navigate(`/productDetails/${productId}`) }>Product details</button>
-      {/* <Link to={`/productDetails/${productId}`} onClick={()=>setRedirect(!redirect)}>
-      <button type="submit" size="lg" class="submit-button btn btn-outline-warning">Product details</button>  
-      </Link> */}
-      </div>
+          <button type="submit" size="lg" class="submit-button btn btn-outline-info mb-3" onClick={addToCart}>Add to cart</button>
+          <button type="submit" size="lg" class="submit-button btn btn-outline-warning" onClick={() =>navigate(`/productDetails/${productId}`) }>Product details</button>
+        </div>
     </Row>
     </div>
   );

@@ -55,7 +55,7 @@ function App() { // Defines the App component, which serves as the main componen
             <Route path='/register' element={<RegisterForm />} />
             <Route path='/login' element={login === "true" ? <HomePage /> : <LogIn />} />
             <Route path='/aboutUs' element={<AboutUs />} />
-            <Route path='/productDetails/:productId' element={login === "true" ? <ProductDetails /> : <LogIn />} />
+            <Route path='/productDetails/:productId' element={<ProductDetails />} />
             <Route path='/womenProducts' element={login === "true" ? <WomenProducts /> : <LogIn />} />
             <Route path='/menProducts' element={login === "true" ? <MenProducts /> : <LogIn />} />
             <Route path='/cart' element={<CartContent />} />
