@@ -2,6 +2,8 @@ import { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import {FaShoppingCart} from 'react-icons/fa'
+import { Link } from 'react-router-dom';
+import CartContent from './CartContent';
 
 function CartModal() {
   const [show, setShow] = useState(false);
@@ -17,16 +19,22 @@ function CartModal() {
 
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title>Modal heading</Modal.Title>
+          <Modal.Title>Shopping Cart</Modal.Title>
         </Modal.Header>
-        <Modal.Body>Woohoo, you are reading this text in a modal!</Modal.Body>
+
+        <Modal.Body>
+          <CartContent/>
+        </Modal.Body>
+        
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
             Close
           </Button>
-          <Button variant="primary" onClick={handleClose}>
-            Save Changes
-          </Button>
+          <Link to= '/cart'>
+            <Button variant="primary" >
+              Complete purchase
+            </Button>
+          </Link>
         </Modal.Footer>
       </Modal>
     </>

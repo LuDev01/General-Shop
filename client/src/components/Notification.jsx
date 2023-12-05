@@ -7,6 +7,7 @@ import Toast from 'react-bootstrap/Toast';
 function Notification({productId}) {
   const [show, setShow] = useState(false);
   const navigate = useNavigate();
+  
   return (
     <div className=''>
     <Row>
@@ -19,7 +20,7 @@ function Notification({productId}) {
               alt=""/>
             <strong className="me-auto">Notification</strong>
           </Toast.Header>
-          <Toast.Body>Product added to you shopping cart! =)</Toast.Body>
+          <Toast.Body>Product added to your shopping cart!</Toast.Body>
         </Toast>
       
       </Col>

@@ -1,0 +1,56 @@
+[
+    {
+      "id":1,
+      "name": "Red t-shirt",
+      "category":"Man",
+      "description":
+        "This is a longer card with supporting text below as a natural to additional content. This content is a little bitlonger.",
+      "price": "$25",
+      "image": "https://res.cloudinary.com/dl0ylthbl/image/upload/v1699910927/onlineShop/img1_ygt1qx.png"
+    },
+    {
+      "id":2,
+      "name": "White t-shirt",
+      "category":"Man",
+      "description":
+        "This is a longer card with supporting text below as a natural to additional content. This content is a little bitlonger.",
+      "price": "$25",
+      "image": "https://res.cloudinary.com/dl0ylthbl/image/upload/v1699910927/onlineShop/img2_h8rm7h.png"
+    },
+    {
+      "id":3,
+      "name": "Black t-shirt",
+      "category":"Woman",
+      "description":
+        "This is a longer card with supporting text below as a natural to additional content. This content is a little bitlonger.",
+      "price": "$25",
+      "image": "https://res.cloudinary.com/dl0ylthbl/image/upload/v1699910927/onlineShop/img3_jcm48f.png"
+    },
+    {
+      "id":4,
+      "name": "Red t-shirt",
+      "category":"Man",
+      "description":
+        "This is a longer card with supporting text below as a natural to additional content. This content is a little bitlonger.",
+      "price": "$25",
+      "image": "https://res.cloudinary.com/dl0ylthbl/image/upload/v1699910927/onlineShop/img1_ygt1qx.png"
+    },
+    {
+      "id":5,
+      "name": "White t-shirt",
+      "category":"Man",
+      "description":
+        "This is a longer card with supporting text below as a natural to additional content. This content is a little bitlonger.",
+      "price": "$25",
+      "image": "https://res.cloudinary.com/dl0ylthbl/image/upload/v1699910927/onlineShop/img2_h8rm7h.png"
+    },
+    {
+      "id":6,
+      "name": "Black t-shirt",
+      "category":"Woman",
+      "description":
+        "This is a longer card with supporting text below as a natural to additional content. This content is a little bitlonger.",
+      "price": "$25",
+      "image": "https://res.cloudinary.com/dl0ylthbl/image/upload/v1699910927/onlineShop/img3_jcm48f.png"
+    }
+  ]
