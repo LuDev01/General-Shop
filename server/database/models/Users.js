@@ -44,6 +44,11 @@ const usersSchema = new mongoose.Schema({ // Creates a Mongoose schema for the "
     //     required: true,
     //     default: 'guest'
     // }
+
+    userRole:{
+        type:String,
+        required:true
+    }
 });
 
 const Users = mongoose.model('Users', usersSchema); // Creates a Mongoose model named "Users" based on the defined schema. The model represents a collection in the MongoDB database and provides an interface for interacting with it.

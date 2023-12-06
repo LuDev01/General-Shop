@@ -87,6 +87,7 @@ export const LoginForm = () => {
             localStorage.setItem("isLoggedIn", true)
             localStorage.setItem('token', data.token)
             localStorage.setItem('exp', data.exp)
+            localStorage.setItem('role',data.role)
             setEmail('');
             setPassw('');
             window.location.reload();

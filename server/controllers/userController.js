@@ -79,7 +79,9 @@ const controllers = {
         expiresIn: '24h',
       });
 
-      res.status(200).json({ token, exp, message: "Welcome!" });
+      const role=user.userRole;
+
+      res.status(200).json({ token, exp,role, message: "Welcome!" });
     } catch (error) {
       console.log(error);
       // res.json(false);

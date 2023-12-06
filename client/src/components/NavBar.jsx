@@ -12,7 +12,7 @@ import { FaUserAlt } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 import { products } from "./Products";
 import defaultUserImg from "./assets/DefaultUserPicture.jpg";
-
+import admin1 from "./assets/team/member1.png";
 
 export const NavBar = () => {
   const [navbar, setNavbar] = useState(false);
@@ -23,7 +23,9 @@ export const NavBar = () => {
   const navigate = useNavigate();
 
   const token = localStorage.getItem("token");
+  const role = localStorage.getItem("role");
   const isLoggedIn = Boolean(token);
+
 
   const [search, setSearchBtn] = useState({
     transition: "all .3s ease",
@@ -64,6 +66,7 @@ export const NavBar = () => {
     localStorage.removeItem("isLoggedInv2");
     localStorage.removeItem("token");
     localStorage.removeItem("exp");
+    localStorage.removeItem("role");
     var cookies = document.cookie.split(";");
 
     for (var i = 0; i < cookies.length; i++) {
@@ -154,7 +157,9 @@ export const NavBar = () => {
             {search.showSearchButton ? (
               <ImSearch className="search-icon" onClick={showIcon} />
             ) : null}
-            {isLoggedIn ? (
+
+            {isLoggedIn  ? (
+              role==="User"? (
               <Nav style={{ position: "relative", right: 17 }}>
                 <img
                   src={defaultUserImg}
@@ -171,14 +176,36 @@ export const NavBar = () => {
                   </NavDropdown.Item>
                 </NavDropdown>
               </Nav>
-            ) : (
-              <div>
+            ) : 
+              role==="Admin" ?(
+                <Nav style={{ position: "relative", right: 17 }}>
+                  <img
+                    src={admin1}
+                    style={{ borderRadius: "50%", width: "32px", height: "32px" }}
+                    alt="profle-picture"
+                    onClick={() => setUserDropdown(!userDropdown)}
+                  />
+                  <NavDropdown show={userDropdown} className="user-dropdown">
+                    <NavDropdown.Item href="/userProfile">
+                      Profile
+                    </NavDropdown.Item>
+                    <NavDropdown.Item href="/adminDashboard">
+                      Dashboard
+                    </NavDropdown.Item>
+                    <NavDropdown.Item onClick={handleOnLogOut}>
+                      Log Out{" "}
+                    </NavDropdown.Item>
+                  </NavDropdown>
+                </Nav>
+              ) : null
+              ):(
+                <div>
                 <Link className="link-user" to="/login">
                   {" "}
                   <FaUserAlt className="user-icon" />{" "}
                 </Link>
               </div>
-            )}
+              )}
 
             <CartModal className="cart-icon" />
           </Navbar.Collapse>
