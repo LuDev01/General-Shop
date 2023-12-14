@@ -1,0 +1,161 @@
+.footer {
+  background-color: #1697b7;
+ 
+  font-size: 1.2rem;
+  padding: 2rem 0;
+  margin-top: 10rem;
+  /* margin-left: 12rem; */
+  position: relative;
+}
+.footer-col1 a {
+  text-decoration: none;
+}
+.footer-col1 h3 {
+  font-weight: 700;
+  font-family: cursive;
+  letter-spacing: 2px;
+}
+.footer-col1 span {
+  color: #e7804b;
+}
+.footer-col1 p {
+  padding: 0 5rem 0.8rem 0;
+  text-align: justify;
+}
+
+.footer-icons {
+  text-align: center;
+}
+.footer-icons i {
+  display: inline-block;
+  background-color: #a9a9a95e;
+  color: #e7804b;
+  border-radius: 50%;
+  font-size: 1.5rem;
+  padding: 0.5rem;
+  margin: 0 0.5rem;
+  transition: 0.6s;
+}
+.footer-icons i:hover {
+  background-color: #e7804b;
+  color: #f3f3f3;
+  transform: translateY(-10px);
+  cursor: pointer;
+}
+.footer h3 {
+  color:#f3f3f3;
+}
+
+.footer-col2 ul {
+  list-style: none;
+  padding-left: 0;
+}
+.footer-col2 ul a {
+  text-decoration: none;
+  color: inherit;
+}
+.footer-col2 ul li {
+  padding: 0.5rem 0;
+}
+.footer-col2 ul li:hover {
+  opacity: 0.75;
+}
+
+.footer-col3 i {
+  position: absolute;
+  font-size: 1.5rem;
+}
+.footer-col3 p {
+  padding-left: 30px;
+  font-size: 1.2rem;
+}
+.footer-end {
+margin-top:2rem;
+  text-align: center;
+  padding: 2rem 0;
+  border-top: 4px solid #fff;
+
+}
+.footer-end p {
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+.custom-shape-divider-top-1702510797 {
+    position: absolute;
+    top: 15rem;
+    left: 0;
+    width: 100%;
+    overflow: hidden;
+    line-height: 0;
+}
+
+.custom-shape-divider-top-1702510797 svg {
+    display: block;
+    width: calc(122% + 1.3px);
+    height: 500px;
+    transform: rotate(180deg);
+
+}
+
+.custom-shape-divider-top-1702510797 .shape-fill {
+    fill: #1697B7;
+}
+
+.waves{
+    margin-top:5rem;
+}
+.wave{
+    position: absolute;
+    top:-100px;
+    left:0;
+    width: 100%;
+    height: 100px;
+    background: url(./assets/waves.png);
+    background-size:1000px 100px;
+
+}
+.wave#wave1{
+    z-index: 1000;
+    opacity: 0.9;
+    bottom: 0;
+    animation: animateWave 4s linear infinite;
+}
+.wave#wave2{
+    z-index: 999;
+    opacity: 0.3;
+    bottom: 10px;
+    animation: animateWave2 4s linear infinite;
+}
+.wave#wave3{
+    z-index: 1000;
+    opacity: 0.2;
+    bottom: 15px;
+    animation: animateWave 4s linear infinite;
+}
+.wave#wave4{
+    z-index: 999;
+    opacity: 0.7;
+    bottom: 20px;
+    animation: animateWave2 4s linear infinite;
+}
+@keyframes animateWave {
+    0%
+    {
+        background-position-x: 1000px;
+    }
+    100%
+    {
+        background-position-x:0px ;
+    }
+    
+}
+@keyframes animateWave2 {
+    0%
+    {
+        background-position-x: 0px;
+    }
+    100%
+    {
+        background-position-x:1000px ;
+    }
+}
