@@ -81,13 +81,16 @@ export const NavBar = () => {
 
   return (
     <>
+
       <Navbar
         expand="lg"
         className={
           navbar ? "NavBar-color active fixed-top" : "NavBar-color fixed-top"
         }
       >
+        
         <Container>
+
           <div className="logo-container">
             <Navbar.Brand href="/">
               <img className="general-logo" src={logo} alt="" />

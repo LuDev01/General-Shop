@@ -8,6 +8,7 @@ import { MdLocationOn } from "react-icons/md";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
+
 import "./Footer.css";
 
 export const Footer = () => {
@@ -105,10 +106,7 @@ export const Footer = () => {
         eserved</p>
         </Container>
       </div>
-       {/* <div className="footer-end">
-        <p>©2023 Developed by SheDev | All Rights R
-        eserved</p>
-      </div>   */}
+
       
       
     </>
