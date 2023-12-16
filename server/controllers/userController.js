@@ -1,11 +1,10 @@
 const User = require("../database/models/Users"); // Imports the User model from the specified path.
 const bcrypt = require("bcrypt"); //Imports the bcrypt library, commonly used for hashing passwords.
 const Jwt = require("jsonwebtoken");
-const CryptoJS = require("crypto-js")
+const CryptoJS = require("crypto-js");
 const { log } = require("console");
 const { Result } = require("express-validator");
 const cloudinary = require("cloudinary").v2;
-
 
 const controllers = {
   //Defines an object named controllers that holds various controller functions for handling different aspects of user-related operations.
@@ -63,25 +62,31 @@ const controllers = {
         return res.status(401).json({ message: "Credenciales inválidas" });
       }
 
-      const bytes = CryptoJS.AES.decrypt(password, 'secret key 123');
+      const bytes = CryptoJS.AES.decrypt(password, "secret key 123");
       const decryptedPassword = bytes.toString(CryptoJS.enc.Utf8);
-      const bytesDB = CryptoJS.AES.decrypt(user.password, 'secret key 123');
+      const bytesDB = CryptoJS.AES.decrypt(user.password, "secret key 123");
       const decryptedPasswordDB = bytesDB.toString(CryptoJS.enc.Utf8);
-      if (decryptedPassword !== decryptedPasswordDB) return res.status(401).json({ message: "Credenciales inválidas" });
+      if (decryptedPassword !== decryptedPasswordDB)
+        return res.status(401).json({ message: "Credenciales inválidas" });
       const isMatch = decryptedPasswordDB === decryptedPassword ? true : false;
-      
+
       if (!isMatch) {
         return res.status(401).json({ message: "Credenciales inválidas" });
       }
 
       exp = Math.floor(Date.now() / 1000) + 24 * 60 * 60;
       const token = Jwt.sign({ userId: user._id }, process.env.JWT_SECRET_KEY, {
-        expiresIn: '24h',
+        expiresIn: "24h",
       });
 
-      const role=user.userRole;
+      const role = user.userRole;
+      
+      // console.log(user);
+      req.session = {};
+      req.session.user = user;
+      // console.log(req.session);
 
-      res.status(200).json({ token, exp,role, message: "Welcome!" });
+      res.status(200).json({ token, exp, role, message: "Welcome!" });
     } catch (error) {
       console.log(error);
       // res.json(false);

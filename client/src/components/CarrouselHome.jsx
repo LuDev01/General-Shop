@@ -5,6 +5,7 @@ import bg3 from "./assets/Background3.jpg";
 import bg4 from "./assets/Background4.jpg";
 import bg5 from "./assets/Background5.jpg";
 import bg6 from "./assets/Background6.jpg";
+import bg7 from "./assets/Background7.jpg";
 
 function DarkVariantExample() {
 
@@ -17,7 +18,7 @@ function DarkVariantExample() {
       <Carousel.Item style={carouselItemStyle}>
         <img
           className="d-block w-100"
-          src={bg4}
+          src={bg7}
           alt="First slide"
         />
         <Carousel.Caption>

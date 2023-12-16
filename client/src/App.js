@@ -13,6 +13,7 @@ import { useState, useEffect } from 'react';
 import  DataProvider  from './components/context/DataContext';
 import {Profile} from "./components/Profile";
 import { Dashboard } from './components/Dashboard';
+import { Test } from './components/Test';
 
 
 function getCookie(name) {
@@ -64,7 +65,7 @@ function App() { // Defines the App component, which serves as the main componen
             <Route path='/cart' element={<CartContent />} />
             <Route path='/userProfile' element={<Profile/>}/>
             <Route path='/adminDashboard' element={<Dashboard/>}/>
-            
+            <Route path='/crudProducts' element={<Test/>}/>
           </Routes>
         </div>
       </BrowserRouter>

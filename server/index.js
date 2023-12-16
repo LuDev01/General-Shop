@@ -8,6 +8,7 @@ require('dotenv').config(); // Imports and configures the dotenv module, allowin
 const colors=require('colors'); // Imports the colors module, which provides text coloring for the console output. It's used for adding color to console logs in this case.
 const port=process.env.PORT || 5000; // Sets the port number for the server. It uses the value of the PORT environment variable if it exists; otherwise, it defaults to port 5000.
 const userRouter=require('./routes/userRoutes'); // Imports the userRoutes module, which contains route handlers for user-related operations.
+const productRouter=require('./routes/productRoutes');
 
 const bodyParser=require('body-parser');
 const cookieParser=require ('cookie-parser');
@@ -32,14 +33,16 @@ const corsOptions = {
 
 // app.use(cors()); //Adds CORS middleware to the Express app, enabling cross-origin resource sharing.
 app.use(userRouter); //Tells the Express app to use the routes defined in userRouter.
+app.use(productRouter);
+
 app.use(cookieParser());
 app.use(session({
     secret:'Is a secret!',
     resave:false,
     saveUninitialized:false,
-    cookie:{
-      maxAge:1000*60*60*24
-    }
+    // cookie:{
+    //   maxAge:1000*60*60*24
+    // }
     
 }));
 

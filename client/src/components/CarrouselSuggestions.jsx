@@ -210,7 +210,14 @@ export const CarrouselSuggestions = () => {
             Don’t miss this chance to get your hands on the best t-shirts ever,
             and join our community of t-shirt fans.
           </h4>
+
         </div>
+        <h2 style={{marginBottom:'3rem', textAlign:'center'}}>Scroll down for more!</h2>
+          <div className="arrow">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
       </div>
     </>
   );

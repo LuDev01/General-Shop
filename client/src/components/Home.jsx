@@ -4,6 +4,7 @@ import { CarrouselSuggestions } from "./CarrouselSuggestions";
 import {ProductsCart}  from "./ProductsCart";
 
 
+
 export const Home = () => {
   return (
     <>
@@ -12,6 +13,7 @@ export const Home = () => {
         <CarrouselSuggestions/>
         <AllProducts/>
         <ProductsCart/>
+        
         </div>
         
     </>
