@@ -2,7 +2,7 @@ const User = require("../database/models/Users"); // Imports the User model from
 const bcrypt = require("bcrypt"); //Imports the bcrypt library, commonly used for hashing passwords.
 const Jwt = require("jsonwebtoken");
 const CryptoJS = require("crypto-js");
-const { log } = require("console");
+const { log, error } = require("console");
 const { Result } = require("express-validator");
 const cloudinary = require("cloudinary").v2;
 
@@ -10,7 +10,6 @@ const controllers = {
   //Defines an object named controllers that holds various controller functions for handling different aspects of user-related operations.
   createUser: async (req, res) => {
     // Defines an asynchronous function createUser to handle the creation of a new user. It takes req (request) and res (response) as parameters.
-    console.log(req.body);
     try {
       const { email } = req.body;
       const existingUser = await User.findOne({ email }); // Check if the email already exists in the database
@@ -27,8 +26,6 @@ const controllers = {
       // const confirmPassword = bcrypt.hashSync(req.body.confirmPassword, 12);
       // delete req.body.confirmPassword;
       // req.body.confirmPassword = confirmPassword;
-
-      console.log(req.body);
 
       const newUser = await User.create({ ...req.body }); //Creates a new user using the User.create method, which is likely a Mongoose method for adding a new document to the "Users" collection.
 
@@ -57,7 +54,6 @@ const controllers = {
     try {
       const user = await User.findOne({ email });
 
-      console.log("Aqui estoy");
       if (!user) {
         return res.status(401).json({ message: "Credenciales inválidas" });
       }
@@ -79,14 +75,12 @@ const controllers = {
         expiresIn: "24h",
       });
 
-      const role = user.userRole;
-      
-      // console.log(user);
-      req.session = {};
-      req.session.user = user;
-      // console.log(req.session);
-
-      res.status(200).json({ token, exp, role, message: "Welcome!" });
+      // req.session = {};
+      if (isMatch) {
+        res
+          .status(200)
+          .json({ token, exp, role: user.userRole, message: "Welcome!" });
+      }
     } catch (error) {
       console.log(error);
       // res.json(false);
