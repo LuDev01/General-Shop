@@ -7,4 +7,9 @@ const authMiddleware = require('../middlewares/authMiddleware')
 
 router.post("/products/create", authMiddleware.isLogged, productController.createProduct);
 
+// @GET /products
+router.get("/products",productController.getProduct);
+
+
+
 module.exports = router;

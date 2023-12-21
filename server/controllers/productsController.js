@@ -20,6 +20,17 @@ const controllers = {
       res.status(400).json({ message: "User not logged" });
     }
   },
+  
+  getProduct: async(req,res)=>{
+    try {
+      const products= await Product.find();
+      if(products){
+        res.status(200).json({products});
+      }
+    } catch (error) {
+      res.json({message: `Error showing products ${error}`})
+    }
+  }
 };
 
 module.exports = controllers;

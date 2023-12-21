@@ -5,6 +5,7 @@ import { useState } from "react";
 import {jwtDecode} from 'jwt-decode';
 
 export const Test = () => {
+  const [name,setName]=useState("");
   const [brand, setBrand] = useState("");
   const [category, setCategory] = useState("");
   const [color, setColor] = useState("");
@@ -27,6 +28,7 @@ export const Test = () => {
       credentials: "include",
 
       body: JSON.stringify({
+        name,
         brand,
         category,
         color,
@@ -46,6 +48,15 @@ export const Test = () => {
   return (
     <>
       <Form onSubmit={(e) => handleSubmit(e)}>
+      <Form.Group className="mb">
+          <Form.Label>Product Name</Form.Label>
+          <Form.Control
+            type="text"
+            placeholder="Enter text"
+            onChange={(e) => setName(e.target.value)}
+          />
+        </Form.Group>
+        
         <Form.Group className="mb">
           <Form.Label>Category</Form.Label>
           <Form.Control
