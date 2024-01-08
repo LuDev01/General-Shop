@@ -30,6 +30,33 @@ const controllers = {
     } catch (error) {
       res.json({message: `Error showing products ${error}`})
     }
+  },
+
+  editProduct: async(req,res)=>{
+    try {
+      const product=await Product.findByIdAndUpdate(
+      req.params.id,
+      { ...req.body },
+      { new: true }
+      );
+      if(product){
+        res.status(200).json({ message: "Updated Successfully" });
+      }
+    } catch (error) {
+      res.json({ message: `Error updating product ${error}` });
+    }
+  },
+  deleteProduct:async(req,res)=>{
+    try {
+      const deleted = await Product.findByIdAndRemove(req.params.id);
+      if (deleted) {
+          res.status(200).json({ message: "Deleted Successfully" });
+      } else {
+          res.status(404).json({ message: "product not found" });
+      }
+  } catch (error) {
+      res.json({ message: `Error deleting product ${error}` });
+  }
   }
 };
 

@@ -12,6 +12,7 @@ const controllers = {
     // Defines an asynchronous function createUser to handle the creation of a new user. It takes req (request) and res (response) as parameters.
     try {
       const { email } = req.body;
+
       const existingUser = await User.findOne({ email }); // Check if the email already exists in the database
 
       if (existingUser) {
@@ -19,15 +20,14 @@ const controllers = {
         return; // Stop the creation process
       }
 
-      // const password = bcrypt.hashSync(req.body.password, 12); //Hashes the user's password using bcrypt.hashSync with a salt factor of 12.
-      // delete req.body.password;
-      // req.body.password = password;
-
-      // const confirmPassword = bcrypt.hashSync(req.body.confirmPassword, 12);
-      // delete req.body.confirmPassword;
-      // req.body.confirmPassword = confirmPassword;
-
+      const isSuperAdmin = req.headers["x-superadmin"] === "true";
       const newUser = await User.create({ ...req.body }); //Creates a new user using the User.create method, which is likely a Mongoose method for adding a new document to the "Users" collection.
+     
+      if (isSuperAdmin) {
+        newUser.userRole.push("Admin");
+      }
+
+      await new User(newUser).save();
 
       res.json({ status: "201", user: newUser }); //Sends a JSON response indicating success (status 200) and includes the newly created user in the response.
     } catch (error) {
@@ -36,6 +36,34 @@ const controllers = {
       res.json({ error: "Error creating the user" });
     }
   },
+
+updateUser: async (req,res)=>{
+  try {
+    // const { id, newRole } = req.body;
+    const { id } = req.params;
+    const { userRole } = req.body;
+
+    const user = await User.findById(id);
+
+    if (!user) {
+      res.status(400).json({ error: "User not found" });
+      return;
+    }
+
+    user.userRole = userRole;
+    const updatedUser = await user.save();
+
+    if (updatedUser) {
+      res.status(200).json({ message: "Updated Successfully", user: updatedUser });
+    }
+  } catch (error) {
+    console.log(error);
+    res.json({ error: "Error modifying the user's role" });
+  }
+},
+
+
+
 
   getUserByPk: async (req, res) => {
     //  Defines an asynchronous function getUserByPk to handle fetching a user by their primary key (ID). It takes req (request) and res (response) as parameters.
@@ -72,7 +100,7 @@ const controllers = {
 
       exp = Math.floor(Date.now() / 1000) + 24 * 60 * 60;
       const token = Jwt.sign({ userId: user._id }, process.env.JWT_SECRET_KEY, {
-        expiresIn: "24h",
+        expiresIn: '24h',
       });
 
       // req.session = {};

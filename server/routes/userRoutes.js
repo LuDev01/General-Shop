@@ -71,6 +71,9 @@ const jwt = require('jsonwebtoken');
 // @POST // register
 router.post('/register', userController.createUser); //Defines a POST route at /register that, when accessed, calls the createUser function from the userController.
 
+//@PUT // userRole modification 
+router.put('/users/:id/update',userController.updateUser)
+
 /**
  * @swagger
  * /user/{id}:

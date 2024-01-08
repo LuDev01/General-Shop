@@ -1,14 +1,14 @@
 import { useState } from "react";
-import { useNavigate, Link } from "react-router-dom";
-import axiosClient from "../axiosConfig";
+import { useNavigate } from "react-router-dom";
 import Form from "react-bootstrap/Form";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
-import Logo from "./assets/GeneralShopLogo.png";
-import CarrouselLogIn from "./CarrouselLogIn";
 import "./RegisterForm.css";
+import Logo from "./assets/GeneralShopLogo.png";
+import { Link } from "react-router-dom";
+import CarrouselLogIn from "./CarrouselLogIn";
 
 import CryptoJS from "crypto-js";
 
@@ -35,7 +35,8 @@ export const RegisterForm = () => {
   });
 
   const [emailExists, setEmailExists] = useState(false);
-  // const [userRole, setUserRole] = useState("");
+  const [userRole, setUserRole] = useState("");
+
 
   const { firstName, lastName, documentType, document, email } = inputs;
   var { password, confirmPassword } = inputs;
@@ -44,7 +45,7 @@ export const RegisterForm = () => {
     setInputs({ ...inputs, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     const newErrors = {};
 
@@ -123,25 +124,34 @@ export const RegisterForm = () => {
           email,
           password,
           confirmPassword,
-          // userRole
+          userRole
         };
-
         alert("Created user");
-        try {
-          const response = await axiosClient.post("register", user);
-          const data = response.data;
-          if (data.error && data.error === "Email is already in use") {
-            setEmailExists(true); // Marks that the email already exists
-            alert("Email is already in use");
-          } else {
-            navigate("/login"); // Redirect the user to the login page
-          }
-        } catch (error) {
-          console.log(error);
-        }
+
+        // Send the POST request to the server only if the email does not exist
+        fetch("http://localhost:5000/register", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+           // 'x-superadmin': 'true', //registro de usuarios administradores 
+            Accept: "application/json",
+          },
+          body: JSON.stringify({ ...user }),
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            if (data.error && data.error === "Email is already in use") {
+              setEmailExists(true); // Marks that the email already exists
+              alert("Email is already in use");
+            } else {
+              navigate("/login"); // Redirect the user to the login page
+            }
+          })
+          .catch((error) => console.log(error));
       }
     }
-  };
+  }
+  
 
   return (
     <>
@@ -151,6 +161,28 @@ export const RegisterForm = () => {
             <img className="logo-img-signup" src={Logo} alt="GeneralShop" />
           </div>
           <h1 className="signUp-title">Sign Up</h1>
+
+          {/* <Form>
+            <p>Choose your role:</p>
+            <Form.Group className="mb-3">
+              <Form.Check
+                type="radio"
+                name="userRole"
+                label="User"
+                value="User"
+                onChange={(e) => setUserRole(e.target.value)}
+                checked={userRole === 'User'}
+              />
+              <Form.Check
+                type="radio"
+                name="userRole"
+                label="Admin"
+                value="Admin"
+                onChange={(e) => setUserRole(e.target.value)}
+                checked={userRole === 'Admin'}
+              />
+            </Form.Group>
+          </Form> */}
 
           <Form.Group className="mb-3" controlId="formBasicEmail">
             <Form.Label>First Name*</Form.Label>
@@ -256,6 +288,20 @@ export const RegisterForm = () => {
               <div className="error-message">{errors.confirmPassword}</div>
             )}
           </Form.Group>
+
+          {/* {userRole === "Admin" ? (
+            <Form.Group className="mb-3" controlId="formBasicPassword">
+              <Form.Label>Acess Code *</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="Your Assigned Access Code"
+                onChange={(e) => setAccessCode(e.target.value)}
+              />
+              {errors.confirmPassword && (
+              <div className="error-message">{errors.confirmPassword}</div>
+            )}
+            </Form.Group>
+          ) : null} */}
 
           {/* <Form.Group className="mb-3" controlId="formBasicCheckbox">
             <Form.Check 

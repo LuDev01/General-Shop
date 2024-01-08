@@ -7,12 +7,12 @@ import { useState, useEffect } from "react";
 
 export const AllProducts = () => {
   const [data, setData] = useState([]);
-console.log("this is the data ",data);
+  console.log("this is the data ", data);
   const getProduct = async () => {
     try {
       const response = await axiosClient.get("products");
-      console.log("this is the response of the server",response.data);
-      setData(response.data.products); 
+      console.log("this is the response of the server", response.data);
+      setData(response.data.products);
     } catch (error) {
       console.log("Error showing the products", error.message);
     }
@@ -23,12 +23,10 @@ console.log("this is the data ",data);
 
   return (
     <>
-
-      
-<Row xs={1} md={3} className="g-4 m-4 ">
-      {data &&
-        data.map((el) => (
-            <Col key={el.id}>
+      <Row xs={1} md={3} className="g-4 m-4 ">
+        {data &&
+          data.map((el) => (
+            <Col key={el._id}>
               <Card className="product-cards">
                 <Card.Img
                   className="products-img"
@@ -39,12 +37,12 @@ console.log("this is the data ",data);
                   <Card.Title>{el.name}</Card.Title>
                   <Card.Text>{el.description}</Card.Text>
                   <Card.Text>Price: {el.price}</Card.Text>
-                  <Notification productId={el.id} />
+                  <Notification productId={el._id} />
                 </Card.Body>
               </Card>
             </Col>
           ))}
-          </Row>
+      </Row>
     </>
   );
 };
