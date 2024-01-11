@@ -3,8 +3,11 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import { useState } from "react";
 import {jwtDecode} from 'jwt-decode';
+import axiosClient from "../axiosConfig";
+import axios from 'axios';
 
-export const Test = () => {
+export const Test = (props) => {
+  const [userId, setuserId] = useState("");
   const [name,setName]=useState("");
   const [brand, setBrand] = useState("");
   const [category, setCategory] = useState("");
@@ -13,37 +16,85 @@ export const Test = () => {
   const [price, setPrice] = useState(null);
   const [quantity, setQuantity] = useState(null);
   const [description, setDescription] = useState("");
-  const [image, setImage] = useState("");
+  const [image, setImage] = useState(null);
 
-  const handleSubmit = (e) => {
+  //Handle and convert img in base 64
+   const handleImage = (e) => {
+     const file = e.target.files[0];
+     setFileToBase(file);
+     console.log(file);
+   }
+
+   const setFileToBase = (file) => {
+     const reader = new FileReader();
+     reader.readAsDataURL(file);
+     reader.onloadend = () => {
+       setImage(reader.result);
+     }
+   }
+
+  //C-Domingo
+  // const handleChange = (e) => {
+  //   console.log("Se cambió el archivo", e);
+  //   setImage(e.target.value)
+  // }
+
+  //C-Lunes
+  const handleChange = (e) => {
     e.preventDefault();
-    const token = localStorage.getItem('token'); 
-    const userId = jwtDecode(token);
-    fetch("http://localhost:5000/products/create", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-      },
-      credentials: "include",
+    const file = e.target.files[0];
+    console.log("Se cambió el archivo", e, file)
+    setImage(file);
+  }
 
-      body: JSON.stringify({
-        name,
-        brand,
-        category,
-        color,
-        size,
-        price,
-        quantity,
-        description,
-        image,
-        userId,
-      }),
-    })
-      .then((response) => response.json())
-      .then((data) => {})
-      .catch((error) => console.log(error));
-  };
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+  //   const token = localStorage.getItem('token'); 
+  //   const userId = jwtDecode(token);
+  //   try {
+  //     const response = await axiosClient.post("products/create", {
+  //       name,
+  //       brand,
+  //       category,
+  //       color,
+  //       size,
+  //       price,
+  //       quantity,
+  //       description,
+  //       image,
+  //       userId,
+  //     });
+  //     alert("Product created successfully!");
+  //     props.refreshProducts();
+  //     // handleClose();
+  //   } catch (error) {
+  //     console.error("Error creating product:", error.message);
+  //     alert("Product creation failed. Please try again.");
+  //   }
+  // };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const {data} = await axios.post('/products/create', {name, brand, category, color, size, price, quantity, description, image, userId})
+      if (data.success === true){
+        setName('');
+        setBrand('');
+        setCategory('');
+        setColor('');
+        setSize('');
+        setPrice('');
+        setQuantity('');
+        setDescription('');
+        setImage('');
+        setuserId('');
+        alert('Product created succesfully')
+      }
+      console.log(data);
+    } catch (error) {
+      console.log(error,"Error creating product")
+    }
+  }
 
   return (
     <>
@@ -114,6 +165,7 @@ export const Test = () => {
         <Form.Group className="mb">
           <Form.Label>Description</Form.Label>
           <Form.Control
+            name="image"
             type="text"
             placeholder="Enter text"
             onChange={(e) => setDescription(e.target.value)}
@@ -121,13 +173,14 @@ export const Test = () => {
         </Form.Group>
 
         <Form.Group className="mb-3">
-          <Form.Label>Image</Form.Label>
+          <Form.Label>Upload Image</Form.Label>
           <Form.Control
-            type="text"
-            placeholder="Enter text"
-            onChange={(e) => setImage(e.target.value)}
+            type="file"
+            //accept="image/*"
+            onChange={handleImage}
           />
-        </Form.Group>
+        </Form.Group> 
+        {/* <input type="file" name="image" id="" onChange={(e) => handleChange(e)}/> */}
 
         <Button variant="primary" type="submit">
           Submit

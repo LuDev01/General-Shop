@@ -14,19 +14,22 @@ const app = express(); //Creates an instance of the Express application, providi
 
 connectDB(); //Calls the connectDB function to establish a connection to the database.
 
+console.log(cloudinary.config().cloud_name);
+
 const corsOptions = {
   origin: "http://localhost:3000",
   credentials: true,
   allowedHeaders: ["Authorization", "Content-Type"], // Agrega 'Authorization' a los encabezados permitidos
 };
+app.use(bodyParser.json({ limit: '10mb' }));
 app.use(cors(corsOptions));
 app.use("/", swagger);
 app.use(express.json()); //Adds middleware to parse incoming JSON requests, enabling the server to handle data sent in the JSON format in the body of HTTP requests.
-// app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.urlencoded({ extended: false })); //Adds middleware to parse incoming URL-encoded requests, facilitating the handling of data sent in the body of HTTP requests
 app.use(
   session({
-    secret: "Isasdfasdfasdfa secret!",
+    secret: "SheDev2101200025021997",
     resave: false,
     saveUninitialized: false,
   })
@@ -40,10 +43,11 @@ const productRouter = require("./routes/productRoutes");
 app.use(userRouter); //Tells the Express app to use the routes defined in userRouter.
 app.use(productRouter);
 
-cloudinary.config({
-  cloud_name: "dzcqlvf5e",
-  api_key: "481745541696896",
-  api_secret: "zRthE4v_GvaDYYklrZuMaZ9Bygg",
-});
+// cloudinary.config({
+//   cloud_name: "generalshop",
+//   api_key: "935673371582777",
+//   api_secret: "vBvBKLxQ2gw95CEaMXZPk7u-bso",
+//   secure:true
+// });
 
 app.listen(port, console.log(`Server working! Port: ${port}`)); //Starts the server, listening on the specified port. The callback function logs a message to the console indicating that the server is running, along with the port number.

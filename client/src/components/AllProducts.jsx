@@ -7,7 +7,7 @@ import { useState, useEffect } from "react";
 
 export const AllProducts = () => {
   const [data, setData] = useState([]);
-console.log("this is the data ",data);
+  console.log("this is the data ",data);
   const getProduct = async () => {
     try {
       const response = await axiosClient.get("products");

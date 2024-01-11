@@ -115,7 +115,7 @@ export const RegisterForm = () => {
         // const hashedPassword=bcrypt.hashSync(password,12);
         const hashedPassword = CryptoJS.AES.encrypt(
           password,
-          "secret key 123"
+          "SheDev2101200025021997"
         ).toString();
         // const hashedPassword=CryptoJS.MD5.encrypt(password,);
         console.log(hashedPassword);

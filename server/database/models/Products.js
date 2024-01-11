@@ -34,14 +34,19 @@ const productsSchema=new mongoose.Schema({
         required:true
     },
     image:{
-        type:String,
-        required:true
+        public_id: {
+            type: String,
+            required: true
+        },
+        url: {
+            type: String,
+            required: true
+        }
     },
     userId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Users'
-      }
-
+    }
 });
 
 const Products=mongoose.model('Products',productsSchema);

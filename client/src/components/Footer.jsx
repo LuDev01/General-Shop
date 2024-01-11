@@ -43,7 +43,6 @@ export const Footer = () => {
           <div className="wave" id="wave2"></div>
           <div className="wave" id="wave3"></div>
           <div className="wave" id="wave4"></div>
-
         </div>
         <Container >
           <Row>

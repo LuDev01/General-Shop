@@ -53,7 +53,7 @@ export const LoginForm = () => {
     if (!errors.email && !errors.passw) {
 
       console.log("Sending request with email and password:", email, passw);
-      const passwordProcess = CryptoJS.AES.encrypt(passw, 'secret key 123').toString();
+      const passwordProcess = CryptoJS.AES.encrypt(passw, 'SheDev2101200025021997').toString();
       fetch('http://localhost:5000/login', {
         method: 'POST',
         headers: {

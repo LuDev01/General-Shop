@@ -58,9 +58,9 @@ const controllers = {
         return res.status(401).json({ message: "Credenciales inválidas" });
       }
 
-      const bytes = CryptoJS.AES.decrypt(password, "secret key 123");
+      const bytes = CryptoJS.AES.decrypt(password, "SheDev2101200025021997");
       const decryptedPassword = bytes.toString(CryptoJS.enc.Utf8);
-      const bytesDB = CryptoJS.AES.decrypt(user.password, "secret key 123");
+      const bytesDB = CryptoJS.AES.decrypt(user.password, "SheDev2101200025021997");
       const decryptedPasswordDB = bytesDB.toString(CryptoJS.enc.Utf8);
       if (decryptedPassword !== decryptedPasswordDB)
         return res.status(401).json({ message: "Credenciales inválidas" });

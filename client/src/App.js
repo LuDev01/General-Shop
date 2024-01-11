@@ -25,7 +25,7 @@ function getCookie(name) {
       return decodeURIComponent(cookieValue);
     }
   } return null;
-} // Si no se encuentra la cookie}
+} // Si no se encuentra la cookie
 
 function App() { // Defines the App component, which serves as the main component for the React application.
 
