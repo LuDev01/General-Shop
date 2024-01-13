@@ -16,7 +16,6 @@ export const DeleteProduct = (props) => {
     e.preventDefault();
     try {
       const response = await axiosClient.delete(`products/${props.id}/delete`);
-      alert("Product deleted successfully!");
       props.refreshProducts();
     } catch (error) {
       console.error("Error deleting product:", error.message);

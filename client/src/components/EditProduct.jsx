@@ -38,13 +38,12 @@ export const EditProduct = (props) => {
             image,
             userId,
           });
-          alert("Product edited successfully!");
           console.log(response.data)
           props.refreshProducts();
           handleClose();
         } catch (error) {
           console.error("Error editing product:", error.message);
-          alert("Product edition failed. Please try again.");
+    
         }
       };
 

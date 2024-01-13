@@ -32,6 +32,29 @@ const controllers = {
     }
   },
 
+  getProductFilter:async(req,res)=>{
+    try {
+      const query = req.query.query;
+
+      const products = await Product.find({
+        $or: [
+          {name: {$regex: query, $options: 'i'}},
+          {brand: {$regex: query, $options: 'i'}},
+          {category: {$regex: query, $options: 'i'}},
+          {color: {$regex: query, $options: 'i'}},
+          {size:{$regex:query,$options:'i'}},
+          {description:{$regex:query,$options:'i'}},      
+        ]
+      });
+  
+      if (products) { 
+        res.status(200).json({products});
+      }
+    } catch (error) {
+      res.json({message: `Error showing products ${error}`});
+    }
+  },
+
   editProduct: async(req,res)=>{
     try {
       const product=await Product.findByIdAndUpdate(

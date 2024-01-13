@@ -7,8 +7,12 @@ import { FaSignOutAlt } from "react-icons/fa";
 import { CreateProduct } from "./CreateProduct";
 import { EditProduct } from "./EditProduct";
 import { DeleteProduct } from "./DeleteProduct";
+import { EditUser } from "./EditUser";
+import { Panel } from "./Panel";
 import axiosClient from "../axiosConfig";
+import { jwtDecode } from "jwt-decode";
 import defaultUserImg from "./assets/DefaultUserPicture.jpg";
+import logoWhite from "./assets/GeneralShopLogoWhite.png";
 import "./Dashboard.css";
 
 export const Dashboard = () => {
@@ -17,8 +21,23 @@ export const Dashboard = () => {
   const [settings, setSettings] = useState(false);
   const [data, setData] = useState([]);
   const [search, setSearch] = useState([]);
-
+  const [idUser, setId] = useState(" ");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [documentType, setDocumentType] = useState("");
+  const [document, setDocument] = useState("");
+  const [email, setEmail] = useState("");
   const [image, setImage] = useState(defaultUserImg); // Set the initial image
+  const token = localStorage.getItem("token");
+  let id;
+  useEffect(() => {
+    if (token) {
+      const { userId } = jwtDecode(token);
+      setId(userId);
+      id = userId;
+      console.log("Id del usuario:", id);
+    }
+  }, [token]);
 
   const dashboardRef = useRef();
   const manageProductsRef = useRef();
@@ -59,6 +78,23 @@ export const Dashboard = () => {
       console.error("Error showing product", error.message);
     }
   };
+
+  const getUser = async () => {
+    try {
+      const response = await axiosClient.get(`user/${id}`); // Send a GET request to your user endpoint
+      const { user } = response.data;
+      setFirstName(user.firstName);
+      setLastName(user.lastName);
+      setDocumentType(user.documentType);
+      setDocument(user.document);
+      setEmail(user.email);
+
+      console.log(user);
+    } catch (error) {
+      console.error("Error showing user", error.message);
+    }
+  };
+
   const handleInputSearch = async (e) => {
     try {
       const response = await axiosClient.get(
@@ -72,6 +108,9 @@ export const Dashboard = () => {
 
   useEffect(() => {
     getProduct();
+  }, []);
+  useEffect(() => {
+    getUser();
   }, []);
 
   const handleImageUpload = (event) => {
@@ -88,8 +127,11 @@ export const Dashboard = () => {
     <>
       <div className="wrapper">
         <div className="navigation">
-          <h1 className="logo">General Shop</h1>
-
+          <div className="logo-dashboard">
+            <Link to="/">
+              <img src={logoWhite} alt="" />
+            </Link>
+          </div>
           <ul className="menu">
             <li>
               <button
@@ -100,6 +142,7 @@ export const Dashboard = () => {
                 <FaHome />
                 Dashboard
               </button>
+
             </li>
             <li>
               <button
@@ -130,14 +173,14 @@ export const Dashboard = () => {
             </li>
           </ul>
 
-          <p className="text-footer">© 2023 LuiDev Coding</p>
+          <p className="text-footer">© 2024 SheDev Coding</p>
         </div>
         {dashboard && (
           <>
             <div className="main">
               <h2 className="principal-title">Site Management</h2>
               <h1>Dashboard </h1>
-              <div id="products-container" className="products-container"></div>
+              <Panel/> 
             </div>
           </>
         )}
@@ -154,7 +197,7 @@ export const Dashboard = () => {
                         <form className="form-inline">
                           <input
                             className="form-control mr-sm-2"
-                            type="search"
+                            type="text"
                             placeholder="Search Product"
                             aria-label="Search"
                             onChange={(e) => handleInputSearch(e)}
@@ -221,6 +264,42 @@ export const Dashboard = () => {
                               </tr>
                             ))}
                         </tbody>
+                        <tbody>
+                          {search.length > 0 &&
+                            search.map((el) => (
+                              <tr key={el._id}>
+                                <td>{el._id}</td>
+                                <td>{el.name}</td>
+                                <td>{el.category}</td>
+                                <td>{el.brand}</td>
+                                <td>{el.color}</td>
+                                <td>{el.size}</td>
+                                <td>{el.price}</td>
+                                <td>{el.quantity}</td>
+                                <td>{el.description}</td>
+                                <td>{el.image}</td>
+                                <td>
+                                  <EditProduct
+                                    refreshProducts={getProduct}
+                                    id={el._id}
+                                    name={el.name}
+                                    category={el.category}
+                                    brand={el.brand}
+                                    color={el.color}
+                                    size={el.size}
+                                    price={el.price}
+                                    quantity={el.quantity}
+                                    description={el.description}
+                                    image={el.image}
+                                  />
+                                  <DeleteProduct
+                                    id={el._id}
+                                    refreshProducts={getProduct}
+                                  />
+                                </td>
+                              </tr>
+                            ))}
+                        </tbody>
                       </table>
                     </div>
                   </div>
@@ -234,6 +313,16 @@ export const Dashboard = () => {
             <div className="main">
               <h2 className="principal-title">Site Management</h2>
               <h1>Settings </h1>
+
+              <EditUser
+                refreshUser={getUser}
+                id={idUser}
+                firstName={firstName}
+                lastName={lastName}
+                documentType={documentType}
+                document={document}
+                email={email}
+              />
               <div>
                 <img
                   src={image}

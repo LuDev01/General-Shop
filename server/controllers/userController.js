@@ -62,8 +62,20 @@ updateUser: async (req,res)=>{
   }
 },
 
-
-
+editUserInfo:async(req,res)=>{
+  try {
+    const userInfo=await User.findByIdAndUpdate(
+    req.params.id,
+    { ...req.body },
+    { new: true }
+    );
+    if(userInfo){
+      res.status(200).json({ message: "Updated Successfully" });
+    }
+  } catch (error) {
+    res.json({ message: `Error updating user ${error}` });
+  }
+},
 
   getUserByPk: async (req, res) => {
     //  Defines an asynchronous function getUserByPk to handle fetching a user by their primary key (ID). It takes req (request) and res (response) as parameters.

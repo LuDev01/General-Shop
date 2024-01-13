@@ -74,6 +74,9 @@ router.post('/register', userController.createUser); //Defines a POST route at /
 //@PUT // userRole modification 
 router.put('/users/:id/update',userController.updateUser)
 
+// @PUT //userInfo
+router.put('/users/:id/edit',userController.editUserInfo)
+
 /**
  * @swagger
  * /user/{id}:
@@ -116,7 +119,7 @@ router.put('/users/:id/update',userController.updateUser)
 
 // @GET//user/:id
 // router.get('/user/:id',userController.getUserByPk); //Defines a GET route at /user/:id that, when accessed, calls the getUserByPk function from the userController.
-router.get('/user/:id',verifyToken,userController.getUserByPk); 
+router.get('/user/:id',userController.getUserByPk); 
 
 /**
  * @swagger
