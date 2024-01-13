@@ -13,6 +13,4 @@ router.get("/products", productController.getProduct);
 // @GET /update
 router.put("/products/update/:id", authMiddleware.isLogged, productController.getProduct)
 
-
-
 module.exports = router;

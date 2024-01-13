@@ -14,6 +14,9 @@ const app = express(); //Creates an instance of the Express application, providi
 
 connectDB(); //Calls the connectDB function to establish a connection to the database.
 
+cloudinary.config({
+  secure: true
+});
 console.log(cloudinary.config().cloud_name);
 
 const corsOptions = {

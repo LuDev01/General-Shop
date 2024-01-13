@@ -3,25 +3,25 @@ const cloudinary = require("../middlewares/cloudinary");
 
 const controllers = {
   
-    // createProduct: async (req, res) => {
-    //   try {
-    //     const { userId } = req.body.userId;
-    //     console.log(userId);
-    //     console.log(req.body);
-    //     delete req.body.userId;
-    //     console.log(req.body);
-    //     const newProduct = await Product.create({
-    //       ...req.body,
-    //       userId,
-    //     });
-    //     console.log(newProduct)
-    //     return res
-    //       .status(200)
-    //       .json({ message: "Product created successfully!", newProduct });
-    //   } catch (error) {
-    //     res.status(400).json({ message: "User not logged" });
-    //   }
-    // },
+  // createProduct: async (req, res) => {
+  //   try {
+  //     const { userId } = req.body.userId;
+  //     console.log(userId);
+  //     console.log(req.body);
+  //     delete req.body.userId;
+  //     console.log(req.body);
+  //     const newProduct = await Product.create({
+  //       ...req.body,
+  //       userId,
+  //     });
+  //     console.log(newProduct)
+  //     return res
+  //       .status(200)
+  //       .json({ message: "Product created successfully!", newProduct });
+  //   } catch (error) {
+  //     res.status(400).json({ message: "User not logged" });
+  //   }
+  // },
 
     //CLOUDINARY
     createProduct: async (req, res) => {
@@ -39,82 +39,34 @@ const controllers = {
         //   overwrite: true,
         //   invalidate: true,        
         // })
-        const {result} = await cloudinary.uploader.upload(image, {
+        const result = await cloudinary.uploader.upload(image, {
           folder: "onlineShop"
         });
       
       
-        // const product = await Product.create({
-        //   name, 
-        //   category, 
-        //   brand, 
-        //   color, 
-        //   size, 
-        //   price, 
-        //   quantity, 
-        //   description, 
-        //   image: {
-        //     public_id: result.public_id,
-        //     url: result.secure_url
-        //   }
-        // });
+        const product = await Product.create({
+          name, 
+          category, 
+          brand, 
+          color, 
+          size, 
+          price, 
+          quantity, 
+          description, 
+          image: {
+            public_id: result.public_id,
+            url: result.secure_url
+          }
+        });
          res.status(201).json({
-           success:true,
-            //product 
+            message: "Product created successfully!",
+            success:true,
+            product 
          })
       } catch (error) {
-        console.log(error);
-        // next(error);
+        console.log("Error creating the product", error);
       }
     },
-  
-  //Mix Product Creation
-  // createProduct: async (req, res) => {
-  //   try {
-  //     const { userId } = req.body;
-  //     console.log(userId);
-  //     console.log(req.body);
-  //     delete req.body.userId;
-  //     console.log(req.body);
-  
-  //     // Crear el producto directamente (sin Cloudinary)
-  //     const newProduct = await Product.create({
-  //       ...req.body,
-  //       userId,
-  //     });
-  
-  //     // Subir la imagen a Cloudinary
-  //     const result = await cloudinary.uploader.upload(req.body.image, {
-  //       folder: "onlineShop",
-  //     });
-  
-  //     // Actualizar el producto con la URL y el ID público de la imagen de Cloudinary
-  //     const updatedProduct = await Product.findByIdAndUpdate(
-  //       newProduct._id,
-  //       {
-  //         image: {
-  //           public_id: result.public_id,
-  //           url: result.secure_url,
-  //         },
-  //       },
-  //       { new: true }
-  //     );
-  
-  //     res.status(201).json({
-  //       success: true,
-  //       product: updatedProduct,
-  //     });
-  //   } catch (error) {
-  //     console.log(error);
-  //     res.status(400).json({
-  //       success: false,
-  //       message: "Bad Request",
-  //       error: error.message,
-  //     });
-  //   }
-  // },
-  
-  
 
   
   getProduct: async(req,res)=>{

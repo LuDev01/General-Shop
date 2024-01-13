@@ -33,26 +33,42 @@ export const Test = (props) => {
      }
    }
 
-  //C-Domingo
-  // const handleChange = (e) => {
-  //   console.log("Se cambió el archivo", e);
-  //   setImage(e.target.value)
-  // }
-
-  //C-Lunes
-  const handleChange = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    const file = e.target.files[0];
-    console.log("Se cambió el archivo", e, file)
-    setImage(file);
-  }
+    const token = localStorage.getItem('token'); 
+    const userId = jwtDecode(token);
+    fetch("http://localhost:3000/crudProducts", {
+      method: "POST",
+      headers: {
+        //"Content-Type": "application/json",
+        Accept: "application/json",
+      },
+      credentials: "include",
+
+      body: JSON.stringify({
+        name,
+        brand,
+        category,
+        color,
+        size,
+        price,
+        quantity,
+        description,
+        image,
+        userId,
+      }),
+    })
+      .then((response) => response.json())
+      .then((data) => console.log(data))
+      .catch((error) => console.log("Error creando el producto", error));
+  };
 
   // const handleSubmit = async (e) => {
   //   e.preventDefault();
   //   const token = localStorage.getItem('token'); 
   //   const userId = jwtDecode(token);
   //   try {
-  //     const response = await axiosClient.post("products/create", {
+  //     const response = await axiosClient.post("http://localhost:3000/crudProducts", {
   //       name,
   //       brand,
   //       category,
@@ -64,8 +80,9 @@ export const Test = (props) => {
   //       image,
   //       userId,
   //     });
+
   //     alert("Product created successfully!");
-  //     props.refreshProducts();
+  //     //props.refreshProducts();
   //     // handleClose();
   //   } catch (error) {
   //     console.error("Error creating product:", error.message);
@@ -73,28 +90,28 @@ export const Test = (props) => {
   //   }
   // };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      const {data} = await axios.post('/products/create', {name, brand, category, color, size, price, quantity, description, image, userId})
-      if (data.success === true){
-        setName('');
-        setBrand('');
-        setCategory('');
-        setColor('');
-        setSize('');
-        setPrice('');
-        setQuantity('');
-        setDescription('');
-        setImage('');
-        setuserId('');
-        alert('Product created succesfully')
-      }
-      console.log(data);
-    } catch (error) {
-      console.log(error,"Error creating product")
-    }
-  }
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+  //   try {
+  //     const {data} = await axiosClient.post('/crudProducts', {name, brand, category, color, size, price, quantity, description, image, userId})
+  //     if (data.success === true){
+  //       setName('');
+  //       setBrand('');
+  //       setCategory('');
+  //       setColor('');
+  //       setSize('');
+  //       setPrice('');
+  //       setQuantity('');
+  //       setDescription('');
+  //       setImage('');
+  //       setuserId('');
+  //       alert('Product created succesfully')
+  //     }
+  //     console.log(data);
+  //   } catch (error) {
+  //     console.log(error,"Error creating product")
+  //   }
+  // }
 
   return (
     <>
@@ -177,7 +194,7 @@ export const Test = (props) => {
           <Form.Control
             type="file"
             //accept="image/*"
-            onChange={handleImage}
+            onChange={(e) => setImage(e.target.files)}
           />
         </Form.Group> 
         {/* <input type="file" name="image" id="" onChange={(e) => handleChange(e)}/> */}

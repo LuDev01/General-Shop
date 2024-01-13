@@ -5,6 +5,7 @@ import Notification from "./Notification";
 import axiosClient from "../axiosConfig";
 import { useState, useEffect } from "react";
 
+
 export const AllProducts = () => {
   const [data, setData] = useState([]);
   console.log("this is the data ",data);
@@ -33,7 +34,7 @@ export const AllProducts = () => {
                 <Card.Img
                   className="products-img"
                   variant="top"
-                  src={el.image}
+                  src={`https://res.cloudinary.com/generalshop/image/upload/v1705014943/onlineShop/${el._id}.png`}
                 />
                 <Card.Body>
                   <Card.Title>{el.name}</Card.Title>
