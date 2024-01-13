@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
-import {useNavigate, Link} from 'react-router-dom';
+import {useNavigate} from 'react-router-dom';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import Toast from 'react-bootstrap/Toast';
 
 import { useContext } from "react";
 import { dataContext } from "./context/DataContext";
-import ProductsCart from './ProductsCart';
+// import ProductsCart from './ProductsCart';
 
 function Notification({productId, buyProducts, product}) {
   const [show, setShow] = useState(false);
@@ -43,8 +43,8 @@ function Notification({productId, buyProducts, product}) {
       
       </Col>
         <div className=" d-grid ">
-          <button type="submit" size="lg" class="submit-button btn btn-outline-info mb-3" onClick={addToCart}>Add to cart</button>
-          <button type="submit" size="lg" class="submit-button btn btn-outline-warning" onClick={() =>navigate(`/productDetails/${productId}`) }>Product details</button>
+          <button type="submit" size="lg" className="submit-button btn btn-outline-info mb-3" onClick={addToCart}>Add to cart</button>
+          <button type="submit" size="lg" className="submit-button btn btn-outline-warning" onClick={() =>navigate(`/productDetails/${productId}`) }>Product details</button>
         </div>
     </Row>
     </div>

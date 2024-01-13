@@ -71,6 +71,12 @@ const jwt = require('jsonwebtoken');
 // @POST // register
 router.post('/register', userController.createUser); //Defines a POST route at /register that, when accessed, calls the createUser function from the userController.
 
+//@PUT // userRole modification 
+router.put('/users/:id/update',userController.updateUser)
+
+// @PUT //userInfo
+router.put('/users/:id/edit',userController.editUserInfo)
+
 /**
  * @swagger
  * /user/{id}:
@@ -113,7 +119,7 @@ router.post('/register', userController.createUser); //Defines a POST route at /
 
 // @GET//user/:id
 // router.get('/user/:id',userController.getUserByPk); //Defines a GET route at /user/:id that, when accessed, calls the getUserByPk function from the userController.
-router.get('/user/:id',verifyToken,userController.getUserByPk); 
+router.get('/user/:id',userController.getUserByPk); 
 
 /**
  * @swagger

@@ -104,7 +104,6 @@ export const LoginForm = () => {
     }
   };
 
-
   const validate = () => {
     const error = {};
 

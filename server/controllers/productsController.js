@@ -74,63 +74,61 @@ const controllers = {
       const products= await Product.find();
       if(products){
         res.status(200).json({products});
+      }
+    } catch (error) {
+      res.json({message: `Error showing products ${error}`})
+    }
+  },
 
-      //   current product
-      //   const currentProduct = await Product.findById(req.params.id);
-      //   console.log("Prueba majo" + currentProduct)
+  getProductFilter:async(req,res)=>{
+    try {
+      const query = req.query.query;
 
-      //   //build the data object
-      //   const data = {
-      //     name: req.body.name,
-      //     category: req.body.category,
-      //     brand: req.body.brand,
-      //     color: req.body.color,
-      //     size: req.body.size,
-      //     price: req.body.price,
-      //     quantity: req.body.quantity,
-      //     description: req.body.description,
-      //   }
+      const products = await Product.find({
+        $or: [
+          {name: {$regex: query, $options: 'i'}},
+          {brand: {$regex: query, $options: 'i'}},
+          {category: {$regex: query, $options: 'i'}},
+          {color: {$regex: query, $options: 'i'}},
+          {size:{$regex:query,$options:'i'}},
+          {description:{$regex:query,$options:'i'}},      
+        ]
+      });
+  
+      if (products) { 
+        res.status(200).json({products});
+      }
+    } catch (error) {
+      res.json({message: `Error showing products ${error}`});
+    }
+  },
 
-      //   //modify image conditionally
-      //   if(req.body.image !== ''){
-      //     const ImgId = currentProduct.image.public_id;
-      //     if (ImgId) {
-      //       await cloudinary.uploader.destroy(ImgId);
-      //     }
-
-      //     const newImage = await cloudinary.uploader.upload(req.body.image, {
-      //       folder: "onlineShop",
-      //       width: 1000,
-      //       crop: "scale"
-      //     });
-
-      //     data.image = {
-      //       public_id: newImage.public_id,
-      //       url: newImage.secure_url
-      //     }
-      //   }
-      // }
-
-      // const productUpdate = await Product.findOneAndUpdate(req.params.id, data, {new:true})
-      // res.status(200).json({
-      //   success: true,
-      //   productUpdate
-      // });
-    } 
+  editProduct: async(req,res)=>{
+    try {
+      const product=await Product.findByIdAndUpdate(
+      req.params.id,
+      { ...req.body },
+      { new: true }
+      );
+      if(product){
+        res.status(200).json({ message: "Updated Successfully" });
+      }
+    } catch (error) {
+      res.json({ message: `Error updating product ${error}` });
+    }
+  },
+  deleteProduct:async(req,res)=>{
+    try {
+      const deleted = await Product.findByIdAndRemove(req.params.id);
+      if (deleted) {
+          res.status(200).json({ message: "Deleted Successfully" });
+      } else {
+          res.status(404).json({ message: "product not found" });
+      }
+  } catch (error) {
+      res.json({ message: `Error deleting product ${error}` });
   }
-  catch (error) {
-    res.json({message: `Error showing products ${error}`})
   }
-
-  // updateProduct: async(req,res, next)=>{
-  //    try {
-  //      const currentProduct = await Product.findById(req.params.id);
-
-
-  //    } catch (error) {
-      
-  //    }
-  //  }
-}}
+};
 
 module.exports = controllers;

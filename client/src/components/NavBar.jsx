@@ -162,7 +162,7 @@ export const NavBar = () => {
             ) : null}
 
             {isLoggedIn  ? (
-              role==="User"? (
+              role==="Client"? (
               <Nav style={{ position: "relative", right: 17 }}>
                 <img
                   src={defaultUserImg}
@@ -189,14 +189,11 @@ export const NavBar = () => {
                     onClick={() => setUserDropdown(!userDropdown)}
                   />
                   <NavDropdown show={userDropdown} className="user-dropdown">
-                    <NavDropdown.Item href="/userProfile">
-                      Profile
-                    </NavDropdown.Item>
                     <NavDropdown.Item href="/adminDashboard">
                       Dashboard
                     </NavDropdown.Item>
                     <NavDropdown.Item onClick={handleOnLogOut}>
-                      Log Out{" "}
+                      Log Out
                     </NavDropdown.Item>
                   </NavDropdown>
                 </Nav>

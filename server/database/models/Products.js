@@ -45,6 +45,7 @@ const productsSchema=new mongoose.Schema({
     },
     userId: {
         type: mongoose.Schema.Types.ObjectId,
+        ref:'userRole',
         ref: 'Users'
     }
 });
