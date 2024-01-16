@@ -23,58 +23,140 @@ const controllers = {
   // },
 
   //CLOUDINARY
-  createProduct: async (req, res) => {
+  // createProduct: async (req, res) => {
 
+  //   try {
+  //     const { name, buffer, originalname } = req.file;
+  //     if (!originalname.match(/\.(jpg|jpeg|png)$/)) {
+  //       return res
+  //         .status(400)
+  //         .json({ error: "Por favor, sube una imagen JPG, JPEG o PNG." });
+  //     }
+  //     const maxSize = 1 * 1024 * 1024; // 1 MB
+  //     if (buffer.length > maxSize) {
+  //       return res
+  //         .status(400)
+  //         .json({
+  //           error:
+  //             "La imagen es demasiado grande. El tamaño máximo permitido es 1 MB.",
+  //         });
+  //     }
+  //     // Convert buffer to a string
+  //     const cloudinaryResponse = await cloudinary.uploader.upload_stream(
+  //       { folder: "onlineShop", resource_type: "image" },
+  //       (error, result) => {
+  //         if (error) {
+  //           console.error("Error al subir la imagen a Cloudinary", error);
+  //           return res
+  //             .status(500)
+  //             .json({ error: "Error al subir la imagen a Cloudinary" });
+  //         }
+  //         const newProduct = new Product({
+  //           name,
+  //           category,
+  //           brand,
+  //           color,
+  //           size,
+  //           price,
+  //           quantity,
+  //           description,
+  //           userId,
+  //           imageUrl: cloudinaryResponse.url,
+
+  //         });
+  //         newProduct.save();
+
+  //         res.json({ message: "Producto guardado con éxito" });
+  //       }
+  //     );
+  //     const stream = cloudinaryResponse(req.file.originalname);
+  //     stream.end(req.file.buffer);
+  //   } catch (error) {
+  //     console.error("Error al guardar el producto", error);
+  //     res.status(500).json({ error: "Error al guardar el producto" });
+  //   }
+  // },
+  //------------------------------------------------------------NEW Controller
+  createProduct: async (req, res) => {
+    // console.log(req.file);
+    // console.log(req.body);
+    // console.log(req.file);
+    console.log(req.body.userId);
+    const {
+      name,
+      category,
+      brand,
+      color,
+      size,
+      price,
+      quantity,
+      description,
+    } = req.body;
+
+    
     try {
-      const { name, buffer, originalname } = req.file;
+      // req.file is the 'image' file
+      const { originalname, mimetype, buffer } = req.file;
+    
+      // Check file type
       if (!originalname.match(/\.(jpg|jpeg|png)$/)) {
         return res
           .status(400)
           .json({ error: "Por favor, sube una imagen JPG, JPEG o PNG." });
       }
+
+      // Check file size
       const maxSize = 1 * 1024 * 1024; // 1 MB
       if (buffer.length > maxSize) {
-        return res
-          .status(400)
-          .json({
-            error:
-              "La imagen es demasiado grande. El tamaño máximo permitido es 1 MB.",
-          });
+        return res.status(400).json({
+          error:
+            "La imagen es demasiado grande. El tamaño máximo permitido es 1 MB.",
+        });
       }
+      // Convert buffer to a stream
+      const stream = require("stream");
+      const bufferStream = new stream.PassThrough();
+      bufferStream.end(buffer);
 
-      // Convert buffer to a string
-      const cloudinaryResponse = await cloudinary.uploader.upload_stream(
-        { folder: "onlineShop", resource_type: "image" },
-        (error, result) => {
-          if (error) {
-            console.error("Error al subir la imagen a Cloudinary", error);
-            return res
-              .status(500)
-              .json({ error: "Error al subir la imagen a Cloudinary" });
+      // Upload stream to Cloudinary
+      const result = await new Promise((resolve, reject) => {
+        const cloudStream = cloudinary.uploader.upload_stream(
+          { resource_type: "image", folder: "onlineShop" },
+          (error, result) => {
+            if (error) {
+              reject(error);
+            } else {
+              resolve(result);
+            }
           }
-          const newProduct = new Product({
-            name,
-            category,
-            brand,
-            color,
-            size,
-            price,
-            quantity,
-            description,
-            userId,
-            imageUrl: cloudinaryResponse.url,
-          
-          });
-          newProduct.save();
+        );
 
-          res.json({ message: "Producto guardado con éxito" });
-        }
-      );
-      const stream = cloudinaryResponse(req.file.originalname);
-      stream.end(req.file.buffer);
+        bufferStream.pipe(cloudStream);
+      });
+
+      const product = await Product.create({
+        name,
+        category,
+        brand,
+        color,
+        size,
+        price,
+        quantity,
+        description,
+        image: {
+          public_id: result.public_id,
+          url: result.secure_url,
+        },
+      });
+
+      res.status(201).json({
+        message: "Product created successfully!",
+        success: true,
+        product,
+      });
     } catch (error) {
-      console.error("Error al guardar el producto", error);
-      res.status(500).json({ error: "Error al guardar el producto" });
+      console.error("Error creating the product", error);
+      res.status(500).json({ error: "Error creating the product" });
     }
   },
 

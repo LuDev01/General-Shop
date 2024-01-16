@@ -32,7 +32,7 @@ export const AllProducts = () => {
                 <Card.Img
                   className="products-img"
                   variant="top"
-                  src={`https://res.cloudinary.com/generalshop/image/upload/v1705014943/onlineShop/${el._id}.png`}
+                  src={el.image ? el.image.url : NoData}
                   onError={(e) => {
                     e.target.onerror = null; // Prevents infinite looping in case default image also fails to load
                     e.target.src = NoData;

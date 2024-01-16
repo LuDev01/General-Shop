@@ -32,21 +32,52 @@ export const CreateProduct = (props) => {
 const handleShow = () => setShow(true);
 const [show, setShow] = useState(false);
 
+  // const handleSubmit = async (e) => {
+  //   try {
+  //     e.preventDefault();
+  //     const response = await axiosClient.post("products/create", {
+  //       name,
+  //       brand,
+  //       category,
+  //       color,
+  //       size,
+  //       price,  
+  //       quantity,
+  //       description,
+  //       image,
+  //       userId,
+  //     });
+  //     alert("Product created successfully!");
+  //     props.refreshProducts();
+  //     handleClose();
+  //   } catch (error) {
+  //     console.error("Error creating product:", error.message);
+  //     alert("Product creation failed. Please try again.");
+  //   }
+  // };
+
   const handleSubmit = async (e) => {
+    e.preventDefault();
+  
+    const formData = new FormData();
+    formData.append('image', image);
+    formData.append('name', name);
+    formData.append('brand', brand);
+    formData.append('category', category);
+    formData.append('color', color);
+    formData.append('size', size);
+    formData.append('price', price);
+    formData.append('quantity', quantity);
+    formData.append('description', description);
+    formData.append('userId', userId);
+  
     try {
-      e.preventDefault();
-      const response = await axiosClient.post("products/create", {
-        name,
-        brand,
-        category,
-        color,
-        size,
-        price,  
-        quantity,
-        description,
-        image,
-        userId,
+      const response = await axiosClient.post('/products/create', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
       });
+  
       alert("Product created successfully!");
       props.refreshProducts();
       handleClose();
@@ -55,6 +86,9 @@ const [show, setShow] = useState(false);
       alert("Product creation failed. Please try again.");
     }
   };
+  
+  
+
 
   return (
     <>
@@ -151,13 +185,10 @@ const [show, setShow] = useState(false);
               <Form.Label>Image</Form.Label>
               <Form.Control
                 type="file"
+                name="image"
                 onChange={(e) => {
                   const file = e.target.files[0];
-                  const reader = new FileReader();
-                  reader.onloadend = () => {
-                    setImage(reader.result);
-                  };
-                  reader.readAsDataURL(file);
+                  setImage(file); // Store the file, not the base64 string
                 }}
               />
             </Form.Group>

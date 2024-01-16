@@ -46,11 +46,4 @@ const productRouter = require("./routes/productRoutes");
 app.use(userRouter); //Tells the Express app to use the routes defined in userRouter.
 app.use(productRouter);
 
-// cloudinary.config({
-//   cloud_name: "generalshop",
-//   api_key: "935673371582777",
-//   api_secret: "vBvBKLxQ2gw95CEaMXZPk7u-bso",
-//   secure:true
-// });
-
 app.listen(port, console.log(`Server working! Port: ${port}`)); //Starts the server, listening on the specified port. The callback function logs a message to the console indicating that the server is running, along with the port number.
