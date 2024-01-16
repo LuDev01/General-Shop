@@ -88,6 +88,14 @@ editUserInfo:async(req,res)=>{
       res.json({ error: "Error showing the user" });
     }
   },
+  getUsers: async (req, res) => {
+    try {
+      const users = await User.find(); 
+      res.json({users });
+    } catch (error) {
+      res.json({ error: "Error showing the users" });
+    }
+  },
 
   processLogin: async (req, res) => {
     const { email, password } = req.body;
@@ -115,7 +123,6 @@ editUserInfo:async(req,res)=>{
         expiresIn: '24h',
       });
 
-      // req.session = {};
       if (isMatch) {
         res
           .status(200)

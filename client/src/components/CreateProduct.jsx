@@ -32,33 +32,8 @@ export const CreateProduct = (props) => {
 const handleShow = () => setShow(true);
 const [show, setShow] = useState(false);
 
-  // const handleSubmit = async (e) => {
-  //   try {
-  //     e.preventDefault();
-  //     const response = await axiosClient.post("products/create", {
-  //       name,
-  //       brand,
-  //       category,
-  //       color,
-  //       size,
-  //       price,  
-  //       quantity,
-  //       description,
-  //       image,
-  //       userId,
-  //     });
-  //     alert("Product created successfully!");
-  //     props.refreshProducts();
-  //     handleClose();
-  //   } catch (error) {
-  //     console.error("Error creating product:", error.message);
-  //     alert("Product creation failed. Please try again.");
-  //   }
-  // };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
-  
     const formData = new FormData();
     formData.append('image', image);
     formData.append('name', name);
@@ -86,9 +61,6 @@ const [show, setShow] = useState(false);
       alert("Product creation failed. Please try again.");
     }
   };
-  
-  
-
 
   return (
     <>

@@ -11,7 +11,6 @@ const controllers = require("../controllers/productsController");
 // router.post("/products/create", authMiddleware.isLogged, productController.createProduct);
 router.post("/products/create", upload.single('image'), productController.createProduct);
 
-
 // @GET /products
 router.get("/products", productController.getProduct);
 
@@ -19,7 +18,7 @@ router.get("/products", productController.getProduct);
 router.get("/searchbyproducts",controllers.getProductFilter)
 
 // @PUT /products/edit
-router.put("/products/:id/edit",productController.editProduct)
+router.put("/products/:id/edit",upload.single('image'),productController.editProduct)
 
 // @DELETE /products/:id/delete
 router.delete("/products/:id/delete",productController.deleteProduct)

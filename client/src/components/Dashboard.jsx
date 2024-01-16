@@ -9,8 +9,8 @@ import { EditProduct } from "./EditProduct";
 import { DeleteProduct } from "./DeleteProduct";
 import { EditUser } from "./EditUser";
 import { Panel } from "./Panel";
-import axiosClient from "../axiosConfig";
 import { jwtDecode } from "jwt-decode";
+import axiosClient from "../axiosConfig";
 import NoData from "./assets/NoData.jpg"
 import logoWhite from "./assets/GeneralShopLogoWhite.png";
 import "./Dashboard.css";
@@ -81,7 +81,7 @@ export const Dashboard = () => {
 
   const getUser = async () => {
     try {
-      const response = await axiosClient.get(`user/${id}`); // Send a GET request to your user endpoint
+      const response = await axiosClient.get(`user/${id}`); 
       const { user } = response.data;
       setFirstName(user.firstName);
       setLastName(user.lastName);
@@ -225,6 +225,7 @@ export const Dashboard = () => {
                             <th>Quantity</th>
                             <th>Description</th>
                             <th>Image</th>
+                            <th>Action</th>
                           </tr>
                         </thead>
                         <tbody>

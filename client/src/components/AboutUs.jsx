@@ -8,6 +8,7 @@ import { Link } from "react-router-dom";
 import { BsGithub } from "react-icons/bs";
 import { FaLinkedin } from "react-icons/fa";
 import { NavBar } from "./NavBar";
+import {Footer} from "./Footer";
 import  "./AboutUs.css";
 
 export const team = [
@@ -72,6 +73,7 @@ export const AboutUs = () => {
           </Col>
         ))}
       </Row>
+      <Footer/>
     </>
   );
 };

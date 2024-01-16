@@ -121,6 +121,9 @@ router.put('/users/:id/edit',userController.editUserInfo)
 // router.get('/user/:id',userController.getUserByPk); //Defines a GET route at /user/:id that, when accessed, calls the getUserByPk function from the userController.
 router.get('/user/:id',userController.getUserByPk); 
 
+// @GET//All users/
+router.get('/users',userController.getUsers); 
+
 /**
  * @swagger
  * /login:

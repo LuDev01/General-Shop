@@ -17,35 +17,38 @@ export const EditProduct = (props) => {
     const [quantity, setQuantity] = useState(props.quantity);
     const [description, setDescription] = useState(props.description);
     const [image, setImage] = useState(props.image);
-    const [userId,setUserId]=useState(props.userId)
+    const [userId,setUserId]=useState(props.id)
   
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
       
     const handleSubmit = async (e) => {
-        console.log(props.id);
-        try {
-          e.preventDefault();
-          const response = await axiosClient.put(`products/${props.id}/edit`, {
-            name,
-            brand,
-            category,
-            color,
-            size,
-            price,  
-            quantity,
-            description,
-            image,
-            userId,
-          });
-          console.log(response.data)
-          props.refreshProducts();
-          handleClose();
-        } catch (error) {
-          console.error("Error editing product:", error.message);
+      try {
+        e.preventDefault();
+        const formData = new FormData();
+        formData.append('name', name);
+        formData.append('brand', brand);
+        formData.append('category', category);
+        formData.append('color', color);
+        formData.append('size', size);
+        formData.append('price', price);
+        formData.append('quantity', quantity);
+        formData.append('description', description);
+        formData.append('image', image);
+        formData.append('userId', userId);
     
-        }
-      };
+        const response = await axiosClient.put(`products/${props.id}/edit`, formData, {
+          headers: {
+            'Content-Type': 'multipart/form-data'
+          }
+        });
+        props.refreshProducts();
+        handleClose();
+      } catch (error) {
+        console.error("Error editing product:", error.message);
+      }
+    };
+    
 
   return (
     <>
@@ -141,8 +144,11 @@ export const EditProduct = (props) => {
               <Form.Control
                 type="file"
                 placeholder="Enter text"
-                // value={image}
-                onChange={(e) => setImage(e.target.files[0])}
+                name="image"
+                onChange={(e) => {
+                  const file = e.target.files[0];
+                  setImage(file); 
+                }}
               />
             </Form.Group>
             <Modal.Footer>

@@ -1,3 +1,4 @@
+const { log } = require("console");
 const Product = require("../database/models/Products");
 const cloudinary = require("../middlewares/cloudinary");
 
@@ -21,83 +22,16 @@ const controllers = {
   //     res.status(400).json({ message: "User not logged" });
   //   }
   // },
-
-  //CLOUDINARY
-  // createProduct: async (req, res) => {
-
-  //   try {
-  //     const { name, buffer, originalname } = req.file;
-  //     if (!originalname.match(/\.(jpg|jpeg|png)$/)) {
-  //       return res
-  //         .status(400)
-  //         .json({ error: "Por favor, sube una imagen JPG, JPEG o PNG." });
-  //     }
-  //     const maxSize = 1 * 1024 * 1024; // 1 MB
-  //     if (buffer.length > maxSize) {
-  //       return res
-  //         .status(400)
-  //         .json({
-  //           error:
-  //             "La imagen es demasiado grande. El tamaño máximo permitido es 1 MB.",
-  //         });
-  //     }
-  //     // Convert buffer to a string
-  //     const cloudinaryResponse = await cloudinary.uploader.upload_stream(
-  //       { folder: "onlineShop", resource_type: "image" },
-  //       (error, result) => {
-  //         if (error) {
-  //           console.error("Error al subir la imagen a Cloudinary", error);
-  //           return res
-  //             .status(500)
-  //             .json({ error: "Error al subir la imagen a Cloudinary" });
-  //         }
-  //         const newProduct = new Product({
-  //           name,
-  //           category,
-  //           brand,
-  //           color,
-  //           size,
-  //           price,
-  //           quantity,
-  //           description,
-  //           userId,
-  //           imageUrl: cloudinaryResponse.url,
-
-  //         });
-  //         newProduct.save();
-
-  //         res.json({ message: "Producto guardado con éxito" });
-  //       }
-  //     );
-  //     const stream = cloudinaryResponse(req.file.originalname);
-  //     stream.end(req.file.buffer);
-  //   } catch (error) {
-  //     console.error("Error al guardar el producto", error);
-  //     res.status(500).json({ error: "Error al guardar el producto" });
-  //   }
-  // },
-  //------------------------------------------------------------NEW Controller
+  
   createProduct: async (req, res) => {
-    // console.log(req.file);
-    // console.log(req.body);
-    // console.log(req.file);
     console.log(req.body.userId);
-    const {
-      name,
-      category,
-      brand,
-      color,
-      size,
-      price,
-      quantity,
-      description,
-    } = req.body;
+    const { name, category, brand, color, size, price, quantity, description } =
+      req.body;
 
-    
     try {
       // req.file is the 'image' file
       const { originalname, mimetype, buffer } = req.file;
-    
+
       // Check file type
       if (!originalname.match(/\.(jpg|jpeg|png)$/)) {
         return res
@@ -130,7 +64,6 @@ const controllers = {
             }
           }
         );
-
         bufferStream.pipe(cloudStream);
       });
 
@@ -195,21 +128,42 @@ const controllers = {
   },
 
   editProduct: async (req, res) => {
+    console.log(req.file);
     try {
       let updatedFields = { ...req.body };
-      // Ensure 'image' field is initialized with an empty object
-      updatedFields.image = updatedFields.image || {};
-      // Check if a new image is uploaded
-      if (
-        typeof req.body.image === "string" &&
-        req.body.image.startsWith("data:image")
-      ) {
-        // Upload the new image to Cloudinary
-        const result = await cloudinary.uploader.upload(req.body.image, {
-          folder: "onlineShop",
-        });
+      if (req.file) {
+        const { originalname, buffer } = req.file;
 
-        // Update the image field with the new public_id and url
+        if (!originalname.match(/\.(jpg|jpeg|png)$/)) {
+          return res
+            .status(400)
+            .json({ error: "Por favor, sube una imagen JPG, JPEG o PNG." });
+        }
+        const maxSize = 1 * 1024 * 1024; // 1 MB
+        if (buffer.length > maxSize) {
+          return res.status(400).json({
+            error:
+              "La imagen es demasiado grande. El tamaño máximo permitido es 1 MB.",
+          });
+        }
+        const stream = require("stream");
+        const bufferStream = new stream.PassThrough();
+        bufferStream.end(buffer);
+
+        const result = await new Promise((resolve, reject) => {
+          const cloudStream = cloudinary.uploader.upload_stream(
+            { resource_type: "image", folder: "onlineShop" },
+            (error, result) => {
+              if (error) {
+                reject(error);
+              } else {
+                resolve(result);
+              }
+            }
+          );
+          bufferStream.pipe(cloudStream);
+        });
+        
         updatedFields.image = {
           public_id: result.public_id,
           url: result.secure_url,
@@ -226,7 +180,8 @@ const controllers = {
         res.status(200).json({ message: "Updated Successfully", product });
       }
     } catch (error) {
-      res.json({ message: `Error updating product ${error}` });
+      console.error("Error updating the product", error);
+      res.status(500).json({ error: "Error updating the product" });
     }
   },
 
