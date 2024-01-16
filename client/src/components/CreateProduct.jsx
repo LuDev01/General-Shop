@@ -11,10 +11,10 @@ export const CreateProduct = (props) => {
   const [category, setCategory] = useState("");
   const [color, setColor] = useState("");
   const [size, setSize] = useState("");
-  const [price, setPrice] = useState(null);
-  const [quantity, setQuantity] = useState(null);
+  const [price, setPrice] = useState("");
+  const [quantity, setQuantity] = useState("");
   const [description, setDescription] = useState("");
-  const [image, setImage] = useState("");
+  const [image, setImage] = useState(null);
   const [userId,setUserId]=useState("")
 
   const handleClose = () =>{
@@ -150,10 +150,15 @@ const [show, setShow] = useState(false);
             <Form.Group className="mb-3">
               <Form.Label>Image</Form.Label>
               <Form.Control
-                type="text"
-                placeholder="Enter text"
-                value={image}
-                onChange={(e) => setImage(e.target.value)}
+                type="file"
+                onChange={(e) => {
+                  const file = e.target.files[0];
+                  const reader = new FileReader();
+                  reader.onloadend = () => {
+                    setImage(reader.result);
+                  };
+                  reader.readAsDataURL(file);
+                }}
               />
             </Form.Group>
             <Modal.Footer>

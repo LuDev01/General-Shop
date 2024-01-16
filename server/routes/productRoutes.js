@@ -1,12 +1,16 @@
 const express = require("express");
 const router = express.Router();
+const multer = require('multer');
+const upload = multer();
 const productController = require("../controllers/productsController");
-const authMiddleware = require('../middlewares/authMiddleware');
+// const authMiddleware = require('../middlewares/authMiddleware');
 const controllers = require("../controllers/productsController");
 
 // @POST /products/create a product
 
-router.post("/products/create", authMiddleware.isLogged, productController.createProduct);
+// router.post("/products/create", authMiddleware.isLogged, productController.createProduct);
+router.post("/products/create", upload.single('image'), productController.createProduct);
+
 
 // @GET /products
 router.get("/products", productController.getProduct);

@@ -11,7 +11,7 @@ import { EditUser } from "./EditUser";
 import { Panel } from "./Panel";
 import axiosClient from "../axiosConfig";
 import { jwtDecode } from "jwt-decode";
-import defaultUserImg from "./assets/DefaultUserPicture.jpg";
+import NoData from "./assets/NoData.jpg"
 import logoWhite from "./assets/GeneralShopLogoWhite.png";
 import "./Dashboard.css";
 
@@ -27,7 +27,7 @@ export const Dashboard = () => {
   const [documentType, setDocumentType] = useState("");
   const [document, setDocument] = useState("");
   const [email, setEmail] = useState("");
-  const [image, setImage] = useState(defaultUserImg); // Set the initial image
+  const [image, setImage] = useState(NoData); // Set the initial image
   const token = localStorage.getItem("token");
   let id;
   useEffect(() => {
@@ -89,7 +89,7 @@ export const Dashboard = () => {
       setDocument(user.document);
       setEmail(user.email);
 
-      console.log(user);
+      // console.log(user);
     } catch (error) {
       console.error("Error showing user", error.message);
     }
@@ -241,7 +241,7 @@ export const Dashboard = () => {
                                 <td>{el.price}</td>
                                 <td>{el.quantity}</td>
                                 <td>{el.description}</td>
-                                <td>{el.image}</td>
+                                <td><img src={el.image ? el.image.url:NoData} alt="Product" /></td>
                                 <td className="product-components">
                                   <EditProduct
                                     refreshProducts={getProduct}
@@ -254,7 +254,7 @@ export const Dashboard = () => {
                                     price={el.price}
                                     quantity={el.quantity}
                                     description={el.description}
-                                    image={el.image}
+                                    image={el.image ? el.image.url : NoData}
                                   />
                                   <DeleteProduct
                                     id={el._id}
@@ -277,7 +277,7 @@ export const Dashboard = () => {
                                 <td>{el.price}</td>
                                 <td>{el.quantity}</td>
                                 <td>{el.description}</td>
-                                <td>{el.image}</td>
+                                <td><img src={el.image ? el.image.url:NoData} alt="Product" /></td>
                                 <td>
                                   <EditProduct
                                     refreshProducts={getProduct}
@@ -290,7 +290,7 @@ export const Dashboard = () => {
                                     price={el.price}
                                     quantity={el.quantity}
                                     description={el.description}
-                                    image={el.image}
+                                    image={el.image ? el.image.url : NoData}
                                   />
                                   <DeleteProduct
                                     id={el._id}

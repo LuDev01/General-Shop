@@ -4,7 +4,7 @@ import Row from "react-bootstrap/Row";
 import Notification from "./Notification";
 import axiosClient from "../axiosConfig";
 import { useState, useEffect } from "react";
-
+import NoData from "./assets/NoData.jpg"
 
 export const AllProducts = () => {
   const [data, setData] = useState([]);
@@ -33,6 +33,10 @@ export const AllProducts = () => {
                   className="products-img"
                   variant="top"
                   src={`https://res.cloudinary.com/generalshop/image/upload/v1705014943/onlineShop/${el._id}.png`}
+                  onError={(e) => {
+                    e.target.onerror = null; // Prevents infinite looping in case default image also fails to load
+                    e.target.src = NoData;
+                  }}
                 />
                 <Card.Body>
                   <Card.Title>{el.name}</Card.Title>

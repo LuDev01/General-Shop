@@ -21,7 +21,7 @@ export const EditProduct = (props) => {
   
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
-  
+      
     const handleSubmit = async (e) => {
         console.log(props.id);
         try {
@@ -139,10 +139,10 @@ export const EditProduct = (props) => {
             <Form.Group className="mb-3">
               <Form.Label>Image</Form.Label>
               <Form.Control
-                type="text"
+                type="file"
                 placeholder="Enter text"
-                value={image}
-                onChange={(e) => setImage(e.target.value)}
+                // value={image}
+                onChange={(e) => setImage(e.target.files[0])}
               />
             </Form.Group>
             <Modal.Footer>
