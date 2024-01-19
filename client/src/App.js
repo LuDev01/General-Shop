@@ -14,6 +14,7 @@ import  DataProvider  from './components/context/DataContext';
 import {Profile} from "./components/Profile";
 import { Dashboard } from './components/Dashboard';
 import { Test } from './components/Test';
+import { ImageProvider } from './components/context/ImageProvider';
 
 
 function getCookie(name) {
@@ -51,6 +52,7 @@ function App() { // Defines the App component, which serves as the main componen
 
 
   return (
+    <ImageProvider>
     <DataProvider>
       <BrowserRouter> {/*Starts the router context provided by BrowserRouter. This allows you to use features like navigation and route matching.*/}
         <div className="App"> {/*Provide a container for the main content of the application.*/}
@@ -70,6 +72,7 @@ function App() { // Defines the App component, which serves as the main componen
         </div>
       </BrowserRouter>
     </DataProvider>
+    </ImageProvider>
   );
 }
 export default App; //Exports the App component as the default export, making it available for use in other parts of the application.

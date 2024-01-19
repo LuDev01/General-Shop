@@ -1,6 +1,7 @@
 import React from "react";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { ToastContainer, toast } from "react-toastify";
+import { ImageContext } from "./context/ImageContext";
 import Form from "react-bootstrap/Form";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
@@ -12,15 +13,19 @@ import "react-toastify/dist/ReactToastify.css";
 
 export const EditUser = (props) => {
   const [user, setUser] = useState({});
-  const [imageURL, setImageURL] = useState(
-    localStorage.getItem("defaultAdminImg")
-  );
   const [image, setImage] = useState(props.image);
   const [firstName, setFirstName] = useState(props.firstName);
   const [lastName, setLastName] = useState(props.lastName);
   const [documentType, setDocumentType] = useState(props.documentType);
   const [document, setDocument] = useState(props.document);
   const [email, setEmail] = useState(props.email);
+  const {
+    imageURL,
+    imageURLClient,
+    updateImageURLAdmin,
+    updateImageURLClient,
+  } = useContext(ImageContext);
+  const role = localStorage.getItem("role"); // get the role from localStorage
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -42,9 +47,12 @@ export const EditUser = (props) => {
           },
         }
       );
+      if (role === "Admin") {
+        updateImageURLAdmin(response.data.user.image.url);
+      } else if (role === "Client") {
+        updateImageURLClient(response.data.user.image.url);
+      }
 
-      setImageURL(response.data.user.image.url);
-      localStorage.setItem('defaultAdminImg',response.data.user.image.url)
       toast.success("User edited successfully!");
       // props.refreshUser();
     } catch (error) {
@@ -62,7 +70,7 @@ export const EditUser = (props) => {
           <Form.Group className="mb-3">
             <div className="text-center mx-auto mt-3 mb-3">
               <img
-                src={imageURL}
+                src={role === "Admin" ? imageURL : imageURLClient}
                 style={{ borderRadius: "50%", width: "7rem", height: "8rem" }}
                 alt="profile"
               />
@@ -74,8 +82,11 @@ export const EditUser = (props) => {
                 const file = e.target.files[0];
                 setImage(file);
                 const newImageURL = URL.createObjectURL(file);
-                setImageURL(newImageURL);
-                // localStorage.setItem("defaultAdminImg", newImageURL);
+                if (role === 'Admin') {
+                  updateImageURLAdmin(newImageURL);
+                } else if (role === 'Client') {
+                  updateImageURLClient(newImageURL);
+                }
               }}
             />
           </Form.Group>

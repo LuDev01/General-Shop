@@ -1,18 +1,17 @@
+import {ImSearch } from "react-icons/im";
+import { useState,useContext } from "react";
+import { FaUserAlt } from "react-icons/fa";
+import { Link, useNavigate } from "react-router-dom";
+import { products } from "./Products";
+import { ImageContext } from "./context/ImageContext";
+import CartModal from "./CartModal";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import Form from "react-bootstrap/Form";
-import "./NavBar.css";
 import logo from "./assets/GeneralShopLogoNoSlogan.png";
-import {ImSearch } from "react-icons/im";
-import { useState } from "react";
-import CartModal from "./CartModal";
-import { FaUserAlt } from "react-icons/fa";
-import { Link, useNavigate } from "react-router-dom";
-import { products } from "./Products";
-import defaultUserImg from "./assets/DefaultUserPicture.jpg";
-import admin from "./assets/DefaultAdminPicture.jpg";
+import "./NavBar.css";
 
 export const NavBar = () => {
   const [navbar, setNavbar] = useState(false);
@@ -26,8 +25,7 @@ export const NavBar = () => {
   const role = localStorage.getItem("role");
   
   const isLoggedIn = Boolean(token);
-
-  localStorage.setItem('defaultAdminImg', admin);
+  const { imageURL,imageURLClient } = useContext(ImageContext);
 
   const [search, setSearchBtn] = useState({
     transition: "all .3s ease",
@@ -64,11 +62,14 @@ export const NavBar = () => {
   };
 
   const handleOnLogOut = () => {
+    localStorage.setItem('isLoggedOut', 'true');
     localStorage.removeItem("isLoggedIn");
     localStorage.removeItem("isLoggedInv2");
     localStorage.removeItem("token");
     localStorage.removeItem("exp");
     localStorage.removeItem("role");
+    // localStorage.removeItem('defaultAdminImg');
+    // localStorage.removeItem('defaultUserImg');
     var cookies = document.cookie.split(";");
 
     for (var i = 0; i < cookies.length; i++) {
@@ -163,7 +164,7 @@ export const NavBar = () => {
               role==="Client"? (
               <Nav style={{ position: "relative", right: 17 }}>
                 <img
-                  src={defaultUserImg}
+                  src={imageURLClient}
                   style={{ borderRadius: "50%", width: "32px", height: "32px" }}
                   alt="profle-picture"
                   onClick={() => setUserDropdown(!userDropdown)}
@@ -181,8 +182,8 @@ export const NavBar = () => {
               role==="Admin" ?(
                 <Nav style={{ position: "relative", right: 17 }}>
                   <img
-                    src={localStorage.getItem('defaultAdminImg') || admin}
-                    style={{ borderRadius: "50%", width: "5rem", height: "5rem" }}
+                    src={imageURL}
+                    style={{ borderRadius: "50%", width: "3rem", height: "3rem" }}
                     alt="profle-picture"
                     onClick={() => setUserDropdown(!userDropdown)}
                   />

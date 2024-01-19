@@ -1,10 +1,11 @@
-import { useState } from "react";
+import { useState,useContext } from "react";
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
+import { BsFillEyeFill, BsFillEyeSlashFill } from "react-icons/bs";
+import { ImageContext } from "./context/ImageContext";
 import CarrouselLogIn from './CarrouselLogIn';
 import Form from "react-bootstrap/Form";
 import Logo from "./assets/GeneralShopLogo.png";
-import { BsFillEyeFill, BsFillEyeSlashFill } from "react-icons/bs";
 import CryptoJS from "crypto-js";
 
 export const LoginForm = () => {
@@ -15,6 +16,8 @@ export const LoginForm = () => {
   const [passw, setPassw] = useState('');
   const [emailError, setEmailError] = useState('');
   const [errors, setErrors] = useState('');
+
+  const { updateImageURLAdmin,updateImageURLClient,} = useContext(ImageContext);
 
   const navigate = useNavigate();
 
@@ -62,16 +65,12 @@ export const LoginForm = () => {
         },
 
         body: JSON.stringify({ email: email, password: passwordProcess }),
-        // body: JSON.stringify({ email: email, password: hashedPassword }), 
 
       })
         .then((response) => response.json())
         .then((data) => {
 
           console.log("Received response from server:", data.message);
-          console.log(data);
-
-          // window.sessionStorage.setItem("isLoggedInv2",true)
 
           function setCookie(name, value, days) {
             let expires = '';
@@ -88,6 +87,16 @@ export const LoginForm = () => {
             localStorage.setItem('token', data.token)
             localStorage.setItem('exp', data.exp)
             localStorage.setItem('role',data.role)
+            localStorage.removeItem('isLoggedOut');
+       
+            if (data.role === 'Admin') {
+              localStorage.setItem('defaultAdminImg', data.image)
+              updateImageURLAdmin(data.image);
+            } else if (data.role === 'Client') {
+              localStorage.setItem('defaultUserImg', data.image)
+              updateImageURLClient(data.image);
+            }
+
             setEmail('');
             setPassw('');
             window.location.reload();
