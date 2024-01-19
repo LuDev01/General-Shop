@@ -5,14 +5,14 @@ import NavDropdown from "react-bootstrap/NavDropdown";
 import Form from "react-bootstrap/Form";
 import "./NavBar.css";
 import logo from "./assets/GeneralShopLogoNoSlogan.png";
-import { ImDisplay, ImSearch } from "react-icons/im";
+import {ImSearch } from "react-icons/im";
 import { useState } from "react";
 import CartModal from "./CartModal";
 import { FaUserAlt } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 import { products } from "./Products";
 import defaultUserImg from "./assets/DefaultUserPicture.jpg";
-import admin1 from "./assets/team/member1.png";
+import admin from "./assets/DefaultAdminPicture.jpg";
 
 export const NavBar = () => {
   const [navbar, setNavbar] = useState(false);
@@ -24,8 +24,10 @@ export const NavBar = () => {
 
   const token = localStorage.getItem("token");
   const role = localStorage.getItem("role");
+  
   const isLoggedIn = Boolean(token);
 
+  localStorage.setItem('defaultAdminImg', admin);
 
   const [search, setSearchBtn] = useState({
     transition: "all .3s ease",
@@ -42,15 +44,15 @@ export const NavBar = () => {
     setIsDropdownVisible(!isDropdownVisible);
   };
 
-  const changeBackground = () => {
-    if (window.scrollY >= 80) {
-      setNavbar(true);
-    } else {
-      setNavbar(false);
-    }
-  };
+  // const changeBackground = () => {
+  //   if (window.scrollY >= 80) {
+  //     setNavbar(true);
+  //   } else {
+  //     setNavbar(false);
+  //   }
+  // };
 
-  window.addEventListener("scroll", changeBackground);
+  // window.addEventListener("scroll", changeBackground);
 
   const handleOnChangeValue = (e) => {
     setValue(e.target.value);
@@ -81,14 +83,12 @@ export const NavBar = () => {
 
   return (
     <>
-
       <Navbar
         expand="lg"
         className={
           navbar ? "NavBar-color active fixed-top" : "NavBar-color fixed-top"
         }
       >
-        
         <Container>
 
           <div className="logo-container">
@@ -112,7 +112,6 @@ export const NavBar = () => {
                 </NavDropdown.Item>
               </NavDropdown>
             </Nav>
-            {/* <div className="search-container"> */}
             <Form
               className="d-flex search-field search-container"
               style={{ opacity: search.opacity, transition: search.transition }}
@@ -131,7 +130,6 @@ export const NavBar = () => {
                   .filter((el) => {
                     const searchItem = value.toLowerCase();
                     const itemName = el.name.toLowerCase();
-                    // return searchItem && itemName.startsWith(searchItem) && itemName!==searchItem
                     return (
                       searchItem && itemName.includes(searchItem.toLowerCase())
                     );
@@ -175,7 +173,7 @@ export const NavBar = () => {
                     Profile
                   </NavDropdown.Item>
                   <NavDropdown.Item onClick={handleOnLogOut}>
-                    Log Out{" "}
+                    Log Out
                   </NavDropdown.Item>
                 </NavDropdown>
               </Nav>
@@ -183,8 +181,8 @@ export const NavBar = () => {
               role==="Admin" ?(
                 <Nav style={{ position: "relative", right: 17 }}>
                   <img
-                    src={admin1}
-                    style={{ borderRadius: "50%", width: "32px", height: "32px" }}
+                    src={localStorage.getItem('defaultAdminImg') || admin}
+                    style={{ borderRadius: "50%", width: "5rem", height: "5rem" }}
                     alt="profle-picture"
                     onClick={() => setUserDropdown(!userDropdown)}
                   />

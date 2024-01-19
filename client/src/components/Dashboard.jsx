@@ -89,7 +89,6 @@ export const Dashboard = () => {
       setDocument(user.document);
       setEmail(user.email);
 
-      // console.log(user);
     } catch (error) {
       console.error("Error showing user", error.message);
     }
@@ -113,16 +112,6 @@ export const Dashboard = () => {
     getUser();
   }, []);
 
-  const handleImageUpload = (event) => {
-    const file = event.target.files[0];
-    const reader = new FileReader();
-
-    reader.onloadend = () => {
-      setImage(reader.result);
-    };
-
-    reader.readAsDataURL(file);
-  };
   return (
     <>
       <div className="wrapper">
@@ -179,7 +168,6 @@ export const Dashboard = () => {
           <>
             <div className="main">
               <h2 className="principal-title">Site Management</h2>
-              <h1>Dashboard </h1>
               <Panel/> 
             </div>
           </>
@@ -187,8 +175,7 @@ export const Dashboard = () => {
         {manageProducts && (
           <>
             <div className="main">
-              <h2 className="principal-title">Site Management</h2>
-              <h1>Manage Product </h1>
+              <h2 className="principal-title">Product Management</h2>
               <div className="container ">
                 <div className="crud shadow-lg p-3 mb-5 mt-5 bg-body rounded">
                   <div className="row">
@@ -312,9 +299,7 @@ export const Dashboard = () => {
         {settings && (
           <>
             <div className="main">
-              <h2 className="principal-title">Site Management</h2>
-              <h1>Settings </h1>
-
+              <h2 className="principal-title">User Settings</h2>
               <EditUser
                 refreshUser={getUser}
                 id={idUser}
@@ -324,18 +309,6 @@ export const Dashboard = () => {
                 document={document}
                 email={email}
               />
-              <div>
-                <img
-                  src={image}
-                  style={{ borderRadius: "50%", width: "32px", height: "32px" }}
-                  alt="profile"
-                />
-                <input
-                  type="file"
-                  accept="image/*"
-                  onChange={handleImageUpload}
-                />
-              </div>
             </div>
           </>
         )}

@@ -1,5 +1,7 @@
 const express=require('express');  //: Imports the Express.js framework.
 const router=express.Router(); // Creates an instance of an Express router, which is a mini-app that can handle routes
+const multer = require('multer');
+const upload = multer();
 const userController=require('../controllers/userController'); //Imports the userController module that likely contains functions to handle user-related operations.
 const jwt = require('jsonwebtoken');
 
@@ -75,7 +77,7 @@ router.post('/register', userController.createUser); //Defines a POST route at /
 router.put('/users/:id/update',userController.updateUser)
 
 // @PUT //userInfo
-router.put('/users/:id/edit',userController.editUserInfo)
+router.put('/users/:id/edit', upload.single('image'),userController.editUserInfo)
 
 /**
  * @swagger

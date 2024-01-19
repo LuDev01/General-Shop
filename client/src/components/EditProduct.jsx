@@ -1,59 +1,69 @@
-import React from 'react'
+import React from "react";
 import { useState } from "react";
+import { ToastContainer, toast } from "react-toastify";
+import { FaEdit } from "react-icons/fa";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
 import axiosClient from "../axiosConfig";
-import { FaEdit } from "react-icons/fa";
+import "react-toastify/dist/ReactToastify.css";
 
 export const EditProduct = (props) => {
-    const [show, setShow] = useState(false);
-    const [name, setName] = useState(props.name);
-    const [brand, setBrand] = useState(props.brand);
-    const [category, setCategory] = useState(props.category);
-    const [color, setColor] = useState(props.color);
-    const [size, setSize] = useState(props.size);
-    const [price, setPrice] = useState(props.price);
-    const [quantity, setQuantity] = useState(props.quantity);
-    const [description, setDescription] = useState(props.description);
-    const [image, setImage] = useState(props.image);
-    const [userId,setUserId]=useState(props.id)
-  
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
-      
-    const handleSubmit = async (e) => {
-      try {
-        e.preventDefault();
-        const formData = new FormData();
-        formData.append('name', name);
-        formData.append('brand', brand);
-        formData.append('category', category);
-        formData.append('color', color);
-        formData.append('size', size);
-        formData.append('price', price);
-        formData.append('quantity', quantity);
-        formData.append('description', description);
-        formData.append('image', image);
-        formData.append('userId', userId);
-    
-        const response = await axiosClient.put(`products/${props.id}/edit`, formData, {
+  const [show, setShow] = useState(false);
+  const [name, setName] = useState(props.name);
+  const [brand, setBrand] = useState(props.brand);
+  const [category, setCategory] = useState(props.category);
+  const [color, setColor] = useState(props.color);
+  const [size, setSize] = useState(props.size);
+  const [price, setPrice] = useState(props.price);
+  const [quantity, setQuantity] = useState(props.quantity);
+  const [description, setDescription] = useState(props.description);
+  const [image, setImage] = useState(props.image);
+  const [userId, setUserId] = useState(props.id);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
+  const handleSubmit = async (e) => {
+    try {
+      e.preventDefault();
+      const formData = new FormData();
+      formData.append("name", name);
+      formData.append("brand", brand);
+      formData.append("category", category);
+      formData.append("color", color);
+      formData.append("size", size);
+      formData.append("price", price);
+      formData.append("quantity", quantity);
+      formData.append("description", description);
+      formData.append("image", image);
+      formData.append("userId", userId);
+
+      const response = await axiosClient.put(
+        `products/${props.id}/edit`,
+        formData,
+        {
           headers: {
-            'Content-Type': 'multipart/form-data'
-          }
-        });
-        props.refreshProducts();
-        handleClose();
-      } catch (error) {
-        console.error("Error editing product:", error.message);
-      }
-    };
-    
+            "Content-Type": "multipart/form-data"
+          },
+        }
+        
+      );
+
+      toast.success("Product edited successfully!");
+      props.refreshProducts();
+      handleClose();
+    } catch (error) {
+      console.error("Error editing product:", error.message);
+      toast.error("Error editing product");
+    }
+  };
 
   return (
     <>
-    <FaEdit onClick={handleShow}/>
-    <Modal show={show} onHide={handleClose}>
+      <ToastContainer />
+      <FaEdit onClick={handleShow} />
+      <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>Edit Product</Modal.Title>
         </Modal.Header>
@@ -147,7 +157,7 @@ export const EditProduct = (props) => {
                 name="image"
                 onChange={(e) => {
                   const file = e.target.files[0];
-                  setImage(file); 
+                  setImage(file);
                 }}
               />
             </Form.Group>
@@ -163,5 +173,5 @@ export const EditProduct = (props) => {
         </Modal.Body>
       </Modal>
     </>
-  )
-}
+  );
+};

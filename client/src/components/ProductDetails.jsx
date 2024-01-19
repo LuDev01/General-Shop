@@ -2,15 +2,15 @@ import React from "react";
 import { useParams } from "react-router-dom";
 import { useState } from "react";
 import { products } from "./Products";
+import { NavBar } from "./NavBar";
 import Card from "react-bootstrap/Card";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
-import "./Products.css";
 import CardBody from "react-bootstrap/esm/CardBody";
 import CardTitle from "react-bootstrap/esm/CardTitle";
 import CardSubtitle from "react-bootstrap/esm/CardSubtitle";
 import Dropdown from "react-bootstrap/Dropdown";
-import { NavBar } from "./NavBar";
+import "./Products.css";
 
 export const ProductDetails = () => {
   const { productId } = useParams();
@@ -29,7 +29,6 @@ export const ProductDetails = () => {
     }
    
   }
-
 
   const product = products.find(
     (products) => products.id === parseInt(productId)
@@ -54,7 +53,7 @@ export const ProductDetails = () => {
               </CardTitle>
               <CardSubtitle style={{ fontWeight: "bold" }}>
                 Price: {product.price}
-              </CardSubtitle>{" "}
+              </CardSubtitle>
               <CardSubtitle
                 className="sizes-display"
                 style={{ fontWeight: "bold", marginTop: "2rem" }}

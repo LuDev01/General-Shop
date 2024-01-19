@@ -1,9 +1,11 @@
 import React from "react";
 import { useState } from "react";
+import { ToastContainer, toast } from "react-toastify";
 import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/esm/Button";
 import axiosClient from "../axiosConfig";
+import "react-toastify/dist/ReactToastify.css";
 
 export const CreateProduct = (props) => {
   const [name, setName] = useState("");
@@ -15,9 +17,9 @@ export const CreateProduct = (props) => {
   const [quantity, setQuantity] = useState("");
   const [description, setDescription] = useState("");
   const [image, setImage] = useState(null);
-  const [userId,setUserId]=useState("")
+  const [userId, setUserId] = useState("");
 
-  const handleClose = () =>{
+  const handleClose = () => {
     setShow(false);
     setName("");
     setBrand("");
@@ -28,42 +30,42 @@ export const CreateProduct = (props) => {
     setQuantity("");
     setDescription("");
     setImage("");
-} 
-const handleShow = () => setShow(true);
-const [show, setShow] = useState(false);
+  };
+  const handleShow = () => setShow(true);
+  const [show, setShow] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData();
-    formData.append('image', image);
-    formData.append('name', name);
-    formData.append('brand', brand);
-    formData.append('category', category);
-    formData.append('color', color);
-    formData.append('size', size);
-    formData.append('price', price);
-    formData.append('quantity', quantity);
-    formData.append('description', description);
-    formData.append('userId', userId);
-  
+    formData.append("image", image);
+    formData.append("name", name);
+    formData.append("brand", brand);
+    formData.append("category", category);
+    formData.append("color", color);
+    formData.append("size", size);
+    formData.append("price", price);
+    formData.append("quantity", quantity);
+    formData.append("description", description);
+    formData.append("userId", userId);
+
     try {
-      const response = await axiosClient.post('/products/create', formData, {
+      const response = await axiosClient.post("/products/create", formData, {
         headers: {
-          'Content-Type': 'multipart/form-data',
+          "Content-Type": "multipart/form-data",
         },
       });
-  
-      alert("Product created successfully!");
       props.refreshProducts();
+      toast.success("Product created successfully!");
       handleClose();
     } catch (error) {
       console.error("Error creating product:", error.message);
-      alert("Product creation failed. Please try again.");
+      toast.error("Error creating product");
     }
   };
 
   return (
     <>
+      <ToastContainer />
       <Button variant="primary" onClick={handleShow}>
         Create New Product
       </Button>

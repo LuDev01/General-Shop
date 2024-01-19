@@ -1,10 +1,12 @@
-import React from 'react'
+import React from "react";
 import { useState } from "react";
+import { ToastContainer, toast } from "react-toastify";
+import { MdDelete } from "react-icons/md";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
-import { MdDelete } from "react-icons/md";
 import axiosClient from "../axiosConfig";
+import "react-toastify/dist/ReactToastify.css";
 
 export const DeleteProduct = (props) => {
   const [show, setShow] = useState(false);
@@ -16,6 +18,7 @@ export const DeleteProduct = (props) => {
     e.preventDefault();
     try {
       const response = await axiosClient.delete(`products/${props.id}/delete`);
+      toast.success("Product deleted successfully!");
       props.refreshProducts();
     } catch (error) {
       console.error("Error deleting product:", error.message);
@@ -23,8 +26,9 @@ export const DeleteProduct = (props) => {
   };
   return (
     <>
-    <MdDelete onClick={handleShow}/>
-    <Modal show={show} onHide={handleClose}>
+      <ToastContainer />
+      <MdDelete onClick={handleShow} />
+      <Modal show={show} onHide={handleClose}>
         <Form onSubmit={(e) => handleSubmit(e)}>
           <Modal.Header closeButton>
             <Modal.Title>You're about to delete your product</Modal.Title>
@@ -43,5 +47,5 @@ export const DeleteProduct = (props) => {
         </Form>
       </Modal>
     </>
-  )
-}
+  );
+};

@@ -27,11 +27,8 @@ const controllers = {
     console.log(req.body.userId);
     const { name, category, brand, color, size, price, quantity, description } =
       req.body;
-
     try {
-      // req.file is the 'image' file
-      const { originalname, mimetype, buffer } = req.file;
-
+      const {originalname,buffer } = req.file;
       // Check file type
       if (!originalname.match(/\.(jpg|jpeg|png)$/)) {
         return res
@@ -128,9 +125,10 @@ const controllers = {
   },
 
   editProduct: async (req, res) => {
-    console.log(req.file);
+    // console.log(req.file);
     try {
       let updatedFields = { ...req.body };
+      console.log("answer:",updatedFields.image);
       if (req.file) {
         const { originalname, buffer } = req.file;
 

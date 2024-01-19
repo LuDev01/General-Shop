@@ -19,10 +19,9 @@ const controllers = {
         res.status(400).json({ error: "Email is already in use" }); // If the email is already in use, send a response to the client
         return; // Stop the creation process
       }
-
       const isSuperAdmin = req.headers["x-superadmin"] === "true";
       const newUser = await User.create({ ...req.body }); //Creates a new user using the User.create method, which is likely a Mongoose method for adding a new document to the "Users" collection.
-     
+
       if (isSuperAdmin) {
         newUser.userRole.push("Admin");
       }
@@ -37,45 +36,90 @@ const controllers = {
     }
   },
 
-updateUser: async (req,res)=>{
-  try {
-    // const { id, newRole } = req.body;
-    const { id } = req.params;
-    const { userRole } = req.body;
+  updateUser: async (req, res) => {
+    try {
+      // const { id, newRole } = req.body;
+      const { id } = req.params;
+      const { userRole } = req.body;
 
-    const user = await User.findById(id);
+      const user = await User.findById(id);
 
-    if (!user) {
-      res.status(400).json({ error: "User not found" });
-      return;
+      if (!user) {
+        res.status(400).json({ error: "User not found" });
+        return;
+      }
+
+      user.userRole = userRole;
+      const updatedUser = await user.save();
+
+      if (updatedUser) {
+        res
+          .status(200)
+          .json({ message: "Updated Successfully", user: updatedUser });
+      }
+    } catch (error) {
+      console.log(error);
+      res.json({ error: "Error modifying the user's role" });
     }
+  },
 
-    user.userRole = userRole;
-    const updatedUser = await user.save();
+  editUserInfo: async (req, res) => {
+    // console.log(req.file);
+    try {
+      let updatedFields = { ...req.body };
+      if (req.file) {
+        const { originalname, buffer } = req.file;
+        if (!originalname.match(/\.(jpg|jpeg|png)$/)) {
+          return res
+            .status(400)
+            .json({ error: "Please upload a JPG, JPEG, or PNG image." });
+        }
 
-    if (updatedUser) {
-      res.status(200).json({ message: "Updated Successfully", user: updatedUser });
+        const maxSize = 1 * 1024 * 1024; // 1 MB
+        if (buffer.length > maxSize) {
+          return res.status(400).json({
+            error: "The image is too large. The maximum allowed size is 1 MB.",
+          });
+        }
+
+        const stream = require("stream");
+        const bufferStream = new stream.PassThrough();
+        bufferStream.end(buffer);
+
+        const result = await new Promise((resolve, reject) => {
+          const cloudStream = cloudinary.uploader.upload_stream(
+            { resource_type: "image", folder: "onlineShop" },
+            // { resource_type: "image", folder: "userImages" },
+            (error, result) => {
+              if (error) {
+                reject(error);
+              } else {
+                resolve(result);
+              }
+            }
+          );
+          bufferStream.pipe(cloudStream);
+        });
+
+        updatedFields.image = {
+          public_id: result.public_id,
+          url: result.secure_url,
+        };
+      }
+
+      const userInfo = await User.findByIdAndUpdate(
+        req.params.id,
+        updatedFields,
+        { new: true }
+      );
+
+      if (userInfo) {
+        res.status(200).json({ message: "Updated Successfully",user: userInfo });
+      }
+    } catch (error) {
+      res.json({ message: `Error updating user ${error}` });
     }
-  } catch (error) {
-    console.log(error);
-    res.json({ error: "Error modifying the user's role" });
-  }
-},
-
-editUserInfo:async(req,res)=>{
-  try {
-    const userInfo=await User.findByIdAndUpdate(
-    req.params.id,
-    { ...req.body },
-    { new: true }
-    );
-    if(userInfo){
-      res.status(200).json({ message: "Updated Successfully" });
-    }
-  } catch (error) {
-    res.json({ message: `Error updating user ${error}` });
-  }
-},
+  },
 
   getUserByPk: async (req, res) => {
     //  Defines an asynchronous function getUserByPk to handle fetching a user by their primary key (ID). It takes req (request) and res (response) as parameters.
@@ -90,8 +134,8 @@ editUserInfo:async(req,res)=>{
   },
   getUsers: async (req, res) => {
     try {
-      const users = await User.find(); 
-      res.json({users });
+      const users = await User.find();
+      res.json({ users });
     } catch (error) {
       res.json({ error: "Error showing the users" });
     }
@@ -108,7 +152,10 @@ editUserInfo:async(req,res)=>{
 
       const bytes = CryptoJS.AES.decrypt(password, "SheDev2101200025021997");
       const decryptedPassword = bytes.toString(CryptoJS.enc.Utf8);
-      const bytesDB = CryptoJS.AES.decrypt(user.password, "SheDev2101200025021997");
+      const bytesDB = CryptoJS.AES.decrypt(
+        user.password,
+        "SheDev2101200025021997"
+      );
       const decryptedPasswordDB = bytesDB.toString(CryptoJS.enc.Utf8);
       if (decryptedPassword !== decryptedPasswordDB)
         return res.status(401).json({ message: "Credenciales inválidas" });
@@ -120,7 +167,7 @@ editUserInfo:async(req,res)=>{
 
       exp = Math.floor(Date.now() / 1000) + 24 * 60 * 60;
       const token = Jwt.sign({ userId: user._id }, process.env.JWT_SECRET_KEY, {
-        expiresIn: '24h',
+        expiresIn: "24h",
       });
 
       if (isMatch) {
