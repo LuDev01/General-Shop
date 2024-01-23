@@ -22,13 +22,13 @@ const controllers = {
   //     res.status(400).json({ message: "User not logged" });
   //   }
   // },
-  
+
   createProduct: async (req, res) => {
     console.log(req.body.userId);
     const { name, category, brand, color, size, price, quantity, description } =
       req.body;
     try {
-      const {originalname,buffer } = req.file;
+      const { originalname, buffer } = req.file;
       // Check file type
       if (!originalname.match(/\.(jpg|jpeg|png)$/)) {
         return res
@@ -101,6 +101,20 @@ const controllers = {
     }
   },
 
+  getProductById: async (req, res) => {
+    try {
+      const productImage = await Product.findById(req.params.id);
+      if (productImage) {
+        res.status(200).json({ productImage });
+      }
+      const cloudinaryImage = productImage.image.public_id;
+
+      // Include the Cloudinary folder and image ID in the response
+      res.status(200).json({ productImage, cloudinaryImage });
+    } catch (error) {
+      res.json({ message: `Error showing product image ${error}` });
+    }
+  },
   getProductFilter: async (req, res) => {
     try {
       const query = req.query.query;
@@ -128,7 +142,7 @@ const controllers = {
     // console.log(req.file);
     try {
       let updatedFields = { ...req.body };
-      console.log("answer:",updatedFields.image);
+      console.log("answer:", updatedFields.image);
       if (req.file) {
         const { originalname, buffer } = req.file;
 
@@ -161,7 +175,7 @@ const controllers = {
           );
           bufferStream.pipe(cloudStream);
         });
-        
+
         updatedFields.image = {
           public_id: result.public_id,
           url: result.secure_url,

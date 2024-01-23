@@ -18,13 +18,8 @@ export const EditProduct = (props) => {
   const [price, setPrice] = useState(props.price);
   const [quantity, setQuantity] = useState(props.quantity);
   const [description, setDescription] = useState(props.description);
-  const [image, setImage] = useState(props.image);
+  const [image, setImage] = useState(props.image.url);
   const [userId, setUserId] = useState(props.id);
-
-  const [formData, setFormData] = useState({
-    imagen: 'onlineShop', // Ruta de la imagen
-    // Otros campos del formulario
-    });
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -41,18 +36,20 @@ export const EditProduct = (props) => {
       formData.append("price", price);
       formData.append("quantity", quantity);
       formData.append("description", description);
-      formData.append("image", image);
       formData.append("userId", userId);
+      
+        if(image){
+          formData.append("image", image);
+        }
 
       const response = await axiosClient.put(
         `products/${props.id}/edit`,
         formData,
         {
           headers: {
-            "Content-Type": "multipart/form-data"
+            "Content-Type": "multipart/form-data",
           },
         }
-        
       );
 
       toast.success("Product edited successfully!");
@@ -165,6 +162,7 @@ export const EditProduct = (props) => {
                   setImage(file);
                 }}
               />
+          
             </Form.Group>
             <Modal.Footer>
               <Button type="submit" className="button-panel-left">

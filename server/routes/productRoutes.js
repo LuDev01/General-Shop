@@ -14,6 +14,9 @@ router.post("/products/create", upload.single('image'), productController.create
 // @GET /products
 router.get("/products", productController.getProduct);
 
+// @GET /productsbyid
+router.get("/products/:id",controllers.getProductById)
+
 // @GET /getProductFilter
 router.get("/searchbyproducts",controllers.getProductFilter)
 
