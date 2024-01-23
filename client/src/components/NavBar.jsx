@@ -128,27 +128,27 @@ export const NavBar = () => {
 
               <div className="dropdown-search">
                 {products
-                  .filter((el) => {
+                  .filter((product) => {
                     const searchItem = value.toLowerCase();
-                    const itemName = el.name.toLowerCase();
+                    const itemName = product.name.toLowerCase();
                     return (
                       searchItem && itemName.includes(searchItem.toLowerCase())
                     );
                   })
                   .slice(0, 3)
 
-                  .map((el) => (
+                  .map((product) => (
                     <Link
                       className="dropdown-search-row"
-                      to={`/productDetails/${el.id}`}
-                      onClick={() => handleOnSearch(el.name)}
-                      key={el.id}
+                      to={`/productDetails/${product.id}`}
+                      onClick={() => handleOnSearch(product.name)}
+                      key={product.id}
                       style={{ textDecoration: "none", color: "black" }}
                     >
-                      {el.name}
+                      {product.name}
                       <img
                         className="dropdown-search-img"
-                        src={el.image}
+                        src={product.image}
                         alt="products"
                       />
                     </Link>

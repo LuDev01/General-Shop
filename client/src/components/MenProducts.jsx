@@ -28,20 +28,20 @@ export const MenProducts = () => {
   <h1 style={{margin:"7rem",textAlign:"center"}}>Men Products Section </h1>
   <Row xs={1} md={3} className="g-4 m-4 ">
         {data
-          .filter((el) => ["man", "men"].includes(el.category.toLowerCase()))
-          .map((el) => (
-            <Col key={el._id}>
+          .filter((product) => ["man", "men"].includes(product.category.toLowerCase()))
+          .map((product) => (
+            <Col key={product._id}>
               <Card className="product-cards">
                 <Card.Img
                   className="products-img"
                   variant="top"
-                  src={el.image.url}
+                  src={product.image.url}
                 />
                 <Card.Body>
-                  <Card.Title>{el.name}</Card.Title>
-                  <Card.Text>{el.description}</Card.Text>
-                  <Card.Text>Price: {el.price}</Card.Text>
-                  <Notification productId={el._id} />
+                  <Card.Title>{product.name}</Card.Title>
+                  <Card.Text>{product.description}</Card.Text>
+                  <Card.Text>Price: {product.price}</Card.Text>
+                  <Notification productId={product._id} />
                 </Card.Body>
               </Card>
             </Col>

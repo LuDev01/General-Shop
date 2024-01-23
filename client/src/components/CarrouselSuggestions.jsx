@@ -18,12 +18,12 @@ import { dataContext } from "./context/DataContext";
 import {Link, useNavigate} from "react-router-dom";
 
 export const CarrouselSuggestions = () => {
-  const { data, cart, setCart } = useContext(dataContext);
+  // const { data, cart, setCart } = useContext(dataContext);
   const navigate=useNavigate();
 
   const buyProducts = (product) => {
     console.log(product);
-    setCart([...cart, product]);
+    // setCart([...cart, product]);
   };
 
   const responsive = {

@@ -6,6 +6,11 @@ import axiosClient from "../axiosConfig";
 import { useState, useEffect } from "react";
 import NoData from "./assets/NoData.jpg"
 
+//Carrito
+import { useContext } from 'react';
+import { dataContext } from './context/DataContext';
+//
+
 export const AllProducts = () => {
   const [data, setData] = useState([]);
   console.log("this is the data ", data);
@@ -22,27 +27,38 @@ export const AllProducts = () => {
     getProduct();
   }, []);
 
+  //Carrito
+  const { cart, addToCart } = useContext(dataContext);
+  // const [data, setData] = useState([]);
+
+  const handleAddToCart = (product) => {
+      addToCart(product);
+  };
+  //
+
   return (
     <>
       <Row xs={1} md={3} className="g-4 m-4 ">
         {data &&
-          data.map((el) => (
-            <Col key={el._id}>
+          data.map((product) => (
+            <Col key={product._id}>
               <Card className="product-cards">
                 <Card.Img
                   className="products-img"
                   variant="top"
-                  src={el.image ? el.image.url : NoData}
+                  src={product.image ? product.image.url : NoData}
                   onError={(e) => {
                     e.target.onerror = null; // Prevents infinite looping in case default image also fails to load
                     e.target.src = NoData;
                   }}
                 />
                 <Card.Body>
-                  <Card.Title>{el.name}</Card.Title>
-                  <Card.Text>{el.description}</Card.Text>
-                  <Card.Text>Price: {el.price}</Card.Text>
-                  <Notification productId={el._id} />
+                  <Card.Title>{product.name}</Card.Title>
+                  <Card.Text>{product.description}</Card.Text>
+                  <Card.Text>Price: {product.price}</Card.Text>
+                  <Notification productId={product._id} />
+                  {/* <Button onClick={() => handleAddToCart(el)}>Add to Cart</Button> */}
+                  <button type="submit" size="lg" className="submit-button btn btn-outline-info mb-3" onClick={() => handleAddToCart(product)}>Add to cart Majo</button>
                 </Card.Body>
               </Card>
             </Col>

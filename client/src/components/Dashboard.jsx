@@ -218,34 +218,34 @@ export const Dashboard = () => {
                         <tbody>
                           {data &&
                             (!search || search.length === 0) &&
-                            data.map((el) => (
-                              <tr key={el._id}>
-                                <td>{el._id}</td>
-                                <td>{el.name}</td>
-                                <td>{el.category}</td>
-                                <td>{el.brand}</td>
-                                <td>{el.color}</td>
-                                <td>{el.size}</td>
-                                <td>{el.price}</td>
-                                <td>{el.quantity}</td>
-                                <td>{el.description}</td>
-                                <td><img src={el.image ? el.image.url:NoData} alt="Product" /></td>
+                            data.map((product) => (
+                              <tr key={product._id}>
+                                <td>{product._id}</td>
+                                <td>{product.name}</td>
+                                <td>{product.category}</td>
+                                <td>{product.brand}</td>
+                                <td>{product.color}</td>
+                                <td>{product.size}</td>
+                                <td>{product.price}</td>
+                                <td>{product.quantity}</td>
+                                <td>{product.description}</td>
+                                <td><img src={product.image ? product.image.url:NoData} alt="Product" /></td>
                                 <td className="product-components">
                                   <EditProduct
                                     refreshProducts={getProduct}
-                                    id={el._id}
-                                    name={el.name}
-                                    category={el.category}
-                                    brand={el.brand}
-                                    color={el.color}
-                                    size={el.size}
-                                    price={el.price}
-                                    quantity={el.quantity}
-                                    description={el.description}
-                                    image={el.image ? el.image.url : NoData}
+                                    id={product._id}
+                                    name={product.name}
+                                    category={product.category}
+                                    brand={product.brand}
+                                    color={product.color}
+                                    size={product.size}
+                                    price={product.price}
+                                    quantity={product.quantity}
+                                    description={product.description}
+                                    image={product.image ? product.image.url : NoData}
                                   />
                                   <DeleteProduct
-                                    id={el._id}
+                                    id={product._id}
                                     refreshProducts={getProduct}
                                   />
                                 </td>
@@ -254,34 +254,34 @@ export const Dashboard = () => {
                         </tbody>
                         <tbody>
                           {search.length > 0 &&
-                            search.map((el) => (
-                              <tr key={el._id}>
-                                <td>{el._id}</td>
-                                <td>{el.name}</td>
-                                <td>{el.category}</td>
-                                <td>{el.brand}</td>
-                                <td>{el.color}</td>
-                                <td>{el.size}</td>
-                                <td>{el.price}</td>
-                                <td>{el.quantity}</td>
-                                <td>{el.description}</td>
-                                <td><img src={el.image ? el.image.url:NoData} alt="Product" /></td>
+                            search.map((product) => (
+                              <tr key={product._id}>
+                                <td>{product._id}</td>
+                                <td>{product.name}</td>
+                                <td>{product.category}</td>
+                                <td>{product.brand}</td>
+                                <td>{product.color}</td>
+                                <td>{product.size}</td>
+                                <td>{product.price}</td>
+                                <td>{product.quantity}</td>
+                                <td>{product.description}</td>
+                                <td><img src={product.image ? product.image.url:NoData} alt="Product" /></td>
                                 <td>
                                   <EditProduct
                                     refreshProducts={getProduct}
-                                    id={el._id}
-                                    name={el.name}
-                                    category={el.category}
-                                    brand={el.brand}
-                                    color={el.color}
-                                    size={el.size}
-                                    price={el.price}
-                                    quantity={el.quantity}
-                                    description={el.description}
-                                    image={el.image ? el.image.url : NoData}
+                                    id={product._id}
+                                    name={product.name}
+                                    category={product.category}
+                                    brand={product.brand}
+                                    color={product.color}
+                                    size={product.size}
+                                    price={product.price}
+                                    quantity={product.quantity}
+                                    description={product.description}
+                                    image={product.image ? product.image.url : NoData}
                                   />
                                   <DeleteProduct
-                                    id={el._id}
+                                    id={product._id}
                                     refreshProducts={getProduct}
                                   />
                                 </td>
