@@ -1,14 +1,16 @@
+import { useState, useEffect } from "react";
+import { ToastContainer, toast } from "react-toastify";
 import Card from "react-bootstrap/Card";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import Notification from "./Notification";
 import axiosClient from "../axiosConfig";
-import { useState, useEffect } from "react";
-import NoData from "./assets/NoData.jpg"
+import NoData from "./assets/NoData.jpg";
+import "react-toastify/dist/ReactToastify.css";
 
 //Carrito
-import { useContext } from 'react';
-import { dataContext } from './context/DataContext';
+import { useContext } from "react";
+import { dataContext } from "./context/DataContext";
 //
 
 export const AllProducts = () => {
@@ -32,12 +34,15 @@ export const AllProducts = () => {
   // const [data, setData] = useState([]);
 
   const handleAddToCart = (product) => {
-      addToCart(product);
+    
+    toast.success("Product added to your cart!");
+    addToCart(product);
   };
   //
 
   return (
     <>
+      <ToastContainer />
       <Row xs={1} md={3} className="g-4 m-4 ">
         {data &&
           data.map((product) => (
@@ -58,7 +63,14 @@ export const AllProducts = () => {
                   <Card.Text>Price: {product.price}</Card.Text>
                   <Notification productId={product._id} />
                   {/* <Button onClick={() => handleAddToCart(el)}>Add to Cart</Button> */}
-                  <button type="submit" size="lg" className="submit-button btn btn-outline-info mb-3" onClick={() => handleAddToCart(product)}>Add to cart Majo</button>
+                  <button
+                    type="submit"
+                    size="lg"
+                    className="submit-button btn btn-outline-info mb-3"
+                    onClick={() => handleAddToCart(product)}
+                  >
+                    Add to cart Majo
+                  </button>
                 </Card.Body>
               </Card>
             </Col>

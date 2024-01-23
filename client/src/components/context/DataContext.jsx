@@ -1,5 +1,5 @@
 import { createContext, useState, useEffect } from 'react';
-import axios from 'axios';
+import axiosClient from '../../axiosConfig';
 
 export const dataContext = createContext();
 
@@ -11,7 +11,7 @@ const DataProvider = ({ children }) => {
         const fetchData = async () => {
             try {
                 // Getting the products
-                const response = await axios.get("products");
+                const response = await axiosClient.get("products");
                 setData(response.data.products);
             } catch (error) {
                 console.error("Error fetching products:", error.message);

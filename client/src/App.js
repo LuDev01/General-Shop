@@ -8,12 +8,11 @@ import { AboutUs } from './components/AboutUs';
 import { WomenProducts } from './components/WomenProducts';
 import { MenProducts } from './components/MenProducts';
 // import {ShoppingCart} from './components/ShoppingCart';
-import CartContent from './components/CartContent';
+import { CartContent } from './components/CartContent';
 import { useState, useEffect } from 'react';
 import  DataProvider  from './components/context/DataContext';
 import {Profile} from "./components/Profile";
 import { Dashboard } from './components/Dashboard';
-import { Test } from './components/Test';
 import { ImageProvider } from './components/context/ImageProvider';
 
 
@@ -61,13 +60,12 @@ function App() { // Defines the App component, which serves as the main componen
             <Route path='/register' element={login==="true" ?<HomePage/>:<RegisterForm />} />
             <Route path='/login' element={login === "true" ? <HomePage /> : <LogIn />} />
             <Route path='/aboutUs' element={<AboutUs />} />
-            <Route path='/productDetails/:productId' element={<ProductDetails />} />
+            <Route path='/productDetails/:id' element={<ProductDetails />} />
             <Route path='/womenProducts' element={ <WomenProducts /> } />
             <Route path='/menProducts' element={ <MenProducts /> } />
             <Route path='/cart' element={<CartContent />} />
             <Route path='/userProfile' element={<Profile/>}/>
             <Route path='/adminDashboard' element={<Dashboard/>}/>
-            <Route path='/crudProducts' element={<Test/>}/>
           </Routes>
         </div>
       </BrowserRouter>

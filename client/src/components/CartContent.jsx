@@ -1,13 +1,11 @@
 import { useContext } from "react";
 import { dataContext } from "./context/DataContext";
-
+import { NavBar } from './NavBar';
 import CartElements from "./CartElements"
 import CartTotal from "./CartTotal";
-import { NavBar } from './NavBar';
-
 import "./CartContent.css";
 
-const CartContent = () => {
+export const CartContent = () => {
     const { cart } = useContext(dataContext);
 
     return (
@@ -27,5 +25,3 @@ const CartContent = () => {
         </>
     );
 };
-
-export default CartContent;

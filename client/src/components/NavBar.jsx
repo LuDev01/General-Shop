@@ -106,10 +106,6 @@ console.log("the super cookie", document.cookie);
               <NavDropdown title="Categories" id="basic-nav-dropdown">
                 <NavDropdown.Item href="/womenProducts">Woman</NavDropdown.Item>
                 <NavDropdown.Item href="/menProducts">Man</NavDropdown.Item>
-                <NavDropdown.Divider />
-                <NavDropdown.Item href="#action/3.4">
-                  Latest Promotions
-                </NavDropdown.Item>
               </NavDropdown>
             </Nav>
             <Form

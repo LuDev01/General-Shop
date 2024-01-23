@@ -30,13 +30,14 @@ export const EditUser = (props) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData();
-    formData.append("image", image);
     formData.append("firstName", firstName);
     formData.append("lastName", lastName);
     formData.append("documentType", documentType);
     formData.append("document", document);
     formData.append("email", email);
-
+    if(image){
+      formData.append("image", image);
+    }
     try {
       const response = await axiosClient.put(
         `users/${props.id}/edit`,

@@ -103,16 +103,14 @@ const controllers = {
 
   getProductById: async (req, res) => {
     try {
-      const productImage = await Product.findById(req.params.id);
-      if (productImage) {
-        res.status(200).json({ productImage });
+      const productById = await Product.findById(req.params.id);
+      if (productById) {
+        res.status(200).json({ productById });
       }
-      const cloudinaryImage = productImage.image.public_id;
-
-      // Include the Cloudinary folder and image ID in the response
-      res.status(200).json({ productImage, cloudinaryImage });
-    } catch (error) {
-      res.json({ message: `Error showing product image ${error}` });
+      else {
+        res.status(404).json({ message: 'Product not found' });
+    }} catch (error) {
+      res.json({ message: `Error showing product ${error}` });
     }
   },
   getProductFilter: async (req, res) => {

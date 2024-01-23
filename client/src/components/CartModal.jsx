@@ -1,9 +1,9 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
+import {FaShoppingCart} from 'react-icons/fa'
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
-import {FaShoppingCart} from 'react-icons/fa'
-import { Link } from 'react-router-dom';
-import CartContent from './CartContent';
+import { CartContent } from './CartContent';
 
 function CartModal() {
   const [show, setShow] = useState(false);
@@ -14,7 +14,6 @@ function CartModal() {
   return (
     <>
       <FaShoppingCart className='cart-icon' onClick={handleShow}>
-        Launch demo modal
       </FaShoppingCart>
 
       <Modal show={show} onHide={handleClose}>
