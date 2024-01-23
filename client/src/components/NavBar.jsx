@@ -68,8 +68,7 @@ export const NavBar = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("exp");
     localStorage.removeItem("role");
-    // localStorage.removeItem('defaultAdminImg');
-    // localStorage.removeItem('defaultUserImg');
+console.log("the super cookie", document.cookie);
     var cookies = document.cookie.split(";");
 
     for (var i = 0; i < cookies.length; i++) {

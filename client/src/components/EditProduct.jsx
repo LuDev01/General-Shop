@@ -21,6 +21,11 @@ export const EditProduct = (props) => {
   const [image, setImage] = useState(props.image);
   const [userId, setUserId] = useState(props.id);
 
+  const [formData, setFormData] = useState({
+    imagen: 'onlineShop', // Ruta de la imagen
+    // Otros campos del formulario
+    });
+
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
