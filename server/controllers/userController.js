@@ -88,7 +88,7 @@ const controllers = {
 
         const result = await new Promise((resolve, reject) => {
           const cloudStream = cloudinary.uploader.upload_stream(
-            { resource_type: "image", folder: "onlineShop" },
+            { resource_type: "image", folder: "userPicture" },
             // { resource_type: "image", folder: "userImages" },
             (error, result) => {
               if (error) {
