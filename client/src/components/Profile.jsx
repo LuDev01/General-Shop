@@ -35,14 +35,16 @@ export const Profile = () => {
     setSettings(true);
     settingsRef.current.classList.add("active");
   };
-  const handleOnLogOut = () => {
+  const handleOnLogOut = (e) => {
+    e.preventDefault();
+    localStorage.setItem('isLoggedOut', 'true');
     localStorage.removeItem("isLoggedIn");
     localStorage.removeItem("isLoggedInv2");
     localStorage.removeItem("token");
     localStorage.removeItem("exp");
     localStorage.removeItem("role");
-    localStorage.removeItem('defaultAdminImg');
-    localStorage.removeItem('defaultUserImg');
+
+    console.log("the cookie",document.cookie);
     var cookies = document.cookie.split(";");
 
     for (var i = 0; i < cookies.length; i++) {
