@@ -1,14 +1,22 @@
+.cartContainer {
+  /* background-color: #f0f0f0; */
+  /* padding: 20px; */
+  /* border: 1px solid #ccc; */
+  margin-top: 20px;
+}
+
 .cartContent {
     display: flex;
     flex-direction: row;
     justify-content: space-around;
     flex-wrap: wrap;
-    margin: 30px;
+    margin-top: 40px;
+    font-size: 1rem;
   }
   
   .cartContent > img {
-    height: 120px;
-    width: 100px;
+    height: 60px;
+    width: auto;
     text-align: center;
   }
   

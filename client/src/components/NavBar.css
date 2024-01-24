@@ -2,15 +2,15 @@
     background-color: white;
     opacity: 0.8;
     transition: all 500ms;
-
   }
+
 .NavBar-color.active{
     /* background-color: transparent; */
     /* background-color: white; */
     background-color: var(--orange-main);
     opacity: 0.8;
-
 }
+
 
 .general-logo{
     max-width: 15vh;
@@ -45,8 +45,8 @@
 .search-container{
     margin-left: -3rem;
     width:220px;
-    
 }
+
 .dropdown-search{
     display: flex;
     flex-direction: column;
@@ -55,8 +55,8 @@
     top: 4rem; /* Position the dropdown-search below the search button */
     width: 18%;
     background-color: white;
-
 }
+
 .dropdown-search:empty{
     border: none;
 }
