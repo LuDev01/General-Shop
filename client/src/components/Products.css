@@ -23,7 +23,15 @@
     margin-left: 10px;
   }
 
-
 .product-info{
     margin-top: 2rem;
+}
+
+.add-to-cart{
+    margin-top: 10px;
+    width: 100%;
+}
+
+.submit-button{
+    width: 100%;
 }

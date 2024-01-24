@@ -43,8 +43,8 @@ function Notification({productId, buyProducts, product}) {
       
       </Col>
         <div className=" d-grid ">
-          <button type="submit" size="lg" className="submit-button btn btn-outline-info mb-3" onClick={addToCart}>Add to cart</button>
-          <button type="submit" size="lg" className="submit-button btn btn-outline-warning" onClick={() =>navigate(`/productDetails/${productId}`) }>Product details</button>
+          {/* <button type="submit" size="lg" className="submit-button btn btn-outline-info mb-3" onClick={addToCart}>Add to cart</button> */}
+          {/* <button type="submit" size="lg" className="submit-button btn btn-outline-warning" onClick={() =>navigate(`/productDetails/${productId}`) }>Product details</button> */}
         </div>
     </Row>
     </div>
