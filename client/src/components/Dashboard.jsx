@@ -11,7 +11,7 @@ import { EditUser } from "./EditUser";
 import { Panel } from "./Panel";
 import { jwtDecode } from "jwt-decode";
 import axiosClient from "../axiosConfig";
-import NoData from "./assets/NoData.jpg"
+import NoData from "./assets/NoData.jpg";
 import logoWhite from "./assets/GeneralShopLogoWhite.png";
 import "./Dashboard.css";
 
@@ -81,14 +81,13 @@ export const Dashboard = () => {
 
   const getUser = async () => {
     try {
-      const response = await axiosClient.get(`user/${id}`); 
+      const response = await axiosClient.get(`user/${id}`);
       const { user } = response.data;
       setFirstName(user.firstName);
       setLastName(user.lastName);
       setDocumentType(user.documentType);
       setDocument(user.document);
       setEmail(user.email);
-
     } catch (error) {
       console.error("Error showing user", error.message);
     }
@@ -131,7 +130,6 @@ export const Dashboard = () => {
                 <FaHome />
                 Dashboard
               </button>
-
             </li>
             <li>
               <button
@@ -168,7 +166,7 @@ export const Dashboard = () => {
           <>
             <div className="main">
               <h2 className="principal-title">Site Management</h2>
-              <Panel/> 
+              <Panel />
             </div>
           </>
         )}
@@ -207,9 +205,12 @@ export const Dashboard = () => {
                             <th>Category</th>
                             <th>Brand </th>
                             <th>Color </th>
-                            <th>Size</th>
+                            <th>Size XS</th>
+                            <th>Size S</th>
+                            <th>Size M</th>
+                            <th>Size L</th>
+                            <th>Size XL</th>
                             <th>Price</th>
-                            <th>Quantity</th>
                             <th>Description</th>
                             <th>Image</th>
                             <th>Action</th>
@@ -225,11 +226,21 @@ export const Dashboard = () => {
                                 <td>{product.category}</td>
                                 <td>{product.brand}</td>
                                 <td>{product.color}</td>
-                                <td>{product.size}</td>
+                                <td>{product.sizes.XS}</td>
+                                <td>{product.sizes.S}</td>
+                                <td>{product.sizes.M}</td>
+                                <td>{product.sizes.L}</td>
+                                <td>{product.sizes.XL}</td>
                                 <td>{product.price}</td>
-                                <td>{product.quantity}</td>
                                 <td>{product.description}</td>
-                                <td><img src={product.image ? product.image.url:NoData} alt="Product" /></td>
+                                <td>
+                                  <img
+                                    src={
+                                      product.image ? product.image.url : NoData
+                                    }
+                                    alt="Product"
+                                  />
+                                </td>
                                 <td className="product-components">
                                   <EditProduct
                                     refreshProducts={getProduct}
@@ -238,11 +249,12 @@ export const Dashboard = () => {
                                     category={product.category}
                                     brand={product.brand}
                                     color={product.color}
-                                    size={product.size}
+                                    sizes={product.sizes}
                                     price={product.price}
-                                    quantity={product.quantity}
                                     description={product.description}
-                                    image={product.image ? product.image.url : NoData}
+                                    image={
+                                      product.image ? product.image.url : NoData
+                                    }
                                   />
                                   <DeleteProduct
                                     id={product._id}
@@ -261,11 +273,21 @@ export const Dashboard = () => {
                                 <td>{product.category}</td>
                                 <td>{product.brand}</td>
                                 <td>{product.color}</td>
-                                <td>{product.size}</td>
+                                <td>{product.sizes.XS}</td>
+                                <td>{product.sizes.S}</td>
+                                <td>{product.sizes.M}</td>
+                                <td>{product.sizes.L}</td>
+                                <td>{product.sizes.XL}</td>
                                 <td>{product.price}</td>
-                                <td>{product.quantity}</td>
                                 <td>{product.description}</td>
-                                <td><img src={product.image ? product.image.url:NoData} alt="Product" /></td>
+                                <td>
+                                  <img
+                                    src={
+                                      product.image ? product.image.url : NoData
+                                    }
+                                    alt="Product"
+                                  />
+                                </td>
                                 <td>
                                   <EditProduct
                                     refreshProducts={getProduct}
@@ -274,11 +296,12 @@ export const Dashboard = () => {
                                     category={product.category}
                                     brand={product.brand}
                                     color={product.color}
-                                    size={product.size}
+                                    sizes={product.sizes}
                                     price={product.price}
-                                    quantity={product.quantity}
                                     description={product.description}
-                                    image={product.image ? product.image.url : NoData}
+                                    image={
+                                      product.image ? product.image.url : NoData
+                                    }
                                   />
                                   <DeleteProduct
                                     id={product._id}

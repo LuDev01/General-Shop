@@ -1,4 +1,3 @@
-import React from "react";
 import { useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import Modal from "react-bootstrap/Modal";
@@ -12,7 +11,7 @@ export const CreateProduct = (props) => {
   const [brand, setBrand] = useState("");
   const [category, setCategory] = useState("");
   const [color, setColor] = useState("");
-  const [size, setSize] = useState("");
+  const [sizes, setSizes] = useState({ XS: 0, S: 0, M: 0, L: 0, XL: 0 });
   const [price, setPrice] = useState("");
   const [quantity, setQuantity] = useState("");
   const [description, setDescription] = useState("");
@@ -25,7 +24,7 @@ export const CreateProduct = (props) => {
     setBrand("");
     setCategory("");
     setColor("");
-    setSize("");
+    setSizes({ XS: 0, S: 0, M: 0, L: 0, XL: 0 });
     setPrice("");
     setQuantity("");
     setDescription("");
@@ -42,7 +41,7 @@ export const CreateProduct = (props) => {
     formData.append("brand", brand);
     formData.append("category", category);
     formData.append("color", color);
-    formData.append("size", size);
+    formData.append("sizes", JSON.stringify(sizes));
     formData.append("price", price);
     formData.append("quantity", quantity);
     formData.append("description", description);
@@ -115,13 +114,53 @@ export const CreateProduct = (props) => {
               />
             </Form.Group>
 
-            <Form.Group className="mb-3">
-              <Form.Label>Size</Form.Label>
+            <Form.Group className="mb">
+              <Form.Label>Size XS</Form.Label>
               <Form.Control
-                type="text"
-                placeholder="Enter text"
-                value={size}
-                onChange={(e) => setSize(e.target.value)}
+                type="number"
+                placeholder="Enter quantity"
+                value={sizes.XS}
+                onChange={(e) => setSizes({ ...sizes, XS: e.target.value })}
+              />
+            </Form.Group>
+
+            <Form.Group className="mb">
+              <Form.Label>Size S</Form.Label>
+              <Form.Control
+                type="number"
+                placeholder="Enter quantity"
+                value={sizes.S}
+                onChange={(e) => setSizes({ ...sizes, S: e.target.value })}
+              />
+            </Form.Group>
+
+            <Form.Group className="mb">
+              <Form.Label>Size M</Form.Label>
+              <Form.Control
+                type="number"
+                placeholder="Enter quantity"
+                value={sizes.M}
+                onChange={(e) => setSizes({ ...sizes, M: e.target.value })}
+              />
+            </Form.Group>
+
+            <Form.Group className="mb">
+              <Form.Label>Size L</Form.Label>
+              <Form.Control
+                type="number"
+                placeholder="Enter quantity"
+                value={sizes.L}
+                onChange={(e) => setSizes({ ...sizes, L: e.target.value })}
+              />
+            </Form.Group>
+
+            <Form.Group className="mb">
+              <Form.Label>Size XL</Form.Label>
+              <Form.Control
+                type="number"
+                placeholder="Enter quantity"
+                value={sizes.XL}
+                onChange={(e) => setSizes({ ...sizes, XL: e.target.value })}
               />
             </Form.Group>
 
@@ -132,16 +171,6 @@ export const CreateProduct = (props) => {
                 placeholder="Enter text"
                 value={price}
                 onChange={(e) => setPrice(e.target.value)}
-              />
-            </Form.Group>
-
-            <Form.Group className="mb-3">
-              <Form.Label>Quantity</Form.Label>
-              <Form.Control
-                type="number"
-                placeholder="Enter text"
-                value={quantity}
-                onChange={(e) => setQuantity(e.target.value)}
               />
             </Form.Group>
 

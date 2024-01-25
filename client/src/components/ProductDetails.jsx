@@ -1,8 +1,11 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import { useParams } from 'react-router-dom';
+import { useParams } from "react-router-dom";
 import { NavBar } from "./NavBar";
 import { Footer } from "./Footer";
+import Button from "react-bootstrap/Button";
+import Modal from "react-bootstrap/Modal";
+import Table from "react-bootstrap/esm/Table";
 import Card from "react-bootstrap/Card";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
@@ -13,10 +16,11 @@ import Dropdown from "react-bootstrap/Dropdown";
 import axiosClient from "../axiosConfig";
 import "./Products.css";
 
-export const ProductDetails = (props) => {
+export const ProductDetails = () => {
   const [data, setData] = useState(null);
   const [selectedSize, setSelectedSize] = useState(null);
   const [quantity, setQuantity] = useState(1);
+  const [modalShow, setModalShow] = useState(false);
 
   const { id } = useParams(); // Access route parameters with useParams
   console.log("Product ID:", id);
@@ -27,7 +31,6 @@ export const ProductDetails = (props) => {
       const response = await axiosClient.get(`products/${id}`);
       console.log("this is the response of the server", response.data);
       setData(response.data.productById);
-
     } catch (error) {
       console.log("Error showing the products", error.message);
     }
@@ -77,18 +80,56 @@ export const ProductDetails = (props) => {
                     {selectedSize || "Choose your size"}
                   </Dropdown.Toggle>
                   <Dropdown.Menu>
-                    {/* {data.size.map((size) => (
+                    {Object.keys(data.sizes).map((size) => (
                       <Dropdown.Item
                         key={size}
                         onClick={() => setSelectedSize(size)}
                       >
                         {size}
                       </Dropdown.Item>
-                    ))} */}
-                    {data.size}
+                    ))}
                   </Dropdown.Menu>
                 </Dropdown>
               </CardSubtitle>
+              <br />
+              <Button variant="info" onClick={() => setModalShow(true)}>
+                Check Store Availability
+              </Button>
+              <Modal
+                show={modalShow}
+                onHide={() => setModalShow(false)}
+                size="lg"
+                aria-labelledby="contained-modal-title-vcenter"
+                centered
+              >
+                <Modal.Header closeButton>
+                  <Modal.Title id="contained-modal-title-vcenter">
+                    Store availability
+                  </Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                  <Table striped bordered hover>
+                    <thead>
+                      <tr>
+                        <th>Size</th>
+                        <th>Quantity</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {selectedSize && (
+                        <tr>
+                          <td>{selectedSize}</td>
+                          <td>{data.sizes[selectedSize]}</td>
+                        </tr>
+                      )}
+                    </tbody>
+                  </Table>
+                </Modal.Body>
+                <Modal.Footer>
+                  <Button onClick={() => setModalShow(false)}>Close</Button>
+                </Modal.Footer>
+              </Modal>
+
               <br />
               <div className="row">
                 <div className="col-md-3 mt-3">
@@ -106,7 +147,7 @@ export const ProductDetails = (props) => {
                       value={quantity}
                       onChange={(e) => setQuantity(e.target.value)}
                     />
-                    {/* <div className="form-control text-center">{quantity}</div> */}
+
                     <button
                       type="button"
                       onClick={handleIncrement}
@@ -125,7 +166,7 @@ export const ProductDetails = (props) => {
           </Col>
         </Row>
       </Card>
-      <Footer/>
+      <Footer />
     </>
   );
 };

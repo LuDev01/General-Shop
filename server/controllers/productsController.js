@@ -1,32 +1,19 @@
-const { log } = require("console");
 const Product = require("../database/models/Products");
 const cloudinary = require("../middlewares/cloudinary");
 
 const controllers = {
-  // createProduct: async (req, res) => {
-  //   try {
-  //     const { userId } = req.body.userId;
-  //     console.log(userId);
-  //     console.log(req.body);
-  //     delete req.body.userId;
-  //     console.log(req.body);
-  //     const newProduct = await Product.create({
-  //       ...req.body,
-  //       userId,
-  //     });
-  //     console.log(newProduct)
-  //     return res
-  //       .status(200)
-  //       .json({ message: "Product created successfully!", newProduct });
-  //   } catch (error) {
-  //     res.status(400).json({ message: "User not logged" });
-  //   }
-  // },
-
   createProduct: async (req, res) => {
     console.log(req.body.userId);
-    const { name, category, brand, color, size, price, quantity, description } =
-      req.body;
+    const {
+      name,
+      category,
+      brand,
+      color,
+      sizes,
+      price,
+      quantity,
+      description,
+    } = req.body;
     try {
       const { originalname, buffer } = req.file;
       // Check file type
@@ -63,13 +50,14 @@ const controllers = {
         );
         bufferStream.pipe(cloudStream);
       });
-
+      // Parse 'sizes' back into a JavaScript object
+      const sizesObj = JSON.parse(sizes);
       const product = await Product.create({
         name,
         category,
         brand,
         color,
-        size,
+        sizes: sizesObj,
         price,
         quantity,
         description,
@@ -106,10 +94,10 @@ const controllers = {
       const productById = await Product.findById(req.params.id);
       if (productById) {
         res.status(200).json({ productById });
+      } else {
+        res.status(404).json({ message: "Product not found" });
       }
-      else {
-        res.status(404).json({ message: 'Product not found' });
-    }} catch (error) {
+    } catch (error) {
       res.json({ message: `Error showing product ${error}` });
     }
   },
@@ -123,7 +111,7 @@ const controllers = {
           { brand: { $regex: query, $options: "i" } },
           { category: { $regex: query, $options: "i" } },
           { color: { $regex: query, $options: "i" } },
-          { size: { $regex: query, $options: "i" } },
+          { sizes: { $regex: query, $options: "i" } },
           { description: { $regex: query, $options: "i" } },
         ],
       });
@@ -178,8 +166,10 @@ const controllers = {
           public_id: result.public_id,
           url: result.secure_url,
         };
+        
       }
-
+      updatedFields.sizes = JSON.parse(updatedFields.sizes);
+      
       const product = await Product.findByIdAndUpdate(
         req.params.id,
         updatedFields,

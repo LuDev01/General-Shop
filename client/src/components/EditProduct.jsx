@@ -1,5 +1,4 @@
-import React from "react";
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import { FaEdit } from "react-icons/fa";
 import Button from "react-bootstrap/Button";
@@ -14,16 +13,15 @@ export const EditProduct = (props) => {
   const [brand, setBrand] = useState(props.brand);
   const [category, setCategory] = useState(props.category);
   const [color, setColor] = useState(props.color);
-  const [size, setSize] = useState(props.size);
+  const [sizes,setSizes]=useState(props.sizes)
   const [price, setPrice] = useState(props.price);
-  const [quantity, setQuantity] = useState(props.quantity);
   const [description, setDescription] = useState(props.description);
   const [image, setImage] = useState(props.image.url);
   const [userId, setUserId] = useState(props.id);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-
+  
   const handleSubmit = async (e) => {
     try {
       e.preventDefault();
@@ -32,15 +30,14 @@ export const EditProduct = (props) => {
       formData.append("brand", brand);
       formData.append("category", category);
       formData.append("color", color);
-      formData.append("size", size);
+      formData.append("sizes", JSON.stringify(sizes));
       formData.append("price", price);
-      formData.append("quantity", quantity);
       formData.append("description", description);
       formData.append("userId", userId);
-      
-        if(image){
-          formData.append("image", image);
-        }
+
+      if (image) {
+        formData.append("image", image);
+      }
 
       const response = await axiosClient.put(
         `products/${props.id}/edit`,
@@ -60,7 +57,6 @@ export const EditProduct = (props) => {
       toast.error("Error editing product");
     }
   };
-
   return (
     <>
       <ToastContainer />
@@ -80,7 +76,6 @@ export const EditProduct = (props) => {
                 onChange={(e) => setName(e.target.value)}
               />
             </Form.Group>
-
             <Form.Group className="mb">
               <Form.Label>Category</Form.Label>
               <Form.Control
@@ -90,7 +85,6 @@ export const EditProduct = (props) => {
                 onChange={(e) => setCategory(e.target.value)}
               />
             </Form.Group>
-
             <Form.Group className="mb-3">
               <Form.Label>Brand</Form.Label>
               <Form.Control
@@ -100,7 +94,6 @@ export const EditProduct = (props) => {
                 onChange={(e) => setBrand(e.target.value)}
               />
             </Form.Group>
-
             <Form.Group className="mb">
               <Form.Label>Color</Form.Label>
               <Form.Control
@@ -110,17 +103,58 @@ export const EditProduct = (props) => {
                 onChange={(e) => setColor(e.target.value)}
               />
             </Form.Group>
-
-            <Form.Group className="mb-3">
-              <Form.Label>Size</Form.Label>
+       
+            <Form.Group className="mb">
+              <Form.Label>Size XS</Form.Label>
               <Form.Control
-                type="text"
-                placeholder="Enter text"
-                value={size}
-                onChange={(e) => setSize(e.target.value)}
+                type="number"
+                placeholder="Enter quantity"
+                value={sizes.XS}
+                onChange={(e) => setSizes({ ...sizes, XS: e.target.value })}
               />
             </Form.Group>
 
+            <Form.Group className="mb">
+              <Form.Label>Size S</Form.Label>
+              <Form.Control
+                type="number"
+                placeholder="Enter quantity"
+                value={sizes.S}
+                onChange={(e) => setSizes({ ...sizes, S: e.target.value })}
+              />
+            </Form.Group>
+
+            <Form.Group className="mb">
+              <Form.Label>Size M</Form.Label>
+              <Form.Control
+                type="number"
+                placeholder="Enter quantity"
+                value={sizes.M}
+                onChange={(e) => setSizes({ ...sizes, M: e.target.value })}
+              />
+            </Form.Group>
+
+            <Form.Group className="mb">
+              <Form.Label>Size L</Form.Label>
+              <Form.Control
+                type="number"
+                placeholder="Enter quantity"
+                value={sizes.L}
+                onChange={(e) => setSizes({ ...sizes, L: e.target.value })}
+              />
+            </Form.Group>
+
+            <Form.Group className="mb">
+              <Form.Label>Size XL</Form.Label>
+              <Form.Control
+                type="number"
+                placeholder="Enter quantity"
+                value={sizes.XL}
+                onChange={(e) => setSizes({ ...sizes, XL: e.target.value })}
+              />
+            </Form.Group>
+           
+     
             <Form.Group className="mb">
               <Form.Label>Price</Form.Label>
               <Form.Control
@@ -130,17 +164,7 @@ export const EditProduct = (props) => {
                 onChange={(e) => setPrice(e.target.value)}
               />
             </Form.Group>
-
-            <Form.Group className="mb-3">
-              <Form.Label>Quantity</Form.Label>
-              <Form.Control
-                type="number"
-                placeholder="Enter text"
-                value={quantity}
-                onChange={(e) => setQuantity(e.target.value)}
-              />
-            </Form.Group>
-
+        
             <Form.Group className="mb">
               <Form.Label>Description</Form.Label>
               <Form.Control
@@ -150,7 +174,6 @@ export const EditProduct = (props) => {
                 onChange={(e) => setDescription(e.target.value)}
               />
             </Form.Group>
-
             <Form.Group className="mb-3">
               <Form.Label>Image</Form.Label>
               <Form.Control
@@ -162,7 +185,6 @@ export const EditProduct = (props) => {
                   setImage(file);
                 }}
               />
-          
             </Form.Group>
             <Modal.Footer>
               <Button type="submit" className="button-panel-left">
