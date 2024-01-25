@@ -6,13 +6,13 @@ import Row from "react-bootstrap/Row";
 import Notification from "./Notification";
 import axiosClient from "../axiosConfig";
 import NoData from "./assets/NoData.jpg";
-import "react-toastify/dist/ReactToastify.css";
 import { useContext } from "react";
 import { dataContext } from "./context/DataContext";
-import './Products.css'
 import {useNavigate} from 'react-router-dom';
+import "react-toastify/dist/ReactToastify.css";
+import './Products.css'
 
-export const AllProducts = (productId) => {
+export const AllProducts = (productById) => {
   const [data, setData] = useState([]);
   const navigate = useNavigate();
   console.log("this is the data ", data);
@@ -40,6 +40,7 @@ export const AllProducts = (productId) => {
 
   return (
     <>
+    <ToastContainer/>
       <Row xs={1} md={5} className="g-4 m-4 ">
         {data &&
           data.map((product) => (
@@ -58,17 +59,9 @@ export const AllProducts = (productId) => {
                   <Card.Title>{product.name}</Card.Title>
                   <Card.Text>{product.description}</Card.Text>
                   <Card.Text>Price: ${product.price}</Card.Text>
-                  <Notification productId={product._id} />
-                  {/* <Button onClick={() => handleAddToCart(el)}>Add to Cart</Button> */}
-                  {/* <button
-                    type="submit"
-                    size="lg"
-                    className="submit-button btn btn-outline-info mb-3"
-                    onClick={() => handleAddToCart(product)}
-                  >
-                    Add to cart Majo
-                  </button> */}
-                  <button type="submit" size="lg" className="submit-button btn btn-outline-warning" onClick={() =>navigate(`/productDetails/${productId}`) }>Product details</button>
+                  <Notification productById={product._id} />
+
+                  <button type="submit" size="lg" className="submit-button btn btn-outline-warning" onClick={() =>navigate(`/productDetails/${product._id}`) }>Product details</button>
                   <button type="submit" size="lg" className="submit-button add-to-cart btn btn-outline-info " onClick={() => handleAddToCart(product)}>Add to cart</button>
                 </Card.Body>
               </Card>

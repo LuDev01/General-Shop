@@ -13,7 +13,7 @@ export const EditProduct = (props) => {
   const [brand, setBrand] = useState(props.brand);
   const [category, setCategory] = useState(props.category);
   const [color, setColor] = useState(props.color);
-  const [sizes,setSizes]=useState(props.sizes)
+  const [sizes,setSizes]=useState(props.sizes);
   const [price, setPrice] = useState(props.price);
   const [description, setDescription] = useState(props.description);
   const [image, setImage] = useState(props.image.url);
