@@ -23,7 +23,6 @@ const DataProvider = ({ children }) => {
 
     const addToCart = (product) => {
         setCart((cart) => [...cart, product]);
-        // setCart([...cart, el])
     };
 
     return (

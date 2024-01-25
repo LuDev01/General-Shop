@@ -11,7 +11,6 @@
     opacity: 0.8;
 }
 
-
 .general-logo{
     max-width: 15vh;
 }
@@ -19,10 +18,12 @@
 .logo-container{
     margin-right:60vh ;
 }
+
 .search-icon{
     margin-right:  40px;
     cursor: pointer;
 }
+
 .user-icon{
     margin-right: 30px;
     cursor: pointer;

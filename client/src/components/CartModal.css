@@ -1,0 +1,9 @@
+.cart-modal-container{
+    margin-top: 5rem;
+    height: auto;
+}
+
+.cart-modal-dialog {
+    max-height: 100vh;
+    margin: 0;
+  }

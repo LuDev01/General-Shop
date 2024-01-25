@@ -142,7 +142,7 @@ export const CarrouselSuggestions = () => {
               size="lg"         
               onClick={()=>navigate("/womenProducts")}           
             >
-              Show Now
+              Shop Now
             </Button>
           </div>
           <div className="text-block">

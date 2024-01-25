@@ -7,7 +7,7 @@ const CartTotal = () => {
   const { cart } = useContext(dataContext);
   <NavBar/>
 
-  // Calcular el total sumando los valores numéricos de los precios
+// Calculate the total by adding the numerical values of the prices
   const total = cart.reduce((acc, product) => {
     if (typeof product.price === 'number') {
       acc += product.price;
@@ -16,12 +16,14 @@ const CartTotal = () => {
   }, 0);
 
   return (
-    <div className="cartTotal">
-      <h3>Total: ${total}</h3>
+    <div className="cart-total">
+      <h3>Total Purchase: ${total}</h3>
     </div>
   );
 };
 
 export default CartTotal;
+
+
 
 

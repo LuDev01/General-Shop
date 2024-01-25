@@ -82,7 +82,8 @@ console.log("the super cookie", document.cookie);
   };
 
   return (
-    <>
+    // <>
+    <div > 
       <Navbar
         expand="lg"
         className={
@@ -205,6 +206,7 @@ console.log("the super cookie", document.cookie);
           </Navbar.Collapse>
         </Container>
       </Navbar>
-    </>
+    {/* </> */}
+    </div>
   );
 };
