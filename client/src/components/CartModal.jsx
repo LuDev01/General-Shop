@@ -22,12 +22,12 @@ function CartModal() {
           <Modal.Title>Shopping Cart</Modal.Title>
         </Modal.Header>
 
-        <Modal.Body >
+        <Modal.Body className='cart-modal-body'>
           <CartContent/>
         </Modal.Body>
         
         <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
+          <Button variant="secondary" onClick={handleClose} >
             Keep buying
           </Button>
           <Link to= '/cart'>

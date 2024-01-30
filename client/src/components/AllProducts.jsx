@@ -12,7 +12,7 @@ import {useNavigate} from 'react-router-dom';
 import "react-toastify/dist/ReactToastify.css";
 import './Products.css'
 
-export const AllProducts = (productById) => {
+export const AllProducts = () => {
   const [data, setData] = useState([]);
   const navigate = useNavigate();
   console.log("this is the data ", data);

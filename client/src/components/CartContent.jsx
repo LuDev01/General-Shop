@@ -7,6 +7,8 @@ import CartTotal from "./CartTotal";
 export const CartContent = () => {
   const { cart } = useContext(dataContext);
 
+  
+
   return (
     <>
       <NavBar />
