@@ -7,7 +7,7 @@ import Notification from "./Notification";
 import axiosClient from "../axiosConfig";
 import NoData from "./assets/NoData.jpg";
 import { useContext } from "react";
-import { dataContext } from "./context/DataContext";
+import { DataContext } from "./context/DataContext";
 import {useNavigate} from 'react-router-dom';
 import "react-toastify/dist/ReactToastify.css";
 import './Products.css'
@@ -30,7 +30,7 @@ export const AllProducts = () => {
   }, []);
 
   //Carrito
-  const { cart, addToCart } = useContext(dataContext);
+  const { cart, addToCart } = useContext(DataContext);
 
   const handleAddToCart = (product) => {
     

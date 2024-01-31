@@ -10,7 +10,7 @@ import { MenProducts } from './components/MenProducts';
 // import {ShoppingCart} from './components/ShoppingCart';
 import { CartContent } from './components/CartContent';
 import { useState, useEffect } from 'react';
-import  DataProvider  from './components/context/DataContext';
+import { DataProvider } from './components/context/DataProvider';
 import {Profile} from "./components/Profile";
 import { Dashboard } from './components/Dashboard';
 import { ImageProvider } from './components/context/ImageProvider';

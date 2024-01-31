@@ -14,11 +14,11 @@ import imgc10 from "../components/assets/img9.jpg";
 import "./CarrouselSuggestions.css";
 
 import { useContext } from "react";
-import { dataContext } from "./context/DataContext";
+import { DataContext } from "./context/DataContext";
 import {Link, useNavigate} from "react-router-dom";
 
 export const CarrouselSuggestions = () => {
-  // const { data, cart, setCart } = useContext(dataContext);
+  // const { data, cart, setCart } = useContext(DataContext);
   const navigate=useNavigate();
 
   const buyProducts = (product) => {

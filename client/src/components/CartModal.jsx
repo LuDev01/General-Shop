@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import {FaShoppingCart} from 'react-icons/fa'
+import { CartContent } from './CartContent';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
-import { CartContent } from './CartContent';
 import './CartContent.css';
 import "./CartModal.css";
 
