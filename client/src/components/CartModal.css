@@ -6,9 +6,8 @@
 .cart-modal-dialog {
     max-height: 100vh;
     margin: 0;
-}
-
-.cart-modal-body{
+  }
+  .cart-modal-body{
     max-height: 400px;
     overflow-y: auto;
-}
+  }

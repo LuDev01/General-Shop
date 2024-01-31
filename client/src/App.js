@@ -11,7 +11,7 @@ import { MenProducts } from './components/MenProducts';
 import { CartContent } from './components/CartContent';
 import {CartTotal} from './components/CartTotal';
 import { useState, useEffect } from 'react';
-import  DataProvider  from './components/context/DataContext';
+import { DataProvider } from './components/context/DataProvider';
 import {Profile} from "./components/Profile";
 import { Dashboard } from './components/Dashboard';
 import { ImageProvider } from './components/context/ImageProvider';

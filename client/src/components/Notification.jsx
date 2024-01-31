@@ -5,12 +5,12 @@ import Row from 'react-bootstrap/Row';
 import Toast from 'react-bootstrap/Toast';
 
 import { useContext } from "react";
-import { dataContext } from "./context/DataContext";
+import { DataContext } from "./context/DataContext";
 
 function Notification({productId, buyProducts, product}) {
   const [show, setShow] = useState(false);
   const navigate = useNavigate();
-  const { data, cart, setCart } = useContext(dataContext);
+  const { data, cart, setCart } = useContext(DataContext);
   
   return (
     <div className=''>

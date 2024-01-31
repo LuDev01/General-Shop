@@ -1,34 +1,5 @@
-// import { useContext } from "react";
-// import { dataContext } from "./context/DataContext";
-// import { NavBar } from './NavBar';
-// import "./CartContent.css";
-
-// export const CartTotal = () => {
-  // const { cart } = useContext(dataContext);
-
-  // // Calculate the total by adding the numerical values of the prices
-  // const total = cart.reduce((acc, product) => {
-  //   if (typeof product.price === 'number') {
-  //     acc += product.price;
-  //   }
-  //   return acc;
-  // }, 0);
-
-  // return (
-  //   <div className="cart-container">
-  //     <NavBar />
-  //     <div className="cart-total">
-  //       <h3>Total Purchase: ${total}</h3>
-  //     </div>
-  //   </div>
-  // );
-// };
-
-
-// CartTotal.js
-
-import React, { useContext } from "react";
-import { dataContext } from "./context/DataContext";
+import { useContext } from "react";
+import { DataContext } from "./context/DataContext";
 import { NavBar } from './NavBar';
 import "./CartTotal.css";
 
@@ -37,8 +8,8 @@ export const CartTotal = () => {
 
   // Calculate the total by adding the numerical values of the prices
   const total = cart.reduce((acc, product) => {
-    if (typeof product.price === 'number') {
-      acc += product.price;
+    if (typeof product.price === 'number' && typeof product.quantity === 'number') {
+      acc += product.price * product.quantity;
     }
     return acc;
   }, 0);

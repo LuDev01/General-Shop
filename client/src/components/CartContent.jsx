@@ -1,11 +1,12 @@
 import React, { useContext } from "react";
-import { dataContext } from "./context/DataContext";
-import { NavBar } from './NavBar';
+import { DataContext } from "./context/DataContext";
+import { NavBar } from "./NavBar";
 import "./CartContent.css";
 // import {CartTotal} from "./CartTotal";
 
 export const CartContent = () => {
-  const { cart } = useContext(dataContext);
+  const { cart, removeFromCart, increaseQuantity, decreaseQuantity } =
+    useContext(DataContext);
 
   // Calculate the total by adding the numerical values of the prices
   const total = cart.reduce((acc, product) => {
@@ -22,27 +23,44 @@ export const CartContent = () => {
         {cart.length > 0 ? (
           <>
             {cart.map((product) => (
-            <div className="cart-items" key={product._id}>
-              <img src={product.image.url} alt="product-card" className="picture" />
-            <div className="product-details">
-              <div className="name-container">
-                <h3 className="name">{product.name}</h3>
-                <h4 className="price">${product.price}</h4>
+              <div className="cart-items" key={product._id}>
+                <img
+                  src={product.image.url}
+                  alt="product-card"
+                  className="picture"
+                />
+                <div className="product-details">
+                  <div className="name-container">
+                    <h3 className="name">{product.name}</h3>
+                    <h4 className="price">${product.price}</h4>
+                    {/* <h4 className="quantity">Quantity: {product.quantity}</h4> */}
+                    <div className="quantity-controls">
+                      <button onClick={() => decreaseQuantity(product._id)}>
+                        -
+                      </button>
+                      <span>{product.quantity}</span>
+                      <button onClick={() => increaseQuantity(product._id)}>
+                        +
+                      </button>
+                    </div>
+                  </div>
+                  <button
+                    className="remove-button"
+                    onClick={() => removeFromCart(product._id)}
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="16"
+                      height="16"
+                      fill="currentColor"
+                      className="bi bi-trash3"
+                      viewBox="0 0 16 16"
+                    >
+                      <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5M11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47M8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5" />
+                    </svg>
+                  </button>
+                </div>
               </div>
-              <button className="remove-button" >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="16"
-                  height="16"
-                  fill="currentColor"
-                  className="bi bi-trash3"
-                  viewBox="0 0 16 16"
-                >
-                  <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5M11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47M8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5"/>
-                </svg>
-              </button>
-            </div>
-          </div>
             ))}
               <div className="cart-total">
                 <h3>Total Purchase: ${total}</h3>
@@ -50,7 +68,15 @@ export const CartContent = () => {
             {/* <CartTotal /> */}
           </>
         ) : (
-          <div className="empty-cart-message"style={{ textAlign: "center", display: "flex", flexDirection: "column", alignItems: "center"}}>
+          <div
+            className="empty-cart-message"
+            style={{
+              textAlign: "center",
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+            }}
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="48"
