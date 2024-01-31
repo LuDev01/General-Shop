@@ -4,7 +4,6 @@ import {FaShoppingCart} from 'react-icons/fa'
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { CartContent } from './CartContent';
-import './CartContent.css';
 import "./CartModal.css";
 
 function CartModal() {
@@ -22,12 +21,12 @@ function CartModal() {
           <Modal.Title>Shopping Cart</Modal.Title>
         </Modal.Header>
 
-        <Modal.Body >
+        <Modal.Body className='cart-modal-body'>
           <CartContent/>
         </Modal.Body>
         
         <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
+          <Button variant="secondary" onClick={handleClose} >
             Keep buying
           </Button>
           <Link to= '/cart'>

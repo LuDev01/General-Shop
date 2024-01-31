@@ -9,6 +9,7 @@ import { WomenProducts } from './components/WomenProducts';
 import { MenProducts } from './components/MenProducts';
 // import {ShoppingCart} from './components/ShoppingCart';
 import { CartContent } from './components/CartContent';
+import {CartTotal} from './components/CartTotal';
 import { useState, useEffect } from 'react';
 import  DataProvider  from './components/context/DataContext';
 import {Profile} from "./components/Profile";
@@ -63,7 +64,7 @@ function App() { // Defines the App component, which serves as the main componen
             <Route path='/productDetails/:id' element={<ProductDetails />} />
             <Route path='/womenProducts' element={ <WomenProducts /> } />
             <Route path='/menProducts' element={ <MenProducts /> } />
-            <Route path='/cart' element={<CartContent />} />
+            <Route path='/cart' element={<CartTotal />} />
             <Route path='/userProfile' element={<Profile/>}/>
             <Route path='/adminDashboard' element={<Dashboard/>}/>
           </Routes>
