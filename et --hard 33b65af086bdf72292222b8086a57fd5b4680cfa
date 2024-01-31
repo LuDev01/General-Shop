@@ -1,0 +1,262 @@
+[33mcommit 33b65af086bdf72292222b8086a57fd5b4680cfa[m[33m ([m[1;36mHEAD -> [m[1;32mTest[m[33m, [m[1;31morigin/Test[m[33m)[m
+Author: LuDev01 <luisatoro0121@hotmail.com>
+Date:   Thu Jan 25 11:29:00 2024 -0500
+
+    Fixing bug in AllProducts component
+    
+    Product Details bug. Navigate route modified and fixed.
+
+[33mcommit ad2f406288620997b1ecc3c3f91856fa10ab45ec[m
+Merge: 181ba61 14c8064
+Author: Mariajose Gomez <mariajgomezg1@gmail.com>
+Date:   Thu Jan 25 09:22:12 2024 -0500
+
+    Merge branch 'Test' of https://github.com/LuDev01/General-Shop into Test
+
+[33mcommit 181ba61dce8bd01e6383e95297258535b3cf39df[m
+Author: Mariajose Gomez <mariajgomezg1@gmail.com>
+Date:   Thu Jan 25 09:11:29 2024 -0500
+
+    Shopping Cart Modal Styles and code refactoring
+
+[33mcommit 14c8064371510deb27b04191918c3cc195834454[m
+Merge: d22778f e7b6f7a
+Author: LuDev01 <luisatoro0121@hotmail.com>
+Date:   Wed Jan 24 11:35:57 2024 -0500
+
+    Merge branch 'Test' of https://github.com/LuDev01/General-Shop into Test
+
+[33mcommit d22778fc58ae4919846882907bfd83f527754ef0[m
+Author: LuDev01 <luisatoro0121@hotmail.com>
+Date:   Wed Jan 24 11:35:48 2024 -0500
+
+    Sizes reconfiguration
+    
+    Modifying the schema, controller and components to set the sizes and quantity as a complete object
+
+[33mcommit e7b6f7acfdf53f44dbb9bafa902ec919a92a6e4a[m
+Author: Mariajose Gomez <mariajgomezg1@gmail.com>
+Date:   Tue Jan 23 23:19:28 2024 -0500
+
+    Adding new styles for the shopping cart
+
+[33mcommit 98491a49b541054fb9a156701cde312ef9f68ed4[m
+Author: LuDev01 <luisatoro0121@hotmail.com>
+Date:   Tue Jan 23 15:45:09 2024 -0500
+
+    Fixing product details component bugs
+
+[33mcommit 0eeb8984af53c30edbefb101e860425e81c439c1[m
+Author: LuDev01 <luisatoro0121@hotmail.com>
+Date:   Tue Jan 23 11:12:33 2024 -0500
+
+    Fixing the image upload issue
+    
+    Just adding an if statement for checking the image status is uploaded
+
+[33mcommit 0db07f017e8b122b61137b50233ae586c8ca1281[m
+Merge: 1db23a9 b2462dc
+Author: Mariajose Gomez <mariajgomezg1@gmail.com>
+Date:   Mon Jan 22 19:39:00 2024 -0500
+
+    Merge branch 'Test' of https://github.com/LuDev01/General-Shop into Test
+
+[33mcommit 1db23a9b4c6f0dc1723f97009886a8d8cc70e30a[m
+Author: Mariajose Gomez <mariajgomezg1@gmail.com>
+Date:   Mon Jan 22 19:38:49 2024 -0500
+
+    Changing cloudinary folder for user profile picture
+
+[33mcommit b2462dc9841ae7786f0416f6ef4c4a6689590101[m
+Author: LuDev01 <luisatoro0121@hotmail.com>
+Date:   Mon Jan 22 19:32:06 2024 -0500
+
+    Changes during the meeting
+
+[33mcommit 8819ddc75c98e018b7329a02972f2e5473471637[m
+Author: Mariajose Gomez <mariajgomezg1@gmail.com>
+Date:   Mon Jan 22 19:29:41 2024 -0500
+
+    Shopping Cart with useContext
+
+[33mcommit bfd97ab28c3d094e8c0d0805ce3836e2adc14d00[m
+Author: LuDev01 <luisatoro0121@hotmail.com>
+Date:   Fri Jan 19 16:22:20 2024 -0500
+
+    Creating a context component for Admin and User profile images
+
+[33mcommit d3c83c7784da1e8caff25790fba5bd224b9b9986[m
+Author: LuDev01 <luisatoro0121@hotmail.com>
+Date:   Thu Jan 18 21:57:06 2024 -0500
+
+    Editing Admin settings
+
+[33mcommit e5563e4f8a64976f3ce2bc693f1bff6c87395ab2[m
+Author: LuDev01 <luisatoro0121@hotmail.com>
+Date:   Tue Jan 16 11:28:01 2024 -0500
+
+    Fixing edit component bugs
+
+[33mcommit a79b61ac82b84952a81f3a60d640a505bd04e360[m
+Author: LuDev01 <luisatoro0121@hotmail.com>
+Date:   Mon Jan 15 21:08:31 2024 -0500
+
+    Fixing bugs on image upload
+
+[33mcommit 6d01305f365a8345f231fc795d849af3626d18c7[m
+Author: LuDev01 <luisatoro0121@hotmail.com>
+Date:   Mon Jan 15 19:46:16 2024 -0500
+
+    Modifications in Create component, Dashboard and routes f
+    
+    Everything was for image uploading
+
+[33mcommit 768d75a4fd89aa1d165ce555344a2665daa9f3fc[m
+Merge: 1b2c2a4 692b7c8
+Author: Mariajose Gomez <mariajgomezg1@gmail.com>
+Date:   Sat Jan 13 15:31:23 2024 -0500
+
+    Merge branch 'Test' of https://github.com/LuDev01/General-Shop into Test
+
+[33mcommit 692b7c8f16fe10b011491e948c2654644e36c13a[m
+Author: LuDev01 <luisatoro0121@hotmail.com>
+Date:   Sat Jan 13 15:20:56 2024 -0500
+
+    Dashboard modifications
+    
+    Modifications for Admin dashboard
+
+[33mcommit 1b2c2a4a74e5a9ccdd8448f2aa78a281ababe2e2[m
+Author: Mariajose Gomez <mariajgomezg1@gmail.com>
+Date:   Sat Jan 13 14:51:16 2024 -0500
+
+    Creating new products with cloudinary URL
+
+[33mcommit 4d15492aee928e89cdd7d30b9ab3e7a35bf45722[m
+Author: Mariajose Gomez <mariajgomezg1@gmail.com>
+Date:   Wed Jan 10 22:39:31 2024 -0500
+
+    Uploading image to Cloudinary
+
+[33mcommit c755eeb16ad4c9ea8be7b5b2af52bdf754504c30[m
+Author: LuDev01 <luisatoro0121@hotmail.com>
+Date:   Mon Jan 8 15:23:46 2024 -0500
+
+    Complete product CRUD
+    
+    Finishing CRUD for all the products
+
+[33mcommit 356b3744b9eeb34bb077692bf40bf9a3bdc684af[m
+Author: LuDev01 <luisatoro0121@hotmail.com>
+Date:   Thu Dec 21 08:54:36 2023 -0500
+
+    Updating files in the project
+
+[33mcommit 34f1a9949aec5e65b31ebaf92d33526a58679dfd[m
+Author: LuDev01 <luisatoro0121@hotmail.com>
+Date:   Sun Dec 17 08:55:46 2023 -0500
+
+    Doing some changes  in the main products files for the product creation
+
+[33mcommit f58a7fd9347a84c5061d39e3f2dd86fced8aedd0[m
+Author: LuDev01 <luisatoro0121@hotmail.com>
+Date:   Sat Dec 16 00:09:58 2023 -0500
+
+    Creating the products API: First approach
+
+[33mcommit 3a9e7e6cf4ed8c013bf33e1b8c3995009bb3c04c[m
+Author: LuDev01 <luisatoro0121@hotmail.com>
+Date:   Thu Dec 14 20:49:29 2023 -0500
+
+    A beautiful change needed
+
+[33mcommit 805766419ebdaf0f813d0123f3c9816a0f7ea795[m
+Author: LuDev01 <luisatoro0121@hotmail.com>
+Date:   Wed Dec 13 22:20:12 2023 -0500
+
+    Giving some style to the footer
+
+[33mcommit f1765d7ff813caf58a7e68ead997a2ca0c21b729[m
+Author: LuDev01 <luisatoro0121@hotmail.com>
+Date:   Wed Dec 6 13:12:18 2023 -0500
+
+    Setting Admin and User profiles
+    
+    This was done to differenciate the permissions each role will have.
+
+[33mcommit 0bcbd85fd456e778f8a76f489c454c847629fcd2[m
+Author: LuDev01 <luisatoro0121@hotmail.com>
+Date:   Tue Dec 5 17:21:34 2023 -0500
+
+    Last update with the promotions
+
+[33mcommit 3a2dce701a0a5c8ccc5a846b98afca78ee7e59db[m
+Author: LuDev01 <luisatoro0121@hotmail.com>
+Date:   Tue Dec 5 17:03:33 2023 -0500
+
+    Adding image changes to the project
+
+[33mcommit 2d239615bfa67b445df5b33c2c5ee96fbf307eb7[m
+Author: LuDev01 <luisatoro0121@hotmail.com>
+Date:   Tue Dec 5 11:59:31 2023 -0500
+
+    Adding user picture feature
+
+[33mcommit 6496ad38d7db596057eed2917776995b4b9de11b[m
+Author: Mariajose Gomez <mariajgomezg1@gmail.com>
+Date:   Tue Dec 5 08:20:32 2023 -0500
+
+    adding ShoppingCart and CardProduct
+
+[33mcommit 14d1b25da5f4c259cc817b1776b791cfd0364714[m
+Author: Mariajose Gomez <mariajgomezg1@gmail.com>
+Date:   Tue Dec 5 02:15:55 2023 -0500
+
+    Creating Shopping Cart
+
+[33mcommit fb2545ffe4d40301870d4dbf0dbe255b8671ad2b[m
+Author: LuDev01 <luisatoro0121@hotmail.com>
+Date:   Sat Dec 2 17:59:26 2023 -0500
+
+    Fixing huge bugs in the user session
+
+[33mcommit 7c38489ed3304c96a15758e6c12bb72c85cda5ed[m
+Author: LuDev01 <luisatoro0121@hotmail.com>
+Date:   Sat Dec 2 13:26:18 2023 -0500
+
+    Fixing some errors in the submit button
+
+[33mcommit 44d5653691423f7722fbcc80f7a5994de871112c[m
+Author: LuDev01 <luisatoro0121@hotmail.com>
+Date:   Fri Dec 1 07:40:48 2023 -0500
+
+    Diferent methods to save user session
+
+[33mcommit d2db1d841fc72428404db0a0f0264c35aa7e46a5[m
+Author: LuDev01 <luisatoro0121@hotmail.com>
+Date:   Wed Nov 29 07:25:27 2023 -0500
+
+    Updating files
+
+[33mcommit 33ee716604d7314b89b450be278f639e66648bd8[m
+Author: LuDev01 <luisatoro0121@hotmail.com>
+Date:   Fri Nov 24 16:59:03 2023 -0500
+
+    User keeps the session
+
+[33mcommit 60eeddba507aee48459ca1e6d5bffb503bd63312[m
+Merge: ea2aebf 69406da
+Author: LuDev01 <luisatoro0121@hotmail.com>
+Date:   Wed Nov 22 21:19:26 2023 -0500
+
+    Merge branch 'Test' of https://github.com/LuDev01/General-Shop into Test
+
+[33mcommit ea2aebfe13d0b2a3838a9b93100257d2f0bad6e9[m
+Author: LuDev01 <luisatoro0121@hotmail.com>
+Date:   Wed Nov 22 21:18:38 2023 -0500
+
+    Updating navbar code
+
+[33mcommit 69406da9e2d193d8dcec3cb6a245e9ccf9c8b6d8[m
+Author: Mariajose Gomez <mariajgomezg1@gmail.com>
+Date

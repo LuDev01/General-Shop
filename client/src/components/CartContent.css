@@ -12,10 +12,6 @@
     height: 10rem;
     width: 10rem;
   }
-  
-  .cart-total {
-    text-align:center;
-  }
 
   .cart-content {
     display: grid;
@@ -27,12 +23,13 @@
     display: grid;
     grid-template-columns: auto 1fr;
     gap: 10px;
+    /* margin-top: 100px; */
   }
   
   .product-details {
     display: flex;
     flex-direction: column;
-    justify-content:flex-start
+    justify-content:flex-start;
   }
 
   .price{
@@ -41,7 +38,7 @@
   
   .remove-button {
     border: 1px dotted gray;
-    border-radius: 15%;
+    border-radius: 8px;
     background: none;
     cursor: pointer;
     color: black;
@@ -53,7 +50,23 @@
   .remove-button:hover {
     color: #d00; 
   }
+
+  .cart-total {
+    text-align:center;
+    /* color: white; */
+  }
   
   .empty-cart-message{
     margin-top:20px;
   }
+
+  /* Shopping Cart Total */
+  .navbar-cart-total{
+    margin-bottom: 100px;
+  }
+
+  
+
+  /* .cart-has-items{
+    background-color: #0275D8;
+  } */

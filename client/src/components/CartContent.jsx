@@ -2,11 +2,20 @@ import React, { useContext } from "react";
 import { DataContext } from "./context/DataContext";
 import { NavBar } from "./NavBar";
 import "./CartContent.css";
-import CartTotal from "./CartTotal";
+// import {CartTotal} from "./CartTotal";
 
 export const CartContent = () => {
   const { cart, removeFromCart, increaseQuantity, decreaseQuantity } =
     useContext(DataContext);
+
+  // Calculate the total by adding the numerical values of the prices
+  const total = cart.reduce((acc, product) => {
+    if (typeof product.price === 'number' && typeof product.quantity === 'number') {
+      acc += product.price * product.quantity;
+    }
+    return acc;
+  }, 0);
+
 
   return (
     <>
@@ -54,7 +63,10 @@ export const CartContent = () => {
                 </div>
               </div>
             ))}
-            <CartTotal />
+              <div className="cart-total">
+                <h3>Total Purchase: ${total}</h3>
+              </div>
+            {/* <CartTotal /> */}
           </>
         ) : (
           <div

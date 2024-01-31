@@ -41,7 +41,7 @@ export const AllProducts = () => {
   return (
     <>
     <ToastContainer/>
-      <Row xs={1} md={5} className="g-4 m-4 ">
+      <Row xs={1} md={4} className="g-4 m-4 ">
         {data &&
           data.map((product) => (
             <Col key={product._id}>
