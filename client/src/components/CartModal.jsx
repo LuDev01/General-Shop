@@ -18,7 +18,7 @@ function CartModal() {
       </FaShoppingCart>
 
       <Modal show={show} onHide={handleClose} className='cart-modal-container' dialogClassName='cart-modal-dialog'>
-        <Modal.Header closeButton>
+        <Modal.Header closeButton className='cart-modal-header' style={{ color: 'white' }}>
           <Modal.Title>Shopping Cart</Modal.Title>
         </Modal.Header>
 
@@ -26,12 +26,12 @@ function CartModal() {
           <CartContent/>
         </Modal.Body>
         
-        <Modal.Footer>
+        <Modal.Footer className='cart-modal-footer' style={{backgroundColor:'#F4F2F2'}} >
           <Button variant="secondary" onClick={handleClose} >
             Keep buying
           </Button>
           <Link to= '/cart'>
-            <Button variant="primary" >
+            <Button style={{backgroundColor:'black'}}>
               Complete purchase
             </Button>
           </Link>

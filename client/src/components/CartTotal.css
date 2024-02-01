@@ -3,47 +3,70 @@
 }
 
 .cart-items-total {
-    display: grid;
-    justify-content: space-around;
-    flex-wrap: wrap;
-    font-size: 1rem;
-    border-bottom: 1px gray dotted;
-    padding:1rem;
-    grid-template-columns: auto 1fr auto;
-  }
+  display: grid;
+  grid-template-columns: auto 1fr auto auto auto; /* Define 5 columnas con tamaños automáticos para la primera, segunda y 1fr (fracción) para las siguientes tres */
+  gap: 30px; /* Espaciado entre las columnas */
+  border-bottom: 1px solid #ccc; /* Agrega un borde inferior entre los productos */
+  padding: 10px 10px 10px 0px; /* Agrega espacio interno en la dirección vertical */
+}
 
-  .cart-items-total > img {
-    height: 10rem;
-    width: 10rem;
-  }
+.cart-content-total {
+  margin: 8rem 20rem;
+  border-radius: 1px solid black;
+}
 
-  .cart-content-total {
-    margin: 8rem 20rem;
-    border-radius: 1px solid black;
-  }
+.remove-button-total{
+  border: 1px dotted gray;
+  width: 20%;
+  border-radius: 8px;
+  background: none;
+  cursor: pointer;
+  color: black;
+  display: flex;
+  justify-content: center;
+  padding: 0.5rem;
+  margin: 0px 20px 0px 0px;
+}
 
-  .remove-button-total{
-    border: 1px dotted gray;
-    width: 5%;
-    border-radius: 8px;
-    background: none;
-    cursor: pointer;
-    color: black;
-    display: flex;
-    justify-content: center;
-    padding: 0.5rem;
-  }
+.remove-button-total:hover {
+  color: #d00; 
+}
 
-  .remove-button-total:hover {
-    color: #d00; 
-  }
+.picture {
+  max-width: 120px; 
+  height: auto;
+}
 
-  .cart-total{
-    margin-top: 2rem;
-    display: grid;
-    grid-template-columns: 2fr 1fr; 
-    /* gap: 10px;  */
-    display: flex;
-    justify-content:space-between; 
-    align-items: center;
-  }
+.price{
+  margin: 0px 5px;
+}
+
+.quantity-controls{
+  margin: 0px 20px;
+}
+
+.quantity-controls {
+  display: flex;
+  align-items: center;
+}
+
+.remove-button-total {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  width: 3rem;
+}
+
+.cart-total{
+  margin: 20px;
+}
+
+.complete-purchase-button{
+  background-color: black;
+  color: white;
+  width: 50%;
+  padding: 5px;
+  border-radius: 8px;
+  margin-top: 10px;
+  font-size: x-large;
+}
