@@ -33,7 +33,6 @@ export const AllProducts = () => {
   const { cart, addToCart } = useContext(DataContext);
 
   const handleAddToCart = (product) => {
-    
     toast.success("Product added to your cart!");
     addToCart(product);
   };
@@ -57,7 +56,6 @@ export const AllProducts = () => {
                 />
                 <Card.Body>
                   <Card.Title>{product.name}</Card.Title>
-                  <Card.Text>{product.description}</Card.Text>
                   <Card.Text>Price: ${product.price}</Card.Text>
                   <Notification productById={product._id} />
 

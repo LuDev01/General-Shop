@@ -1,8 +1,10 @@
 import React from "react";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { useParams } from "react-router-dom";
 import { NavBar } from "./NavBar";
 import { Footer } from "./Footer";
+import { DataContext } from "./context/DataContext";
+import { ToastContainer, toast } from "react-toastify";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import Table from "react-bootstrap/esm/Table";
@@ -15,12 +17,13 @@ import CardSubtitle from "react-bootstrap/esm/CardSubtitle";
 import Dropdown from "react-bootstrap/Dropdown";
 import axiosClient from "../axiosConfig";
 import "./Products.css";
+import "react-toastify/dist/ReactToastify.css";
 
 export const ProductDetails = () => {
   const [data, setData] = useState(null);
   const [selectedSize, setSelectedSize] = useState(null);
-  const [quantity, setQuantity] = useState(1);
   const [modalShow, setModalShow] = useState(false);
+  const { addToCart } = useContext(DataContext);
 
   const { id } = useParams(); // Access route parameters with useParams
   console.log("Product ID:", id);
@@ -39,33 +42,29 @@ export const ProductDetails = () => {
     getProductId();
   }, []);
 
-  const handleDecrement = () => {
-    if (quantity > 1) {
-      setQuantity((prevCount) => prevCount - 1);
-    }
-  };
-  const handleIncrement = () => {
-    if (quantity < 10) {
-      setQuantity((prevCount) => prevCount + 1);
-    }
-  };
-
   if (!data) {
     return <div>Product not found</div>;
   }
+  const handleAddToCart = (data) => {
+    toast.success("Product added to your cart!");
+    addToCart(data);
+  };
 
   return (
     <>
+      <ToastContainer />
       <NavBar />
       <Card style={{ margin: "8rem 6rem " }}>
         <Row>
           <Col>
-            <img src={data.image.url} alt="{data.name}" />
+            {data && data.image && (
+              <img src={data.image.url} alt="{data.name}" />
+            )}
           </Col>
           <Col>
             <CardBody className="product-display">
               <CardTitle>
-                <p>{data.description}</p>
+                <h2>{data.name}</h2>
               </CardTitle>
               <CardSubtitle style={{ fontWeight: "bold" }}>
                 Price: {data.price}
@@ -95,6 +94,7 @@ export const ProductDetails = () => {
               <Button variant="info" onClick={() => setModalShow(true)}>
                 Check Store Availability
               </Button>
+              <br />
               <Modal
                 show={modalShow}
                 onHide={() => setModalShow(false)}
@@ -131,36 +131,20 @@ export const ProductDetails = () => {
               </Modal>
 
               <br />
-              <div className="row">
-                <div className="col-md-3 mt-3">
-                  <div className="input-group">
-                    <button
-                      type="button"
-                      onClick={handleDecrement}
-                      className="input-group-text"
-                    >
-                      -
-                    </button>
-                    <input
-                      type="text"
-                      className="form-control text-center"
-                      value={quantity}
-                      onChange={(e) => setQuantity(e.target.value)}
-                    />
-
-                    <button
-                      type="button"
-                      onClick={handleIncrement}
-                      className="input-group-text"
-                    >
-                      +
-                    </button>
-                  </div>
-                </div>
-              </div>
+              <Button
+                variant="info"
+                disabled={!selectedSize}
+                onClick={() => {
+                  if (selectedSize) {
+                    handleAddToCart({ ...data, size: selectedSize });
+                  }
+                }}
+              >
+                {selectedSize ? "Add to Cart" : "Select a Size"}
+              </Button>
               <div className="product-info">
                 <h3>Product information</h3>
-                <p>Product information details</p>
+                <p>{data.description}</p>
               </div>
             </CardBody>
           </Col>

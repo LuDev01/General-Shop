@@ -38,12 +38,7 @@ export const DataProvider = ({ children }) => {
             }
         });
     };
-    
-    // const removeFromCart = (productId) => {
-    //     setCart((currentCart) => {
-    //         return currentCart.filter(product => product._id !== productId);
-    //     });
-    // };
+
 
     const removeFromCart = (productId) => {
         setCart((currentCart) => {

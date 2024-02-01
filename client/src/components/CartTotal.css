@@ -10,6 +10,7 @@
     border-bottom: 1px gray dotted;
     padding:1rem;
     grid-template-columns: auto 1fr auto;
+
   }
 
   .cart-items-total > img {
@@ -20,6 +21,7 @@
   .cart-content-total {
     margin: 8rem 20rem;
     border-radius: 1px solid black;
+    
   }
 
   .remove-button-total{
