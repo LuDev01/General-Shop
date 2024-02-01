@@ -1,10 +1,14 @@
 import { useContext } from "react";
 import { DataContext } from "./context/DataContext";
+import { useState } from 'react';
 import { NavBar } from './NavBar';
+import {PurchaseModal} from "./PurchaseModal";
 import "./CartTotal.css";
 
 export const CartTotal = () => {
-  const { cart } = useContext(DataContext);
+  const { cart, removeFromCart, increaseQuantity, decreaseQuantity } = useContext(DataContext);
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   // Calculate the total by adding the numerical values of the prices
   const total = cart.reduce((acc, product) => {
@@ -15,50 +19,93 @@ export const CartTotal = () => {
   }, 0);
 
   return (
-    // <div className="cart-total">
-    //   <h3>Total Purchase today: ${total}</h3>
-    // </div>
     <>
-      <NavBar />
+      <NavBar className="nav-bar-custom"/>
       <div className="cart-content-total">
         {cart.length > 0 ? (
           <>
+
             <h1 className="shopping-cart-title">Shopping Cart</h1>
-            {cart.map((product) => (
-            <div className="cart-items-total" key={product._id}>
-              <img src={product.image.url} alt="product-card" className="picture" />
-            <div className="product-details">
-              <div className="name-container">
-                <h3 className="name">{product.name}</h3>
-                <h4 className="price">${product.price}</h4>
+            <div className="cart-items-total">
+              <div className="product-column">
+                <h4 className="column-header">Product</h4>
               </div>
-              <button className="remove-button-total" >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="16"
-                  height="16"
-                  fill="currentColor"
-                  className="bi bi-trash3"
-                  viewBox="0 0 16 16"
-                >
-                  <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5M11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47M8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5"/>
-                </svg>
-              </button>
+              <div className="empty-column">
+                <h4 className="column-header">&nbsp;</h4>
+              </div>
+              <div className="price-column">
+                <h4 className="column-header">Unit Price</h4>
+              </div>
+              <div className="quantity-controls-column">
+                <h4 className="column-header">Quantity </h4>
+              </div>
+              <div className="remove-button-column">
+                <h4 className="column-header">Remove</h4>
+              </div>
             </div>
-          </div>
-            ))}
-              <div className="cart-total">
-                  <div className="total-column">
-                    <h3>Total Purchase: ${total}</h3>
+
+            {cart.map((product) => (
+              <div className="cart-items-total" key={product._id}>
+                {/* Column 1: Product */}
+                <div className="product-column">
+                  <img src={product.image.url} alt="product-card" className="picture" />
+                </div>
+
+                {/* Column 2 */}
+                <div className="empty-column">
+                  <div className="product-details">
+                    <h3 className="name">{product.name}</h3>
                   </div>
+                </div>
+
+                {/* Column 3: Price */}
+                <div className="price-column">
+                  <h4 className="price">${product.price}</h4>
+                </div>
+
+                {/* Column 4: Quantity Controls */}
+                <div className="quantity-controls-column">
+                  <div className="quantity-controls">
+                    <button className="less-button" onClick={() => decreaseQuantity(product._id)}>
+                      -
+                    </button>
+                    <span>{product.quantity}</span>
+                    <button className="plus-button" onClick={() => increaseQuantity(product._id)}>
+                      +
+                    </button>
+                  </div>
+                </div>
+
+                {/* Column 5: Remove Button */}
+                <div className="remove-button-column">
+                  <button className="remove-button-total" onClick={() => removeFromCart(product._id)}>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="16"
+                      height="16"
+                      fill="currentColor"
+                      className="bi bi-trash3"
+                      viewBox="0 0 16 16"
+                    >
+                      <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5M11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47M8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5"/>
+                    </svg>
+                  </button>
+                </div>
+              </div>
+            ))}
+
+              <div className="cart-total">
+                <h3>Total Purchase: ${total}</h3>
                 <div className="complete-purchase-column">
-                  <button type="submit" className="submit-button add-to-cart btn btn-outline-info">
+                  <button className="complete-purchase-button" onClick={() => setIsModalOpen(true)} >
                     Complete purchase
                   </button>
                 </div>
               </div>
-
-            {/* <CartTotal /> */}
+              <PurchaseModal
+                isOpen={isModalOpen}
+                onRequestClose={() => setIsModalOpen(false)}
+              />
           </>
         ) : (
           <div className="empty-cart-message"style={{ textAlign: "center", display: "flex", flexDirection: "column", alignItems: "center"}}>
@@ -80,3 +127,4 @@ export const CartTotal = () => {
     </>
   );
 };
+

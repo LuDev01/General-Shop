@@ -35,6 +35,17 @@
   .price{
     margin-bottom: 40px;
   }
+
+  .less-button, .plus-button{
+    border: 2px dotted gray;
+    border-radius: 8px;
+    background: none;
+    cursor: pointer;
+    color: black;
+    justify-content: center;
+    padding: 0.2rem 0.5rem;
+    margin: 0.5rem; 
+  }
   
   .remove-button {
     border: 1px dotted gray;
