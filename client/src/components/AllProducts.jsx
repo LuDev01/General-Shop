@@ -60,7 +60,7 @@ export const AllProducts = () => {
                   <Notification productById={product._id} />
 
                   <button type="submit" size="lg" className="submit-button btn btn-outline-warning" onClick={() =>navigate(`/productDetails/${product._id}`) }>Product details</button>
-                  <button type="submit" size="lg" className="submit-button add-to-cart btn btn-outline-info " onClick={() => handleAddToCart(product)}>Add to cart</button>
+                  {/* <button type="submit" size="lg" className="submit-button add-to-cart btn btn-outline-info " onClick={() => handleAddToCart(product)}>Add to cart</button> */}
                 </Card.Body>
               </Card>
             </Col>

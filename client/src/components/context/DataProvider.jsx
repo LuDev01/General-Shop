@@ -24,9 +24,9 @@ export const DataProvider = ({ children }) => {
     //     setCart((cart) => [...cart, product]);
     // };
 
-    const addToCart = (product) => {
+    const addToCart = (product,size) => {
         setCart((currentCart) => {
-            const index = currentCart.findIndex((p) => p._id === product._id);
+            const index = currentCart.findIndex((p) => p._id === product._id && p.size === size);
             if (index >= 0) {
                 // The product is already in the cart, increment quantity
                 const newCart = [...currentCart];
@@ -34,15 +34,15 @@ export const DataProvider = ({ children }) => {
                 return newCart;
             } else {
                 // The product is not in the cart, add it with quantity 1
-                return [...currentCart, { ...product, quantity: 1 }];
+                return [...currentCart, { ...product,size, quantity: 1 }];
             }
         });
     };
 
 
-    const removeFromCart = (productId) => {
+    const removeFromCart = (productId,size) => {
         setCart((currentCart) => {
-            const index = currentCart.findIndex((p) => p._id === productId);
+            const index = currentCart.findIndex((p) => p._id === productId && p.size === size);
             if (index >= 0) {
                 const newCart = [...currentCart];
                 if (newCart[index].quantity > 1) {
@@ -59,9 +59,9 @@ export const DataProvider = ({ children }) => {
         });
     };
 
-    const increaseQuantity = (productId) => {
+    const increaseQuantity = (productId,size) => {
         setCart((currentCart) => {
-            const index = currentCart.findIndex((p) => p._id === productId);
+            const index = currentCart.findIndex((p) => p._id === productId && p.size === size);
             if (index >= 0) {
                 const newCart = [...currentCart];
                 newCart[index] = { ...newCart[index], quantity: newCart[index].quantity + 1 };
@@ -72,9 +72,9 @@ export const DataProvider = ({ children }) => {
         });
     };
     
-    const decreaseQuantity = (productId) => {
+    const decreaseQuantity = (productId,size) => {
         setCart((currentCart) => {
-            const index = currentCart.findIndex((p) => p._id === productId);
+            const index = currentCart.findIndex((p) => p._id === productId && p.size === size);
             if (index >= 0 && currentCart[index].quantity > 1) {
                 const newCart = [...currentCart];
                 newCart[index] = { ...newCart[index], quantity: newCart[index].quantity - 1 };

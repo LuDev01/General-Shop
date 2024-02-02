@@ -24,7 +24,7 @@ export const CartContent = () => {
         {cart.length > 0 ? (
           <>
             {cart.map((product) => (
-              <div className="cart-items" key={product._id}>
+              <div className="cart-items" key={`${product._id}-${product.size}`}>
                 <img
                   src={product.image.url}
                   alt="product-card"
@@ -34,21 +34,21 @@ export const CartContent = () => {
                   <div className="name-container">
                     <h3 className="name">{product.name}</h3>
                     <h4 className="price">${product.price}</h4>
-                    {/* <h4 className="quantity">Quantity: {product.quantity}</h4> */}
+                    <p className="size">Size: {product.size}</p>
                     <div className="quantity-controls">
                       Cantidad:
-                      <button className="less-button" onClick={() => decreaseQuantity(product._id)}>
+                      <button className="less-button" onClick={() => decreaseQuantity(product._id,product.size)}>
                         -
                       </button>
                       <span>{product.quantity}</span>
-                      <button className="plus-button" onClick={() => increaseQuantity(product._id)}>
+                      <button className="plus-button" onClick={() => increaseQuantity(product._id,product.size)}>
                         +
                       </button>
                     </div>
                   </div>
                   <button
                     className="remove-button"
-                    onClick={() => removeFromCart(product._id)}
+                    onClick={() => removeFromCart(product._id,product.size)}
                     >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
