@@ -15,6 +15,8 @@ import CardBody from "react-bootstrap/esm/CardBody";
 import CardTitle from "react-bootstrap/esm/CardTitle";
 import CardSubtitle from "react-bootstrap/esm/CardSubtitle";
 import Dropdown from "react-bootstrap/Dropdown";
+import Tooltip from "react-bootstrap/Tooltip";
+import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import axiosClient from "../axiosConfig";
 import "./Products.css";
 import "react-toastify/dist/ReactToastify.css";
@@ -22,6 +24,7 @@ import "react-toastify/dist/ReactToastify.css";
 export const ProductDetails = () => {
   const [data, setData] = useState(null);
   const [selectedSize, setSelectedSize] = useState(null);
+  const [displayedSize, setDisplayedSize] = useState(null);
   const [modalShow, setModalShow] = useState(false);
   const { addToCart } = useContext(DataContext);
 
@@ -47,7 +50,7 @@ export const ProductDetails = () => {
   }
   const handleAddToCart = (data) => {
     toast.success("Product added to your cart!");
-    addToCart(data);
+    addToCart(data, selectedSize);
   };
 
   return (
@@ -82,7 +85,15 @@ export const ProductDetails = () => {
                     {Object.keys(data.sizes).map((size) => (
                       <Dropdown.Item
                         key={size}
-                        onClick={() => setSelectedSize(size)}
+                        onClick={() => {
+                          setDisplayedSize(size);
+                          if (data.sizes[size] === 0) {
+                            toast.error(`Size ${size} is out of stock :(`);
+                            setSelectedSize(null);
+                          } else {
+                            setSelectedSize(size);
+                          }
+                        }}
                       >
                         {size}
                       </Dropdown.Item>
@@ -116,14 +127,23 @@ export const ProductDetails = () => {
                       </tr>
                     </thead>
                     <tbody>
-                      {selectedSize && (
+                      {displayedSize && (
                         <tr>
-                          <td>{selectedSize}</td>
-                          <td>{data.sizes[selectedSize]}</td>
+                          <td>{displayedSize}</td>
+                          <td>
+                            {data.sizes[displayedSize] === 0
+                              ? "Out of stock"
+                              : data.sizes[displayedSize]}
+                          </td>
                         </tr>
                       )}
                     </tbody>
                   </Table>
+                  {displayedSize && data.sizes[displayedSize] === 0 && (
+                    <p style={{ color: "red" }}>
+                      The size {displayedSize} is not available.
+                    </p>
+                  )}
                 </Modal.Body>
                 <Modal.Footer>
                   <Button onClick={() => setModalShow(false)}>Close</Button>
@@ -131,17 +151,49 @@ export const ProductDetails = () => {
               </Modal>
 
               <br />
-              <Button
-                variant="info"
-                disabled={!selectedSize}
-                onClick={() => {
-                  if (selectedSize) {
-                    handleAddToCart({ ...data, size: selectedSize });
+
+              {!selectedSize ? (
+                <OverlayTrigger
+                  overlay={
+                    <Tooltip id="tooltip-disabled">
+                      Please, select an available size to continue
+                    </Tooltip>
                   }
-                }}
-              >
-                {selectedSize ? "Add to Cart" : "Select a Size"}
-              </Button>
+                >
+                  <span className="d-inline-block">
+                    <Button
+                      variant="info"
+                      disabled={
+                        !selectedSize ||
+                        (selectedSize && data.sizes[selectedSize] === 0)
+                      }
+                      onClick={() => {
+                        if (selectedSize && data.sizes[selectedSize] !== 0) {
+                          handleAddToCart({ ...data, size: selectedSize });
+                        }
+                      }}
+                      style={{ pointerEvents: "none" }}
+                    >
+                      {selectedSize ? "Add to Cart" : "Add to Cart"}
+                    </Button>
+                  </span>
+                </OverlayTrigger>
+              ) : (
+                <Button
+                  variant="info"
+                  disabled={
+                    !selectedSize ||
+                    (selectedSize && data.sizes[selectedSize] === 0)
+                  }
+                  onClick={() => {
+                    if (selectedSize && data.sizes[selectedSize] !== 0) {
+                      handleAddToCart({ ...data, size: selectedSize });
+                    }
+                  }}
+                >
+                  {selectedSize ? "Add to Cart" : "Add to Cart"}
+                </Button>
+              )}
               <div className="product-info">
                 <h3>Product information</h3>
                 <p>{data.description}</p>

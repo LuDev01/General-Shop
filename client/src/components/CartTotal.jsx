@@ -3,6 +3,8 @@ import { DataContext } from "./context/DataContext";
 import { useState } from 'react';
 import { NavBar } from './NavBar';
 import {PurchaseModal} from "./PurchaseModal";
+import { ToastContainer, toast } from "react-toastify";
+import axiosClient from "../axiosConfig";
 import "./CartTotal.css";
 
 export const CartTotal = () => {
@@ -26,14 +28,56 @@ export const CartTotal = () => {
     // Closing the modal
     setIsModalOpen(false);
   };
+  // const checkStockQuantities = async () => {
+  //   try {
+  //     const productDataPromises = cart.map(product => axiosClient.get(`/products/${product._id}`));
+  //     const responses = await Promise.all(productDataPromises);
+
+
+  //     for (let i = 0; i < responses.length; i++) {
+  //       const latestProductData = responses[i].data.productById;
+  //       const product = cart[i];
+  //       console.log("latest:",latestProductData);
+  //       console.log("product size:",product.size);
+  //       console.log("latest product size: ",latestProductData.productById.sizes);
+
+
+  //       // Check if the sizes object exists
+  //       if (product.size && latestProductData.sizes && latestProductData.sizes[product.size]) {
+  //         // Check the stock quantity for the selected size
+  //         if (product.quantity > latestProductData.sizes[product.size]) {
+  //           return false;
+  //         }
+  //       } else {
+  //         console.error(`Sizes object not found for product ${product._id}`);
+  //         return false;
+  //       }
+  //     }
+  //   } catch (error) {
+  //     console.error(`Failed to fetch product data: ${error}`);
+  //     return false;
+  //   }
+
+  //   return true;
+  // };
+  // const handleCheckout = async () => {
+  //   const isStockAvailable = await checkStockQuantities();
+  
+  //   if (!isStockAvailable) {
+  //     toast.error("Some items in your cart are out of stock. Please adjust the quantities and try again.");
+  //   } else {
+  //     // Proceed with the checkout
+  //     setIsModalOpen(true);
+  //   }
+  // };
 
   return (
     <>
+    <ToastContainer/>
       <NavBar className="nav-bar-custom"/>
       <div className="cart-content-total">
         {cart.length > 0 ? (
           <>
-
             <h1 className="shopping-cart-title">Shopping Cart</h1>
             <div className="cart-items-total">
               <div className="product-column">
@@ -54,7 +98,7 @@ export const CartTotal = () => {
             </div>
 
             {cart.map((product) => (
-              <div className="cart-items-total" key={product._id}>
+              <div className="cart-items-total" key={`${product._id}-${product.size}`}>
                 {/* Column 1: Product */}
                 <div className="product-column">
                   <img src={product.image.url} alt="product-card" className="picture" />
@@ -64,6 +108,7 @@ export const CartTotal = () => {
                 <div className="empty-column">
                   <div className="product-details">
                     <h3 className="name">{product.name}</h3>
+                    <p>Size: {product.size}</p>
                   </div>
                 </div>
 
@@ -71,15 +116,15 @@ export const CartTotal = () => {
                 <div className="price-column">
                   <h4 className="price">${product.price}</h4>
                 </div>
-
+               
                 {/* Column 4: Quantity Controls */}
                 <div className="quantity-controls-column">
                   <div className="quantity-controls">
-                    <button className="less-button" onClick={() => decreaseQuantity(product._id)}>
+                    <button className="less-button" onClick={() => decreaseQuantity(product._id,product.size)}>
                       -
                     </button>
                     <span>{product.quantity}</span>
-                    <button className="plus-button" onClick={() => increaseQuantity(product._id)}>
+                    <button className="plus-button" onClick={() => increaseQuantity(product._id,product.size)}>
                       +
                     </button>
                   </div>
@@ -87,7 +132,7 @@ export const CartTotal = () => {
 
                 {/* Column 5: Remove Button */}
                 <div className="remove-button-column">
-                  <button className="remove-button-total" onClick={() => removeFromCart(product._id)}>
+                  <button className="remove-button-total" onClick={() => removeFromCart(product._id,product.size)}>
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       width="16"
@@ -106,7 +151,8 @@ export const CartTotal = () => {
               <div className="cart-total">
                 <h3>Total Purchase: ${total}</h3>
                 <div className="complete-purchase-column">
-                  <button className="complete-purchase-button" onClick={() => setIsModalOpen(true)} >
+                  {/* <button className="complete-purchase-button" onClick={handleCheckout} > */}
+                  <button className="complete-purchase-button" onClick={()=>setIsModalOpen(true)} >
                     Complete purchase
                   </button>
                 </div>
