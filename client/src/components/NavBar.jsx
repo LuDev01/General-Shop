@@ -68,7 +68,7 @@ export const NavBar = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("exp");
     localStorage.removeItem("role");
-console.log("the super cookie", document.cookie);
+    console.log("the super cookie", document.cookie);
     var cookies = document.cookie.split(";");
 
     for (var i = 0; i < cookies.length; i++) {
@@ -82,7 +82,6 @@ console.log("the super cookie", document.cookie);
   };
 
   return (
-    // <>
     <div > 
       <Navbar
         expand="lg"
@@ -206,7 +205,6 @@ console.log("the super cookie", document.cookie);
           </Navbar.Collapse>
         </Container>
       </Navbar>
-    {/* </> */}
     </div>
   );
 };

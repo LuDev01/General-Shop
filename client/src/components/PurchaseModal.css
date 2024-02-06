@@ -1,0 +1,29 @@
+.shipment-info-title{
+    color: var(--orange-second);
+}
+
+.purchase-form{
+    display: flex;
+    flex-direction: column;
+}
+
+.name-form{
+    color: var(--orange-second);
+}
+
+.address-form{
+    margin-top: 1rem;
+    color: var(--orange-second);
+}
+
+.name-input, .address-input{
+    border-radius: 8px;
+    border: 1px dotted gray;
+    margin: 1px;
+    background-color: rgba(255, 255, 255, 0.7);
+}
+
+.send-order-button{
+    background-color: black;
+    color: white;
+}

@@ -18,6 +18,15 @@ export const CartTotal = () => {
     return acc;
   }, 0);
 
+  const handlePurchaseComplete = () => {
+    cart.forEach((product) => {
+      removeFromCart(product._id);
+    });
+
+    // Closing the modal
+    setIsModalOpen(false);
+  };
+
   return (
     <>
       <NavBar className="nav-bar-custom"/>
@@ -123,8 +132,15 @@ export const CartTotal = () => {
             <h4 className="empty-cart-message">Your cart is empty</h4>
           </div>
         )}
+        <PurchaseModal
+          isOpen={isModalOpen}
+          onRequestClose={() => setIsModalOpen(false)}
+          onPurchaseComplete={handlePurchaseComplete}
+        />
       </div>
     </>
   );
 };
+
+
 

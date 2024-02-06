@@ -9,9 +9,9 @@ import bg7 from "./assets/Background7.jpg";
 
 function DarkVariantExample() {
 
-    const carouselItemStyle = {
-        transition: 'opacity 0.2s'
-      };
+  const carouselItemStyle = {
+      transition: 'opacity 0.2s'
+    };
 
   return (
     <Carousel data-bs-theme="dark" className='custom-carrousel'>

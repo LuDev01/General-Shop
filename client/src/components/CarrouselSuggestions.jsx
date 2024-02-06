@@ -115,8 +115,7 @@ export const CarrouselSuggestions = () => {
       <div>
         <div className="banner">
           <h2>
-            Here we have the best promotions for you with the best quality!
-            Extra 20% OFF in Christmas.
+            Here we have the best tees for you with the best quality!
           </h2>
         </div>
         <div className="categories-layout">
@@ -124,7 +123,7 @@ export const CarrouselSuggestions = () => {
             <img src={imgc9} alt="img" />
           </div>
           <div className="text-block">
-            <h1>See what we have for you</h1>
+            <h1>Hey girl! See what we have for you</h1>
             <h4>
               The General Shop is well known for its large and cheap t-shirt
               variety for men of all preferences and occasions. We also offer
@@ -146,7 +145,7 @@ export const CarrouselSuggestions = () => {
             </Button>
           </div>
           <div className="text-block">
-            <h1>Check that out!</h1>
+            <h1>Hey dude! Check this out</h1>
             <h4>
               We are well known for our huge and low-cost t-shirt assortment for
               men of all tastes and purposes. We also offer styling
@@ -171,11 +170,11 @@ export const CarrouselSuggestions = () => {
             <img src={imgc10} alt="img" />
           </div>
         </div>
-        <div className="banner-2">
+        {/* <div className="banner-2">
           <h2>Check our latest promotions! Don't miss them up!</h2>
-        </div>
+        </div> */}
 
-        <Carousel responsive={responsive}>
+        {/* <Carousel responsive={responsive}>
           {carrouselSuggestionsData.map((product, idx) => (
             <div className="carrousel-card" key={idx}>
               <img
@@ -188,27 +187,23 @@ export const CarrouselSuggestions = () => {
               <p>{product.descripcion}</p>
               <p>
                 <button onClick={() => buyProducts(product)}>
-                  Add to Cart
+                  Product details
                 </button>
               </p>
             </div>
           ))}
-        </Carousel>
+        </Carousel> */}
         <div className="banner-3">
           <h2>
             All you can find in one place! General Shop. Your style, our matter.
           </h2>
           <h4>
-            This holiday season, the General Shop has prepared a special
-            surprise for all the t-shirt lovers out there. It’s a place where
-            you can find the perfect t-shirt for yourself or your loved ones,
-            and enjoy the amazing discounts on all our products. Browse through
-            our online store and discover that each t-shirt is a piece of art,
-            inspired by your favourite themes and genres. Whether you want to
-            show off your personality, make a statement, or just feel
-            comfortable, our t-shirt collections have something for everyone.
-            Don’t miss this chance to get your hands on the best t-shirts ever,
-            and join our community of t-shirt fans.
+          Explore a diverse collection of tees suitable for yourself, family, and friends.
+          Our online store showcases each t-shirt as a unique piece of art, inspired 
+          by a variety of themes and genres. Whether you want to express your personality, 
+          make a statement, or simply feel comfortable, our t-shirt collections have something 
+          for everyone. Don't miss the chance to get your hands on the best t-shirts ever 
+          and join our community of t-shirt fans.
           </h4>
 
         </div>
