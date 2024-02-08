@@ -56,7 +56,6 @@ export const WomenProducts = () => {
                 />
                 <Card.Body>
                   <Card.Title>{product.name}</Card.Title>
-                  <Card.Text>{product.description}</Card.Text>
                   <Card.Text>Price: {product.price}</Card.Text>
                   <Notification productId={product._id} />
                   <button type="submit" size="lg" className="submit-button btn btn-outline-warning" onClick={() =>navigate(`/productDetails/${product._id}`) }>Product details</button>

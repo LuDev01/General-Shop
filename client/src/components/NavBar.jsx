@@ -1,8 +1,7 @@
-import {ImSearch } from "react-icons/im";
-import { useState,useContext } from "react";
+import { useState, useContext, useEffect } from "react";
+import { Link, useNavigate,useParams } from "react-router-dom";
+import { ImSearch } from "react-icons/im";
 import { FaUserAlt } from "react-icons/fa";
-import { Link, useNavigate } from "react-router-dom";
-import { products } from "./Products";
 import { ImageContext } from "./context/ImageContext";
 import CartModal from "./CartModal";
 import Container from "react-bootstrap/Container";
@@ -12,6 +11,7 @@ import NavDropdown from "react-bootstrap/NavDropdown";
 import Form from "react-bootstrap/Form";
 import logo from "./assets/GeneralShopLogoNoSlogan.png";
 import "./NavBar.css";
+import axiosClient from "../axiosConfig";
 
 export const NavBar = () => {
   const [navbar, setNavbar] = useState(false);
@@ -19,13 +19,14 @@ export const NavBar = () => {
   const [isDropdownVisible, setIsDropdownVisible] = useState(false);
   const [value, setValue] = useState("");
   const [userDropdown, setUserDropdown] = useState(false);
+  const [data, setData] = useState([]);
   const navigate = useNavigate();
 
   const token = localStorage.getItem("token");
   const role = localStorage.getItem("role");
-  
+
   const isLoggedIn = Boolean(token);
-  const { imageURL,imageURLClient } = useContext(ImageContext);
+  const { imageURL, imageURLClient } = useContext(ImageContext);
 
   const [search, setSearchBtn] = useState({
     transition: "all .3s ease",
@@ -62,7 +63,7 @@ export const NavBar = () => {
   };
 
   const handleOnLogOut = () => {
-    localStorage.setItem('isLoggedOut', 'true');
+    localStorage.setItem("isLoggedOut", "true");
     localStorage.removeItem("isLoggedIn");
     localStorage.removeItem("isLoggedInv2");
     localStorage.removeItem("token");
@@ -81,8 +82,22 @@ export const NavBar = () => {
     window.location.reload();
   };
 
+
+  const getProduct = async () => {
+    try {
+      const response = await axiosClient.get(`products?search=${value}`);
+      setData(response.data.products);
+      console.log("here the data",data);
+    } catch (error) {
+      console.error("Error showing product", error.message);
+    }
+  };
+useEffect(()=>{
+  getProduct();
+},[value])
+
   return (
-    <div > 
+    <div>
       <Navbar
         expand="lg"
         className={
@@ -90,7 +105,6 @@ export const NavBar = () => {
         }
       >
         <Container>
-
           <div className="logo-container">
             <Navbar.Brand href="/">
               <img className="general-logo" src={logo} alt="" />
@@ -99,11 +113,21 @@ export const NavBar = () => {
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav style={{ position: "relative", right: 90 }}>
-              <Nav.Link href="/">Home</Nav.Link>
-              <Nav.Link style={{ whiteSpace: "nowrap" }} href="/aboutUs">
+              <Nav.Link href="/" className="nav-menu-text">
+                Home
+              </Nav.Link>
+              <Nav.Link
+                className="nav-menu-text"
+                style={{ whiteSpace: "nowrap" }}
+                href="/aboutUs"
+              >
                 About Us
               </Nav.Link>
-              <NavDropdown title="Categories" id="basic-nav-dropdown">
+              {/* <NavDropdown  title="Categories" id="basic-nav-dropdown"  > */}
+              <NavDropdown
+                title={<span className="nav-menu-text">Categories</span>}
+                id="basic-nav-dropdown"
+              >
                 <NavDropdown.Item href="/womenProducts">Woman</NavDropdown.Item>
                 <NavDropdown.Item href="/menProducts">Man</NavDropdown.Item>
               </NavDropdown>
@@ -120,65 +144,75 @@ export const NavBar = () => {
                 value={value}
                 onChange={handleOnChangeValue}
               />
-
+            {value && data && (
               <div className="dropdown-search">
-                {products
+                {data
                   .filter((product) => {
-                    const searchItem = value.toLowerCase();
-                    const itemName = product.name.toLowerCase();
-                    return (
-                      searchItem && itemName.includes(searchItem.toLowerCase())
-                    );
-                  })
+                    const searchItems = value.toLowerCase().split(" ");
+                    return searchItems.every(
+                      (item) =>
+                      product.name.toLowerCase().includes(item) ||
+                      product.color.toLowerCase().includes(item) ||
+                      product.category.toLowerCase().includes(item)
+                      );
+                    })
                   .slice(0, 3)
 
                   .map((product) => (
                     <Link
-                      className="dropdown-search-row"
-                      to={`/productDetails/${product.id}`}
-                      onClick={() => handleOnSearch(product.name)}
-                      key={product.id}
-                      style={{ textDecoration: "none", color: "black" }}
+                    className="dropdown-search-row"
+                    to={`/productDetails/${product._id}`}
+                    onClick={() => handleOnSearch(product.name)}
+                    key={product._id}
+                    style={{ textDecoration: "none", color: "black" }}
                     >
                       {product.name}
                       <img
                         className="dropdown-search-img"
-                        src={product.image}
+                        src={product.image.url}
                         alt="products"
-                      />
+                        />
                     </Link>
                   ))}
               </div>
+                  )}
             </Form>
 
             {search.showSearchButton ? (
               <ImSearch className="search-icon" onClick={showIcon} />
             ) : null}
 
-            {isLoggedIn  ? (
-              role==="Client"? (
-              <Nav style={{ position: "relative", right: 17 }}>
-                <img
-                  src={imageURLClient}
-                  style={{ borderRadius: "50%", width: "32px", height: "32px" }}
-                  alt="profle-picture"
-                  onClick={() => setUserDropdown(!userDropdown)}
-                />
-                <NavDropdown show={userDropdown} className="user-dropdown">
-                  <NavDropdown.Item href="/userProfile">
-                    Profile
-                  </NavDropdown.Item>
-                  <NavDropdown.Item onClick={handleOnLogOut}>
-                    Log Out
-                  </NavDropdown.Item>
-                </NavDropdown>
-              </Nav>
-            ) : 
-              role==="Admin" ?(
+            {isLoggedIn ? (
+              role === "Client" ? (
+                <Nav style={{ position: "relative", right: 17 }}>
+                  <img
+                    src={imageURLClient}
+                    style={{
+                      borderRadius: "50%",
+                      width: "32px",
+                      height: "32px",
+                    }}
+                    alt="profle-picture"
+                    onClick={() => setUserDropdown(!userDropdown)}
+                  />
+                  <NavDropdown show={userDropdown} className="user-dropdown">
+                    <NavDropdown.Item href="/userProfile">
+                      Profile
+                    </NavDropdown.Item>
+                    <NavDropdown.Item onClick={handleOnLogOut}>
+                      Log Out
+                    </NavDropdown.Item>
+                  </NavDropdown>
+                </Nav>
+              ) : role === "Admin" ? (
                 <Nav style={{ position: "relative", right: 17 }}>
                   <img
                     src={imageURL}
-                    style={{ borderRadius: "50%", width: "3rem", height: "3rem" }}
+                    style={{
+                      borderRadius: "50%",
+                      width: "3rem",
+                      height: "3rem",
+                    }}
                     alt="profle-picture"
                     onClick={() => setUserDropdown(!userDropdown)}
                   />
@@ -192,14 +226,14 @@ export const NavBar = () => {
                   </NavDropdown>
                 </Nav>
               ) : null
-              ):(
-                <div>
+            ) : (
+              <div>
                 <Link className="link-user" to="/login">
                   {" "}
                   <FaUserAlt className="user-icon" />{" "}
                 </Link>
               </div>
-              )}
+            )}
 
             <CartModal className="cart-icon" />
           </Navbar.Collapse>

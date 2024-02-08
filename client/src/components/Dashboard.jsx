@@ -14,6 +14,7 @@ import axiosClient from "../axiosConfig";
 import NoData from "./assets/NoData.jpg";
 import logoWhite from "./assets/GeneralShopLogoWhite.png";
 import "./Dashboard.css";
+import Button from "react-bootstrap/esm/Button";
 
 export const Dashboard = () => {
   const [dashboard, setDashboard] = useState(true);
@@ -28,7 +29,21 @@ export const Dashboard = () => {
   const [document, setDocument] = useState("");
   const [email, setEmail] = useState("");
   const [image, setImage] = useState(NoData); // Set the initial image
+  const [currentPage, setCurrentPage] = useState(1);
+  const [isExpanded, setIsExpanded] = useState({});
+
   const token = localStorage.getItem("token");
+
+  //Pagination
+  const itemsPerPage = 3;
+  // Get current items
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentItems = data.slice(indexOfFirstItem, indexOfLastItem);
+
+  // Change page
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
   let id;
   useEffect(() => {
     if (token) {
@@ -217,9 +232,9 @@ export const Dashboard = () => {
                           </tr>
                         </thead>
                         <tbody>
-                          {data &&
+                          {currentItems &&
                             (!search || search.length === 0) &&
-                            data.map((product) => (
+                            currentItems.map((product) => (
                               <tr key={product._id}>
                                 <td>{product._id}</td>
                                 <td>{product.name}</td>
@@ -232,7 +247,17 @@ export const Dashboard = () => {
                                 <td>{product.sizes.L}</td>
                                 <td>{product.sizes.XL}</td>
                                 <td>{product.price}</td>
-                                <td>{product.description}</td>
+                                <td>
+                                  {isExpanded[product._id] ? product.description : `${product.description.substring( 0,90)}...`}
+                                  {product.description.length > 90 && (
+                                    <Button
+                                      variant="outline-info"
+                                      onClick={() => setIsExpanded({...isExpanded, [product._id]: !isExpanded[product._id], }) }
+                                    >
+                                      {isExpanded[product._id] ? "Read Less" : "Read More"}
+                                    </Button>
+                                  )}
+                                </td>
                                 <td>
                                   <img
                                     src={
@@ -313,6 +338,25 @@ export const Dashboard = () => {
                         </tbody>
                       </table>
                     </div>
+
+                    {/* Pagination */}
+                    <nav>
+                      <ul className="pagination  justify-content-center">
+                        {Array(Math.ceil(data.length / itemsPerPage))
+                          .fill()
+                          .map((_, i) => (
+                            <li key={i} className="page-item">
+                              <a
+                                onClick={() => paginate(i + 1)}
+                                className="page-link"
+                              >
+                                {" "}
+                                {i + 1}
+                              </a>
+                            </li>
+                          ))}
+                      </ul>
+                    </nav>
                   </div>
                 </div>
               </div>

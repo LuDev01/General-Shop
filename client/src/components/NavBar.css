@@ -1,8 +1,13 @@
 .NavBar-color{
-    background-color: white;
+    /* background-color: white; */
+    background-color: black;
+    color: var(--white-main);
     opacity: 0.8;
     transition: all 500ms;
   }
+.nav-menu-text{
+    color:white  !important;
+}
 
 .NavBar-color.active{
     /* background-color: transparent; */

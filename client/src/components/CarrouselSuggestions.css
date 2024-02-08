@@ -2,8 +2,8 @@
   margin: 0 0 2rem 0;
   padding: 0.2rem;
   text-align: center;
-  background-color:var(--orange-second);
-
+  color:var(--white-main);
+  background-color:black
 }
 
 /* .banner  h2{
