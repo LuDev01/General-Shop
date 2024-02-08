@@ -304,7 +304,15 @@ export const Dashboard = () => {
                                 <td>{product.sizes.L}</td>
                                 <td>{product.sizes.XL}</td>
                                 <td>{product.price}</td>
-                                <td>{product.description}</td>
+                                <td> {isExpanded[product._id] ? product.description : `${product.description.substring( 0,90)}...`}
+                                  {product.description.length > 90 && (
+                                    <Button
+                                      variant="outline-info"
+                                      onClick={() => setIsExpanded({...isExpanded, [product._id]: !isExpanded[product._id], }) }
+                                    >
+                                      {isExpanded[product._id] ? "Read Less" : "Read More"}
+                                    </Button>
+                                  )}</td>
                                 <td>
                                   <img
                                     src={
