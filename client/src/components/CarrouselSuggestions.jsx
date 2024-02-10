@@ -1,4 +1,3 @@
-import "react-multi-carousel/lib/styles.css";
 import Button from "react-bootstrap/Button";
 import imgc9 from "../components/assets/img8.jpg";
 import imgc10 from "../components/assets/img9.jpg";
