@@ -215,7 +215,7 @@ export const Dashboard = () => {
                       <table className="table table-striped table-hover table-bordered">
                         <thead>
                           <tr>
-                            <th>ID</th>
+                            <th>Image</th>
                             <th>Product Name </th>
                             <th>Category</th>
                             <th>Brand </th>
@@ -227,8 +227,7 @@ export const Dashboard = () => {
                             <th>Size XL</th>
                             <th>Price</th>
                             <th>Description</th>
-                            <th>Image</th>
-                            <th>Action</th>
+                            <th colSpan={2}>Action</th>
                           </tr>
                         </thead>
                         <tbody>
@@ -236,7 +235,15 @@ export const Dashboard = () => {
                             (!search || search.length === 0) &&
                             currentItems.map((product) => (
                               <tr key={product._id}>
-                                <td>{product._id}</td>
+                                  <td>
+                                    <img
+                                    className="image-dashboard "
+                                      src={
+                                        product.image ? product.image.url : NoData
+                                      }
+                                      alt="Product"
+                                    />
+                                  </td>
                                 <td>{product.name}</td>
                                 <td>{product.category}</td>
                                 <td>{product.brand}</td>
@@ -248,8 +255,8 @@ export const Dashboard = () => {
                                 <td>{product.sizes.XL}</td>
                                 <td>{product.price}</td>
                                 <td>
-                                  {isExpanded[product._id] ? product.description : `${product.description.substring( 0,90)}...`}
-                                  {product.description.length > 90 && (
+                                  {isExpanded[product._id] ? product.description : `${product.description.substring( 0,30)}...`}
+                                  {product.description.length > 30 && (
                                     <Button
                                       variant="outline-info"
                                       onClick={() => setIsExpanded({...isExpanded, [product._id]: !isExpanded[product._id], }) }
@@ -257,14 +264,6 @@ export const Dashboard = () => {
                                       {isExpanded[product._id] ? "Read Less" : "Read More"}
                                     </Button>
                                   )}
-                                </td>
-                                <td>
-                                  <img
-                                    src={
-                                      product.image ? product.image.url : NoData
-                                    }
-                                    alt="Product"
-                                  />
                                 </td>
                                 <td className="product-components">
                                   <EditProduct
@@ -281,6 +280,8 @@ export const Dashboard = () => {
                                       product.image ? product.image.url : NoData
                                     }
                                   />
+                                </td>
+                                <td className="product-components">
                                   <DeleteProduct
                                     id={product._id}
                                     refreshProducts={getProduct}
@@ -293,7 +294,14 @@ export const Dashboard = () => {
                           {search.length > 0 &&
                             search.map((product) => (
                               <tr key={product._id}>
-                                <td>{product._id}</td>
+                                <td>
+                                  <img
+                                    src={
+                                      product.image ? product.image.url : NoData
+                                    }
+                                    alt="Product"
+                                  />
+                                </td>
                                 <td>{product.name}</td>
                                 <td>{product.category}</td>
                                 <td>{product.brand}</td>
@@ -304,8 +312,8 @@ export const Dashboard = () => {
                                 <td>{product.sizes.L}</td>
                                 <td>{product.sizes.XL}</td>
                                 <td>{product.price}</td>
-                                <td> {isExpanded[product._id] ? product.description : `${product.description.substring( 0,90)}...`}
-                                  {product.description.length > 90 && (
+                                <td> {isExpanded[product._id] ? product.description : `${product.description.substring( 0,30)}...`}
+                                  {product.description.length > 30 && (
                                     <Button
                                       variant="outline-info"
                                       onClick={() => setIsExpanded({...isExpanded, [product._id]: !isExpanded[product._id], }) }
@@ -313,14 +321,6 @@ export const Dashboard = () => {
                                       {isExpanded[product._id] ? "Read Less" : "Read More"}
                                     </Button>
                                   )}</td>
-                                <td>
-                                  <img
-                                    src={
-                                      product.image ? product.image.url : NoData
-                                    }
-                                    alt="Product"
-                                  />
-                                </td>
                                 <td>
                                   <EditProduct
                                     refreshProducts={getProduct}
@@ -336,6 +336,8 @@ export const Dashboard = () => {
                                       product.image ? product.image.url : NoData
                                     }
                                   />
+                                </td>
+                                <td>
                                   <DeleteProduct
                                     id={product._id}
                                     refreshProducts={getProduct}

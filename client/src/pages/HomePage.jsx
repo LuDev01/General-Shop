@@ -5,9 +5,11 @@ import { Footer } from "../components/Footer"
 export const HomePage = () => {
   return (
     <>
+  
     <NavBar/>
     <Home/>
     <Footer/>
+ 
    
     </>
   )

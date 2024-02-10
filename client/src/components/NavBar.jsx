@@ -57,8 +57,9 @@ export const NavBar = () => {
     setValue(e.target.value);
   };
 
-  const handleOnSearch = (searchItem) => {
+  const handleOnSearch = (searchItem, id) => {
     setValue(searchItem);
+    navigate({to: `/${id}`})
     console.log("searching", searchItem);
   };
 
@@ -162,7 +163,7 @@ useEffect(()=>{
                     <Link
                     className="dropdown-search-row"
                     to={`/productDetails/${product._id}`}
-                    onClick={() => handleOnSearch(product.name)}
+                    onClick={() => handleOnSearch(product.name, product._id)}
                     key={product._id}
                     style={{ textDecoration: "none", color: "black" }}
                     >

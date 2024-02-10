@@ -108,14 +108,11 @@ ul {
   font-weight: bold;
 }
 
-
-
 .product-components {
-  display: flex;
-  flex-direction: row;
-  font-size: 25px;
   cursor: pointer;
+  height: 100%;
 }
+
 .panel-cards {
   display: grid;
   grid-template-columns: repeat(4, 2fr);
@@ -144,7 +141,10 @@ ul {
   grid-template-columns: repeat(4, 1fr);
   gap: 1rem;
 }
+.image-dashboard{
+  width: 150px;
 
+}
 /* MEDIA QUERIES */
 
 @media screen and (max-width: 850px) {
