@@ -1,29 +1,14 @@
-import Carousel from "react-multi-carousel";
-import "react-multi-carousel/lib/styles.css";
 import Button from "react-bootstrap/Button";
-import imgc1 from "../components/assets/products/img8.png";
-import imgc2 from "../components/assets/products/img9.png";
-import imgc3 from "../components/assets/products/img10.png";
-import imgc4 from "../components/assets/products/img11.png";
-import imgc5 from "../components/assets/products/img12.png";
-import imgc6 from "../components/assets/products/img13.png";
-import imgc7 from "../components/assets/products/img14.png";
-import imgc8 from "../components/assets/products/img15.png";
 import imgc9 from "../components/assets/img8.jpg";
 import imgc10 from "../components/assets/img9.jpg";
 import "./CarrouselSuggestions.css";
-
-import { useContext } from "react";
-import { DataContext } from "./context/DataContext";
 import {Link, useNavigate} from "react-router-dom";
 
 export const CarrouselSuggestions = () => {
-  // const { data, cart, setCart } = useContext(DataContext);
   const navigate=useNavigate();
 
   const buyProducts = (product) => {
     console.log(product);
-    // setCart([...cart, product]);
   };
 
   return (
@@ -86,29 +71,7 @@ export const CarrouselSuggestions = () => {
             <img src={imgc10} alt="img" />
           </div>
         </div>
-        {/* <div className="banner-2">
-          <h2>Check our latest promotions! Don't miss them up!</h2>
-        </div> */}
-
-        {/* <Carousel responsive={responsive}>
-          {carrouselSuggestionsData.map((product, idx) => (
-            <div className="carrousel-card" key={idx}>
-              <img
-                className="product--image"
-                src={product.image}
-                alt={product.name}
-              />
-              <h2>{product.name}</h2>
-              <p className="price">{product.price}</p>
-              <p>{product.descripcion}</p>
-              <p>
-                <button onClick={() => buyProducts(product)}>
-                  Product details
-                </button>
-              </p>
-            </div>
-          ))}
-        </Carousel> */}
+    
         <div className="banner-3">
           <h2>
             All you can find in one place! General Shop. Your style, our matter.
