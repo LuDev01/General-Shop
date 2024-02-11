@@ -48,8 +48,9 @@ export const NavBar = () => {
     setValue(e.target.value);
   };
 
-  const handleOnSearch = (searchItem) => {
+  const handleOnSearch = (searchItem, id) => {
     setValue(searchItem);
+    navigate({to: `/${id}`})
     console.log("searching", searchItem);
   };
 

@@ -33,7 +33,6 @@ export const CartTotal = () => {
       <div className="cart-content-total">
         {cart.length > 0 ? (
           <>
-
             <h1 className="shopping-cart-title">Shopping Cart</h1>
             <div className="cart-items-total">
               <div className="product-column">
@@ -54,7 +53,7 @@ export const CartTotal = () => {
             </div>
 
             {cart.map((product) => (
-              <div className="cart-items-total" key={product._id}>
+              <div className="cart-items-total" key={`${product._id}-${product.size}`}>
                 {/* Column 1: Product */}
                 <div className="product-column">
                   <img src={product.image.url} alt="product-card" className="picture" />
@@ -64,6 +63,7 @@ export const CartTotal = () => {
                 <div className="empty-column">
                   <div className="product-details">
                     <h3 className="name">{product.name}</h3>
+                    <p>Size: {product.size}</p>
                   </div>
                 </div>
 
@@ -75,11 +75,11 @@ export const CartTotal = () => {
                 {/* Column 4: Quantity Controls */}
                 <div className="quantity-controls-column">
                   <div className="quantity-controls">
-                    <button className="less-button" onClick={() => decreaseQuantity(product._id)}>
+                    <button className="less-button" onClick={() => decreaseQuantity(product._id,product.size)}>
                       -
                     </button>
                     <span>{product.quantity}</span>
-                    <button className="plus-button" onClick={() => increaseQuantity(product._id)}>
+                    <button className="plus-button" onClick={() => increaseQuantity(product._id,product.size)}>
                       +
                     </button>
                   </div>
@@ -87,7 +87,7 @@ export const CartTotal = () => {
 
                 {/* Column 5: Remove Button */}
                 <div className="remove-button-column">
-                  <button className="remove-button-total" onClick={() => removeFromCart(product._id)}>
+                  <button className="remove-button-total" onClick={() => removeFromCart(product._id,product.size)}>
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       width="16"

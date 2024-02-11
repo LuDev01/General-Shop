@@ -1,29 +1,14 @@
-import Carousel from "react-multi-carousel";
-import "react-multi-carousel/lib/styles.css";
 import Button from "react-bootstrap/Button";
-import imgc1 from "../components/assets/products/img8.png";
-import imgc2 from "../components/assets/products/img9.png";
-import imgc3 from "../components/assets/products/img10.png";
-import imgc4 from "../components/assets/products/img11.png";
-import imgc5 from "../components/assets/products/img12.png";
-import imgc6 from "../components/assets/products/img13.png";
-import imgc7 from "../components/assets/products/img14.png";
-import imgc8 from "../components/assets/products/img15.png";
 import imgc9 from "../components/assets/img8.jpg";
 import imgc10 from "../components/assets/img9.jpg";
+import {Link, useNavigate} from "react-router-dom";
 import "./CarrouselSuggestions.css";
 
-import { useContext } from "react";
-import { DataContext } from "./context/DataContext";
-import {Link, useNavigate} from "react-router-dom";
-
 export const CarrouselSuggestions = () => {
-  // const { data, cart, setCart } = useContext(DataContext);
   const navigate=useNavigate();
 
   const buyProducts = (product) => {
     console.log(product);
-    // setCart([...cart, product]);
   };
 
   return (
