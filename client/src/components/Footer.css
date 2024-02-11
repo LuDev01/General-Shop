@@ -1,5 +1,6 @@
 .footer {
-  background-color: #1697b7;
+  /* background-color: #1697b7; */
+  background-color: #F3F4F6;
   font-size: 1.2rem;
   padding: 2rem 0;
   margin-top: 10rem;
@@ -97,9 +98,9 @@ margin-top:2rem;
 
 }
 
-.custom-shape-divider-top-1702510797 .shape-fill {
+/* .custom-shape-divider-top-1702510797 .shape-fill {
     fill: #1697B7;
-}
+} */
 
 .waves{
     margin-top:5rem;

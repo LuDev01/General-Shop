@@ -2,18 +2,12 @@
     /* background-color: white; */
     background-color: black;
     color: var(--white-main);
-    opacity: 0.8;
+    /* opacity: 0.8; */
     transition: all 500ms;
-  }
-.nav-menu-text{
-    color:white  !important;
 }
 
-.NavBar-color.active{
-    /* background-color: transparent; */
-    /* background-color: white; */
-    background-color: var(--orange-main);
-    opacity: 0.8;
+.nav-menu-text{
+    color:white  !important;
 }
 
 .general-logo{
@@ -80,3 +74,5 @@
 .user-dropdown .dropdown-toggle::after{
     display: none;
 }
+
+/* MEDIA QUERIES CON FONDO BLANCO CUANDO SEA UNA PANTALLA PEQUEÑA */
