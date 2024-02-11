@@ -49,16 +49,16 @@ export const Footer = () => {
               <h3>Quick Links</h3>
               <ul>
                 <li>
-                  <Link to="/">Services</Link>
+                  <Link to="/">Home</Link>
                 </li>
                 <li>
-                  <Link to="/">About Us</Link>
+                  <Link to="/aboutUs">About Us</Link>
                 </li>
                 <li>
-                  <Link to="/">Products</Link>
+                  <Link to="/womenProducts">Woman</Link>
                 </li>
                 <li>
-                  <Link to="/">Become a partner</Link>
+                  <Link to="/menProducts">Men</Link>
                 </li>
               </ul>
             </Col>
