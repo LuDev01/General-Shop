@@ -1,8 +1,8 @@
 import Button from "react-bootstrap/Button";
 import imgc9 from "../components/assets/img8.jpg";
 import imgc10 from "../components/assets/img9.jpg";
-import "./CarrouselSuggestions.css";
 import {Link, useNavigate} from "react-router-dom";
+import "./CarrouselSuggestions.css";
 
 export const CarrouselSuggestions = () => {
   const navigate=useNavigate();
