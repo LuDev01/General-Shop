@@ -21,7 +21,7 @@ export const CartTotal = () => {
 
   const handlePurchaseComplete = () => {
     cart.forEach(async(product) => {
-      await axiosClient.post("products/decreaseQuantity",{
+      await axiosClient.post("products/decreaseProductQuantity",{
         productId: product._id,
         size: product.size,
         quantity: product.quantity
