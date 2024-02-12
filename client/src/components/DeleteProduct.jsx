@@ -27,7 +27,7 @@ export const DeleteProduct = (props) => {
   return (
     <>
       <ToastContainer />
-      <MdDelete onClick={handleShow} />
+      <MdDelete style={{fontSize:"1.5rem"}} onClick={handleShow} />
       <Modal show={show} onHide={handleClose}>
         <Form onSubmit={(e) => handleSubmit(e)}>
           <Modal.Header closeButton>
