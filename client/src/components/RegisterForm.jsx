@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import axiosClient from "../axiosConfig";
 import Form from "react-bootstrap/Form";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
@@ -8,6 +7,7 @@ import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
 import Logo from "./assets/GeneralShopLogo.png";
 import CarrouselLogIn from "./CarrouselLogIn";
+import axiosClient from "../axiosConfig";
 import "./RegisterForm.css";
 
 import CryptoJS from "crypto-js";
