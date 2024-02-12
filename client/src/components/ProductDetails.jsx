@@ -33,7 +33,6 @@ export const ProductDetails = () => {
 
   const getProductId = async () => {
     try {
-      // const response = await axiosClient.get(`products/${props.id}`);
       const response = await axiosClient.get(`products/${id}`);
       console.log("this is the response of the server", response.data);
       setData(response.data.productById);
@@ -49,8 +48,10 @@ export const ProductDetails = () => {
     return <div>Product not found</div>;
   }
   const handleAddToCart = (data) => {
-    toast.success("Product added to your cart!");
-    addToCart(data, selectedSize);
+    const added = addToCart(data, selectedSize);
+    if (added) {
+        toast.success("Product added to your cart!");
+    }
   };
 
   return (

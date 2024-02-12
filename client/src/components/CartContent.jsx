@@ -36,7 +36,7 @@ export const CartContent = () => {
                     <h4 className="price">${product.price}</h4>
                     <p className="size">Size: {product.size}</p>
                     <div className="quantity-controls">
-                      Cantidad:
+                      Quantity:
                       <button className="less-button" onClick={() => decreaseQuantity(product._id,product.size)}>
                         -
                       </button>
