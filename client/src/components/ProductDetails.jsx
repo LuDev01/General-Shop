@@ -48,8 +48,10 @@ export const ProductDetails = () => {
     return <div>Product not found</div>;
   }
   const handleAddToCart = (data) => {
-    toast.success("Product added to your cart!");
-    addToCart(data, selectedSize);
+    const added = addToCart(data, selectedSize);
+    if (added) {
+        toast.success("Product added to your cart!");
+    }
   };
 
   return (

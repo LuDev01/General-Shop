@@ -25,15 +25,16 @@ export const DataProvider = ({ children }) => {
     const productFromData = data.find((p) => p._id === product._id);
     if (!productFromData) {
       console.error(`Product with id ${product._id} not found in data`);
-      return;
+      return false;
     }
     // Find the size in the product details
     const sizeFromData = productFromData.sizes[size];
     if (!sizeFromData) {
       console.error(`Size ${size} not found in product with id ${product._id}`);
-      return;
+      return false;
     }
 
+    let added = false;
     setCart((currentCart) => {
       const index = currentCart.findIndex((p) => p._id === product._id && p.size === size);
 
@@ -43,6 +44,7 @@ export const DataProvider = ({ children }) => {
           // There are still products available, increment quantity
           const newCart = [...currentCart];
           newCart[index] = {...newCart[index],quantity: newCart[index].quantity + 1};
+          added = true;
           return newCart;
         }
         else {
@@ -53,9 +55,11 @@ export const DataProvider = ({ children }) => {
 
       } else {
         // The product is not in the cart, add it with quantity 1
+        added = true;
         return [...currentCart, { ...product, size, quantity: 1 }];
       }
     });
+    return added;
   };
 
   const removeFromCart = (productId, size) => {
@@ -85,16 +89,16 @@ export const DataProvider = ({ children }) => {
     const productFromData = data.find(p => p._id === productId);
     if (!productFromData) {
         console.error(`Product with id ${productId} not found in data`);
-        return false;
+        return;
     }
 
     // Find the size in the product details
     const sizeFromData = productFromData.sizes[size];
     if (!sizeFromData) {
         console.error(`Size ${size} not found in product with id ${productId}`);
-        return false;
+        return;
     }
-    let added = false;
+
     setCart((currentCart) => {
         const index = currentCart.findIndex((p) => p._id === productId && p.size === size);
         if (index >= 0) {
@@ -103,7 +107,6 @@ export const DataProvider = ({ children }) => {
                 // There are still products available, increment quantity
                 const newCart = [...currentCart];
                 newCart[index] = { ...newCart[index], quantity: newCart[index].quantity + 1 };
-                added = true;
                 return newCart;
             } else {
                 // No more products available
@@ -129,9 +132,12 @@ const decreaseQuantity = (productId, size) => {
     });
 };
 
+const clearCart=()=>{
+    setCart([]);
+}
   return (
     <DataContext.Provider
-      value={{data, cart, addToCart,removeFromCart,increaseQuantity,decreaseQuantity,}} >{children}
+      value={{data, cart, addToCart,removeFromCart,increaseQuantity,decreaseQuantity,clearCart}} >{children}
     </DataContext.Provider>
   );
 };

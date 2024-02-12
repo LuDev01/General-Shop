@@ -3,10 +3,11 @@ import { DataContext } from "./context/DataContext";
 import { useState } from 'react';
 import { NavBar } from './NavBar';
 import {PurchaseModal} from "./PurchaseModal";
+import axiosClient from "../axiosConfig";
 import "./CartTotal.css";
 
 export const CartTotal = () => {
-  const { cart, removeFromCart, increaseQuantity, decreaseQuantity } = useContext(DataContext);
+  const { cart, removeFromCart, increaseQuantity, decreaseQuantity,clearCart } = useContext(DataContext);
 
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -19,10 +20,16 @@ export const CartTotal = () => {
   }, 0);
 
   const handlePurchaseComplete = () => {
-    cart.forEach((product) => {
+    cart.forEach(async(product) => {
+      await axiosClient.post("products/decreaseQuantity",{
+        productId: product._id,
+        size: product.size,
+        quantity: product.quantity
+      });
+      
       removeFromCart(product._id);
     });
-
+    clearCart();
     // Closing the modal
     setIsModalOpen(false);
   };

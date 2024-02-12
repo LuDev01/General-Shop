@@ -166,10 +166,9 @@ const controllers = {
           public_id: result.public_id,
           url: result.secure_url,
         };
-        
       }
       updatedFields.sizes = JSON.parse(updatedFields.sizes);
-      
+
       const product = await Product.findByIdAndUpdate(
         req.params.id,
         updatedFields,
@@ -195,6 +194,36 @@ const controllers = {
       }
     } catch (error) {
       res.json({ message: `Error deleting product ${error}` });
+    }
+  },
+
+  decreaseProductQuantity: async (req, res) => {
+    const { productId, size, quantity } = req.body;
+    try {
+      // Fetch the product and update it in one go
+      const product = await Product.findByIdAndUpdate(
+        productId,
+        { $inc: { [`sizes.${size}`]: -quantity } },
+        { new: true }  // This option makes sure the updated document is returned
+    );
+    if (product && product.sizes[size] !== undefined) {
+      if (product.sizes[size] >= 0) {
+          // The product quantity was successfully updated
+          res.status(200).json({ message: 'Product quantity updated' });
+      } else {
+          // The product quantity went below zero, revert the update
+          await Product.findByIdAndUpdate(
+              productId,
+              { $inc: { [`sizes.${size}`]: quantity } }
+          );
+          res.status(400).json({ message: 'Not enough product in stock' });
+      }
+  } else {
+      res.status(404).json({ message: 'Product not found' });
+  }
+      
+    } catch (error) {
+      res.json({ message: `Error updating product quantity: ${error}` });
     }
   },
 };
