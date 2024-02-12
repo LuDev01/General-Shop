@@ -223,7 +223,7 @@ const controllers = {
   }
       
     } catch (error) {
-      res.json({ message: `Error updating product quantity: ${error}` });
+         res.json({ message: `Error updating product quantity: ${error}` });
     }
   },
 };
