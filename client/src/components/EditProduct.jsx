@@ -60,7 +60,7 @@ export const EditProduct = (props) => {
   return (
     <>
       <ToastContainer />
-      <FaEdit onClick={handleShow} />
+      <FaEdit style={{fontSize:"1.5rem"}} onClick={handleShow} />
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>Edit Product</Modal.Title>

@@ -48,9 +48,10 @@ export const NavBar = () => {
     setValue(e.target.value);
   };
 
-  const handleOnSearch = (searchItem, id) => {
+  const handleOnSearch = (searchItem,data) => {
     setValue(searchItem);
-    navigate({to: `/${id}`})
+    // <Link to={`/productDetails/${data._id}`}></Link>
+    navigate({to: `/productDetails/${data._id}`})
     console.log("searching", searchItem);
   };
 
@@ -115,12 +116,14 @@ export const NavBar = () => {
               <img className="general-logo" src={logo} alt="" />
             </Navbar.Brand>
           </div>
-          <Navbar.Toggle
+          {/* <Navbar.Toggle
             aria-controls="basic-navbar-nav"
             onClick={handleMenuToggle}
-          />
+          /> */}
+            <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
-            <Nav className={`me-auto ${isMenuVisible ? "mobile-menu" : ""}`}>
+            {/* <Nav className={`me-auto ${isMenuVisible ? "mobile-menu" : ""}`}> */}
+            <Nav style={{ position: "relative", right: 90 }}>
               <Nav.Link href="/" className="nav-menu-text">
                 Home
               </Nav.Link>
@@ -141,10 +144,14 @@ export const NavBar = () => {
                 <NavDropdown.Item href="/menProducts">Man</NavDropdown.Item>
               </NavDropdown>
             </Nav>
-            <Form
+            {/* <Form
               className={`d-flex search-field search-container ${
                 isSearchVisible ? "mobile-search" : ""
               }`}
+            > */}
+             <Form
+              className="d-flex search-field search-container"
+              style={{ opacity: search.opacity, transition: search.transition }}
             >
               <Form.Control
                 type="search"
@@ -189,13 +196,16 @@ export const NavBar = () => {
                 </div>
               )}
             </Form>
-
+{/* 
             {!isSearchVisible && (
               <ImSearch
                 className="search-icon"
                 onClick={handleSearchToggle}
               />
-            )}
+            )} */}
+                 {search.showSearchButton ? (
+              <ImSearch className="search-icon" onClick={showIcon} />
+            ) : null}
 
             {isLoggedIn ? (
               role === "Client" ? (

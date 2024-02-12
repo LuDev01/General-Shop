@@ -7,6 +7,7 @@ import CarrouselLogIn from './CarrouselLogIn';
 import Form from "react-bootstrap/Form";
 import Logo from "./assets/GeneralShopLogo.png";
 import CryptoJS from "crypto-js";
+import "../App.css";
 
 export const LoginForm = () => {
 
@@ -18,7 +19,7 @@ export const LoginForm = () => {
   const [errors, setErrors] = useState('');
 
   const { updateImageURLAdmin,updateImageURLClient,} = useContext(ImageContext);
-
+  const port = process.env.PORT || 5000;
   const navigate = useNavigate();
 
   const handleToggle = () => {
@@ -57,7 +58,9 @@ export const LoginForm = () => {
 
       console.log("Sending request with email and password:", email, passw);
       const passwordProcess = CryptoJS.AES.encrypt(passw, 'SheDev2101200025021997').toString();
-      fetch('http://localhost:5000/login', {
+      
+    
+      fetch(`${port}:/login`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
