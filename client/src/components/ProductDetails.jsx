@@ -33,7 +33,6 @@ export const ProductDetails = () => {
 
   const getProductId = async () => {
     try {
-      // const response = await axiosClient.get(`products/${props.id}`);
       const response = await axiosClient.get(`products/${id}`);
       console.log("this is the response of the server", response.data);
       setData(response.data.productById);
