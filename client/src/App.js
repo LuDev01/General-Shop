@@ -7,15 +7,12 @@ import { ProductDetails } from './components/ProductDetails';
 import { AboutUs } from './components/AboutUs';
 import { WomenProducts } from './components/WomenProducts';
 import { MenProducts } from './components/MenProducts';
-// import {ShoppingCart} from './components/ShoppingCart';
-import { CartContent } from './components/CartContent';
 import {CartTotal} from './components/CartTotal';
 import { useState, useEffect } from 'react';
 import { DataProvider } from './components/context/DataProvider';
 import {Profile} from "./components/Profile";
 import { Dashboard } from './components/Dashboard';
 import { ImageProvider } from './components/context/ImageProvider';
-
 
 function getCookie(name) {
   const cookies = document.cookie.split(';');
@@ -36,7 +33,6 @@ function App() { // Defines the App component, which serves as the main componen
 
   useEffect(() => {
     const handleStorageChange = () => {
-      debugger
       // setLogin(window.localStorage.getItem("isLoggedIn"));
       // setLogin(window.sessionStorage.getItem("isLoggedInv2"));
       setLogin(getCookie("isLoggedInv3"));

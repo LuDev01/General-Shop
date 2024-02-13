@@ -4,7 +4,15 @@ import axiosClient from "../../axiosConfig";
 
 export const DataProvider = ({ children }) => {
   const [data, setData] = useState([]);
-  const [cart, setCart] = useState([]);
+  const [cart, setCart] = useState(()=>{
+    const savedCart=localStorage.getItem("myCart");
+    if(savedCart){
+      return JSON.parse(savedCart);
+    }
+    else{
+      return [];
+    }
+  });
 
   useEffect(() => {
     const fetchData = async () => {
@@ -19,6 +27,12 @@ export const DataProvider = ({ children }) => {
 
     fetchData();
   }, []);
+
+  useEffect(() => {
+    // Save the cart to localStorage whenever it changes
+    localStorage.setItem("myCart", JSON.stringify(cart));
+  }, [cart]);
+
 
   const addToCart = (product, size) => {
     // Find the product in the data state
@@ -56,7 +70,7 @@ export const DataProvider = ({ children }) => {
       } else {
         // The product is not in the cart, add it with quantity 1
         added = true;
-        return [...currentCart, { ...product, size, quantity: 1 }];
+        return [...currentCart, { ...product,sizes:{[size]:sizeFromData} ,size, quantity: 1 }];
       }
     });
     return added;
@@ -120,17 +134,24 @@ export const DataProvider = ({ children }) => {
 };
 
 const decreaseQuantity = (productId, size) => {
-    setCart((currentCart) => {
-        const index = currentCart.findIndex((p) => p._id === productId && p.size === size);
-        if (index >= 0 && currentCart[index].quantity > 1) {
-            const newCart = [...currentCart];
-            newCart[index] = { ...newCart[index], quantity: newCart[index].quantity - 1 };
-            return newCart;
-        } else {
-            return currentCart;
-        }
-    });
+  setCart((currentCart) => {
+      const index = currentCart.findIndex((p) => p._id === productId && p.size === size);
+      if (index >= 0) {
+          const newCart = [...currentCart];
+          if (newCart[index].quantity > 1) {
+              // If the product quantity is more than 1, decrease it by 1
+              newCart[index] = { ...newCart[index], quantity: newCart[index].quantity - 1 };
+          } else {
+              // If the product quantity is 1, remove the product from the cart
+              newCart.splice(index, 1);
+          }
+          return newCart;
+      } else {
+          return currentCart;
+      }
+  });
 };
+
 
 const clearCart=()=>{
     setCart([]);
