@@ -10,13 +10,22 @@
 
 .product-cards{
     transition: 0.3s;
-    margin-top: 4rem;
+    margin: 4rem 0.5rem 0rem 0.5rem;
 }
 
 .product-cards:hover{
     transform: translateY(-0.8rem);
     box-shadow: 0.5rem 0.75rem 1.5rem #bbbb;
 }
+
+.product-display, .col-prod-details{
+    background-color: #F3F4F6;
+}
+
+.col-prod-details{
+    border-radius: 10px;
+}
+
 
 .sizes-display{
     display: flex;
@@ -38,4 +47,20 @@
 
 .submit-button{
     width: 100%;
+    background-color: black;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border: 1px solid black;
+    font: 24px;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    padding: 0.5em 1em;
+    border-radius: 8px;
+}
+
+.submit-button:hover{
+    background-color: white;
+    color: black;
+    font-weight: bold;
 }

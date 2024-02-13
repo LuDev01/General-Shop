@@ -58,14 +58,14 @@ export const ProductDetails = () => {
     <>
       <ToastContainer />
       <NavBar />
-      <Card style={{ margin: "8rem 6rem " }}>
+      <Card style={{ margin: "8rem 6rem" }}>
         <Row>
-          <Col>
+          <Col className="col-prod-details text-center">
             {data && data.image && (
               <img src={data.image.url} alt="{data.name}" />
             )}
           </Col>
-          <Col>
+          <Col className="col-prod-details">
             <CardBody className="product-display">
               <CardTitle>
                 <h2>{data.name}</h2>
@@ -79,10 +79,10 @@ export const ProductDetails = () => {
               >
                 Sizes:
                 <Dropdown>
-                  <Dropdown.Toggle variant="info" id="dropdown-basic">
+                  <Dropdown.Toggle variant="info" id="dropdown-basic" >
                     {selectedSize || "Choose your size"}
                   </Dropdown.Toggle>
-                  <Dropdown.Menu>
+                  <Dropdown.Menu >
                     {Object.keys(data.sizes).map((size) => (
                       <Dropdown.Item
                         key={size}

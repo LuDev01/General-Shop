@@ -67,7 +67,6 @@ export const CartContent = () => {
               <div className="cart-total">
                 <h3>Total Purchase: ${total}</h3>
               </div>
-            {/* <CartTotal /> */}
           </>
         ) : (
           <div

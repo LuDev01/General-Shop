@@ -40,7 +40,7 @@ export const AllProducts = () => {
   return (
     <>
     <ToastContainer/>
-      <Row xs={1} md={4} className="g-4 m-4 ">
+      <Row xs={1} md={4} className="g-4">
         {data &&
           data.map((product) => (
             <Col key={product._id}>
@@ -59,7 +59,7 @@ export const AllProducts = () => {
                   <Card.Text>Price: ${product.price}</Card.Text>
                   <Notification productById={product._id} />
 
-                  <button type="submit" size="lg" className="submit-button btn btn-outline-warning" onClick={() =>navigate(`/productDetails/${product._id}`) }>Product details</button>
+                  <button type="submit" size="lg" className="submit-button " onClick={() =>navigate(`/productDetails/${product._id}`) }>Product details</button>
                   {/* <button type="submit" size="lg" className="submit-button add-to-cart btn btn-outline-info " onClick={() => handleAddToCart(product)}>Add to cart</button> */}
                 </Card.Body>
               </Card>
