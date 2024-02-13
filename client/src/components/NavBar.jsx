@@ -120,7 +120,7 @@ export const NavBar = () => {
             aria-controls="basic-navbar-nav"
             onClick={handleMenuToggle}
           /> */}
-            <Navbar.Toggle aria-controls="basic-navbar-nav" />
+          {/* <Navbar.Toggle aria-controls="basic-navbar-nav" /> */}
           <Navbar.Collapse id="basic-navbar-nav">
             {/* <Nav className={`me-auto ${isMenuVisible ? "mobile-menu" : ""}`}> */}
             <Nav style={{ position: "relative", right: 90 }}>
