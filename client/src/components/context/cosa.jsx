@@ -253,7 +253,7 @@ export const NavBar = () => {
               </div>
             )}
 
-            <CartModal className="cart-icon" />
+            <CartModal  />
           </Navbar.Collapse>
         </Container>
       </Navbar>

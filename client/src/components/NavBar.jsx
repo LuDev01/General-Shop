@@ -10,8 +10,8 @@ import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import Form from "react-bootstrap/Form";
 import logo from "./assets/GeneralShopLogoNoSlogan.png";
-import "./NavBar.css";
 import axiosClient from "../axiosConfig";
+import "./NavBar.css";
 
 export const NavBar = () => {
   const [navbar, setNavbar] = useState(false);
@@ -139,7 +139,7 @@ export const NavBar = () => {
                 id="basic-nav-dropdown"
               >
                 <NavDropdown.Item href="/womenProducts">
-                  Woman
+                  Woman 
                 </NavDropdown.Item>
                 <NavDropdown.Item href="/menProducts">Man</NavDropdown.Item>
               </NavDropdown>
@@ -260,7 +260,7 @@ export const NavBar = () => {
               </div>
             )}
 
-            <CartModal className="cart-icon" />
+            <CartModal />
           </Navbar.Collapse>
         </Container>
       </Navbar>
