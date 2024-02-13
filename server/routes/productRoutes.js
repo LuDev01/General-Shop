@@ -11,6 +11,9 @@ const controllers = require("../controllers/productsController");
 // router.post("/products/create", authMiddleware.isLogged, productController.createProduct);
 router.post("/products/create", upload.single('image'), productController.createProduct);
 
+//@POST /products/decreaseQuantity
+router.post("/products/decreaseProductQuantity",productController.decreaseProductQuantity);
+
 // @GET /products
 router.get("/products", productController.getProduct);
 
