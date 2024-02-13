@@ -1,6 +1,22 @@
 *{
   font-size: small;
 }
+.cart-counter {
+  position: absolute;
+  top: -30%;
+  right: 55%;
+  background: orange;
+  color: white;
+  border-radius: 50%;
+  padding: 0.5px 5px;
+  font-size: 10px;
+}
+
+.cart-icon{
+  margin-right: 30px;
+  cursor: pointer;
+  font-size: 1.2rem;
+}
 
 .cart-modal-container{
     margin-top: 5rem;

@@ -78,26 +78,18 @@ export const DataProvider = ({ children }) => {
 
   const removeFromCart = (productId, size) => {
     setCart((currentCart) => {
-      const index = currentCart.findIndex( (p) => p._id === productId && p.size === size );
+      const index = currentCart.findIndex((p) => p._id === productId && p.size === size);
       if (index >= 0) {
         const newCart = [...currentCart];
-        if (newCart[index].quantity > 1) {
-          // If the product quantity is more than 1, decrease it by 1
-          newCart[index] = {
-            ...newCart[index],
-            quantity: newCart[index].quantity - 1,
-          };
-        } else {
-          // If the product quantity is 1, remove the product from the cart
-          newCart.splice(index, 1);
-        }
+        // Remove the product from the cart
+        newCart.splice(index, 1);
         return newCart;
       } else {
         return currentCart;
       }
     });
   };
-
+  
   const increaseQuantity = (productId, size) => {
     // Find the product in the data state
     const productFromData = data.find(p => p._id === productId);
