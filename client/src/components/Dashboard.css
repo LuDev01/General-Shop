@@ -1,7 +1,7 @@
 .wrapper {
   display: grid;
   grid-template-columns: 1fr 4fr;
-  background-color: var(--blue-main);
+  background-color: black;
 }
 
 ul {
