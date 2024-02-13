@@ -37,10 +37,10 @@ export const MenProducts = () => {
     <>
       <ToastContainer />
       <NavBar />
-      <h1 style={{ margin: "7rem", textAlign: "center" }}>
+      <h1 style={{ marginTop: "7rem", textAlign: "center" }}>
         Men Products Section{" "}
       </h1>
-      <Row xs={1} md={3} className="g-4 m-4 ">
+      <Row xs={1} md={3} className="g-4 ">
         {data
           .filter((product) =>
             ["man", "men"].includes(product.category.toLowerCase())
@@ -57,7 +57,7 @@ export const MenProducts = () => {
                   <Card.Title>{product.name}</Card.Title>
                   <Card.Text>Price: {product.price}</Card.Text>
                   <Notification productId={product._id} />
-                  <button type="submit" size="lg" className="submit-button btn btn-outline-warning" onClick={() =>navigate(`/productDetails/${product._id}`) }>Product details</button>
+                  <button type="submit" size="lg" className="submit-button" onClick={() =>navigate(`/productDetails/${product._id}`) }>Product details</button>
                   {/* <button type="submit" size="lg" className="submit-button add-to-cart btn btn-outline-info " onClick={() => handleAddToCart(product)}>Add to cart</button> */}
                 </Card.Body>
               </Card>
