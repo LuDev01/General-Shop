@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
-import { Link,useNavigate } from "react-router-dom";
+import { Link} from "react-router-dom";
 import { BsPersonFillGear } from "react-icons/bs";
-import { FaSignOutAlt } from "react-icons/fa";
 import { EditUser } from "./EditUser";
 import { jwtDecode } from "jwt-decode";
 import axiosClient from "../axiosConfig";
@@ -11,7 +10,7 @@ import "./Profile.css";
 
 export const Profile = () => {
   const [image, setImage] = useState(defaultUserImg); // Set the initial image
-  const [settings, setSettings] = useState(false);
+  const [settings, setSettings] = useState(true);
   const [idUser, setId] = useState(" ");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -19,7 +18,8 @@ export const Profile = () => {
   const [document, setDocument] = useState("");
   const [email, setEmail] = useState("");
   const token = localStorage.getItem("token");
-  const navigate = useNavigate();
+
+
   let id;
   useEffect(() => {
     if (token) {
@@ -33,33 +33,14 @@ export const Profile = () => {
   const settingsRef = useRef();
   const handleChangeSettings = () => {
     setSettings(true);
+    console.log("Settings:", settings); // Add this line
     settingsRef.current.classList.add("active");
-  };
-  const handleOnLogOut = (e) => {
-    e.preventDefault();
-    localStorage.setItem('isLoggedOut', 'true');
-    localStorage.removeItem("isLoggedIn");
-    localStorage.removeItem("isLoggedInv2");
-    localStorage.removeItem("token");
-    localStorage.removeItem("exp");
-    localStorage.removeItem("role");
-
-    console.log("the cookie",document.cookie);
-    var cookies = document.cookie.split(";");
-
-    for (var i = 0; i < cookies.length; i++) {
-      var cookie = cookies[i];
-      var eqPos = cookie.indexOf("=");
-      var name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
-      document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
-    }
-    navigate("/");
-    window.location.reload();
   };
   const getUser = async () => {
     try {
       const response = await axiosClient.get(`user/${id}`);
       const { user } = response.data;
+      console.log("User data:", user); // Add this line
       setFirstName(user.firstName);
       setLastName(user.lastName);
       setDocumentType(user.documentType);
@@ -71,8 +52,10 @@ export const Profile = () => {
   };
 
   useEffect(() => {
-    getUser();
-  }, []);
+    if (settings) {
+      getUser();
+    }
+  }, [settings]);
 
   return (
     <>
@@ -86,19 +69,13 @@ export const Profile = () => {
           <ul className="client-menu">
             <li>
               <button
-                className="client-button-menu button-category active"
+                className="client-button-menu  active"
                 ref={settingsRef}
                 onClick={handleChangeSettings}
               >
                 <BsPersonFillGear />
                 Settings
               </button>
-            </li>
-            <li>
-              <Link className="client-button-menu client-button-signout" onClick={handleOnLogOut}>
-                <FaSignOutAlt />
-                Sign Out 
-              </Link>
             </li>
           </ul>
           <p className="client-text-footer">© 2024 SheDev Coding</p>
@@ -110,6 +87,7 @@ export const Profile = () => {
               <h2 className="client-principal-title">User Settings</h2>
               <EditUser
                 refreshUser={getUser}
+                key={idUser}
                 id={idUser}
                 firstName={firstName}
                 lastName={lastName}

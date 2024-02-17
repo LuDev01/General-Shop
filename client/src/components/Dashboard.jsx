@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { Link } from "react-router-dom";
+import { Link,useNavigate } from "react-router-dom";
 import { FaHome } from "react-icons/fa";
 import { FaTshirt } from "react-icons/fa";
 import { BsPersonFillGear } from "react-icons/bs";
@@ -33,7 +33,7 @@ export const Dashboard = () => {
   const [isExpanded, setIsExpanded] = useState({});
 
   const token = localStorage.getItem("token");
-
+  const navigate=useNavigate();
   //Pagination
   const itemsPerPage = 3;
   // Get current items
@@ -85,6 +85,41 @@ export const Dashboard = () => {
     settingsRef.current.classList.add("active");
   };
 
+  const handleInputSearch = async (e) => {
+    try {
+      const response = await axiosClient.get(
+        `searchbyproducts?query=${e.target.value}`
+      );
+      setSearch(response.data.products);
+    } catch (error) {
+      console.log("Error during the research");
+    }
+  };
+  
+  const handleOnLogOut = () => {
+    localStorage.setItem("isLoggedOut", "true");
+    localStorage.removeItem("isLoggedIn");
+    localStorage.removeItem("isLoggedInv2");
+    localStorage.removeItem("token");
+    localStorage.removeItem("exp");
+    localStorage.removeItem("role");
+
+
+    document.cookie = "isLoggedIn=false;path=/";
+    var cookies = document.cookie.split(";");
+    // document.cookie = "isLoggedInv3=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/";
+    for (var i = 0; i < cookies.length; i++) {
+      var cookie = cookies[i];
+      var eqPos = cookie.indexOf("=");
+      var name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
+      document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/";
+    }
+    navigate("/");
+    
+    window.location.reload();
+  };
+  console.log("Mega cookie", document.cookie);
+  
   const getProduct = async () => {
     try {
       const response = await axiosClient.get("products");
@@ -105,17 +140,6 @@ export const Dashboard = () => {
       setEmail(user.email);
     } catch (error) {
       console.error("Error showing user", error.message);
-    }
-  };
-
-  const handleInputSearch = async (e) => {
-    try {
-      const response = await axiosClient.get(
-        `searchbyproducts?query=${e.target.value}`
-      );
-      setSearch(response.data.products);
-    } catch (error) {
-      console.log("Error during the research");
     }
   };
 
@@ -167,12 +191,6 @@ export const Dashboard = () => {
               </button>
             </li>
 
-            <li>
-              <Link className="button-menu button-signout" to="/">
-                <FaSignOutAlt />
-                Sign Out
-              </Link>
-            </li>
           </ul>
 
           <p className="text-footer">© 2024 SheDev Coding</p>

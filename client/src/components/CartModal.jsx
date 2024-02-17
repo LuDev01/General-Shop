@@ -15,7 +15,9 @@ function CartModal() {
   const { cart } = useContext(DataContext);
 
   const totalQuantity = cart.reduce(
-    (total, product) => total + product.quantity,0);
+    (total, product) => {
+      return total+(product.quantity>=1?1:0);
+    },0);
 
   return (
     <>
