@@ -54,7 +54,7 @@ export const NavBar = () => {
     navigate({to: `/productDetails/${data._id}`})
     console.log("searching", searchItem);
   };
-
+  
   const handleOnLogOut = () => {
     localStorage.setItem("isLoggedOut", "true");
     localStorage.removeItem("isLoggedIn");

@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
-import { Link,useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { BsPersonFillGear } from "react-icons/bs";
-import { FaSignOutAlt } from "react-icons/fa";
 import { EditUser } from "./EditUser";
 import { jwtDecode } from "jwt-decode";
 import axiosClient from "../axiosConfig";
@@ -11,7 +10,8 @@ import "./Profile.css";
 
 export const Profile = () => {
   const [image, setImage] = useState(defaultUserImg); // Set the initial image
-  const [settings, setSettings] = useState(false);
+  const [settings, setSettings] = useState(true);
+  // const [settings, setSettings] = useState(false);
   const [idUser, setId] = useState(" ");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -30,33 +30,8 @@ export const Profile = () => {
     }
   }, [token]);
 
-  const settingsRef = useRef();
-  const handleChangeSettings = () => {
-    setSettings(true);
-    settingsRef.current.classList.add("active");
-  };
-  const handleOnLogOut = (e) => {
-    e.preventDefault();
-    localStorage.setItem('isLoggedOut', 'true');
-    localStorage.removeItem("isLoggedIn");
-    localStorage.removeItem("isLoggedInv2");
-    localStorage.removeItem("token");
-    localStorage.removeItem("exp");
-    localStorage.removeItem("role");
-
-    console.log("the cookie",document.cookie);
-    var cookies = document.cookie.split(";");
-
-    for (var i = 0; i < cookies.length; i++) {
-      var cookie = cookies[i];
-      var eqPos = cookie.indexOf("=");
-      var name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
-      document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
-    }
-    navigate("/");
-    window.location.reload();
-  };
   const getUser = async () => {
+    if (!settings) return;
     try {
       const response = await axiosClient.get(`user/${id}`);
       const { user } = response.data;
@@ -70,9 +45,18 @@ export const Profile = () => {
     }
   };
 
+
+  const settingsRef = useRef();
+  const handleChangeSettings = () => {
+    setSettings(true);
+    console.log('Settings:', settings); // Add this line
+    settingsRef.current.classList.add("active");
+    getUser();
+  };
+
   useEffect(() => {
     getUser();
-  }, []);
+  }, [settings]);
 
   return (
     <>
@@ -93,12 +77,6 @@ export const Profile = () => {
                 <BsPersonFillGear />
                 Settings
               </button>
-            </li>
-            <li>
-              <Link className="client-button-menu client-button-signout" onClick={handleOnLogOut}>
-                <FaSignOutAlt />
-                Sign Out 
-              </Link>
             </li>
           </ul>
           <p className="client-text-footer">© 2024 SheDev Coding</p>
