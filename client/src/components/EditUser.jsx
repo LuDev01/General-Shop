@@ -62,6 +62,16 @@ export const EditUser = (props) => {
     }
   };
 
+  useEffect(() => {
+    setImage(props.image);
+    setFirstName(props.firstName);
+    setLastName(props.lastName);
+    setDocumentType(props.documentType);
+    setDocument(props.document);
+    setEmail(props.email);
+  }, [props]);
+  
+
   return (
     <>
       <ToastContainer />

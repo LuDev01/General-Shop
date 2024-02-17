@@ -79,15 +79,6 @@ ul {
   box-shadow: 0 -1rem 0 var(--white-main);
 }
 
-.button-menu > i.bi-hand-index-thumb-fill,
-.button-menu > i.bi-hand-index-thumb {
-  transform: rotateZ(90deg);
-}
-
-.button-signout {
-  margin-top: 2rem;
-}
-
 .text-footer {
   color: var(--blue-second);
   font-size: 1rem;

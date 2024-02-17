@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link} from "react-router-dom";
 import { BsPersonFillGear } from "react-icons/bs";
 import { EditUser } from "./EditUser";
 import { jwtDecode } from "jwt-decode";
@@ -11,7 +11,6 @@ import "./Profile.css";
 export const Profile = () => {
   const [image, setImage] = useState(defaultUserImg); // Set the initial image
   const [settings, setSettings] = useState(true);
-  // const [settings, setSettings] = useState(false);
   const [idUser, setId] = useState(" ");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -19,7 +18,8 @@ export const Profile = () => {
   const [document, setDocument] = useState("");
   const [email, setEmail] = useState("");
   const token = localStorage.getItem("token");
-  const navigate = useNavigate();
+
+
   let id;
   useEffect(() => {
     if (token) {
@@ -30,11 +30,17 @@ export const Profile = () => {
     }
   }, [token]);
 
+  const settingsRef = useRef();
+  const handleChangeSettings = () => {
+    setSettings(true);
+    console.log("Settings:", settings); // Add this line
+    settingsRef.current.classList.add("active");
+  };
   const getUser = async () => {
-    if (!settings) return;
     try {
       const response = await axiosClient.get(`user/${id}`);
       const { user } = response.data;
+      console.log("User data:", user); // Add this line
       setFirstName(user.firstName);
       setLastName(user.lastName);
       setDocumentType(user.documentType);
@@ -45,17 +51,10 @@ export const Profile = () => {
     }
   };
 
-
-  const settingsRef = useRef();
-  const handleChangeSettings = () => {
-    setSettings(true);
-    console.log('Settings:', settings); // Add this line
-    settingsRef.current.classList.add("active");
-    getUser();
-  };
-
   useEffect(() => {
-    getUser();
+    if (settings) {
+      getUser();
+    }
   }, [settings]);
 
   return (
@@ -70,7 +69,7 @@ export const Profile = () => {
           <ul className="client-menu">
             <li>
               <button
-                className="client-button-menu button-category active"
+                className="client-button-menu  active"
                 ref={settingsRef}
                 onClick={handleChangeSettings}
               >
@@ -88,6 +87,7 @@ export const Profile = () => {
               <h2 className="client-principal-title">User Settings</h2>
               <EditUser
                 refreshUser={getUser}
+                key={idUser}
                 id={idUser}
                 firstName={firstName}
                 lastName={lastName}
