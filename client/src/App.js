@@ -13,6 +13,7 @@ import { DataProvider } from './components/context/DataProvider';
 import {Profile} from "./components/Profile";
 import { Dashboard } from './components/Dashboard';
 import { ImageProvider } from './components/context/ImageProvider';
+import {UserProvider} from './components/context/UserProvider';
 
 function getCookie(name) {
   const cookies = document.cookie.split(';');
@@ -48,7 +49,9 @@ function App() { // Defines the App component, which serves as the main componen
 
 
   return (
+    
     <ImageProvider>
+    {/* <UserProvider> */}
     <DataProvider>
       <BrowserRouter> {/*Starts the router context provided by BrowserRouter. This allows you to use features like navigation and route matching.*/}
         <div className="App"> {/*Provide a container for the main content of the application.*/}
@@ -67,6 +70,7 @@ function App() { // Defines the App component, which serves as the main componen
         </div>
       </BrowserRouter>
     </DataProvider>
+    {/* </UserProvider> */}
     </ImageProvider>
   );
 }

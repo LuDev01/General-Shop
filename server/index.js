@@ -20,8 +20,8 @@ cloudinary.config({
 console.log(cloudinary.config().cloud_name);
 
 const corsOptions = {
-  // origin: "http://localhost:3000",
-  origin: "https://general-shop-shedev-frontend.vercel.app",
+  origin: "http://localhost:3000",
+  // origin: "https://general-shop-shedev-frontend.vercel.app",
   credentials: true,
   allowedHeaders: ["Authorization", "Content-Type"], // Agrega 'Authorization' a los encabezados permitidos
 };

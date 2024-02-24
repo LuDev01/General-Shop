@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { BsFillEyeFill, BsFillEyeSlashFill } from "react-icons/bs";
 import { ImageContext } from "./context/ImageContext";
+import { DataContext } from "./context/DataContext";
 import CarrouselLogIn from "./CarrouselLogIn";
 import Form from "react-bootstrap/Form";
 import Logo from "./assets/GeneralShopLogo.png";
@@ -20,7 +21,8 @@ export const LoginForm = () => {
 
   const { updateImageURLAdmin, updateImageURLClient } =
     useContext(ImageContext);
-  const port = process.env.PORT || 5000;
+
+  const { setRole, setCart } = useContext(DataContext);
   const navigate = useNavigate();
 
   const handleToggle = () => {
@@ -52,7 +54,6 @@ export const LoginForm = () => {
     setErrors(errors);
 
     if (!errors.email && !errors.passw) {
-      console.log("Sending request with email and password:", email, passw);
       const passwordProcess = CryptoJS.AES.encrypt(
         passw,
         "SheDev2101200025021997"
@@ -80,12 +81,20 @@ export const LoginForm = () => {
 
         if (data.message === "Welcome!") {
           setCookie("isLoggedInv3", true, 1);
+          setRole(data.role);
           localStorage.setItem("isLoggedIn", true);
           localStorage.setItem("token", data.token);
           localStorage.setItem("exp", data.exp);
           localStorage.setItem("role", data.role);
           localStorage.removeItem("isLoggedOut");
 
+          // Load the cart for the new role
+          const savedCart = localStorage.getItem(`myCart_${data.role}`);
+          if (savedCart) {
+            setCart(JSON.parse(savedCart));
+          } else {
+            setCart([]);
+          }
           if (data.role === "Admin") {
             localStorage.setItem("defaultAdminImg", data.image);
             updateImageURLAdmin(data.image);
@@ -93,21 +102,26 @@ export const LoginForm = () => {
             localStorage.setItem("defaultUserImg", data.image);
             updateImageURLClient(data.image);
           }
-
           setEmail("");
           setPassw("");
           window.location.reload();
           navigate("/");
         } else {
           // Authentication fails
-          alert(
-            "Authentication failed! Please check your information or create your account."
-          );
-          console.log("Error de else");
-          console.log(passw);
+          alert( "Authentication failed! Please check your information or create your account."    );
         }
       } catch (error) {
-        console.log(error);
+        if (error.response && error.response.status === 401) {
+          if (error.response.data.message === "Email not found") {
+            setErrors({ email: "Invalid email", passw: "" });
+          } else if (error.response.data.message === "Incorrect password") {
+            setErrors({ email: "", passw: "Invalid password" });
+          }
+        } else {
+          // Something happened in setting up the request that triggered an Error
+          console.log('Error', error.message);
+        }
+        
       }
     }
   };
@@ -143,7 +157,7 @@ export const LoginForm = () => {
           <div className="d-flex justify-content-center">
             <img className="logo-img" src={Logo} alt="GeneralShop" />
           </div>
-          <Form.Group className="mb-3" >
+          <Form.Group className="mb-3">
             <h3 className="text-title">Log in to continue </h3>
             <Form.Label>Email</Form.Label>
             <Form.Control
