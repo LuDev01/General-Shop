@@ -3,9 +3,11 @@ import { DataContext } from "./DataContext";
 import axiosClient from "../../axiosConfig";
 
 export const DataProvider = ({ children }) => {
+  const [role, setRole] = useState(localStorage.getItem("role") || "Guest");
   const [data, setData] = useState([]);
   const [cart, setCart] = useState(()=>{
-    const savedCart=localStorage.getItem("myCart");
+    const userId = role === "Guest" ? "" : localStorage.getItem("user"); // Get the useriD from local storage only if the role is not "Guest"
+    const savedCart=localStorage.getItem(`myCart_${role}${userId ? "_" + userId : ""}`);
     if(savedCart){
       return JSON.parse(savedCart);
     }
@@ -30,11 +32,13 @@ export const DataProvider = ({ children }) => {
 
   useEffect(() => {
     // Save the cart to localStorage whenever it changes
-    localStorage.setItem("myCart", JSON.stringify(cart));
-  }, [cart]);
+    const userId = role === "Guest" ? "" : localStorage.getItem("user"); // Get the token from local storage 
+    localStorage.setItem(`myCart_${role}${userId ? "_" + userId : ""}`, JSON.stringify(cart));
+  }, [cart,role]);
 
 
   const addToCart = (product, size) => {
+
     // Find the product in the data state
     const productFromData = data.find((p) => p._id === product._id);
     if (!productFromData) {
@@ -150,7 +154,7 @@ const clearCart=()=>{
 }
   return (
     <DataContext.Provider
-      value={{data, cart, addToCart,removeFromCart,increaseQuantity,decreaseQuantity,clearCart}} >{children}
+      value={{data, cart,setCart,role,setRole, addToCart,removeFromCart,increaseQuantity,decreaseQuantity,clearCart}} >{children}
     </DataContext.Provider>
   );
 };

@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { ImSearch } from "react-icons/im";
 import { FaUserAlt } from "react-icons/fa";
 import { ImageContext } from "./context/ImageContext";
+import { DataContext } from "./context/DataContext";
 import CartModal from "./CartModal";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
@@ -28,6 +29,7 @@ export const NavBar = () => {
 
   const isLoggedIn = Boolean(token);
   const { imageURL, imageURLClient } = useContext(ImageContext);
+  const { setRole, setCart } = useContext(DataContext);
 
   const [search, setSearchBtn] = useState({
     transition: "all .3s ease",
@@ -48,20 +50,29 @@ export const NavBar = () => {
     setValue(e.target.value);
   };
 
-  const handleOnSearch = (searchItem,data) => {
+  const handleOnSearch = (searchItem, data) => {
     setValue(searchItem);
-    // <Link to={`/productDetails/${data._id}`}></Link>
-    navigate({to: `/productDetails/${data._id}`})
+    navigate({ to: `/productDetails/${data._id}` });
     console.log("searching", searchItem);
   };
-  
+
   const handleOnLogOut = () => {
+    setRole("Guest");
     localStorage.setItem("isLoggedOut", "true");
     localStorage.removeItem("isLoggedIn");
     localStorage.removeItem("isLoggedInv2");
     localStorage.removeItem("token");
     localStorage.removeItem("exp");
     localStorage.removeItem("role");
+    localStorage.removeItem("user");
+
+    const savedCart = localStorage.getItem("myCart_Guest");
+    if (savedCart) {
+      setCart(JSON.parse(savedCart));
+    } else {
+      setCart([]);
+    }
+
     console.log("the super cookie", document.cookie);
     var cookies = document.cookie.split(";");
 
@@ -89,25 +100,12 @@ export const NavBar = () => {
     getProduct();
   }, [value]);
 
-  const handleMenuToggle = () => {
-    setIsMenuVisible(!isMenuVisible);
-    setIsSearchVisible(false); // Oculta la barra de búsqueda al abrir el menú
-  };
-
-  const handleSearchToggle = () => {
-    setIsSearchVisible(!isSearchVisible);
-    setIsDropdownVisible(!isDropdownVisible);
-    setIsMenuVisible(false); // Oculta el menú al abrir la barra de búsqueda
-  };
-
   return (
     <div>
       <Navbar
         expand="lg"
         className={
-          navbar
-            ? "NavBar-color active fixed-top"
-            : "NavBar-color fixed-top"
+          navbar ? "NavBar-color active fixed-top" : "NavBar-color fixed-top"
         }
       >
         <Container>
@@ -116,13 +114,8 @@ export const NavBar = () => {
               <img className="general-logo" src={logo} alt="" />
             </Navbar.Brand>
           </div>
-          {/* <Navbar.Toggle
-            aria-controls="basic-navbar-nav"
-            onClick={handleMenuToggle}
-          /> */}
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
-            {/* <Nav className={`me-auto ${isMenuVisible ? "mobile-menu" : ""}`}> */}
             <Nav style={{ position: "relative", right: 90 }}>
               <Nav.Link href="/" className="nav-menu-text">
                 Home
@@ -138,18 +131,11 @@ export const NavBar = () => {
                 title={<span className="nav-menu-text">Categories</span>}
                 id="basic-nav-dropdown"
               >
-                <NavDropdown.Item href="/womenProducts">
-                  Woman 
-                </NavDropdown.Item>
+                <NavDropdown.Item href="/womenProducts">Woman</NavDropdown.Item>
                 <NavDropdown.Item href="/menProducts">Man</NavDropdown.Item>
               </NavDropdown>
             </Nav>
-            {/* <Form
-              className={`d-flex search-field search-container ${
-                isSearchVisible ? "mobile-search" : ""
-              }`}
-            > */}
-             <Form
+            <Form
               className="d-flex search-field search-container"
               style={{ opacity: search.opacity, transition: search.transition }}
             >
@@ -196,20 +182,18 @@ export const NavBar = () => {
                 </div>
               )}
             </Form>
-{/* 
-            {!isSearchVisible && (
-              <ImSearch
-                className="search-icon"
-                onClick={handleSearchToggle}
-              />
-            )} */}
-                 {search.showSearchButton ? (
+          
+            {search.showSearchButton ? (
               <ImSearch className="search-icon" onClick={showIcon} />
             ) : null}
 
             {isLoggedIn ? (
               role === "Client" ? (
-                <Nav className={`user-dropdown ${isMenuVisible ? "mobile-menu" : ""}`}>
+                <Nav
+                  className={`user-dropdown ${
+                    isMenuVisible ? "mobile-menu" : ""
+                  }`}
+                >
                   <img
                     src={imageURLClient}
                     style={{
@@ -230,7 +214,11 @@ export const NavBar = () => {
                   </NavDropdown>
                 </Nav>
               ) : role === "Admin" ? (
-                <Nav className={`user-dropdown ${isMenuVisible ? "mobile-menu" : ""}`}>
+                <Nav
+                  className={`user-dropdown ${
+                    isMenuVisible ? "mobile-menu" : ""
+                  }`}
+                >
                   <img
                     src={imageURL}
                     style={{
@@ -267,4 +255,3 @@ export const NavBar = () => {
     </div>
   );
 };
-

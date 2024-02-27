@@ -4,17 +4,17 @@ import defaultUserImg from "../assets/DefaultUserPicture.jpg";
 import defaultAdminImg from "../assets/DefaultAdminPicture.jpg";
 
 export const ImageProvider = ({ children }) => {
-  const role = localStorage.getItem('role'); // get the role from localStorage
-  const [imageURL, setImageURL] =  useState( localStorage.getItem('isLoggedOut') === 'true' ? defaultAdminImg : localStorage.getItem('defaultAdminImg') || defaultAdminImg);
-  const [imageURLClient, setImageURLClient] = useState(localStorage.getItem('isLoggedOut') === 'true' ? defaultUserImg : localStorage.getItem('defaultUserImg') || defaultUserImg);
-
+  const userId = localStorage.getItem('user'); 
+  const [imageURL, setImageURL] = useState(localStorage.getItem(`defaultAdminImg_${userId}`) || defaultAdminImg);
+  const [imageURLClient, setImageURLClient] = useState(localStorage.getItem(`defaultUserImg_${userId}`) || defaultUserImg);
+ 
   const updateImageURLAdmin = (newURL) => {
     setImageURL(newURL);
-    localStorage.setItem('defaultAdminImg', newURL);
+    localStorage.setItem(`defaultAdminImg_${userId}`, newURL);
   };
   const updateImageURLClient = (newURLClient) => {
     setImageURLClient(newURLClient);
-    localStorage.setItem('defaultUserImg', newURLClient);
+    localStorage.setItem(`defaultUserImg_${userId}`, newURLClient);
   };
 
   return (

@@ -96,29 +96,6 @@ export const Dashboard = () => {
     }
   };
   
-  const handleOnLogOut = () => {
-    localStorage.setItem("isLoggedOut", "true");
-    localStorage.removeItem("isLoggedIn");
-    localStorage.removeItem("isLoggedInv2");
-    localStorage.removeItem("token");
-    localStorage.removeItem("exp");
-    localStorage.removeItem("role");
-
-
-    document.cookie = "isLoggedIn=false;path=/";
-    var cookies = document.cookie.split(";");
-    // document.cookie = "isLoggedInv3=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/";
-    for (var i = 0; i < cookies.length; i++) {
-      var cookie = cookies[i];
-      var eqPos = cookie.indexOf("=");
-      var name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
-      document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/";
-    }
-    navigate("/");
-    
-    window.location.reload();
-  };
-  console.log("Mega cookie", document.cookie);
   
   const getProduct = async () => {
     try {

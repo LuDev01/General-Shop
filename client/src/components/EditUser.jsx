@@ -26,6 +26,7 @@ export const EditUser = (props) => {
     updateImageURLClient,
   } = useContext(ImageContext);
   const role = localStorage.getItem("role"); // get the role from localStorage
+  const userId=localStorage.getItem("user");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -48,10 +49,13 @@ export const EditUser = (props) => {
           },
         }
       );
+      const newImageURL = response.data.user.image.url;
       if (role === "Admin") {
-        updateImageURLAdmin(response.data.user.image.url);
+        updateImageURLAdmin(newImageURL);
+        localStorage.setItem(`AdminImg_${userId}`, newImageURL);
       } else if (role === "Client") {
-        updateImageURLClient(response.data.user.image.url);
+        updateImageURLClient(newImageURL);
+        localStorage.setItem(`ClientImg_${userId}`, newImageURL);
       }
 
       toast.success("User edited successfully!");
