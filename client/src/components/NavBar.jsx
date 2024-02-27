@@ -13,7 +13,6 @@ import Form from "react-bootstrap/Form";
 import logo from "./assets/GeneralShopLogoNoSlogan.png";
 import axiosClient from "../axiosConfig";
 import "./NavBar.css";
-import { setRandomFallback } from "bcryptjs";
 
 export const NavBar = () => {
   const [navbar, setNavbar] = useState(false);
@@ -53,7 +52,6 @@ export const NavBar = () => {
 
   const handleOnSearch = (searchItem, data) => {
     setValue(searchItem);
-    // <Link to={`/productDetails/${data._id}`}></Link>
     navigate({ to: `/productDetails/${data._id}` });
     console.log("searching", searchItem);
   };
@@ -66,6 +64,7 @@ export const NavBar = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("exp");
     localStorage.removeItem("role");
+    localStorage.removeItem("user");
 
     const savedCart = localStorage.getItem("myCart_Guest");
     if (savedCart) {
@@ -101,17 +100,6 @@ export const NavBar = () => {
     getProduct();
   }, [value]);
 
-  const handleMenuToggle = () => {
-    setIsMenuVisible(!isMenuVisible);
-    setIsSearchVisible(false); // Oculta la barra de búsqueda al abrir el menú
-  };
-
-  const handleSearchToggle = () => {
-    setIsSearchVisible(!isSearchVisible);
-    setIsDropdownVisible(!isDropdownVisible);
-    setIsMenuVisible(false); // Oculta el menú al abrir la barra de búsqueda
-  };
-
   return (
     <div>
       <Navbar
@@ -126,13 +114,8 @@ export const NavBar = () => {
               <img className="general-logo" src={logo} alt="" />
             </Navbar.Brand>
           </div>
-          {/* <Navbar.Toggle
-            aria-controls="basic-navbar-nav"
-            onClick={handleMenuToggle}
-          /> */}
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
-            {/* <Nav className={`me-auto ${isMenuVisible ? "mobile-menu" : ""}`}> */}
             <Nav style={{ position: "relative", right: 90 }}>
               <Nav.Link href="/" className="nav-menu-text">
                 Home
@@ -152,11 +135,6 @@ export const NavBar = () => {
                 <NavDropdown.Item href="/menProducts">Man</NavDropdown.Item>
               </NavDropdown>
             </Nav>
-            {/* <Form
-              className={`d-flex search-field search-container ${
-                isSearchVisible ? "mobile-search" : ""
-              }`}
-            > */}
             <Form
               className="d-flex search-field search-container"
               style={{ opacity: search.opacity, transition: search.transition }}
@@ -204,13 +182,7 @@ export const NavBar = () => {
                 </div>
               )}
             </Form>
-            {/* 
-            {!isSearchVisible && (
-              <ImSearch
-                className="search-icon"
-                onClick={handleSearchToggle}
-              />
-            )} */}
+          
             {search.showSearchButton ? (
               <ImSearch className="search-icon" onClick={showIcon} />
             ) : null}

@@ -173,7 +173,7 @@ const controllers = {
       if (isMatch) {
         res
           .status(200)
-          .json({ token, exp, role: user.userRole, message: "Welcome!" });
+          .json({ token, exp, role: user.userRole,userId:user._id, message: "Welcome!" });
       }
     } catch (error) {
       console.log(error);

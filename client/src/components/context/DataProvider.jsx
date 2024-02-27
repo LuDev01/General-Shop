@@ -1,14 +1,13 @@
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect } from "react";
 import { DataContext } from "./DataContext";
-import {UserContext} from "./UserContext";
 import axiosClient from "../../axiosConfig";
 
 export const DataProvider = ({ children }) => {
-  // const {user,setUser}=useContext(UserContext);
   const [role, setRole] = useState(localStorage.getItem("role") || "Guest");
   const [data, setData] = useState([]);
   const [cart, setCart] = useState(()=>{
-    const savedCart=localStorage.getItem(`myCart_${role}`);
+    const userId = role === "Guest" ? "" : localStorage.getItem("user"); // Get the useriD from local storage only if the role is not "Guest"
+    const savedCart=localStorage.getItem(`myCart_${role}${userId ? "_" + userId : ""}`);
     if(savedCart){
       return JSON.parse(savedCart);
     }
@@ -33,7 +32,8 @@ export const DataProvider = ({ children }) => {
 
   useEffect(() => {
     // Save the cart to localStorage whenever it changes
-    localStorage.setItem(`myCart_${role}`, JSON.stringify(cart));
+    const userId = role === "Guest" ? "" : localStorage.getItem("user"); // Get the token from local storage 
+    localStorage.setItem(`myCart_${role}${userId ? "_" + userId : ""}`, JSON.stringify(cart));
   }, [cart,role]);
 
 

@@ -68,7 +68,7 @@ export const LoginForm = () => {
         const response = await axiosClient.post("login", userLogin);
         const data = response.data;
         console.log("Received response from server:", data.message);
-
+ 
         function setCookie(name, value, days) {
           let expires = "";
           if (days) {
@@ -78,7 +78,7 @@ export const LoginForm = () => {
           }
           document.cookie = `${name}=${value || ""}${expires}; path=/`;
         }
-
+    
         if (data.message === "Welcome!") {
           setCookie("isLoggedInv3", true, 1);
           setRole(data.role);
@@ -86,20 +86,21 @@ export const LoginForm = () => {
           localStorage.setItem("token", data.token);
           localStorage.setItem("exp", data.exp);
           localStorage.setItem("role", data.role);
+          localStorage.setItem("user",data.userId);
           localStorage.removeItem("isLoggedOut");
-
+          const userId=localStorage.getItem('user');
           // Load the cart for the new role
-          const savedCart = localStorage.getItem(`myCart_${data.role}`);
+          const savedCart = localStorage.getItem(`myCart_${data.role}_${userId}`);
           if (savedCart) {
             setCart(JSON.parse(savedCart));
           } else {
             setCart([]);
           }
           if (data.role === "Admin") {
-            localStorage.setItem("defaultAdminImg", data.image);
+            localStorage.setItem(`AdminImg_${userId}`, data.image);
             updateImageURLAdmin(data.image);
           } else if (data.role === "Client") {
-            localStorage.setItem("defaultUserImg", data.image);
+            localStorage.setItem(`ClientImg_${userId}`, data.image);
             updateImageURLClient(data.image);
           }
           setEmail("");
