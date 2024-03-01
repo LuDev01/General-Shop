@@ -37,6 +37,8 @@
 <h3><b>General Shop - Online Fashion Transactional Portal</b></h3>
 
 Welcome to the repository of the General Shop web application, a Colombia-based startup dedicated to selling fashion products over the Internet. The main objective of this application is to strengthen General Shop's digital sales channel by building a transactional portal for the sale of adult fashion t-shirts 👕🛍️.
+
+---
  
 ## Scripts
 - **start (frontend)**: `npm start`
