@@ -1,10 +1,10 @@
 <div align="center">
-  <img style="width: 80px; border-radius:100px"   src="/client/src/components/assets/GeneralShopLogoNoSlogan.png"/>
+  <img style="width: 150px; border-radius:100px"   src="/client/src/components/assets/GeneralShopLogoNoSlogan.png"/>
 </div>
 
 ---
-### 🧰 Stack
 <div align="center">
+### 🧰 Stack
   <img alt="JavaScript" width="30px" style="padding-right:10px;" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-plain.svg" />
   <img alt="React" width="30px" style="padding-right:10px;" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" />
   <img alt="HTML" width="30px" style="padding-right:10px;" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-plain.svg" />
