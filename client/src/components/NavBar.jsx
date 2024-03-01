@@ -17,7 +17,6 @@ import "./NavBar.css";
 
 export const NavBar = () => {
   const [isSearchVisible, setIsSearchVisible] = useState(false);
-  // const [isDropdownVisible, setIsDropdownVisible] = useState(false);
   const [value, setValue] = useState("");
   const [userDropdown, setUserDropdown] = useState(false);
   const [data, setData] = useState([]);
@@ -42,7 +41,9 @@ export const NavBar = () => {
       opacity: isSearchVisible ? 0 : 1,
     }));
     setIsSearchVisible(!isSearchVisible);
-    // setIsDropdownVisible(!isDropdownVisible);
+    if (isSearchVisible) {
+      setValue(""); 
+    }
   };
 
   const handleOnChangeValue = (e) => {
@@ -86,14 +87,8 @@ export const NavBar = () => {
     }
   };
 
-  // useEffect(() => {
-  //   getProduct();
-  // }, [value]);
-
   useEffect(() => {
     getProduct();
-    console.log("value:", value);
-    console.log("data:", data);
   }, [value]);
 
   return (
@@ -106,7 +101,6 @@ export const NavBar = () => {
         </div>
       
       <div className="navigation-tabs">
-        {/* <ul className={`navigation ${isMenuVisible ? 'open' : ''}`}> */}
         <ul className="navigation">
           <li>
             <a href="/">Home</a>
@@ -169,60 +163,60 @@ export const NavBar = () => {
               ))}
           </div>
         )}
-        <div>
-        {isLoggedIn ? (
-              role === "Client" ? (
-                <Nav className={`user-dropdown ${isMenuVisible ? "mobile-menu" : ""}`}>
-                  <img
-                    src={imageURLClient}
-                    style={{
-                      borderRadius: "50%",
-                      width: "32px",
-                      height: "32px",
-                    }}
-                    alt="profile-picture"
-                    onClick={() => setUserDropdown(!userDropdown)}
-                  />
-                  <NavDropdown show={userDropdown} className="user-dropdown">
-                    <NavDropdown.Item href="/userProfile">
-                      Profile
-                    </NavDropdown.Item>
-                    <NavDropdown.Item onClick={handleOnLogOut}>
-                      Log Out
-                    </NavDropdown.Item>
-                  </NavDropdown>
-                </Nav>
-              ) : role === "Admin" ? (
-                <Nav className={`user-dropdown ${isMenuVisible ? "mobile-menu" : ""}`}>
-                  <img
-                    src={imageURL}
-                    style={{
-                      borderRadius: "50%",
-                      width: "3rem",
-                      height: "3rem",
-                    }}
-                    alt="profile-picture"
-                    onClick={() => setUserDropdown(!userDropdown)}
-                  />
-                  <NavDropdown show={userDropdown} className="user-dropdown-menu">
-                    <NavDropdown.Item href="/adminDashboard">
-                      Dashboard
-                    </NavDropdown.Item>
-                    <NavDropdown.Item onClick={handleOnLogOut}>
-                      Log Out
-                    </NavDropdown.Item>
-                  </NavDropdown>
-                </Nav>
-              ) : null
-            ) : (
-              <div>
-                <Link className="link-user" to="/login">
-                  {" "}
-                  <FaUserAlt className="user-icon" />{" "}
-                </Link>
-              </div>
-            )}
-      </div>
+        <div className="login">
+          {isLoggedIn ? (
+                role === "Client" ? (
+                  <Nav className={`user-dropdown ${isMenuVisible ? "mobile-menu" : ""}`}>
+                    <img
+                      src={imageURLClient}
+                      style={{
+                        borderRadius: "50%",
+                        width: "32px",
+                        height: "32px",
+                      }}
+                      alt="profile-picture"
+                      onClick={() => setUserDropdown(!userDropdown)}
+                    />
+                    <NavDropdown show={userDropdown} className="user-dropdown">
+                      <NavDropdown.Item href="/userProfile">
+                        Profile
+                      </NavDropdown.Item>
+                      <NavDropdown.Item onClick={handleOnLogOut}>
+                        Log Out
+                      </NavDropdown.Item>
+                    </NavDropdown>
+                  </Nav>
+                ) : role === "Admin" ? (
+                  <Nav className={`user-dropdown ${isMenuVisible ? "mobile-menu" : ""}`}>
+                    <img
+                      src={imageURL}
+                      style={{
+                        borderRadius: "50%",
+                        width: "3rem",
+                        height: "3rem",
+                      }}
+                      alt="profile-picture"
+                      onClick={() => setUserDropdown(!userDropdown)}
+                    />
+                    <NavDropdown show={userDropdown} className="user-dropdown-menu">
+                      <NavDropdown.Item href="/adminDashboard">
+                        Dashboard
+                      </NavDropdown.Item>
+                      <NavDropdown.Item onClick={handleOnLogOut}>
+                        Log Out
+                      </NavDropdown.Item>
+                    </NavDropdown>
+                  </Nav>
+                ) : null
+              ) : (
+                <div>
+                  <Link className="link-user" to="/login">
+                    {" "}
+                    <FaUserAlt className="user-icon" />{" "}
+                  </Link>
+                </div>
+              )}
+        </div>
       {!isSearchVisible && <CartModal/>}
       </div>
     </header>

@@ -171,7 +171,7 @@ export const NavBar = () => {
                 </div>
               )}
             </Form>
-                 {search.showSearchButton ? (
+            {search.showSearchButton ? (
               <ImSearch className="search-icon" onClick={showIcon} />
             ) : null}
 
