@@ -3,10 +3,9 @@
   <h3 align="center"><b>E-commerce</b></h3>
 </div>
 [Demo](https://general-shop-shedev-frontend.vercel.app/)
-
 ---
 <div align="center">
-###🧰 Stack
+### Stack 🧰
   <br>
   <img alt="JavaScript" width="40px" style="padding-right:10px;" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-plain.svg" />
   <img alt="React" width="40px" style="padding-right:10px;" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" />
