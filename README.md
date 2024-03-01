@@ -30,6 +30,8 @@
   JavaScript | React | HTML | CSS | NodeJS | MongoDB
 </div>
 
+---
+
 ## Description
 E-commerce - Gestor de Compras
  
