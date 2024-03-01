@@ -1,9 +1,9 @@
 <div align="center">
   <img style="width: 150px; border-radius:100px"   src="/client/src/components/assets/GeneralShopLogoNoSlogan.png"/>
+  <h3 align="center"><b>E-commerce</b></h3>
+  [Demo](https://general-shop-shedev-frontend.vercel.app/)
 </div>
 
-<h3 align="center"><b>E-commerce</b></h3>
-[Demo](https://general-shop-shedev-frontend.vercel.app/)
 ---
 <div align="center">
 ###🧰 Stack
