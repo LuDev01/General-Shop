@@ -1,5 +1,5 @@
 <div align="center">
-  <img style="width: 150px; border-radius:100px"   src="/client/src/components/assets/GeneralShopLogoNoSlogan.png"/>
+  <img style="width: 200px; border-radius:100px"   src="/client/src/components/assets/GeneralShopLogoNoSlogan.png"/>
   <h3 align="center"><b>E-commerce</b></h3>
 </div>
 
