@@ -63,11 +63,11 @@ E-commerce - Gestor de Compras
 
 ---
 
-General Shop - Online Fashion Transactional Portal
+<h3><b>General Shop - Online Fashion Transactional Portal</b></h3>
 
 Welcome to the repository of the General Shop web application, a Colombia-based startup dedicated to selling fashion products over the Internet. The main objective of this application is to strengthen General Shop's digital sales channel by building a transactional portal for the sale of adult fashion t-shirts 👕🛍️.
 
-<h3 align="center"><b>Requirements and Functionalities</b></h3>
+<h3><b>Requirements and Functionalities</b></h3>
 
 1. User Authentication:
     - Login screen with username and password fields.
@@ -101,4 +101,4 @@ Welcome to the repository of the General Shop web application, a Colombia-based 
     - Purchase confirmation with delivery details in a pop-up window.
     - Cash on delivery, no payment method required.
 
-Thank you for considering General Shop for your online purchases! Feel free to explore the source code and contribute to the development of this exciting application.
+🚀Thank you for considering General Shop for your online purchases! Feel free to explore the source code and contribute to the development of this exciting application.
