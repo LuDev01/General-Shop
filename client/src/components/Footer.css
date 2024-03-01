@@ -3,30 +3,33 @@
   font-size: 1.2rem;
   padding: 2rem 0;
   margin-top: 10rem;
-  /* margin-left: 12rem; */
   position: relative;
 }
+
 .footer-col1 a {
   text-decoration: none;
 }
+
 .footer-col1 h3 {
   font-weight: 700;
-  font-family: cursive;
   letter-spacing: 2px;
 }
+
 .footer-col1 span {
   font-size: 20px;
   color: #e7804b;
 }
+
 .footer-col1 p {
   color: #fff;
-  padding: 0 5rem 0.8rem 0;
-  text-align: justify;
+  margin: auto;
 }
 
 .footer-icons {
   text-align: center;
+  margin: 2em;
 }
+
 .footer-icons i {
   display: inline-block;
   background-color: white;
@@ -36,12 +39,14 @@
   margin: 0 0.5rem;
   transition: 0.6s;
 }
+
 .footer-icons i:hover {
   background-color: #e7804b;
   color: white;
   transform: translateY(-10px);
   cursor: pointer;
 }
+
 .footer h3 {
   color: white;
 }
@@ -76,13 +81,13 @@
 }
 .footer-col3 p {
   color: #fff;
-  padding-left: 30px;
+  /* padding-left: 3px; */
   font-size: 1.2rem;
 }
 .footer-end {
   margin-top: 2rem;
   text-align: center;
-  padding: 2rem 0;
+  /* padding: 2rem 0; */
   border-top: 4px solid #fff;
   color: #fff;
 }
@@ -143,6 +148,16 @@
   bottom: 20px;
   animation: animateWave2 4s linear infinite;
 }
+
+.footer-col3 .contact-info {
+  display: flex;
+}
+
+.contact-icon{
+  justify-content: space-around;
+}
+
+
 @keyframes animateWave {
   0% {
     background-position-x: 1000px;

@@ -1,6 +1,6 @@
 import { useState, useContext, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { ImSearch, ImCross } from "react-icons/im";
+import { ImSearch } from "react-icons/im";
 import { FaUserAlt } from "react-icons/fa";
 import { ImageContext } from "./context/ImageContext";
 import CartModal from "./CartModal";
@@ -11,11 +11,10 @@ import NavDropdown from "react-bootstrap/NavDropdown";
 import Form from "react-bootstrap/Form";
 import logo from "./assets/GeneralShopLogoNoSlogan.png";
 import axiosClient from "../axiosConfig";
-// import 'bootstrap/dist/css/bootstrap.min.css';
 import "./NavBar.css";
-// import Header from "./NavbarComponent";
 
 export const NavBar = () => {
+  const [navbar, setNavbar] = useState(false);
   const [isSearchVisible, setIsSearchVisible] = useState(false);
   const [isDropdownVisible, setIsDropdownVisible] = useState(false);
   const [value, setValue] = useState("");
@@ -56,7 +55,6 @@ export const NavBar = () => {
     console.log("searching", searchItem);
   };
   
-
   const handleOnLogOut = () => {
     localStorage.setItem("isLoggedOut", "true");
     localStorage.removeItem("isLoggedIn");
@@ -87,93 +85,97 @@ export const NavBar = () => {
     }
   };
 
-  // useEffect(() => {
-  //   getProduct();
-  // }, [value]);
-
   useEffect(() => {
     getProduct();
-    console.log("value:", value);
-    console.log("data:", data);
   }, [value]);
 
   return (
-    <header>
-      <div className="group">
-      <div className="logo-container">
-        <Link to="/">
-          <img className="general-logo" src={logo} alt="" />
-        </Link>
-      </div>
-      
-      <div className="navigation-tabs">
-        {/* <ul className={`navigation ${isMenuVisible ? 'open' : ''}`}> */}
-        <ul className="navigation">
-          <li>
-            <a href="/">Home</a>
-          </li>
-          <li>
-            <a href="/aboutUs">About Us</a>
-          </li>
-          <li>
-            <a href="/womenProducts">Woman</a>
-          </li>
-          <li>
-            <a href="/menProducts">Man</a>
-          </li>
-        </ul>
-      </div>        
-        
-        <div>
-          {isSearchVisible ? (
-            <div className={`searchBox ${isSearchVisible ? 'active' : ''}`}>
-              <ImSearch className="search-product-icon" onClick={handleOnSearch} />
-              <input type="text" placeholder="S E A R C H   H E R E . . . " />
-              <ImCross className="close-icon" onClick={showIcon} />
-            </div>
-            ) : (
-              <ImSearch className="search-icon" onClick={showIcon} />
-            )}
-        </div>
-        {value && data && (
-          <div className="dropdown-search">
-            {data
-              .filter((product) => {
-                const searchItems = value.toLowerCase().split(" ");
-                return searchItems.every(
-                  (item) =>
-                    product.name.toLowerCase().includes(item) ||
-                    product.color.toLowerCase().includes(item) ||
-                    product.category.toLowerCase().includes(item)
-                );
-              })
-              .slice(0, 3)
-              .map((product) => (
-                <Link
-                  className="dropdown-search-row"
-                  to={`/productDetails/${product._id}`}
-                  onClick={() => handleOnSearch(product.name)}
-                  key={product._id}
-                  style={{
-                    textDecoration: "none",
-                    color: "black",
-                  }}
-                >
-                  {product.name}
-                  <img
-                    className="dropdown-search-img"
-                    src={product.image.url}
-                    alt="products"
-                  />
-                </Link>
-              ))}
+    <div>
+      <Navbar
+        expand="lg"
+        className= "NavBar-color active fixed-top"
+      >
+        <Container>
+          <div className="logo-container">
+            <Navbar.Brand href="/">
+              <img className="general-logo" src={logo} alt="" />
+            </Navbar.Brand>
           </div>
-        )}
-        {/* {search.showSearchButton ? (
-          <ImSearch className="search-icon" onClick={showIcon} />
-        ) : null} */}
-        <div>
-        {isLoggedIn ? (
+          <Navbar.Toggle aria-controls="basic-navbar-nav" />
+          <Navbar.Collapse id="basic-navbar-nav">
+            <Nav style={{ position: "relative", right: 90 }}>
+              <Nav.Link href="/" className="nav-menu-text">
+                Home
+              </Nav.Link>
+              <Nav.Link
+                className="nav-menu-text"
+                style={{ whiteSpace: "nowrap" }}
+                href="/aboutUs"
+              >
+                About Us
+              </Nav.Link>
+              <NavDropdown
+                title={<span className="nav-menu-text">Categories</span>}
+                id="basic-nav-dropdown"
+              >
+                <NavDropdown.Item href="/womenProducts">
+                  Woman 
+                </NavDropdown.Item>
+                <NavDropdown.Item href="/menProducts">Man</NavDropdown.Item>
+              </NavDropdown>
+            </Nav>
+             <Form
+              className="d-flex search-field search-container"
+              style={{ opacity: search.opacity, transition: search.transition }}
+            >
+              <Form.Control
+                type="search"
+                placeholder="Search"
+                className="me-2"
+                aria-label="Search"
+                value={value}
+                onChange={handleOnChangeValue}
+              />
+              {value && data && (
+                <div className="dropdown-search">
+                  {data
+                    .filter((product) => {
+                      const searchItems = value.toLowerCase().split(" ");
+                      return searchItems.every(
+                        (item) =>
+                          product.name.toLowerCase().includes(item) ||
+                          product.color.toLowerCase().includes(item) ||
+                          product.category.toLowerCase().includes(item)
+                      );
+                    })
+                    .slice(0, 3)
+                    .map((product) => (
+                      <Link
+                        className="dropdown-search-row"
+                        to={`/productDetails/${product._id}`}
+                        onClick={() => handleOnSearch(product.name)}
+                        key={product._id}
+                        style={{
+                          textDecoration: "none",
+                          color: "black",
+                        }}
+                      >
+                        {product.name}
+                        <img
+                          className="dropdown-search-img"
+                          src={product.image.url}
+                          alt="products"
+                        />
+                      </Link>
+                    ))}
+                </div>
+              )}
+            </Form>
+                 {search.showSearchButton ? (
+              <ImSearch className="search-icon" onClick={showIcon} />
+            ) : null}
+
+            {isLoggedIn ? (
               role === "Client" ? (
                 <Nav className={`user-dropdown ${isMenuVisible ? "mobile-menu" : ""}`}>
                   <img
@@ -207,7 +209,7 @@ export const NavBar = () => {
                     alt="profile-picture"
                     onClick={() => setUserDropdown(!userDropdown)}
                   />
-                  <NavDropdown show={userDropdown} className="user-dropdown-menu">
+                  <NavDropdown show={userDropdown} className="user-dropdown">
                     <NavDropdown.Item href="/adminDashboard">
                       Dashboard
                     </NavDropdown.Item>
@@ -225,9 +227,11 @@ export const NavBar = () => {
                 </Link>
               </div>
             )}
-      </div>
-      {!isSearchVisible && <CartModal />}
-      </div>
-    </header>
+
+            <CartModal />
+          </Navbar.Collapse>
+        </Container>
+      </Navbar>
+    </div>
   );
 };

@@ -190,9 +190,7 @@ export const Dashboard = () => {
                 Settings
               </button>
             </li>
-
           </ul>
-
           <p className="text-footer">© 2024 SheDev Coding</p>
         </div>
         {dashboard && (
