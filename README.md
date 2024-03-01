@@ -22,12 +22,12 @@
   JavaScript | React | HTML | CSS | NodeJS | MongoDB
 </div>
 
-### Description
-E-commerce Gestor de Compras
+## Description
+E-commerce - Gestor de Compras
  
 ## Scripts
-- **start**: `node server/index.js`
-- **dev**: `nodemon server/index.js`
+- **start (frontend)**: `npm start`
+- **dev (backend)**: `npm run dev`
  
 ## Dependencies
 - [axios](https://www.npmjs.com/package/axios): ^1.5.1
