@@ -33,7 +33,10 @@
 ---
 
 ## Description
-E-commerce - Gestor de Compras
+
+<h3><b>General Shop - Online Fashion Transactional Portal</b></h3>
+
+Welcome to the repository of the General Shop web application, a Colombia-based startup dedicated to selling fashion products over the Internet. The main objective of this application is to strengthen General Shop's digital sales channel by building a transactional portal for the sale of adult fashion t-shirts 👕🛍️.
  
 ## Scripts
 - **start (frontend)**: `npm start`
@@ -63,10 +66,6 @@ E-commerce - Gestor de Compras
 
 ---
 
-<h3><b>General Shop - Online Fashion Transactional Portal</b></h3>
-
-Welcome to the repository of the General Shop web application, a Colombia-based startup dedicated to selling fashion products over the Internet. The main objective of this application is to strengthen General Shop's digital sales channel by building a transactional portal for the sale of adult fashion t-shirts 👕🛍️.
-
 <h3><b>Requirements and Functionalities</b></h3>
 
 1. User Authentication:
@@ -83,7 +82,7 @@ Welcome to the repository of the General Shop web application, a Colombia-based 
     - Attractive background image related to clothing sales.
     - Product search bar.
 
-4. "Manage Products - Dashboard" functionality:
+4. Manage Products & Dashboard functionality:
     - Table with list of products, edit and delete buttons (CRUD).
     - Search for products using a text field.
     - Adding new products with pop-up form.
