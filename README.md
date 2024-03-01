@@ -1,8 +1,8 @@
 <div align="center">
   <img style="width: 150px; border-radius:100px"   src="/client/src/components/assets/GeneralShopLogoNoSlogan.png"/>
-  E-commerce
 </div>
 <div align="center">
+  E-commerce
 ---
 ### 🧰 Stack
   <br>
