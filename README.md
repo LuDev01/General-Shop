@@ -2,7 +2,7 @@
   <img style="width: 150px; border-radius:100px"   src="/client/src/components/assets/GeneralShopLogoNoSlogan.png"/>
   <h3 align="center"><b>E-commerce</b></h3>
 </div>
-  [Demo](https://general-shop-shedev-frontend.vercel.app/)
+[Demo](https://general-shop-shedev-frontend.vercel.app/)
 
 ---
 <div align="center">
