@@ -147,7 +147,7 @@ const controllers = {
       const user = await User.findOne({ email });
 
       if (!user) {
-        return res.status(401).json({ message: "Credenciales inválidas" });
+        return res.status(401).json({ message: "Email not found" });
       }
 
       const bytes = CryptoJS.AES.decrypt(password, "SheDev2101200025021997");
@@ -158,11 +158,11 @@ const controllers = {
       );
       const decryptedPasswordDB = bytesDB.toString(CryptoJS.enc.Utf8);
       if (decryptedPassword !== decryptedPasswordDB)
-        return res.status(401).json({ message: "Credenciales inválidas" });
+        return res.status(401).json({ message: "Incorrect password" });
       const isMatch = decryptedPasswordDB === decryptedPassword ? true : false;
 
       if (!isMatch) {
-        return res.status(401).json({ message: "Credenciales inválidas" });
+        return res.status(401).json({ message: "Incorrect password" });
       }
 
       exp = Math.floor(Date.now() / 1000) + 24 * 60 * 60;
@@ -173,7 +173,7 @@ const controllers = {
       if (isMatch) {
         res
           .status(200)
-          .json({ token, exp, role: user.userRole, message: "Welcome!" });
+          .json({ token, exp, role: user.userRole,userId:user._id, message: "Welcome!" });
       }
     } catch (error) {
       console.log(error);

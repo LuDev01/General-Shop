@@ -48,8 +48,9 @@ function App() { // Defines the App component, which serves as the main componen
 
 
   return (
+    
     <ImageProvider>
-    <DataProvider>
+      <DataProvider>
       <BrowserRouter> {/*Starts the router context provided by BrowserRouter. This allows you to use features like navigation and route matching.*/}
         <div className="App"> {/*Provide a container for the main content of the application.*/}
           <Routes> {/*Sets up a container for defining different routes in the application.*/}
