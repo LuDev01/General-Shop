@@ -60,3 +60,45 @@ E-commerce - Gestor de Compras
 - [nodemon](https://www.npmjs.com/package/nodemon): ^3.0.1
 - [react-scripts](https://www.npmjs.com/package/react-scripts): ^5.0.1
 - [uuid](https://www.npmjs.com/package/uuid): ^9.0.1
+
+---
+
+General Shop - Online Fashion Transactional Portal
+
+Welcome to the repository of the General Shop web application, a Colombia-based startup dedicated to selling fashion products over the Internet. The main objective of this application is to strengthen General Shop's digital sales channel by building a transactional portal for the sale of adult fashion t-shirts 👕🛍️.
+
+<h3 align="center"><b>Requirements and Functionalities</b></h3>
+
+1. User Authentication:
+    - Login screen with username and password fields.
+    - "Sign up" button that opens a pop-up window with a registration form.
+    - Registration validations, including valid email and password requirements.
+  
+2. Protection and Consumption of Authentication Services:
+    - Protection of the application through backend authentication services (JWT & CryptoJS).
+    - Registered users can use the login.
+
+3. Home with Menu Bar:
+    - Categories in the menu bar: Men, Women, Manage Products, Shopping Cart.
+    - Attractive background image related to clothing sales.
+    - Product search bar.
+
+4. "Manage Products - Dashboard" functionality:
+    - Table with list of products, edit and delete buttons (CRUD).
+    - Search for products using a text field.
+    - Adding new products with pop-up form.
+    - Editing and deletion of existing products.
+     
+5. Product Details:
+    - Detailed information, size, color and quantity selection option.
+    - "Add to cart" button with validations.
+     
+6. Shopping Cart:
+    - Viewing products, individual values and purchase total.
+    - Option to delete products and recalculate the total.
+
+7. Purchase Process:
+    - Purchase confirmation with delivery details in a pop-up window.
+    - Cash on delivery, no payment method required.
+
+Thank you for considering General Shop for your online purchases! Feel free to explore the source code and contribute to the development of this exciting application.
