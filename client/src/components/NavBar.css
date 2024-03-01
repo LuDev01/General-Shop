@@ -160,13 +160,15 @@ header .searchBox{
 
 .dropdown-search{
     display: flex;
-    flex-direction: column;
-    position:absolute;
+    position: absolute;
     border-radius: 5px;
-    top: 4rem; 
-    width: 18%;
+    top: 4rem;
+    width: 100%;
     background-color: white;
     z-index: 999;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-top: 1em;
 }
 
 .dropdown-search:empty{
@@ -178,13 +180,17 @@ header .searchBox{
     text-align: start;
     padding: 2px;
     margin-left: 10px;
-    z-index: 999;
+    /* border-bottom: 1px solid black; */
 }
 
 .dropdown-search-img{
     margin-left: 2rem;
     max-width: 4.5rem;
-    z-index: 999;
+    margin: 1em;
+}
+
+.search-product-line{
+    width: 100%;
 }
 
 .user-dropdown .dropdown-toggle::after{

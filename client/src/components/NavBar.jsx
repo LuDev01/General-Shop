@@ -17,7 +17,7 @@ import "./NavBar.css";
 
 export const NavBar = () => {
   const [isSearchVisible, setIsSearchVisible] = useState(false);
-  const [isDropdownVisible, setIsDropdownVisible] = useState(false);
+  // const [isDropdownVisible, setIsDropdownVisible] = useState(false);
   const [value, setValue] = useState("");
   const [userDropdown, setUserDropdown] = useState(false);
   const [data, setData] = useState([]);
@@ -42,7 +42,7 @@ export const NavBar = () => {
       opacity: isSearchVisible ? 0 : 1,
     }));
     setIsSearchVisible(!isSearchVisible);
-    setIsDropdownVisible(!isDropdownVisible);
+    // setIsDropdownVisible(!isDropdownVisible);
   };
 
   const handleOnChangeValue = (e) => {
@@ -51,7 +51,6 @@ export const NavBar = () => {
 
   const handleOnSearch = (searchItem,data) => {
     setValue(searchItem);
-    // <Link to={`/productDetails/${data._id}`}></Link>
     navigate({to: `/productDetails/${data._id}`})
     console.log("searching", searchItem);
   };
@@ -100,11 +99,11 @@ export const NavBar = () => {
   return (
     <header>
       <div className="group">
-      <div className="logo-container">
-        <Link to="/">
-          <img className="general-logo" src={logo} alt="" />
-        </Link>
-      </div>
+        <div className="logo-container">
+          <Link to="/">
+            <img className="general-logo" src={logo} alt="" />
+          </Link>
+        </div>
       
       <div className="navigation-tabs">
         {/* <ul className={`navigation ${isMenuVisible ? 'open' : ''}`}> */}
@@ -128,13 +127,13 @@ export const NavBar = () => {
           {isSearchVisible ? (
             <div className={`searchBox ${isSearchVisible ? 'active' : ''}`}>
               <ImSearch className="search-product-icon" onClick={handleOnSearch} />
-              <input type="text" placeholder="S E A R C H   H E R E . . . " />
+              <input type="text" placeholder="S E A R C H   H E R E . . . " value={value} onChange={handleOnChangeValue}/>
               <ImCross className="close-icon" onClick={showIcon} />
             </div>
             ) : (
               <ImSearch className="search-icon" onClick={showIcon} />
             )}
-        </div>
+        </div>        
         {value && data && (
           <div className="dropdown-search">
             {data
@@ -159,19 +158,17 @@ export const NavBar = () => {
                     color: "black",
                   }}
                 >
-                  {product.name}
                   <img
                     className="dropdown-search-img"
                     src={product.image.url}
                     alt="products"
                   />
-                </Link>
+                  {product.name}
+                  {/* <hr className="search-product-line"/> */}
+                  </Link>
               ))}
           </div>
         )}
-        {/* {search.showSearchButton ? (
-          <ImSearch className="search-icon" onClick={showIcon} />
-        ) : null} */}
         <div>
         {isLoggedIn ? (
               role === "Client" ? (
@@ -226,7 +223,7 @@ export const NavBar = () => {
               </div>
             )}
       </div>
-      {!isSearchVisible && <CartModal />}
+      {!isSearchVisible && <CartModal/>}
       </div>
     </header>
   );
