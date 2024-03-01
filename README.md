@@ -3,8 +3,10 @@
 </div>
 <div align="center">
   E-commerce
+</div>
 ---
-### 🧰 Stack
+<div align="center">
+###🧰 Stack
   <br>
   <img alt="JavaScript" width="30px" style="padding-right:10px;" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-plain.svg" />
   <img alt="React" width="30px" style="padding-right:10px;" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" />
