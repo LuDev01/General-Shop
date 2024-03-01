@@ -3,7 +3,11 @@
   <h3 align="center"><b>E-commerce</b></h3>
 </div>
 
+<div align="center">
+  
 [Demo](https://general-shop-shedev-frontend.vercel.app/)
+
+</div>
 
 ---
 
