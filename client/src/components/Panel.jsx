@@ -4,14 +4,14 @@ import { IoIosEye } from "react-icons/io";
 import { FaMoneyBillTrendUp } from "react-icons/fa6";
 import { FaShoppingCart } from "react-icons/fa";
 import { PiUsersThreeFill } from "react-icons/pi";
-import { ToastContainer, toast } from 'react-toastify';
+import { ToastContainer, toast } from "react-toastify";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import Card from "react-bootstrap/Card";
 import Table from "react-bootstrap/Table";
 import Dropdown from "react-bootstrap/Dropdown";
 import axiosClient from "../axiosConfig";
-import 'react-toastify/dist/ReactToastify.css';
+import "react-toastify/dist/ReactToastify.css";
 
 import "./Dashboard.css";
 
@@ -63,9 +63,12 @@ export const Panel = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axiosClient.put(`users/${selectedUser._id}/update`, {
-        userRole: newRole,
-      });
+      const response = await axiosClient.put(
+        `users/${selectedUser._id}/update`,
+        {
+          userRole: newRole,
+        }
+      );
       console.log(response.data);
       toast.success("User role updated successfully!");
       setShow(false);
@@ -73,7 +76,6 @@ export const Panel = () => {
       console.error("Error updating user role", error.message);
       toast.error("Error updating user role");
     }
-    
   };
 
   return (
@@ -126,7 +128,7 @@ export const Panel = () => {
               {newRole || "Select a Role"}
             </Dropdown.Toggle>
             <Dropdown.Menu>
-            <Dropdown.Item eventKey="Admin">Admin</Dropdown.Item>
+              <Dropdown.Item eventKey="Admin">Admin</Dropdown.Item>
               <Dropdown.Item eventKey="Client">Client</Dropdown.Item>
             </Dropdown.Menu>
           </Dropdown>
@@ -138,7 +140,6 @@ export const Panel = () => {
           <Button variant="primary" onClick={handleSubmit}>
             Save Changes
           </Button>
-        
         </Modal.Footer>
       </Modal>
     </>

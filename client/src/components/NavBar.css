@@ -8,6 +8,11 @@ header{
     overflow-x: hidden;
     overflow-y: hidden;
     background-color: black;
+    width: 100%;
+    /* position: fixed; */
+    z-index: 10;
+    /* height: auto; */
+    padding: 0 30px;
 }
 
 .general-logo{
@@ -38,7 +43,13 @@ header{
 
 .navigation{
     margin: 0;
+    display: flex;
 }
+
+.navigation ul li a {
+    justify-content: center;
+}
+
 
 .group ul{
     flex-direction: row;
@@ -128,6 +139,7 @@ header .searchBox{
     width: 1.4em;
     height: 1.4em;
     margin: 1.2em;
+    display: flex;
 }
 
 .search-icon.active{
@@ -137,10 +149,6 @@ header .searchBox{
 .close-icon{
     width: 20px;
     height: 20px;
-    /* opacity: 0; */
-    /* visibility: hidden; */
-    /* transition: 0.5s; */
-    /* transform: scale(0); */
 }
 
 .dropdown-search{
@@ -150,10 +158,11 @@ header .searchBox{
     top: 4rem;
     width: 100%;
     background-color: white;
-    z-index: 999;
+    z-index: 15;
     flex-direction: column;
     align-items: flex-start;
     margin-top: 1em;
+
 }
 
 .dropdown-search:empty{
@@ -165,7 +174,6 @@ header .searchBox{
     text-align: start;
     padding: 2px;
     margin-left: 10px;
-    /* border-bottom: 1px solid black; */
 }
 
 .dropdown-search-img{
@@ -197,3 +205,65 @@ header .searchBox{
 .login{
     display: flex;
 }
+
+.right-navigation{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100px;
+}
+
+/* .group {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+.menu-toggle {
+display: none;
+cursor: pointer;
+font-size: 1.5rem;
+}
+
+.group ul.menu-open {
+  flex-direction: column;
+  gap: 10px;
+}
+  
+  @media (max-width: 768px) {
+    .menu-toggle {
+      display: block;
+      z-index: 15;
+    }
+  
+    .navigation-tabs {
+      display: none;
+    }
+  
+    .menu-open .navigation-tabs {
+      display: flex;
+      flex-direction: column;
+      position: absolute;
+      top: 70px;
+      left: 0;
+      width: 100%;
+      background-color: red;
+      height: 80px;
+      z-index: 999;
+      color: white;
+    }
+
+    .group ul {
+        flex-direction: column;
+        z-index: 20;
+        color: white;
+    }
+
+    a{
+        color: white;
+    }
+    
+    .menu-toggle{
+        color: white;
+    }
+  } */

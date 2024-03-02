@@ -21,9 +21,13 @@ export const Footer = () => {
           <div className="wave" id="wave3"></div>
           <div className="wave" id="wave4"></div>
         </div>
-        <Container >
+        <Container>
           <Row>
-            <Col xs={12} md={4} className="footer-col1 text-center align-items-center">
+            <Col
+              xs={12}
+              md={4}
+              className="footer-col1 text-center align-items-center"
+            >
               <Link to="/login">
                 <h3>
                   <span>GENERAL</span> SHOP
@@ -31,10 +35,10 @@ export const Footer = () => {
               </Link>
               <div className="general-shop-info">
                 <p>
-                  Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ipsum
-                  porro aut in ducimus modi molestias nam adipisci laborum,
-                  voluptas illum a deserunt temporibus! Nemo, veniam deserunt?
-                  Dolorem eum veritatis voluptatum?
+                  Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+                  Ipsum porro aut in ducimus modi molestias nam adipisci
+                  laborum, voluptas illum a deserunt temporibus! Nemo, veniam
+                  deserunt? Dolorem eum veritatis voluptatum?
                 </p>
               </div>
               <div className="footer-icons d-flex justify-content-center">
@@ -63,7 +67,11 @@ export const Footer = () => {
                 </li>
               </ul>
             </Col>
-            <Col xs={12} md={4} className="footer-col3 text-center d-flex flex-column align-items-center">
+            <Col
+              xs={12}
+              md={4}
+              className="footer-col3 text-center d-flex flex-column align-items-center"
+            >
               <h3>Contact info</h3>
               <div className="contact-info d-flex justify-content-between align-items-center mb-3">
                 <div className="test d-flex align-items-center">
@@ -91,10 +99,11 @@ export const Footer = () => {
               </div>
             </Col>
           </Row>
-          <p className="footer-end">©2024 Developed by SheDev | All Rights Reserved</p>
+          <p className="footer-end">
+            ©2024 Developed by SheDev | All Rights Reserved
+          </p>
         </Container>
       </div>
-
     </>
   );
 };
