@@ -35,10 +35,9 @@ export const Footer = () => {
               </Link>
               <div className="general-shop-info">
                 <p>
-                  Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-                  Ipsum porro aut in ducimus modi molestias nam adipisci
-                  laborum, voluptas illum a deserunt temporibus! Nemo, veniam
-                  deserunt? Dolorem eum veritatis voluptatum?
+                  Welcome to the General Shop web application,
+                  a Colombia-based startup dedicated to selling fashion products
+                  over the Internet. 
                 </p>
               </div>
               <div className="footer-icons d-flex justify-content-center">
@@ -57,13 +56,13 @@ export const Footer = () => {
                   <Link to="/">Home</Link>
                 </li>
                 <li>
-                  <Link to="/aboutUs">About Us</Link>
-                </li>
-                <li>
                   <Link to="/womenProducts">Woman</Link>
                 </li>
                 <li>
                   <Link to="/menProducts">Men</Link>
+                </li>
+                <li>
+                  <Link to="/aboutUs">About Us</Link>
                 </li>
               </ul>
             </Col>

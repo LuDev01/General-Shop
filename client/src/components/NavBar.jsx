@@ -83,7 +83,7 @@ export const NavBar = () => {
 
   useEffect(() => {
     getProduct();
-    console.log("This is the data",data)
+    console.log("This is the data", data);
   }, [value]);
 
   // const toggleNavigation = () => {
@@ -99,19 +99,15 @@ export const NavBar = () => {
             <img className="general-logo" src={logo} alt="" />
           </Link>
         </div>
-
-|      {/* 
+        |{" "}
+        {/* 
         <div className="menu-toggle" onClick={() => setIsMenuVisible(!isMenuVisible)}>
           <ImMenu className="menu-toggle"/>
         </div> */}
-
         <div className="navigation-tabs">
           <ul className="navigation">
             <li>
               <a href="/">Home</a>
-            </li>
-            <li>
-              <a href="/aboutUs">About Us</a>
             </li>
             <li>
               <a href="/womenProducts">Woman</a>
@@ -119,64 +115,65 @@ export const NavBar = () => {
             <li>
               <a href="/menProducts">Man</a>
             </li>
+            <li>
+              <a href="/aboutUs">About Us</a>
+            </li>
           </ul>
         </div>
-
-        
-          <div>
-            {isSearchVisible ? (
-              <div className={`searchBox ${isSearchVisible ? 'active' : ''}`}>
-                <ImSearch
-                  className="search-product-icon"
-                  onClick={handleOnSearch}
-                />
-                <input
-                  type="text"
-                  placeholder="S E A R C H   H E R E . . . "
-                  value={value}
-                  onChange={handleOnChangeValue}
-                />
-                <ImCross className="close-icon" onClick={showIcon} />
-              </div>
-            ) : (
-              <ImSearch className="search-icon" onClick={showIcon} />
-            )}
-          </div>
-          {value && data && (
-            <div className="dropdown-search">
-              {data
-                .filter((product) => {
-                  const searchItems = value.toLowerCase().split(" ");
-                  return searchItems.every(
-                    (item) =>
-                      product.name.toLowerCase().includes(item) ||
-                      product.color.toLowerCase().includes(item) ||
-                      product.category.toLowerCase().includes(item)
-                  );
-                })
-                .slice(0, 3)
-                .map((product) => (
-                  <Link
-                    className="dropdown-search-row"
-                    to={`/productDetails/${product._id}`}
-                    onClick={() => handleOnSearch(product.name)}
-                    key={product._id}
-                    style={{
-                      textDecoration: "none",
-                      color: "black",
-                    }}
-                  >
-                    <img
-                      className="dropdown-search-img"
-                      src={product.image.url}
-                      alt="products"
-                    />
-                    {product.name}
-                  </Link>
-                ))}
+        <div>
+          {isSearchVisible ? (
+            <div className={`searchBox ${isSearchVisible ? "active" : ""}`}>
+              <ImSearch
+                className="search-product-icon"
+                onClick={handleOnSearch}
+              />
+              <input
+                type="text"
+                placeholder="S E A R C H   H E R E . . . "
+                value={value}
+                onChange={handleOnChangeValue}
+              />
+              <ImCross className="close-icon" onClick={showIcon} />
             </div>
+          ) : (
+            <ImSearch className="search-icon" onClick={showIcon} />
           )}
-          <div className="right-navigation">
+        </div>
+        {value && data && (
+          <div className="dropdown-search">
+            {data
+              .filter((product) => {
+                const searchItems = value.toLowerCase().split(" ");
+                return searchItems.every(
+                  (item) =>
+                    product.name.toLowerCase().includes(item) ||
+                    product.color.toLowerCase().includes(item) ||
+                    product.category.toLowerCase().includes(item)
+                );
+              })
+              .slice(0, 3)
+              .map((product) => (
+                <Link
+                  className="dropdown-search-row"
+                  to={`/productDetails/${product._id}`}
+                  onClick={() => handleOnSearch(product.name)}
+                  key={product._id}
+                  style={{
+                    textDecoration: "none",
+                    color: "black",
+                  }}
+                >
+                  <img
+                    className="dropdown-search-img"
+                    src={product.image.url}
+                    alt="products"
+                  />
+                  {product.name}
+                </Link>
+              ))}
+          </div>
+        )}
+        <div className="right-navigation">
           <div className="login">
             {isLoggedIn ? (
               role === "Client" ? (

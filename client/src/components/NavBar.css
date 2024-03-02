@@ -8,7 +8,7 @@ header{
     overflow-x: hidden;
     overflow-y: hidden;
     background-color: black;
-    width: 100%;
+    width: 100vw;
     /* position: fixed; */
     z-index: 10;
     /* height: auto; */
@@ -188,12 +188,12 @@ header .searchBox{
 
 .user-dropdown .dropdown-toggle::after{
     display: none;
-    z-index: 999;
 }
 
 .user-dropdown .user-dropdown-menu {
     position: absolute;
     top: 50px;
+    z-index: 16;
 }
 
 .user-icon{

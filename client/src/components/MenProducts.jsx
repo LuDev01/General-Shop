@@ -37,7 +37,7 @@ export const MenProducts = () => {
     <>
       <ToastContainer />
       <NavBar />
-      <h1 style={{ marginTop: "7rem", textAlign: "center" }}>
+      <h1 style={{ marginTop: "1rem", textAlign: "center" }}>
         Men Products Section{" "}
       </h1>
       <Row xs={1} md={3} className="g-4 ">
