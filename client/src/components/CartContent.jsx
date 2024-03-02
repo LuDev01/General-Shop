@@ -18,8 +18,6 @@ export const CartContent = () => {
 
   return (
     <>
-      {/* <NavBar /> */}
-
       <div className="cart-content">
         {cart.length > 0 ? (
           <>

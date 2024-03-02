@@ -216,3 +216,31 @@ ul {
     right: 1rem;
   }
 }
+
+/* Majo */
+@media screen and (max-width: 768px) {
+  .navigation {
+    height: auto;
+    padding-bottom: 2rem;
+    position: sticky;
+
+  }
+
+  .logo-dashboard img {
+    width: 70%;
+    margin-bottom: 1rem;
+  }
+
+  .menu {
+    flex-direction: column;
+  }
+
+  .button-menu {
+    width: auto;
+    text-align: left;
+  }
+
+  .text-footer {
+    text-align: center;
+  }
+}
