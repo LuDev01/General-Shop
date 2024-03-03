@@ -15,7 +15,9 @@ export const NavBar = () => {
   const [value, setValue] = useState("");
   const [userDropdown, setUserDropdown] = useState(false);
   const [data, setData] = useState([]);
-  const [isMenuVisible, setIsMenuVisible] = useState(false);
+  // const [isMenuVisible, setIsMenuVisible] = useState(false);
+  const [isMenuVisible, setIsMenuVisible] = useState(window.innerWidth > 768);
+
   const navigate = useNavigate();
 
   const token = localStorage.getItem("token");
@@ -86,34 +88,19 @@ export const NavBar = () => {
     console.log("This is the data", data);
   }, [value]);
 
-  useEffect(() => {
-    const handleResize = () => {
-      setIsMenuVisible(window.innerWidth < 768);
-    };
-
-    window.addEventListener("resize", handleResize);
-    handleResize();
-
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
-
+  
+  console.log('isMenuVisible:', isMenuVisible);
   return (
     <header>
       <div className="group">
         <div>
           <ImMenu
             className={`menu-toggle ${isMenuVisible ? "visible" : ""}`}
-            onClick={() => setIsMenuVisible(!isMenuVisible)}
+            onClick={() =>{ 
+              console.log('Menu icon clicked');
+              setIsMenuVisible(!isMenuVisible)}}
+            
           />
-        </div>
-        <div className="logo-container">
-          <Link to="/">
-            <img className="general-logo" src={logo} alt="" />
-          </Link>
-        </div>
-
         <div className={`navigation-tabs ${isMenuVisible ? "" : "hidden"}`}>
           <ul className="navigation">
             <li>
@@ -129,6 +116,12 @@ export const NavBar = () => {
               <a href="/aboutUs">About Us</a>
             </li>
           </ul>
+        </div>
+        </div>
+        <div className="logo-container">
+          <Link to="/">
+            <img className="general-logo" src={logo} alt="" />
+          </Link>
         </div>
 
         <div>
