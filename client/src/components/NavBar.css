@@ -232,7 +232,7 @@ header .searchBox{
         display: flex;
         flex-direction: column;
         position: absolute;
-        top: 70px;
+        top: 80px;
         left: 0;
         width: 100%;
         background-color: black;
@@ -246,3 +246,8 @@ header .searchBox{
     }
 }
 
+@media screen and (min-width: 769px) {
+    .navigation-tabs {
+        display: block;
+    }
+}
