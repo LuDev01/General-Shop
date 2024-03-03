@@ -1,5 +1,5 @@
 .title-text{
-  margin-top:8rem;
+  margin-top:2rem;
   text-align: center;
 }
 
@@ -9,7 +9,7 @@
 }
 
 .team-col-card{
-margin: 5rem 3rem 5rem 3rem;
+margin: 3rem 3rem 5rem 3rem;
 }
 .team-card{
   transition: 0.3s;

@@ -62,7 +62,7 @@ export const ProductDetails = () => {
     <>
       <ToastContainer />
       <NavBar />
-      <Card style={{ margin: "8rem 6rem", backgroundColor: " #F3F4F6" }}>
+      <Card style={{ margin: "8rem 6rem", backgroundColor: "#F3F4F6" }}>
         <Row>
           <Col
             className="col-prod-details text-center"

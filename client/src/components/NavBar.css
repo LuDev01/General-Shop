@@ -1,75 +1,259 @@
-.NavBar-color{
-    /* background-color: white; */
-    background-color: black;
-    color: var(--white-main);
-    /* opacity: 0.8; */
-    transition: all 500ms;
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-.nav-menu-text{
-    color:white  !important;
+header{
+    overflow-x: hidden;
+    overflow-y: hidden;
+    background-color: black;
+    width: 100vw;
+    /* position: fixed; */
+    z-index: 10;
+    /* height: auto; */
+    padding: 0 30px;
 }
 
 .general-logo{
     max-width: 15vh;
+    margin: 1em;
 }
 
-
-.logo-container{
-    margin-right:60vh ;
+.group{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 
 .search-icon{
-    margin-right:  40px;
-    cursor: pointer;
-    font-size: 1.2rem;
-}
-
-.user-icon{
-    margin-right: 30px;
-    cursor: pointer;
-    color:white;
-    font-size: 1.2rem;
-}
-
-.log-out-icon{
-    margin-right: 40px;
+    color: white;
+    font-size: 1rem;
     cursor: pointer;
 }
 
-.link-user{
-    color: #000;
+.close-icon{
+    width: 60px;
 }
 
-.search-container{
-    margin-left: -3rem;
-    width:220px;
+.dropdown-menu {
+    position:fixed;
+    background-color: white;
+}
+
+.navigation{
+    margin: 0;
+    display: flex;
+}
+
+.navigation ul li a {
+    justify-content: center;
+}
+
+
+.group ul{
+    flex-direction: row;
+    gap: 40px;  
+    height: 80px;
+}
+
+.group ul li{
+    list-style: none;
+    justify-content: flex-start;
+}
+
+.group ul li a{
+    position: relative;
+    text-decoration: none;
+    font-size: 1em;
+    /* color: #333; */
+    color: white;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+}
+
+.group ul li a::before{
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    width: 100%;
+    height: 2px;
+    background-color: white;
+    transform: scaleX(0);
+    transition: transform 0.5s ease-in-out;
+    transform-origin: right;
+}
+
+.group  ul li a:hover::before{
+    transform: scaleX(1);
+    transform-origin: left;
+}
+
+header .searchBox{
+    position: absolute;
+    right: -100%;
+    width: 100%;
+    height: 80px;
+    display: flex;
+    background: #fff;
+    align-items: center;
+    padding: 0 30px;
+    transition: 0.5s ease-in-out;
+}
+
+.searchBox.active{
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+.searchBox.active input {
+    width: 100%;
+    box-sizing: border-box; 
+}
+
+.searchBox input{
+    display: flex;
+    align-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    border: none;
+    outline: none;
+    color: #333;
+    font-size: 1em;
+    background: #fff;
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+}
+    
+.search-icon{
+    position: relative;
+    margin: 10px;
+    top: 2.5px;
+    transition: 0.5s ease-in-out;
+    width: 1.4em;
+    height: 1.4em;
+}
+
+.search-product-icon{
+    width: 1.4em;
+    height: 1.4em;
+    margin: 1.2em;
+    display: flex;
+}
+
+.search-icon.active{
+    left: 0;
+}
+    
+.close-icon{
+    width: 20px;
+    height: 20px;
 }
 
 .dropdown-search{
     display: flex;
-    flex-direction: column;
-    position:absolute;
+    position: absolute;
     border-radius: 5px;
-    top: 4rem; /* Position the dropdown-search below the search button */
-    width: 18%;
+    top: 4rem;
+    width: 100%;
     background-color: white;
+    z-index: 15;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-top: 1em;
+
 }
 
 .dropdown-search:empty{
     border: none;
 }
+
 .dropdown-search-row{
     cursor: pointer;
     text-align: start;
     padding: 2px;
     margin-left: 10px;
 }
+
 .dropdown-search-img{
     margin-left: 2rem;
     max-width: 4.5rem;
+    margin: 1em;
+}
+
+.search-product-line{
+    width: 100%;
 }
 
 .user-dropdown .dropdown-toggle::after{
     display: none;
+}
+
+.user-dropdown .user-dropdown-menu {
+    position: absolute;
+    top: 50px;
+    z-index: 16;
+}
+
+.user-icon{
+    cursor: pointer;
+    color:white;
+    font-size: 1.2rem;
+}
+
+.login{
+    display: flex;
+}
+
+.right-navigation{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100px;
+}
+
+
+@media screen and (max-width: 768px) {
+    .menu-toggle.visible {
+        color: white;
+    }
+
+   .menu-toggle{
+    color:white;
+   }
+    .navigation-tabs {
+        display: none; /* hide the navigation tabs on small screens when isMenuVisible is false */
+    }
+    .menu-toggle.visible ~ .navigation-tabs {
+        display: flex; /* show the navigation tabs on small screens when isMenuVisible is true */
+    }
+    .navigation-tabs ul{
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: 80px;
+        left: 0;
+        width: 100%;
+        background-color: black;
+        height: 185px;
+        z-index: 20;
+        color: white;
+      }
+
+    .group ul{
+        gap: 20px;  
+    }
+}
+
+@media screen and (min-width: 769px) {
+    .navigation-tabs {
+        display: block;
+    }
+    .navigation-tabs {
+        display: flex; /* always show the navigation tabs on larger screens */
+    }
+    .menu-toggle{
+        color: black;
+    }
 }

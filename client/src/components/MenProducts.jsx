@@ -37,7 +37,7 @@ export const MenProducts = () => {
     <>
       <ToastContainer />
       <NavBar />
-      <h1 style={{ marginTop: "7rem", textAlign: "center" }}>
+      <h1 style={{ marginTop: "1rem", textAlign: "center" }}>
         Men Products Section{" "}
       </h1>
       <Row xs={1} md={3} className="g-4 ">
@@ -55,7 +55,7 @@ export const MenProducts = () => {
                 />
                 <Card.Body>
                   <Card.Title>{product.name}</Card.Title>
-                  <Card.Text>Price: {product.price}</Card.Text>
+                  <Card.Text>Price: ${product.price}</Card.Text>
                   <Notification productId={product._id} />
                   <button type="submit" size="lg" className="submit-button" onClick={() =>navigate(`/productDetails/${product._id}`) }>Product details</button>
                   {/* <button type="submit" size="lg" className="submit-button add-to-cart btn btn-outline-info " onClick={() => handleAddToCart(product)}>Add to cart</button> */}

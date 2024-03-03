@@ -1,27 +1,23 @@
 import { useState, useContext, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { ImSearch } from "react-icons/im";
+import { ImSearch, ImCross, ImMenu } from "react-icons/im";
 import { FaUserAlt } from "react-icons/fa";
 import { ImageContext } from "./context/ImageContext";
-import { DataContext } from "./context/DataContext";
 import CartModal from "./CartModal";
-import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
-import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
-import Form from "react-bootstrap/Form";
 import logo from "./assets/GeneralShopLogoNoSlogan.png";
 import axiosClient from "../axiosConfig";
 import "./NavBar.css";
 
 export const NavBar = () => {
-  const [navbar, setNavbar] = useState(false);
   const [isSearchVisible, setIsSearchVisible] = useState(false);
-  const [isDropdownVisible, setIsDropdownVisible] = useState(false);
   const [value, setValue] = useState("");
   const [userDropdown, setUserDropdown] = useState(false);
   const [data, setData] = useState([]);
-  const [isMenuVisible, setIsMenuVisible] = useState(false);
+  // const [isMenuVisible, setIsMenuVisible] = useState(false);
+  const [isMenuVisible, setIsMenuVisible] = useState(window.innerWidth > 768);
+
   const navigate = useNavigate();
 
   const token = localStorage.getItem("token");
@@ -29,21 +25,22 @@ export const NavBar = () => {
 
   const isLoggedIn = Boolean(token);
   const { imageURL, imageURLClient } = useContext(ImageContext);
-  const { setRole, setCart } = useContext(DataContext);
 
-  const [search, setSearchBtn] = useState({
-    transition: "all .3s ease",
-    opacity: 0,
-    showSearchButton: true,
-  });
+  // const [search, setSearchBtn] = useState({
+  //   transition: "all .3s ease",
+  //   opacity: 0,
+  //   showSearchButton: true,
+  // });
 
   const showIcon = () => {
-    setSearchBtn((prevSearch) => ({
-      ...prevSearch,
-      opacity: isSearchVisible ? 0 : 1,
-    }));
+    // setSearchBtn((prevSearch) => ({
+    //   ...prevSearch,
+    //   opacity: isSearchVisible ? 0 : 1,
+    // }));
     setIsSearchVisible(!isSearchVisible);
-    setIsDropdownVisible(!isDropdownVisible);
+    if (isSearchVisible) {
+      setValue("");
+    }
   };
 
   const handleOnChangeValue = (e) => {
@@ -57,22 +54,12 @@ export const NavBar = () => {
   };
 
   const handleOnLogOut = () => {
-    setRole("Guest");
     localStorage.setItem("isLoggedOut", "true");
     localStorage.removeItem("isLoggedIn");
     localStorage.removeItem("isLoggedInv2");
     localStorage.removeItem("token");
     localStorage.removeItem("exp");
     localStorage.removeItem("role");
-    localStorage.removeItem("user");
-
-    const savedCart = localStorage.getItem("myCart_Guest");
-    if (savedCart) {
-      setCart(JSON.parse(savedCart));
-    } else {
-      setCart([]);
-    }
-
     console.log("the super cookie", document.cookie);
     var cookies = document.cookie.split(";");
 
@@ -98,95 +85,100 @@ export const NavBar = () => {
 
   useEffect(() => {
     getProduct();
+    console.log("This is the data", data);
   }, [value]);
 
+  
+  console.log('isMenuVisible:', isMenuVisible);
   return (
-    <div>
-      <Navbar
-        expand="lg"
-        className={
-          navbar ? "NavBar-color active fixed-top" : "NavBar-color fixed-top"
-        }
-      >
-        <Container>
-          <div className="logo-container">
-            <Navbar.Brand href="/">
-              <img className="general-logo" src={logo} alt="" />
-            </Navbar.Brand>
-          </div>
-          <Navbar.Toggle aria-controls="basic-navbar-nav" />
-          <Navbar.Collapse id="basic-navbar-nav">
-            <Nav style={{ position: "relative", right: 90 }}>
-              <Nav.Link href="/" className="nav-menu-text">
-                Home
-              </Nav.Link>
-              <Nav.Link
-                className="nav-menu-text"
-                style={{ whiteSpace: "nowrap" }}
-                href="/aboutUs"
-              >
-                About Us
-              </Nav.Link>
-              <NavDropdown
-                title={<span className="nav-menu-text">Categories</span>}
-                id="basic-nav-dropdown"
-              >
-                <NavDropdown.Item href="/womenProducts">Woman</NavDropdown.Item>
-                <NavDropdown.Item href="/menProducts">Man</NavDropdown.Item>
-              </NavDropdown>
-            </Nav>
-            <Form
-              className="d-flex search-field search-container"
-              style={{ opacity: search.opacity, transition: search.transition }}
-            >
-              <Form.Control
-                type="search"
-                placeholder="Search"
-                className="me-2"
-                aria-label="Search"
+    <header>
+      <div className="group">
+        <div>
+          <ImMenu
+            className={`menu-toggle ${isMenuVisible ? "visible" : ""}`}
+            onClick={() =>{ 
+              console.log('Menu icon clicked');
+              setIsMenuVisible(!isMenuVisible)}}
+            
+          />
+        <div className={`navigation-tabs ${isMenuVisible ? "" : "hidden"}`}>
+          <ul className="navigation">
+            <li>
+              <a href="/">Home</a>
+            </li>
+            <li>
+              <a href="/womenProducts">Woman</a>
+            </li>
+            <li>
+              <a href="/menProducts">Man</a>
+            </li>
+            <li>
+              <a href="/aboutUs">About Us</a>
+            </li>
+          </ul>
+        </div>
+        </div>
+        <div className="logo-container">
+          <Link to="/">
+            <img className="general-logo" src={logo} alt="" />
+          </Link>
+        </div>
+
+        <div>
+          {isSearchVisible ? (
+            <div className={`searchBox ${isSearchVisible ? "active" : ""}`}>
+              <ImSearch
+                className="search-product-icon"
+                onClick={handleOnSearch}
+              />
+              <input
+                type="text"
+                placeholder="S E A R C H   H E R E . . . "
                 value={value}
                 onChange={handleOnChangeValue}
               />
-              {value && data && (
-                <div className="dropdown-search">
-                  {data
-                    .filter((product) => {
-                      const searchItems = value.toLowerCase().split(" ");
-                      return searchItems.every(
-                        (item) =>
-                          product.name.toLowerCase().includes(item) ||
-                          product.color.toLowerCase().includes(item) ||
-                          product.category.toLowerCase().includes(item)
-                      );
-                    })
-                    .slice(0, 3)
-                    .map((product) => (
-                      <Link
-                        className="dropdown-search-row"
-                        to={`/productDetails/${product._id}`}
-                        onClick={() => handleOnSearch(product.name)}
-                        key={product._id}
-                        style={{
-                          textDecoration: "none",
-                          color: "black",
-                        }}
-                      >
-                        {product.name}
-                        <img
-                          className="dropdown-search-img"
-                          src={product.image.url}
-                          alt="products"
-                        />
-                      </Link>
-                    ))}
-                </div>
-              )}
-            </Form>
-          
-            {search.showSearchButton ? (
-              <ImSearch className="search-icon" onClick={showIcon} />
-            ) : null}
-
+              <ImCross className="close-icon" onClick={showIcon} />
+            </div>
+          ) : (
+            <ImSearch className="search-icon" onClick={showIcon} />
+          )}
+        </div>
+        {value && data && (
+          <div className="dropdown-search">
+            {data
+              .filter((product) => {
+                const searchItems = value.toLowerCase().split(" ");
+                return searchItems.every(
+                  (item) =>
+                    product.name.toLowerCase().includes(item) ||
+                    product.color.toLowerCase().includes(item) ||
+                    product.category.toLowerCase().includes(item)
+                );
+              })
+              .slice(0, 3)
+              .map((product) => (
+                <Link
+                  className="dropdown-search-row"
+                  to={`/productDetails/${product._id}`}
+                  onClick={() => handleOnSearch(product.name)}
+                  key={product._id}
+                  style={{
+                    textDecoration: "none",
+                    color: "black",
+                  }}
+                >
+                  <img
+                    className="dropdown-search-img"
+                    src={product.image.url}
+                    alt="products"
+                  />
+                  {product.name}
+                </Link>
+              ))}
+          </div>
+        )}
+        <div className="right-navigation">
+          <div className="login">
             {isLoggedIn ? (
               role === "Client" ? (
                 <Nav
@@ -204,7 +196,7 @@ export const NavBar = () => {
                     alt="profile-picture"
                     onClick={() => setUserDropdown(!userDropdown)}
                   />
-                  <NavDropdown show={userDropdown} className="user-dropdown">
+                  <NavDropdown show={userDropdown} className="user-dropdown-menu">
                     <NavDropdown.Item href="/userProfile">
                       Profile
                     </NavDropdown.Item>
@@ -229,7 +221,10 @@ export const NavBar = () => {
                     alt="profile-picture"
                     onClick={() => setUserDropdown(!userDropdown)}
                   />
-                  <NavDropdown show={userDropdown} className="user-dropdown">
+                  <NavDropdown
+                    show={userDropdown}
+                    className="user-dropdown-menu"
+                  >
                     <NavDropdown.Item href="/adminDashboard">
                       Dashboard
                     </NavDropdown.Item>
@@ -247,11 +242,10 @@ export const NavBar = () => {
                 </Link>
               </div>
             )}
-
-            <CartModal />
-          </Navbar.Collapse>
-        </Container>
-      </Navbar>
-    </div>
+          </div>
+          {!isSearchVisible && <CartModal />}
+        </div>
+      </div>
+    </header>
   );
 };
