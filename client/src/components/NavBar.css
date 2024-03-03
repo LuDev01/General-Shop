@@ -219,14 +219,9 @@ header .searchBox{
         color: white;
     }
 
-    .menu-toggle::before{
-        color:red;
-        /* background-color: red; */
-    }
-    .menu-toggle::after{
-        color:rgb(61, 228, 219);
-        /* background-color: red; */
-    }
+   .menu-toggle{
+    color:white;
+   }
     .navigation-tabs {
         display: none; /* hide the navigation tabs on small screens when isMenuVisible is false */
     }
