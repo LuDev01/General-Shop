@@ -213,57 +213,43 @@ header .searchBox{
     width: 100px;
 }
 
-/* .group {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  
 .menu-toggle {
-display: none;
-cursor: pointer;
-font-size: 1.5rem;
+    display: none;
 }
 
-.group ul.menu-open {
-  flex-direction: column;
-  gap: 10px;
-}
-  
-  @media (max-width: 768px) {
-    .menu-toggle {
-      display: block;
-      z-index: 15;
+@media screen and (max-width: 768px) {
+    .menu-toggle.visible {
+        display: inline-block;
+        color: white;
+        /* z-index: 20; */
     }
-  
+
+    /* .navigation-tabs {
+        display: none;
+    } */
+
     .navigation-tabs {
-      display: none;
-    }
-  
-    .menu-open .navigation-tabs {
-      display: flex;
-      flex-direction: column;
-      position: absolute;
-      top: 70px;
-      left: 0;
-      width: 100%;
-      background-color: red;
-      height: 80px;
-      z-index: 999;
-      color: white;
-    }
-
-    .group ul {
+        /* display: flex; */
+        /* flex-direction: column; */
+        position: absolute;
+        top: 70px;
+        left: 0;
+        width: 100%;
+        background-color: red;
+        height: 200px;
+        z-index: 999;
+        color: white;
+      }
+      
+      .group ul a{
+        display: flex;
         flex-direction: column;
         z-index: 20;
         color: white;
     }
-
+    
     a{
         color: white;
     }
-    
-    .menu-toggle{
-        color: white;
-    }
-  } */
+}
+

@@ -86,40 +86,52 @@ export const NavBar = () => {
     console.log("This is the data", data);
   }, [value]);
 
-  // const toggleNavigation = () => {
-  //   const navigation = document.querySelector(".navigation");
-  //   navigation.classList.toggle("show");
-  // };
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMenuVisible(window.innerWidth < 768);
+    };
+
+    window.addEventListener('resize', handleResize);
+    handleResize();
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
 
   return (
     <header>
+
       <div className="group">
+        <div>
+          <ImMenu className={`menu-toggle ${isMenuVisible ? "visible" : ""}`}
+          onClick={() => setIsMenuVisible(!isMenuVisible)} />
+        </div>
         <div className="logo-container">
           <Link to="/">
             <img className="general-logo" src={logo} alt="" />
           </Link>
         </div>
-        |{" "}
-        {/* 
-        <div className="menu-toggle" onClick={() => setIsMenuVisible(!isMenuVisible)}>
-          <ImMenu className="menu-toggle"/>
-        </div> */}
-        <div className="navigation-tabs">
-          <ul className="navigation">
-            <li>
-              <a href="/">Home</a>
-            </li>
-            <li>
-              <a href="/womenProducts">Woman</a>
-            </li>
-            <li>
-              <a href="/menProducts">Man</a>
-            </li>
-            <li>
-              <a href="/aboutUs">About Us</a>
-            </li>
-          </ul>
-        </div>
+
+        {isMenuVisible && (
+          <div className="navigation-tabs">
+            <ul className="navigation">
+              <li>
+                <a href="/">Home</a>
+              </li>
+              <li>
+                <a href="/womenProducts">Woman</a>
+              </li>
+              <li>
+                <a href="/menProducts">Man</a>
+              </li>
+              <li>
+                <a href="/aboutUs">About Us</a>
+              </li>
+            </ul>
+          </div>
+        )}
+
         <div>
           {isSearchVisible ? (
             <div className={`searchBox ${isSearchVisible ? "active" : ""}`}>
