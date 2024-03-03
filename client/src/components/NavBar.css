@@ -223,7 +223,12 @@ header .searchBox{
     .menu-toggle{
         color: white;
     }
-
+    .navigation-tabs {
+        display: none; /* hide the navigation tabs on small screens when isMenuVisible is false */
+    }
+    .menu-toggle.visible ~ .navigation-tabs {
+        display: flex; /* show the navigation tabs on small screens when isMenuVisible is true */
+    }
     .navigation-tabs ul{
         display: flex;
         flex-direction: column;
@@ -245,5 +250,11 @@ header .searchBox{
 @media screen and (min-width: 769px) {
     .navigation-tabs {
         display: block;
+    }
+    .navigation-tabs {
+        display: flex; /* always show the navigation tabs on larger screens */
+    }
+    .menu-toggle{
+        color: black;
     }
 }
