@@ -212,16 +212,20 @@ header .searchBox{
     justify-content: space-between;
     width: 100px;
 }
-.hidden {
-    display: none;
-}
+
+
 @media screen and (max-width: 768px) {
     .menu-toggle.visible {
         color: white;
     }
 
-    .menu-toggle{
-        color: white;
+    .menu-toggle::before{
+        color:red;
+        /* background-color: red; */
+    }
+    .menu-toggle::after{
+        color:rgb(61, 228, 219);
+        /* background-color: red; */
     }
     .navigation-tabs {
         display: none; /* hide the navigation tabs on small screens when isMenuVisible is false */
