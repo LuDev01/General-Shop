@@ -80,3 +80,11 @@
 .drop-product-details {
     font-weight: bold;
 }
+
+/* Responsive */
+@media only screen and (max-width: 768px) {
+    .row{
+        display: flex;
+        flex-direction: column;
+    }
+}
