@@ -212,11 +212,9 @@ header .searchBox{
     justify-content: space-between;
     width: 100px;
 }
-
-/* .menu-toggle {
+.hidden {
     display: none;
-} */
-
+}
 @media screen and (max-width: 768px) {
     .menu-toggle.visible {
         color: white;
@@ -230,7 +228,7 @@ header .searchBox{
         display: flex;
         flex-direction: column;
         position: absolute;
-        top: 70px;
+        top: 80px;
         left: 0;
         width: 100%;
         background-color: black;
@@ -244,3 +242,8 @@ header .searchBox{
     }
 }
 
+@media screen and (min-width: 769px) {
+    .navigation-tabs {
+        display: block;
+    }
+}

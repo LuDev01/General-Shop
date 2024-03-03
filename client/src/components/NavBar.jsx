@@ -24,17 +24,17 @@ export const NavBar = () => {
   const isLoggedIn = Boolean(token);
   const { imageURL, imageURLClient } = useContext(ImageContext);
 
-  const [search, setSearchBtn] = useState({
-    transition: "all .3s ease",
-    opacity: 0,
-    showSearchButton: true,
-  });
+  // const [search, setSearchBtn] = useState({
+  //   transition: "all .3s ease",
+  //   opacity: 0,
+  //   showSearchButton: true,
+  // });
 
   const showIcon = () => {
-    setSearchBtn((prevSearch) => ({
-      ...prevSearch,
-      opacity: isSearchVisible ? 0 : 1,
-    }));
+    // setSearchBtn((prevSearch) => ({
+    //   ...prevSearch,
+    //   opacity: isSearchVisible ? 0 : 1,
+    // }));
     setIsSearchVisible(!isSearchVisible);
     if (isSearchVisible) {
       setValue("");
@@ -86,13 +86,27 @@ export const NavBar = () => {
     console.log("This is the data", data);
   }, [value]);
 
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMenuVisible(window.innerWidth < 768);
+    };
+
+    window.addEventListener("resize", handleResize);
+    handleResize();
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
   return (
     <header>
-
       <div className="group">
         <div>
-          <ImMenu className={`menu-toggle ${isMenuVisible ? "visible" : ""}`}
-          onClick={() => setIsMenuVisible(!isMenuVisible)} />
+          <ImMenu
+            className={`menu-toggle ${isMenuVisible ? "visible" : ""}`}
+            onClick={() => setIsMenuVisible(!isMenuVisible)}
+          />
         </div>
         <div className="logo-container">
           <Link to="/">
@@ -100,24 +114,22 @@ export const NavBar = () => {
           </Link>
         </div>
 
-        {isMenuVisible && (
-          <div className="navigation-tabs">
-            <ul className="navigation">
-              <li>
-                <a href="/">Home</a>
-              </li>
-              <li>
-                <a href="/womenProducts">Woman</a>
-              </li>
-              <li>
-                <a href="/menProducts">Man</a>
-              </li>
-              <li>
-                <a href="/aboutUs">About Us</a>
-              </li>
-            </ul>
-          </div>
-        )}
+        <div className={`navigation-tabs ${isMenuVisible ? "" : "hidden"}`}>
+          <ul className="navigation">
+            <li>
+              <a href="/">Home</a>
+            </li>
+            <li>
+              <a href="/womenProducts">Woman</a>
+            </li>
+            <li>
+              <a href="/menProducts">Man</a>
+            </li>
+            <li>
+              <a href="/aboutUs">About Us</a>
+            </li>
+          </ul>
+        </div>
 
         <div>
           {isSearchVisible ? (
