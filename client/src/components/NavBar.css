@@ -213,43 +213,34 @@ header .searchBox{
     width: 100px;
 }
 
-.menu-toggle {
+/* .menu-toggle {
     display: none;
-}
+} */
 
 @media screen and (max-width: 768px) {
     .menu-toggle.visible {
-        display: inline-block;
         color: white;
-        /* z-index: 20; */
     }
 
-    /* .navigation-tabs {
-        display: none;
-    } */
+    .menu-toggle{
+        color: white;
+    }
 
-    .navigation-tabs {
-        /* display: flex; */
-        /* flex-direction: column; */
+    .navigation-tabs ul{
+        display: flex;
+        flex-direction: column;
         position: absolute;
         top: 70px;
         left: 0;
         width: 100%;
-        background-color: red;
-        height: 200px;
-        z-index: 999;
-        color: white;
-      }
-      
-      .group ul a{
-        display: flex;
-        flex-direction: column;
+        background-color: black;
+        height: 185px;
         z-index: 20;
         color: white;
-    }
-    
-    a{
-        color: white;
+      }
+
+    .group ul{
+        gap: 20px;  
     }
 }
 

@@ -86,19 +86,6 @@ export const NavBar = () => {
     console.log("This is the data", data);
   }, [value]);
 
-  useEffect(() => {
-    const handleResize = () => {
-      setIsMenuVisible(window.innerWidth < 768);
-    };
-
-    window.addEventListener('resize', handleResize);
-    handleResize();
-
-    return () => {
-      window.removeEventListener('resize', handleResize);
-    };
-  }, []);
-
   return (
     <header>
 
