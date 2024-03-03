@@ -88,11 +88,9 @@ export const NavBar = () => {
 
   return (
     <header>
-
       <div className="group">
-        <div>
-          <ImMenu className={`menu-toggle ${isMenuVisible ? "visible" : ""}`}
-          onClick={() => setIsMenuVisible(!isMenuVisible)} />
+        <div className={`menu-toggle ${isMenuVisible ? "visible" : ""}`}>
+          <ImMenu onClick={() => setIsMenuVisible(!isMenuVisible)} />
         </div>
         <div className="logo-container">
           <Link to="/">
