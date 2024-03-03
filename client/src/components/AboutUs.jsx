@@ -17,7 +17,7 @@ export const team = [
     name: "Luisa Toro",
     role: "Full Stack Web Developer",
     description:
-      "On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire, that they cannot foresee the pain and trouble that are bound to ensue; and equal blame belongs to those who fail in their duty through weakness of will, which is the same as saying through shrinking from toil and pain",
+      "Luisa is an adventurous full stack web developer with a passion for programming and an appetite for excitement. When she's not coding, you can find her immersed in the world of video games, strategizing her next move or exploring virtual landscapes. Beyond the screen, Luisa enjoys the adrenaline rush of extreme sports and the creativity of cooking up delicious meals in the kitchen. ",
     image: member1,
     socialnetwork1: "https://github.com/LuDev01",
     socialnetwork2:
@@ -28,7 +28,7 @@ export const team = [
     name: "Mariajosé Gómez",
     role: "Full Stack Web Developer",
     description:
-      "On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire, that they cannot foresee the pain and trouble that are bound to ensue; and equal blame belongs to those who fail in their duty through weakness of will, which is the same as saying through shrinking from toil and pain",
+      "Majo is a passionate full stack web developer who thrives on solving complex problems and continuously learning new technologies. With a deep love for animals and nature, she often finds inspiration for her coding projects while diving into the depths of the ocean. Majo's curiosity and dedication drive her to explore innovative solutions and push the boundaries of what's possible in web development. ",
     image: member2,
     socialnetwork1: "https://github.com/mariajgomezg",
     socialnetwork2: "https://www.linkedin.com/in/mariajgo/",
